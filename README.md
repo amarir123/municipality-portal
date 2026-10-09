@@ -1,64 +1,64 @@
-# 🏛️ البوابة الرقمية للجماعة الترابية (SaaS Municipality Portal)
+# 🏛️ Portail Numérique de la Commune Territoriale (SaaS Municipality Portal)
 
-> **البوابة الإلكترونية الرسمية وحل التدبير الجماعي الذكي 10/10** — منصة مؤسساتية متكاملة لتقديم الخدمات الرقمية للمواطنين، تتبع الشكايات والطلبات، إدارة المشاريع التنموية، وتخصيص الهوية البصرية (White-Label Engine).
-
----
-
-## 🌟 مميزات المنصة الرئيسية
-
-- 🇲🇦 **هوية مؤسساتية مغربية 10/10:** تصميم فاخر يعتمد على الهوية الرسمية (الأزرق الملكي والذهبي) مع خط **IBM Plex Sans Arabic**.
-- 📩 **نظام الشكايات والطلبات المباشرة:** إمكانية إيداع الشكايات وإصدار **رقم تتبع موحد (Ticket ID)** للمواطنين لمتابعة حالة طلباتهم.
-- 📄 **مركز الخدمات الإلكترونية والوثائق PDF:** تحميل النماذج الرسمية وتوجيه المواطنين للمنافس الرقمية (Wathyqa.ma & Rokhas.ma).
-- 🎨 **لوحة تحكم وتخصيص SaaS (White-Label Engine):** تغيير اسم الجماعة، الألوان، الشعارات، وتصدير/استيراد الحزمة المكتملة في ملف `JSON` بنقرة واحدة لبيع المنصة للجماعات الترابية الأخرى.
-- 📊 **لوحة إحصائيات بصرية متطورة:** مبيانات ورسوم بيانية تفاعلية (Chart.js) لتتبع الأداء ونسب إنجاز المشاريع التنموية.
+> **Portail Électronique Officiel & Solution de Gestion Communale Intelligente 10/10** — Une plateforme institutionnelle intégrée offrant des services numériques aux citoyens, le suivi des réclamations en ligne, la gestion des projets de développement urbain et un moteur de personnalisation en marque blanche (White-Label Engine).
 
 ---
 
-## 👥 صلاحيات الوصول والفريق المخول (Project Access & Collaborators)
+## 🌟 Fonctionnalités Principales
 
-تم منح صلاحيات الوصول والتدبير لهذا المشروع للرسائل الإلكترونية التالية:
+- 🇲🇦 **Identité Institutionnelle Marocaine 10/10 :** Interface moderne et raffinée respectant les couleurs officielles (Bleu Roi & Accent Or) avec la typographie **IBM Plex Sans Arabic**.
+- 📩 **Gestion des Réclamations & Demandes :** Dépôt en ligne et attribution d'un **Identifiant de Suivi Unique (Ticket ID)** pour permettre aux citoyens de suivre l'avancement de leurs dossiers.
+- 📄 **Hub de Services Électroniques & Documents PDF :** Téléchargement de formulaires officiels et intégration dynamique avec les plateformes nationales (*Wathyqa.ma* et *Rokhas.ma*).
+- 🎨 **Moteur de Personnalisation SaaS (White-Label Engine) :** Gestion complète de l'identité visuelle (nom de la commune, logos, couleurs thématiques) avec export/import du package de configuration au format `JSON` en un clic pour le déploiement sur d'autres collectivités territoriales.
+- 📊 **Tableau de Bord Analytics & Graphiques :** Visualisation statistique interactive (Chart.js) pour le suivi des taux d'avancement des projets et le traitement des demandes citoyennes.
 
-| الاسم / الصفة | البريد الإلكتروني (Email) | مستوى الصلاحية |
+---
+
+## 👥 Droits d'Accès & Collaborateurs (Project Access)
+
+Les privilèges d'accès et d'administration de ce dépôt sont attribués aux collaborateurs suivants :
+
+| Nom & Qualité | Adresse Email | Niveau d'Accès |
 | :--- | :--- | :--- |
-| **Yassine El Malki** | `yassine.elmalki@gmail.com` | Administrator / Collaborator |
-| **Yassine El Moudene** | `yassine.elmoudene@gmail.com` | Administrator / Collaborator |
+| **Yassine El Malki** | `yassine.elmalki@gmail.com` | Administrateur / Collaborateur |
+| **Yassine El Moudene** | `yassine.elmoudene@gmail.com` | Administrateur / Collaborateur |
 
 ---
 
-## 🚀 كيفية التشغيل والإنتاج (Quick Start)
+## 🚀 Guide de Démarrage Rapide (Quick Start)
 
-### 1. التشغيل المحلي (Local HTTP Server)
-يمكن تشغيل المنصة فوراً باستخدام أي خادم محلي:
+### 1. Exécution du Serveur Local
+Pour lancer l'application en environnement local :
 
 ```bash
-# باستخدام Python
+# Serveur HTTP via Python
 python -m http.server 8000
 ```
-تصفح البوابة الرسمية: `http://localhost:8000`  
-تصفح لوحة التحكم الإدارية: `http://localhost:8000/admin.html`
+- **Portail Officiel Citoyen :** `http://localhost:8000`
+- **Panneau de Contrôle Admin :** `http://localhost:8000/admin.html`
 
-### 2. بيانات الدخول للاختبار (Admin Credentials)
-- **اسم المستخدم:** `admin`
-- **كلمة المرور:** `admin123`
+### 2. Identifiants d'Accès Administration
+- **Nom d'utilisateur :** `admin`
+- **Mot de passe :** `admin123`
 
 ---
 
-## 📁 هيكلية المشروع (Project Architecture)
+## 📁 Architecture du Projet (Project Structure)
 
 ```
 siteweb com/
-├── index.html            # البوابة الرسمية للجماعة الترابية
-├── admin.html            # لوحة التحكم الإدارية (SaaS Admin Panel)
-├── style.css             # نظام التصميم الأنيق (Design System & Tokens)
-├── db.js                 # قاعدة البيانات المحلية (LocalStorage Engine)
-├── app.js                # المحرك الرئيسي والتفاعلات الشاملة
-├── js/                   # النمط المعماري (MVC Architecture)
-│   ├── models/           # (News, Projects, Complaints, Branding, Services...)
-│   ├── views/            # (AdminView, EventView, NewsView...)
-│   └── controllers/      # (MainController, AdminController)
-└── assets/               # الشعارات، الصور عالية الدقة، وأيقونات الوثائق
+├── index.html            # Page d'Accueil et Portail Officiel de la Commune
+├── admin.html            # Panneau de Contrôle d'Administration (SaaS Dashboard)
+├── style.css             # Design System & Tokens Thématiques (Navy & Gold)
+├── db.js                 # Moteur de Persistance Locale (LocalStorage Database)
+├── app.js                # Interactions Générales & Gestionnaires d'Événements
+├── js/                   # Architecture Logicielle MVC (Model-View-Controller)
+│   ├── models/           # Models (News, Projects, Complaints, Branding, Services...)
+│   ├── views/            # Views (AdminView, EventView, NewsView...)
+│   └── controllers/      # Controllers (MainController, AdminController)
+└── assets/               # Imagerie Haute Résolution, Logos & Actes Officiels
 ```
 
 ---
 
-*تطوير وتنفيذ بمواصفات عالية الجودة للرفع من جودة الخدمات الرقمية للجماعات الترابية بالمملكة المغربية.* 🇲🇦✨
+*Développé selon des normes d'excellence pour la transformation numérique et la modernisation des services publics des Collectivités Territoriales du Royaume du Maroc.* 🇲🇦✨
