@@ -14,17 +14,6 @@
 
 ---
 
-## 👥 Droits d'Accès & Collaborateurs (Project Access)
-
-Les privilèges d'accès et d'administration de ce dépôt sont attribués aux collaborateurs suivants :
-
-| Nom & Qualité | Adresse Email | Niveau d'Accès |
-| :--- | :--- | :--- |
-| **Yassine El Malki** | `yassine.elmalki@gmail.com` | Administrateur / Collaborateur |
-| **Yassine El Moudene** | `yassine.elmoudene@gmail.com` | Administrateur / Collaborateur |
-
----
-
 ## 🚀 Guide de Démarrage Rapide (Quick Start)
 
 ### 1. Exécution du Serveur Local
