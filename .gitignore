@@ -1,0 +1,14 @@
+# Dependencies and environments
+venv/
+ENV/
+env/
+__pycache__/
+
+# Logs and temporary files
+*.log
+login_page_preview.png
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store

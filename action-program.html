@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="برنامج عمل الجماعة الترابية لبيوكرى 2022-2027 - الأهداف الاستراتيجية والمشاريع التنموية.">
+    <title>برنامج عمل الجماعة 2022-2027 | بوابة جماعة بيوكرى</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .subpage-hero {
+            position: relative;
+            height: 320px;
+            background-image: url('assets/beach_bg.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--bg-white);
+            margin-bottom: 50px;
+        }
+        .subpage-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(13, 94, 166, 0.4) 0%, rgba(13, 94, 166, 0.9) 100%);
+            z-index: 1;
+        }
+        .subpage-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        .subpage-hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .content-box {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+        .content-box h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent-color);
+            padding-right: 12px;
+        }
+        .content-box p {
+            margin-bottom: 16px;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        /* Accordion layout for Program Axes */
+        .accordion-wrapper {
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            background-color: var(--bg-white);
+            transition: var(--transition);
+        }
+        .accordion-header {
+            padding: 20px 24px;
+            background-color: var(--bg-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+        .accordion-item.active .accordion-header {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+        }
+        .accordion-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 24px;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+            padding: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .axis-meta {
+            display: flex;
+            gap: 24px;
+            background-color: var(--bg-light);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .axis-progress-bar {
+            width: 150px;
+            height: 8px;
+            background-color: #dee2e6;
+            border-radius: 4px;
+            overflow: hidden;
+            align-self: center;
+        }
+        .axis-progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+        .accordion-item.active .axis-progress {
+            background-color: var(--accent-color);
+        }
+        .project-list {
+            margin-right: 20px;
+        }
+        .project-list li {
+            list-style-type: disc;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+        @media (max-width: 768px) {
+            .subpage-hero {
+                height: 240px;
+            }
+            .subpage-hero-title {
+                font-size: 1.8rem;
+            }
+            .axis-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .axis-progress-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="topBar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <div class="search-container">
+                    <button class="search-toggle-btn" id="searchToggleBtn" aria-label="بحث">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <div class="search-input-wrapper" id="searchInputWrapper">
+                        <input type="text" id="searchInput" placeholder="ابحث في البوابة...">
+                    </div>
+                </div>
+                <span class="divider">|</span>
+                <a href="contact.html" class="top-link">التواصل</a>
+                <a href="index.html#news" class="top-link">أخبار الجماعة</a>
+                <a href="admin.html" class="top-link" target="_blank" style="margin-left: 12px; font-weight: 700; color: var(--accent-color);">بوابة المدير</a>
+                <a href="index.html#procedures-grid" class="btn btn-gold">خدمات إلكترونية</a>
+            </div>
+            
+            <div class="top-bar-right">
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="ar">العربية</button>
+                    <button class="lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+                    <button class="lang-btn" data-lang="fr">Français</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <nav class="main-nav" id="mainNav">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="القائمة">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
+                    <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
+                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية الحضرية</a></li>
+                    <li><a href="action-program.html" class="nav-link active">برنامج عمل الجماعة</a></li>
+                    <li><a href="index.html#procedures-grid" class="nav-link">الإجراءات الإدارية</a></li>
+                    <li><a href="sustainable.html" class="nav-link">بيوكرى مدينة مستدامة</a></li>
+                    <li><a href="index.html" class="nav-link">الجماعة الترابية</a></li>
+                </ul>
+            </nav>
+
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/biougra_logo.png" alt="شعار الجماعة الترابية لبيوكرى VILLE DE BIOUGRA" class="main-logo">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero">
+        <div class="container subpage-hero-content">
+            <h1 class="subpage-hero-title">برنامج عمل الجماعة 2022-2027</h1>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <div class="content-box">
+            <h3>تقديم برنامج عمل الجماعة</h3>
+            <p>يعد برنامج عمل الجماعة الترابية لبيوكرى للفترة الممتدة بين 2022 و2027 الوثيقة المرجعية والتخطيطية الكبرى لرسم وتوجيه الاستثمارات التنموية بالمدينة خلال الولاية الانتدابية الحالية.</p>
+            <p>تم إعداد هذا المخطط وفق مقاربة تشاركية واسعة شملت الفاعلين الاقتصاديين، المجتمع المدني، الهيئات الاستشارية، وممثلي الإدارات العمومية، لتحديد أولويات التنمية لساكنة بيوكرى والمصادقة على ميزانية مالية إجمالية تفوق 2.6 مليار درهم لتمويل مختلف المشاريع.</p>
+        </div>
+
+        <h2 class="section-title">المحاور الاستراتيجية الكبرى للبرنامج</h2>
+
+        <div class="accordion-wrapper">
+            <!-- Axis 1 -->
+            <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>المحور الأول: تهيئة البنية التحتية، الطرق وحركية السير</span>
+                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="axis-meta">
+                        <div><strong>الميزانية المخصصة:</strong> 1.1 مليار درهم</div>
+                        <div><strong>نسبة الإنجاز الفعلية:</strong> 85%</div>
+                        <div class="axis-progress-bar">
+                            <div class="axis-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <p>يهدف هذا المحور إلى فك العزلة وتطوير حركة السير وتهيئة الطرق الكبرى ومداخل المدينة وربط الأحياء ببعضها.</p>
+                    <ul class="project-list">
+                        <li>بناء الممر تحت الأرضي بمدخل المدينة وتثليث الطرق الدائرية.</li>
+                        <li>إعادة تعبيد الشوارع الرئيسية وتحديث شبكة الإنارة العمومية بمصابيح موفرة للطاقة.</li>
+                        <li>إنجاز ممرات الدراجات الهوائية والممرات الخاصة بالراجلين وتحديث إشارات المرور الذكية.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Axis 2 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>المحور الثاني: البيئة، جودة الحياة وتطوير المساحات الخضراء</span>
+                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="axis-meta">
+                        <div><strong>الميزانية المخصصة:</strong> 450 مليون درهم</div>
+                        <div><strong>نسبة الإنجاز الفعلية:</strong> 75%</div>
+                        <div class="axis-progress-bar">
+                            <div class="axis-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <p>يركز هذا المحور على الجوانب البيئية وتجميل المدينة وزيادة حصة الفرد من المساحات الخضراء والحدائق العامة.</p>
+                    <ul class="project-list">
+                        <li>تهيئة وتدشين منتزه "النجاح" ومنتزهات الأحياء للقرب.</li>
+                        <li>إنجاز محطة متطورة لتصفية المياه العادمة لإعادة استخدامها بسقي حدائق المدينة.</li>
+                        <li>إطلاق مبادرة التشجير المكثف لأحياء بيوكرى.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Axis 3 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>المحور الثالث: دعم التعليم، الصحة، الشؤون الاجتماعية وتكافؤ الفرص</span>
+                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="axis-meta">
+                        <div><strong>الميزانية المخصصة:</strong> 350 مليون درهم</div>
+                        <div><strong>نسبة الإنجاز الفعلية:</strong> 60%</div>
+                        <div class="axis-progress-bar">
+                            <div class="axis-progress" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <p>يهدف هذا المحور لتحقيق التماسك الاجتماعي وتحسين الخدمات الأساسية في قطاعي الصحة والتعليم ودعم الشباب والنساء والطفل.</p>
+                    <ul class="project-list">
+                        <li>بناء مراكز صحية للقرب وتحديث مستوصفات الأحياء الهامشية وتجهيزها.</li>
+                        <li>بناء وتحديث المدارس الابتدائية ودعم برامج التعليم الأولي العمومي للأسر المعوزة.</li>
+                        <li>توقيع اتفاقيات دعم وتأهيل سنوية للجمعيات العاملة بمجال محو الأمية والرعاية والتوحد.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Axis 4 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>المحور الرابع: الهوية الثقافية، السياحة وتثمين التراث المحلي</span>
+                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="axis-meta">
+                        <div><strong>الميزانية المخصصة:</strong> 500 مليون درهم</div>
+                        <div><strong>نسبة الإنجاز الفعلية:</strong> 70%</div>
+                        <div class="axis-progress-bar">
+                            <div class="axis-progress" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <p>يرمي لتنشيط القطاع السياحي وتثبيت هوية المدينة وتاريخها الأمازيغي وحماية المواقع الأثرية.</p>
+                    <ul class="project-list">
+                        <li>مشروع تأهيل المعالم التاريخية والتراثية بالمنطقة وإحداث متحف تذكاري.</li>
+                        <li>إنشاء وتجهيز "المركب الثقافي لبيوكرى" كفضاء للعروض الفنية الكبرى.</li>
+                        <li>إحداث متاحف متخصصة وتطوير الكورنيش والمسار السياحي للشاطئ بالكامل.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Axis 5 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>المحور الخامس: الإدارة الذكية والتحول الرقمي وحسن الحكامة</span>
+                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="axis-meta">
+                        <div><strong>الميزانية المخصصة:</strong> 200 مليون درهم</div>
+                        <div><strong>نسبة الإنجاز الفعلية:</strong> 80%</div>
+                        <div class="axis-progress-bar">
+                            <div class="axis-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <p>يرتكز على رقمنة ورقابة الأنظمة الإدارية الداخلية وتسهيل الخدمات على المرتفقين والمواطنين وتتبع الميزانية.</p>
+                    <ul class="project-list">
+                        <li>تعميم الخدمات السحابية والربط الشبكي لمقاطعات وملحقات الجماعة.</li>
+                        <li>دعم الخدمات الرقمية المباشرة لرخص الأنشطة والتعمير وشواهد الحالة المدنية.</li>
+                        <li>تكوين المستمر للموظفين الإداريين لضمان الجودة والشفافية وتسهيل الاستقبال.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3 class="footer-col-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="publications.html">منشوراتنا</a></li>
+                    <li><a href="index.html#news">مستجدات</a></li>
+                    <li><a href="index.html#multimedia">صوت و صورة</a></li>
+                    <li><a href="index.html#events">انشطة ومناسبات</a></li>
+                    <li><a href="index.html#news">دورات المجلس</a></li>
+                    <li><a href="contact.html">التواصل</a></li>
+                    <li><a href="admin.html" target="_blank" style="color: var(--accent-color); font-weight: 700;">بوابة المدير</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-col-title">الإجراءات الإدارية</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#procedures-grid">الحالة المدنية</a></li>
+                    <li><a href="index.html#procedures-grid">الشؤون الثقافية</a></li>
+                    <li><a href="index.html#procedures-grid">حفظ الصحة</a></li>
+                    <li><a href="index.html#procedures-grid">الشؤون الاقتصادية والشرطة الادارية</a></li>
+                    <li><a href="index.html#procedures-grid">الممتلكات الجماعية</a></li>
+                    <li><a href="index.html#procedures-grid">جميع الإجراءات الإدارية</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-col-title">الجماعة الترابية</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">الجماعة الترابية</a></li>
+                    <li><a href="index.html">الهيكل التنظيمي للجماعة</a></li>
+                    <li><a href="index.html">مكتب المجلس الجماعي</a></li>
+                    <li><a href="index.html">أعضاء المجلس الجماعي</a></li>
+                    <li><a href="index.html">أدوار ووظائف</a></li>
+                    <li><a href="index.html">هيئة المساواة وتكافؤ الفرص</a></li>
+                </ul>
+            </div>
+            <div class="footer-logo-col">
+                <img src="assets/biougra_logo.png" alt="مدينة بيوكرى VILLE DE BIOUGRA" class="footer-logo">
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="footer-socials">
+                <a href="#" class="social-icon" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Twitter/X">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96 29 29 0 0 0 .46-5.29 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                2026 &copy; <span class="muni-name-display">الجماعة الترابية لبيوكرى</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top-btn" id="backToTopBtn" aria-label="الرجوع للأعلى">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <script type="module" src="js/app.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Custom accordion logic for action program page
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const items = document.querySelectorAll('.accordion-item');
+            
+            // Toggle active state
+            const isActive = item.classList.contains('active');
+            
+            items.forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.accordion-content').style.maxHeight = null;
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+                const content = item.querySelector('.accordion-content');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+        
+        // Initialize active accordion heights on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const activeItem = document.querySelector('.accordion-item.active');
+            if (activeItem) {
+                const content = activeItem.querySelector('.accordion-content');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

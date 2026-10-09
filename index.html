@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="البوابة الرسمية للجماعة الترابية - نافذتكم للاطلاع على مستجدات المدينة، الخدمات الإلكترونية، والمشاريع التنموية.">
+    <title>بوابة الجماعة الترابية | البوابة الرسمية</title>
+    
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cairo for Arabic institutional typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="appBody">
+    <div class="scroll-progress-bar" id="scrollBar"></div>
+
+
+
+    <!-- TOP BAR (Utility Header) -->
+    <div class="top-bar" id="topBar">
+        <div class="container top-bar-content">
+            <!-- Left Side: Search, Contact, Weather & Prayer Widget -->
+            <div class="top-bar-left">
+                <div class="search-container">
+                    <button class="search-toggle-btn" id="searchToggleBtn" aria-label="بحث">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <div class="search-input-wrapper" id="searchInputWrapper">
+                        <input type="text" id="searchInput" placeholder="ابحث في البوابة...">
+                    </div>
+                </div>
+                <span class="divider">|</span>
+                <a href="contact.html" class="top-link">التواصل</a>
+                <a href="#news" class="top-link">أخبار الجماعة</a>
+                <a href="javascript:void(0)" onclick="openComplaintModal()" class="top-link highlight-link">إيداع شكاية 📩</a>
+                <a href="javascript:void(0)" onclick="openTicketTrackModal()" class="top-link highlight-link">تتبع شكاية 🔍</a>
+                <a href="admin.html" class="top-link admin-only" target="_blank" style="margin-left: 12px; font-weight: 700; color: var(--accent-color);">بوابة المدير ⚙️</a>
+                <a href="#servicesSection" class="btn btn-gold">خدمات ووثائق إلكترونية</a>
+            </div>
+            
+            <!-- Right Side: Weather, Prayer & Languages -->
+            <div class="top-bar-right" style="display: flex; align-items: center; gap: 15px;">
+                <div class="weather-widget-badge" id="weatherBadge">
+                    <span id="weatherIcon">☀️</span> <span id="weatherCityDisplay">أكادير</span> <strong id="weatherTempDisplay">24°C</strong>
+                </div>
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="ar">العربية</button>
+                    <button class="lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+                    <button class="lang-btn" data-lang="fr">Français</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & NAVIGATION -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <!-- Left: Main Navigation Menu -->
+            <nav class="main-nav" id="mainNav">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="القائمة">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
+                    <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
+                    <li><a href="#urban-development" class="nav-link" id="navUrbanLink">برنامج التنمية الحضرية</a></li>
+                    <li><a href="action-program.html" class="nav-link">برنامج عمل الجماعة</a></li>
+                    <li><a href="#servicesSection" class="nav-link">الخدمات والوثائق</a></li>
+                    <li><a href="sustainable.html" class="nav-link">مدينة مستدامة</a></li>
+                    <li><a href="index.html" class="nav-link active">الجماعة الترابية</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right: Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo.png" alt="شعار الجماعة الترابية" class="main-logo" id="mainLogoHeaderImg">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER SECTION -->
+    <section class="hero-section" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title animate-up">بوابة <span class="muni-name-display">الجماعة الترابية</span></h1>
+            <div class="hero-search-wrapper animate-up-delay">
+                <input type="text" id="heroSearchInput" placeholder="ابحث في المستجدات والخدمات والوثائق..." onkeyup="handleHeroLiveSearch()">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+                <a href="#municipality" class="btn btn-primary btn-lg animate-up-delay">تعرف على الجماعة</a>
+                <button onclick="openComplaintModal()" class="btn btn-gold btn-lg animate-up-delay">إيداع شكاية أو طلب إلكتروني 📩</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUNICIPALITY UPDATES & NEWS -->
+    <section class="news-section" id="news">
+        <div class="container news-container">
+            <!-- Left Column: Core Cards -->
+            <div class="cards-grid">
+                <!-- Card 1: Municipal Council -->
+                <div class="info-card" data-modal="council">
+                    <div class="card-img-wrapper">
+                        <img src="assets/card_council.png" id="card-img-council" alt="المجلس الجماعي">
+                        <div class="card-overlay-badge">المجلس الجماعي</div>
+                    </div>
+                </div>
+                <!-- Card 2: Administrative Procedures -->
+                <div class="info-card" data-modal="procedures">
+                    <div class="card-img-wrapper">
+                        <img src="assets/card_procedures.png" id="card-img-procedures" alt="الإجراءات الإدارية">
+                        <div class="card-overlay-badge">الإجراءات الإدارية</div>
+                    </div>
+                </div>
+                <!-- Card 3: Territorial Municipality -->
+                <div class="info-card" data-modal="territory">
+                    <div class="card-img-wrapper">
+                        <img src="assets/card_territory.png" id="card-img-territory" alt="الجماعة الترابية">
+                        <div class="card-overlay-badge">الجماعة الترابية</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: News List -->
+            <div class="news-list-wrapper">
+                <h2 class="section-title">مستجدات الجماعة</h2>
+                <div class="news-list" id="newsListContainer">
+                    <!-- Dynamic rendering via NewsView -->
+                </div>
+                <button class="btn btn-outline btn-more" id="moreNewsBtn">مستجدات أكثر &gt;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-SERVICES & OFFICIAL PDF DOCUMENTS HUB -->
+    <section class="services-hub-section" id="servicesSection">
+        <div class="container">
+            <h2 class="section-title center">الخدمات الإلكترونية والوثائق الرسمية</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 35px;">تحميل الاستمارات، الميزانيات السنوية، وبرنامج عمل الجماعة بصيغة PDF الرقمية</p>
+            
+            <div class="services-hub-grid" id="servicesHubContainer">
+                <!-- Dynamic Rendering via ServiceModel -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMINISTRATIVE PROCEDURES SECTION -->
+    <section class="procedures-section" id="procedures-grid">
+        <div class="container">
+            <h2 class="section-title center">الاجراءات الادارية</h2>
+            
+            <div class="procedures-grid">
+                <div class="proc-card" data-proc="health">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3 class="proc-card-title">حفظ الصحة</h3>
+                </div>
+
+                <div class="proc-card" data-proc="culture">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path></svg>
+                    </div>
+                    <h3 class="proc-card-title">الشؤون الثقافية والرياضية</h3>
+                </div>
+
+                <div class="proc-card" data-proc="urbanism">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    </div>
+                    <h3 class="proc-card-title">التعمير والبناء</h3>
+                </div>
+
+                <div class="proc-card" data-proc="civil">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                    </div>
+                    <h3 class="proc-card-title">الحالة المدنية والتصديق</h3>
+                </div>
+
+                <div class="proc-card" data-proc="economic">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle></svg>
+                    </div>
+                    <h3 class="proc-card-title">الشؤون الاقتصادية والأسواق</h3>
+                </div>
+
+                <div class="proc-card" data-proc="administrative">
+                    <div class="proc-icon-wrapper">
+                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect></svg>
+                    </div>
+                    <h3 class="proc-card-title">الشرطة الإدارية</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- URBAN DEVELOPMENT PROGRAM SECTION -->
+    <section class="urban-development-section" id="urban-development">
+        <div class="container">
+            <h2 class="section-title center">برنامج التنمية الحضرية</h2>
+            <div class="urban-grid" id="projectsGridContainer">
+                <!-- Dynamic Rendering via ProjectView -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MULTIMEDIA & PRESS GALLERY -->
+    <section class="multimedia-section" id="multimedia">
+        <div class="container">
+            <h2 class="section-title center">صوت و صورة (المعرض المرئي)</h2>
+            <div class="media-grid" id="videoGridContainer">
+                <!-- Dynamic Rendering via VideoView -->
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS & ACTIVITIES SECTION -->
+    <section class="events-section" id="events">
+        <div class="container">
+            <h2 class="section-title center">أنشطة ومناسبات الجماعة</h2>
+            <div class="events-grid" id="eventsGridContainer">
+                <!-- Dynamic Rendering via EventView -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MUNICIPALITY STATS SECTION -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">2026</div>
+                <div class="stat-label">سنة التحول الرقمي</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+100%</div>
+                <div class="stat-label">شفافية وتواصل محلي</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+50</div>
+                <div class="stat-label">مشروع تنموي مفتوح</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">تواصل إلكتروني مستمر</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3 class="footer-col-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">الجماعة الترابية</a></li>
+                    <li><a href="sustainable.html">مدينة مستدامة</a></li>
+                    <li><a href="#procedures-grid">الإجراءات الإدارية</a></li>
+                    <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
+                    <li><a href="publications.html">منشوراتنا</a></li>
+                    <li><a href="contact.html">أوقات العمل والتواصل</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-col-title">اتصل بالجماعة</h3>
+                <ul class="footer-contact-info">
+                    <li>📍 <span id="footerAddressDisplay">المقر الرئيسي للجماعة</span></li>
+                    <li>📞 الهاتف: <span id="footerPhoneDisplay">+212 528 84 00 00</span></li>
+                    <li>✉️ البريد: <span id="footerEmailDisplay">contact@commune.ma</span></li>
+                    <li>🕒 الأوقات: <span id="footerHoursDisplay">من الإثنين إلى الجمعة: 08:30 - 16:30</span></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">موقع الجماعة</h3>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">بوابة رقمية تفاعلية مخصصة لتقريب الإدارة من المواطنين وتسهيل الولوج إلى المعلومة والمساطر الإدارية للجماعة الترابية.</p>
+            </div>
+
+            <div class="footer-col footer-logo-col">
+                <img src="assets/logo.png" alt="شعار الجماعة" class="footer-logo" id="footerLogoImg">
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <div>&copy; 2026 جميع الحقوق محفوظة لـ <span class="muni-name-display">الجماعة الترابية</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP FLOATING BUTTON -->
+    <button class="back-to-top-btn" id="backToTopBtn" aria-label="الرجوع للأعلى">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    </button>
+
+    <!-- DYNAMIC INTERACTIVE MODAL DIALOG CONTAINER -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- CITIZEN COMPLAINT MODAL -->
+    <div class="modal-overlay" id="complaintModalOverlay" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="closeComplaintModal()" aria-label="إغلاق">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 8px; text-align: center;">إيداع شكاية أو طلب إلكتروني 📩</h3>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">سيتم تزويدكم برقم تتبع خاص لمتابعة حالة الشكاية فور إرسالها</p>
+
+                <form id="complaintForm" onsubmit="submitCitizenComplaint(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">الاسم الكامل *</label>
+                            <input type="text" id="cmpName" required style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">رقم الهاتف *</label>
+                            <input type="tel" id="cmpPhone" required style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">البريد الإلكتروني</label>
+                            <input type="email" id="cmpEmail" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">تصنيف الموضوع</label>
+                            <select id="cmpCategory" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; background: white;">
+                                <option>إنارة عمومية</option>
+                                <option>نظافة وبيئة</option>
+                                <option>رخص وتعمير</option>
+                                <option>طرقات وأشغال</option>
+                                <option>حالة مدنية وشواهد</option>
+                                <option>استفسار عام</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">عنوان الموضوع *</label>
+                        <input type="text" id="cmpSubject" required placeholder="مثال: طلب إصلاح عمود إنارة" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">تفاصيل الطلب أو الشكاية *</label>
+                        <textarea id="cmpDetails" rows="4" required placeholder="اكتب التفاصيل والمكان بالضبط..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">إرسال الشكاية والحصول على رقم التتبع 🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TICKET TRACKER MODAL -->
+    <div class="modal-overlay" id="ticketTrackOverlay" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close-btn" onclick="closeTicketTrackModal()" aria-label="إغلاق">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 8px; text-align: center;">تتبع حالة الشكاية أو الطلب 🔍</h3>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">أدخل رقم التتبع الخاص بك (مثال: TKT-2026-001)</p>
+
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <input type="text" id="trackTicketInput" placeholder="أدخل رقم التتبع..." style="flex-grow: 1; padding: 10px; border: 2px solid var(--primary-color); border-radius: 6px; text-align: center; font-weight: 700;">
+                    <button onclick="handleTrackTicketSearch()" class="btn btn-primary">بحث</button>
+                </div>
+
+                <div id="ticketResultDisplay" style="display: none; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript MVC Bundle -->
+    <script type="module" src="js/app.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

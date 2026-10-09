@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منشورات، ميزانيات، وتقارير الجماعة الترابية لبيوكرى - تصفح وتحميل الوثائق الرسمية.">
+    <title>منشورات ووثائق الجماعة | بوابة جماعة بيوكرى</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .subpage-hero {
+            position: relative;
+            height: 320px;
+            background-image: url('assets/beach_bg.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--bg-white);
+            margin-bottom: 50px;
+        }
+        .subpage-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(13, 94, 166, 0.4) 0%, rgba(13, 94, 166, 0.9) 100%);
+            z-index: 1;
+        }
+        .subpage-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        .subpage-hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        /* Publications grid layout */
+        .pub-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        .pub-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        .pub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--primary-color);
+        }
+        .pub-file-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .pub-card.doc .pub-file-icon {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+        .pub-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .pub-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .pub-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+        }
+        .pub-description {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .pub-action-row {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .download-progress-bar {
+            width: 100px;
+            height: 6px;
+            background-color: #dee2e6;
+            border-radius: 3px;
+            overflow: hidden;
+            display: none;
+        }
+        .download-progress {
+            height: 100%;
+            background-color: #10b981;
+            width: 0%;
+        }
+        @media (max-width: 768px) {
+            .pub-grid {
+                grid-template-columns: 1fr;
+            }
+            .pub-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .pub-meta {
+                justify-content: center;
+            }
+            .subpage-hero {
+                height: 240px;
+            }
+            .subpage-hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="topBar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <div class="search-container">
+                    <button class="search-toggle-btn" id="searchToggleBtn" aria-label="بحث">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <div class="search-input-wrapper" id="searchInputWrapper">
+                        <input type="text" id="searchInput" placeholder="ابحث في البوابة...">
+                    </div>
+                </div>
+                <span class="divider">|</span>
+                <a href="contact.html" class="top-link">التواصل</a>
+                <a href="index.html#news" class="top-link">أخبار الجماعة</a>
+                <a href="admin.html" class="top-link admin-only" target="_blank" style="margin-left: 12px; font-weight: 700; color: var(--accent-color);">بوابة المدير</a>
+                <a href="index.html#procedures-grid" class="btn btn-gold">خدمات إلكترونية</a>
+            </div>
+            
+            <div class="top-bar-right">
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="ar">العربية</button>
+                    <button class="lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+                    <button class="lang-btn" data-lang="fr">Français</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <nav class="main-nav" id="mainNav">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="القائمة">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
+                    <li><a href="publications.html" class="nav-link active">منشوراتنا</a></li>
+                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية الحضرية</a></li>
+                    <li><a href="action-program.html" class="nav-link">برنامج عمل الجماعة</a></li>
+                    <li><a href="index.html#procedures-grid" class="nav-link">الإجراءات الإدارية</a></li>
+                    <li><a href="sustainable.html" class="nav-link">بيوكرى مدينة مستدامة</a></li>
+                    <li><a href="index.html" class="nav-link">الجماعة الترابية</a></li>
+                </ul>
+            </nav>
+
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/biougra_logo.png" alt="شعار الجماعة الترابية لبيوكرى VILLE DE BIOUGRA" class="main-logo">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero">
+        <div class="container subpage-hero-content">
+            <h1 class="subpage-hero-title">منشورات ووثائق الجماعة</h1>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <div class="pub-grid" id="publicationsListContainer">
+            <!-- Doc 1: Annual Report -->
+            <div class="pub-card">
+                <div class="pub-file-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="pub-details">
+                    <h3 class="pub-title">التقرير السنوي لأنشطة جماعة بيوكرى 2025</h3>
+                    <div class="pub-meta">
+                        <span>نوع الملف: PDF</span>
+                        <span>الحجم: 4.8 ميغابايت</span>
+                    </div>
+                    <p class="pub-description">يتضمن الحصيلة الكاملة لمشاريع البنية التحتية، الخدمات الاجتماعية، الميزانيات المنفذة، وشراكات الجماعة خلال سنة 2025.</p>
+                    <div class="pub-action-row">
+                        <button class="btn btn-primary" onclick="simulateDownload(this)">تحميل الوثيقة</button>
+                        <div class="download-progress-bar">
+                            <div class="download-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doc 2: Budget Document -->
+            <div class="pub-card">
+                <div class="pub-file-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="pub-details">
+                    <h3 class="pub-title">الميزانية السنوية المعتمدة برسم سنة 2026</h3>
+                    <div class="pub-meta">
+                        <span>نوع الملف: PDF</span>
+                        <span>الحجم: 2.1 ميغابايت</span>
+                    </div>
+                    <p class="pub-description">تفصيل الموارد المالية والمداخيل الضريبية والنفقات العمومية التسييرية والاستثمارية المصادق عليها من طرف المجلس لسنة 2026.</p>
+                    <div class="pub-action-row">
+                        <button class="btn btn-primary" onclick="simulateDownload(this)">تحميل الوثيقة</button>
+                        <div class="download-progress-bar">
+                            <div class="download-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doc 3: Construction Guide -->
+            <div class="pub-card doc">
+                <div class="pub-file-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="pub-details">
+                    <h3 class="pub-title">دليل رخص البناء والتعمير ببيوكرى</h3>
+                    <div class="pub-meta">
+                        <span>نوع الملف: DOCX</span>
+                        <span>الحجم: 1.5 ميغابايت</span>
+                    </div>
+                    <p class="pub-description">مرشد توضيحي شامل للمهندسين والمواطنين يتضمن شروط البناء، الرسوم المعمول بها، والتصميم والخرائط المطلوبة عبر Rokhas.ma.</p>
+                    <div class="pub-action-row">
+                        <button class="btn btn-primary" onclick="simulateDownload(this)">تحميل الوثيقة</button>
+                        <div class="download-progress-bar">
+                            <div class="download-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doc 4: Administrative Procedures Handbook -->
+            <div class="pub-card">
+                <div class="pub-file-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="pub-details">
+                    <h3 class="pub-title">كتيب مساطر الإجراءات الإدارية للمواطنين</h3>
+                    <div class="pub-meta">
+                        <span>نوع الملف: PDF</span>
+                        <span>الحجم: 3.2 ميغابايت</span>
+                    </div>
+                    <p class="pub-description">كتيب تعريفي بالوثائق والمكاتب المخصصة للحالة المدنية، تصحيح الإمضاءات، الرخص الاقتصادية، وحفظ الصحة بالمدينة.</p>
+                    <div class="pub-action-row">
+                        <button class="btn btn-primary" onclick="simulateDownload(this)">تحميل الوثيقة</button>
+                        <div class="download-progress-bar">
+                            <div class="download-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3 class="footer-col-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="publications.html">منشوراتنا</a></li>
+                    <li><a href="index.html#news">مستجدات</a></li>
+                    <li><a href="index.html#multimedia">صوت و صورة</a></li>
+                    <li><a href="index.html#events">انشطة ومناسبات</a></li>
+                    <li><a href="index.html#news">دورات المجلس</a></li>
+                    <li><a href="contact.html">التواصل</a></li>
+                    <li><a href="admin.html" target="_blank" style="color: var(--accent-color); font-weight: 700;">بوابة المدير</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-col-title">الإجراءات الإدارية</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#procedures-grid">الحالة المدنية</a></li>
+                    <li><a href="index.html#procedures-grid">الشؤون الثقافية</a></li>
+                    <li><a href="index.html#procedures-grid">حفظ الصحة</a></li>
+                    <li><a href="index.html#procedures-grid">الشؤون الاقتصادية والشرطة الادارية</a></li>
+                    <li><a href="index.html#procedures-grid">الممتلكات الجماعية</a></li>
+                    <li><a href="index.html#procedures-grid">جميع الإجراءات الإدارية</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-col-title">الجماعة الترابية</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">الجماعة الترابية</a></li>
+                    <li><a href="index.html">الهيكل التنظيمي للجماعة</a></li>
+                    <li><a href="index.html">مكتب المجلس الجماعي</a></li>
+                    <li><a href="index.html">أعضاء المجلس الجماعي</a></li>
+                    <li><a href="index.html">أدوار ووظائف</a></li>
+                    <li><a href="index.html">هيئة المساواة وتكافؤ الفرص</a></li>
+                </ul>
+            </div>
+            <div class="footer-logo-col">
+                <img src="assets/biougra_logo.png" alt="مدينة بيوكرى VILLE DE BIOUGRA" class="footer-logo">
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="footer-socials">
+                <a href="#" class="social-icon" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Twitter/X">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96 29 29 0 0 0 .46-5.29 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                2026 &copy; <span class="muni-name-display">الجماعة الترابية لبيوكرى</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top-btn" id="backToTopBtn" aria-label="الرجوع للأعلى">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Simulated download bar
+        function simulateDownload(button) {
+            if (button.classList.contains('downloading')) return;
+            
+            button.classList.add('downloading');
+            button.style.display = 'none';
+            
+            const progressWrapper = button.nextElementSibling;
+            const progress = progressWrapper.querySelector('.download-progress');
+            
+            progressWrapper.style.display = 'block';
+            progress.style.width = '0%';
+            
+            let percent = 0;
+            const interval = setInterval(() => {
+                percent += 5;
+                progress.style.width = percent + '%';
+                
+                if (percent >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressWrapper.style.display = 'none';
+                        button.style.display = 'inline-flex';
+                        button.classList.remove('downloading');
+                        button.textContent = 'تم التحميل ✓';
+                        button.classList.add('btn-gold');
+                        button.classList.remove('btn-primary');
+                        alert('نجاح: تم تنزيل الملف بنجاح على جهازك!');
+                    }, 400);
+                }
+            }, 100);
+    </script>
+    <script type="module" src="js/app.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

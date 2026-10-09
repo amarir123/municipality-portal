@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - البوابة الرقمية للجماعة</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for analytics visual graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+    <!-- 1. LOGIN OVERLAY CARD -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-card-top-bar"></div>
+            <img src="assets/logo.png" alt="Ville Logo" class="login-logo" id="adminLoginLogo">
+            <h2 class="login-title">بوابة إدارة الجماعة الترابية</h2>
+            <p class="login-subtitle">نظام التحكم والتدبير الرقمي الموحد</p>
+            
+            <form id="loginForm" onsubmit="window.adminController ? window.adminController.handleLogin(event) : handleAdminLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="adminUser">اسم المستخدم</label>
+                    <input type="text" id="adminUser" class="form-input" placeholder="أدخل اسم المستخدم" value="admin" required autocomplete="username">
+                </div>
+                <div class="form-group" style="margin-bottom: 26px;">
+                    <label class="form-label" for="adminPass">كلمة المرور</label>
+                    <input type="password" id="adminPass" class="form-input" placeholder="أدخل كلمة المرور" value="admin123" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="login-btn-submit">
+                    <span>تسجيل الدخول إلى النظام</span>
+                    <span>🔑</span>
+                </button>
+            </form>
+            
+            <div class="login-footer-tag">
+                <span>المملكة المغربية</span>
+                <span>•</span>
+                <span>وزارة الداخلية</span>
+                <span>•</span>
+                <span>الجماعة الترابية</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SIDEBAR NAVIGATION -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <img src="assets/logo.png" alt="Ville Logo" id="adminSidebarLogo">
+            </div>
+            <div class="sidebar-title">لوحة التحكم الإدارية</div>
+        </div>
+        <nav class="sidebar-menu">
+            <button class="sidebar-btn active" onclick="switchPanel(this, 'analytics-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <span>إحصائيات المنصة 📊</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'complaints-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>إدارة الشكايات 📩</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'services-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <span>الخدمات والوثائق PDF 📄</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'branding-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>
+                <span>تخصيص الهوية والبيع 🎨</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'news-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v11a2 2 0 0 1-2 2z"></path></svg>
+                <span>مستجدات الجماعة</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'projects-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="18" y2="21"></line><line x1="18" y1="3" x2="6" y2="21"></line></svg>
+                <span>المشاريع التنموية</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'pubs-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                <span>المنشورات والتقارير</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'events-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect></svg>
+                <span>أنشطة ومناسبات</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline" style="width: 100%; border-color: #ef4444; color: #ef4444;" onclick="window.adminController ? window.adminController.handleLogout() : handleLogout()">تسجيل الخروج</button>
+        </div>
+    </aside>
+
+    <!-- 3. MAIN CONTENTS AREA -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="admin-header-title">لوحة تحكم البوابة الرقمية (SaaS Control Panel)</h1>
+            <div class="admin-user-info">
+                <span>المسؤول: <strong>مدير الجماعة</strong></span> |
+                <a href="index.html" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">عرض البوابة الرسمية ↗</a>
+            </div>
+        </header>
+
+        <!-- STATS WIDGETS -->
+        <section class="widgets-grid">
+            <div class="widget-card">
+                <div>
+                    <div class="widget-value" id="statNewsCount">0</div>
+                    <div class="widget-label">إجمالي الأخبار</div>
+                </div>
+                <div class="widget-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v11a2 2 0 0 1-2 2z"></path></svg></div>
+            </div>
+            <div class="widget-card">
+                <div>
+                    <div class="widget-value" id="statProjectsCount">0</div>
+                    <div class="widget-label">مشاريع تنموية</div>
+                </div>
+                <div class="widget-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="18" y2="21"></line></svg></div>
+            </div>
+            <div class="widget-card">
+                <div>
+                    <div class="widget-value" id="statComplaintsCount">0</div>
+                    <div class="widget-label">شكايات المواطنين</div>
+                </div>
+                <div class="widget-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path></svg></div>
+            </div>
+            <div class="widget-card">
+                <div>
+                    <div class="widget-value" id="statServicesCount">0</div>
+                    <div class="widget-label">خدمات ووثائق PDF</div>
+                </div>
+                <div class="widget-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg></div>
+            </div>
+        </section>
+
+        <!-- PANEL 1: ANALYTICS & CHARTS -->
+        <section class="admin-panel-content active" id="analytics-panel">
+            <h2 class="panel-section-title">📊 إحصائيات المنصة وتقارير الأداء البصري</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                <div class="card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-color); font-size: 1.1rem; margin-bottom: 15px;">نسب إنجاز المشاريع التنموية (%)</h3>
+                    <canvas id="projectsChartCanvas" height="200"></canvas>
+                </div>
+                <div class="card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-color); font-size: 1.1rem; margin-bottom: 15px;">حالة شكايات وطلبات المواطنين</h3>
+                    <canvas id="complaintsChartCanvas" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 2: COMPLAINTS MANAGEMENT -->
+        <section class="admin-panel-content" id="complaints-panel">
+            <h2 class="panel-section-title">📩 إدارة شكايات ومراسلات المواطنين</h2>
+            <div class="card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div>قائمة الشكايات والطلبات الواردة</div>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="window.adminController.filterComplaints('all')" class="btn btn-outline btn-sm">الكل</button>
+                        <button onclick="window.adminController.filterComplaints('قيد النظر')" class="btn btn-outline btn-sm">قيد النظر</button>
+                        <button onclick="window.adminController.filterComplaints('قيد المعالجة')" class="btn btn-outline btn-sm">قيد المعالجة</button>
+                        <button onclick="window.adminController.filterComplaints('تم الحل')" class="btn btn-outline btn-sm">تم الحل</button>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>رقم التتبع (Ticket ID)</th>
+                                <th>المواطن</th>
+                                <th>الموضوع والتصنيف</th>
+                                <th>الحالة</th>
+                                <th>التاريخ</th>
+                                <th>إجراءات الإدارة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminComplaintsTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 3: SERVICES & PDF HUB MANAGEMENT -->
+        <section class="admin-panel-content" id="services-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">📄 إدارة الخدمات الإلكترونية والوثائق PDF</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddServiceModal()">+ إضافة خدمة أو وثيقة جديدة</button>
+            </div>
+            <div class="card">
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>العنوان والتصنيف</th>
+                                <th>الوصف</th>
+                                <th>نوع الرابط / الملف</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminServicesTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL 4: WHITE-LABEL BRANDING & SAAS PACKAGING -->
+        <section class="admin-panel-content" id="branding-panel">
+            <h2 class="panel-section-title">🎨 تخصيص هويّة الجماعة وسيناريوهات البيع (White-Label Engine)</h2>
+            
+            <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--accent-color);">
+                <h3 style="color: var(--primary-color); margin-bottom: 12px;">📦 تصدير واستيراد تهيئة المنصة (SaaS JSON Package)</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">يمكنك حفظ وإخراج تهيئة الجماعة بالكامل في ملف JSON لإعادة تركيبها وبيعها لجماعات أخرى بنقرة واحدة!</p>
+                <div style="display: flex; gap: 15px;">
+                    <button onclick="window.adminController.handleExportPackage()" class="btn btn-gold">تصدير حزمة التهيئة (Export JSON) 📥</button>
+                    <button onclick="document.getElementById('importJsonFileInput').click()" class="btn btn-outline">استيراد حزمة جماعة جديدة (Import JSON) 📤</button>
+                    <input type="file" id="importJsonFileInput" accept=".json" style="display: none;" onchange="window.adminController.handleImportPackageFile(event)">
+                </div>
+            </div>
+
+            <form id="brandingForm" onsubmit="window.adminController.saveBrandingSettings(event)">
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">1. المعلومات الأساسية والتواصل للجماعة</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">اسم الجماعة الترابية *</label>
+                            <input type="text" id="brandMuniName" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">اسم المدينة/الإقليم *</label>
+                            <input type="text" id="brandCityName" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">رقم الهاتف الرسمي</label>
+                            <input type="text" id="brandPhone" class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" id="brandEmail" class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">أوقات العمل</label>
+                            <input type="text" id="brandWorkingHours" class="form-input">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">شريط التنبيهات والإعلانات العاجلة (Ticker Text)</label>
+                        <input type="text" id="brandTickerText" class="form-input">
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">2. الألوان المباشرة (Theme Colors)</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">اللون الرئيسي (Primary)</label>
+                            <input type="color" id="brandPrimaryColor" style="width: 100%; height: 42px; cursor: pointer; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label class="form-label">اللون الثانوي (Accent Gold)</label>
+                            <input type="color" id="brandAccentColor" style="width: 100%; height: 42px; cursor: pointer; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label class="form-label">لون العناصر الداكنة</label>
+                            <input type="color" id="brandDarkColor" style="width: 100%; height: 42px; cursor: pointer; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label class="form-label">لون النصوص الرئيسية</label>
+                            <input type="color" id="brandTextColor" style="width: 100%; height: 42px; cursor: pointer; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">3. تفعيل وإخفاء الأقسام (Section Visibility Toggles)</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                            <input type="checkbox" id="brandShowTicker" checked> إظهار شريط الإعلانات العاجلة
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                            <input type="checkbox" id="brandShowUrban" checked> إظهار قسم التنمية الحضرية
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                            <input type="checkbox" id="brandShowServices" checked> إظهار قسم الخدمات والوثائق
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">حفظ وإرسال التغييرات إلى البوابة المباشرة 💾</button>
+            </form>
+        </section>
+
+        <!-- PANEL 5: NEWS MANAGEMENT -->
+        <section class="admin-panel-content" id="news-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">مستجدات الجماعة</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddNewsModal()">+ إضافة خبر جديد</button>
+            </div>
+            <div class="card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>عنوان الخبر</th>
+                            <th>التاريخ</th>
+                            <th>الملخص</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminNewsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PANEL 6: PROJECTS MANAGEMENT -->
+        <section class="admin-panel-content" id="projects-panel">
+            <h2 class="panel-section-title">المشاريع التنموية</h2>
+            <div class="proj-admin-grid" id="adminProjectsGrid"></div>
+        </section>
+
+        <!-- PANEL 7: PUBLICATIONS -->
+        <section class="admin-panel-content" id="pubs-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">المنشورات والتقارير الرسمية</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddPubModal()">+ إضافة منشور جديد</button>
+            </div>
+            <div class="card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>عنوان المنشور</th>
+                            <th>النوع</th>
+                            <th>الحجم</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminPubsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PANEL 8: EVENTS -->
+        <section class="admin-panel-content" id="events-panel">
+            <h2 class="panel-section-title">أنشطة ومناسبات الجماعة</h2>
+            <div id="adminEventsContainer"></div>
+        </section>
+    </main>
+
+    <!-- TOAST NOTIFICATION NOTIFIER -->
+    <div class="toast-notify" id="toastNotify">
+        <span id="toastMessage">تم التحديث بنجاح!</span>
+    </div>
+
+    <!-- MODAL EDIT NEWS -->
+    <div class="modal-overlay" id="adminEditNewsModal">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="window.adminController.closeNewsModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="newsModalTitle">إضافة / تعديل خبر</h3>
+                <form id="newsEditForm" onsubmit="window.adminController.saveNewsItem(event)">
+                    <input type="hidden" id="editNewsId">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان الخبر</label>
+                        <input type="text" id="editNewsTitle" class="form-input" required>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">التاريخ</label>
+                        <input type="text" id="editNewsDate" class="form-input" required>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الملخص</label>
+                        <input type="text" id="editNewsExcerpt" class="form-input" required>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">التفاصيل الكاملة</label>
+                        <textarea id="editNewsContent" class="form-input" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ الخبر</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT COMPLAINT RESPONSE -->
+    <div class="modal-overlay" id="adminEditComplaintModal" style="display: none;">
+        <div class="modal-content" style="max-width: 550px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeComplaintEditModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">معالجة والرد على شكاية المواطن</h3>
+                <form onsubmit="window.adminController.saveComplaintResponse(event)">
+                    <input type="hidden" id="editCmpId">
+                    <div style="margin-bottom: 12px; background: #f8fafc; padding: 12px; border-radius: 6px;">
+                        <div style="font-weight: 700; color: var(--primary-color);" id="cmpModalSubject"></div>
+                        <div style="font-size: 0.85rem; color: #64748b;" id="cmpModalCitizen"></div>
+                        <div style="font-size: 0.85rem; margin-top: 6px;" id="cmpModalDetails"></div>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">حالة الشكاية</label>
+                        <select id="cmpModalStatus" class="form-input" style="background: white;">
+                            <option value="قيد النظر">قيد النظر</option>
+                            <option value="قيد المعالجة">قيد المعالجة</option>
+                            <option value="تم الحل">تم الحل</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">ملاحظة ورَدّ الإدارة الموجه للمواطن</label>
+                        <textarea id="cmpModalResponseNote" class="form-input" rows="4" placeholder="اكتب رد الجماعة الإداري..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ التحديث وإرسال الرد 🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript MVC Bundle -->
+    <script type="module" src="js/app.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
