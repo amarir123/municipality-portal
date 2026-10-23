@@ -829,8 +829,8 @@
         </div>
     </section>
 
-    <!-- MUNICIPALITY STATS SECTION (عدادات متحركة) -->
-    <section class="stats-section">
+    <!-- MUNICIPALITY STATS SECTION (عدادات إحصائية زجاجية فاخرة) -->
+    <section class="stats-section" id="portalStats">
         <div class="container stats-grid">
             <div class="stat-card">
                 <div class="stat-number" data-target="2027">2021-2027</div>
@@ -851,130 +851,136 @@
         </div>
     </section>
 
-    <!-- THE MASTER FOOTER (PRE-STRIP + 4 BALANCED COLS + DARK MINI-MAP) -->
+    <!-- WORLD-CLASS INSTITUTIONAL MASTER FOOTER -->
     <footer class="master-footer" id="mainFooter">
-        <!-- Pre-footer Call-to-Action Strip -->
-        <div class="footer-cta-strip">
-            <div class="container footer-cta-wrapper">
-                <div>
-                    <h3 class="footer-cta-title">هل لديك سؤال، استفسار أو اقتراح؟</h3>
-                    <p class="footer-cta-subtitle">مصالح وأطر جماعة بيوكرى رهن إشارتكم للإجابة على تساؤلاتكم ومواكبة ملفاتكم</p>
+        <!-- Institutional Header Strip -->
+        <div class="footer-institutional-header">
+            <div class="container footer-brand-flex">
+                <img src="assets/logo_transparent.png" alt="شعار المملكة وجماعة بيوكرى" class="footer-logo-main">
+                <div class="footer-brand-info">
+                    <span class="footer-kingdom-badge">المملكة المغربية • وزارة الداخلية • إقليم اشتوكة آيت باها</span>
+                    <h3 class="footer-portal-title">الجماعة الترابية لبيوكرى</h3>
+                    <p class="footer-portal-tagline">البوابة الرقمية الرسمية الموحدة لتدبير الشأن العام المحلي، مواكبة التنمية المستدامة، وتقريب الخدمات الإدارية من المواطنين والمجتمع المدني والمستثمرين.</p>
                 </div>
-                <div class="footer-cta-actions">
-                    <a href="https://wa.me/212528818000" target="_blank" class="btn-footer-whatsapp">
-                        <span>تواصل عبر واتساب</span>
+                <div class="footer-action-badge-box">
+                    <button type="button" onclick="openComplaintModal()" class="btn-footer-chikaya">
+                        <span>✍️ إيداع شكاية أو مقترح</span>
+                    </button>
+                    <a href="https://maps.google.com/?q=30.2184,-9.3719" target="_blank" class="btn-footer-location">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>مقر الجماعة على الخريطة</span>
                     </a>
-                    <a href="tel:+212528818000" class="btn-footer-call">
-                        <span>اتصل بنا هاتفياً</span>
-                    </a>
-                    <form onsubmit="event.preventDefault(); alert('شكراً لاشتراككم في النشرة الإخبارية لجماعة بيوكرى!');" style="display: flex; gap: 6px;">
-                        <input type="email" placeholder="بريدك الإلكتروني..." required style="padding: 10px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.85rem; outline: none;">
-                        <button type="submit" class="btn btn-gold btn-sm" style="border-radius: 20px; padding: 0 16px;">اشترك</button>
-                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- 4 Balanced Columns -->
-        <div class="footer-main-content">
-            <div class="container footer-4cols-grid">
-                <!-- Col 1: Institutional Identity & Transparent Logo -->
-                <div class="footer-col">
-                    <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى" class="footer-logo-transparent" id="footerLogoImg">
-                    <h4 style="margin-bottom: 8px;">جماعة بيوكرى الترابية</h4>
-                    <p class="footer-desc-text">
-                        البوابة الرقمية الرسمية الموحدة لتقريب الإدارة الجماعية من المواطنين والمجتمع المدني والمستثمرين، تكريساً لمبادئ الشفافية والمساءلة والتحول الرقمي بإقليم اشتوكة آيت باها.
-                    </p>
-                    <!-- Social Media SVG Icons -->
-                    <div class="footer-social-row">
-                        <a href="https://facebook.com" target="_blank" class="social-icon-btn" aria-label="Facebook">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" class="social-icon-btn" aria-label="X Twitter">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Col 2: Quick Links -->
-                <div class="footer-col">
-                    <h4>روابط سريعة</h4>
-                    <ul class="footer-links-list">
-                        <li><a href="municipality.html">الجماعة الترابية</a></li>
-                        <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
-                        <li><a href="#urban-development">برنامج التنمية الحضرية</a></li>
-                        <li><a href="sustainable.html">مدينة بيوكرى المستدامة</a></li>
-                        <li><a href="publications.html">منشورات ومقررات المجلس</a></li>
-                        <li><a href="contact.html">أوقات العمل والتواصل</a></li>
+        <!-- 3 Elegant Organized Columns -->
+        <div class="footer-columns-wrapper">
+            <div class="container footer-3cols-grid">
+                <!-- Column 1: Services -->
+                <div class="footer-col-block">
+                    <h4 class="footer-col-heading">الخدمات الإدارية الرقمية</h4>
+                    <ul class="footer-stylish-links">
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('residence')">شهادة السكنى والإقامة الجماعية</a></li>
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('birth')">عقود ورسوم الحالة المدنية</a></li>
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">منصة رخص البناء والتعمير (Rokhas)</a></li>
+                        <li><a href="javascript:void(0)" onclick="openComplaintModal()">إيداع وتتبع الشكايات (Chikaya)</a></li>
+                        <li><a href="javascript:void(0)" onclick="openSubventionsModal()">دعم جمعيات المجتمع المدني والاتحادات</a></li>
+                        <li><a href="javascript:void(0)" onclick="openLegalPopup()">المعلومات القانونية والنصوص التنظيمية</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Citizen Services -->
-                <div class="footer-col">
-                    <h4>خدمات المواطن</h4>
-                    <ul class="footer-links-list">
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('residence')">شهادة السكنى والإقامة</a></li>
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('birth')">عقود الحالة المدنية</a></li>
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">رخص البناء والتعمير</a></li>
-                        <li><a href="javascript:void(0)" onclick="openComplaintModal()">إيداع شكاية أو مقترح</a></li>
-                        <li><a href="javascript:void(0)" onclick="openSubventionsModal()">دعم الجمعيات والاتحادات</a></li>
-                        <li><a href="javascript:void(0)" onclick="openLegalPopup()">المعلومات القانونية</a></li>
+                <!-- Column 2: Municipality & Development -->
+                <div class="footer-col-block">
+                    <h4 class="footer-col-heading">التنمية والشأن المحلي</h4>
+                    <ul class="footer-stylish-links">
+                        <li><a href="action-program.html">برنامج عمل الجماعة (2021-2027)</a></li>
+                        <li><a href="#urban-development">مشاريع التنمية الحضرية الكبرى</a></li>
+                        <li><a href="sustainable.html">بيوكرى عاصمة بيئية مستدامة</a></li>
+                        <li><a href="publications.html">منشورات ومقررات المجلس الجماعي</a></li>
+                        <li><a href="municipality.html">الهيكل التنظيمي والمصالح الجماعية</a></li>
+                        <li><a href="contact.html">دليل المساطر والإجراءات الإدارية</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 4: Contact & Stylized Mini-Map Widget -->
-                <div class="footer-col">
-                    <h4>الاتصال والموقع</h4>
-                    <ul class="footer-contact-items">
+                <!-- Column 3: Contact, Hours & Official Channels -->
+                <div class="footer-col-block">
+                    <h4 class="footer-col-heading">المقر الرسمي والتواصل</h4>
+                    <ul class="footer-stylish-contact">
                         <li>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            <span id="footerAddressDisplay">شارع محمد الخامس، المقر الرئيسي لجماعة بيوكرى، إقليم اشتوكة آيت باها</span>
+                            <div class="contact-icon-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div>
+                                <strong>المقر الرئيسي للجماعة:</strong>
+                                <span>شارع محمد الخامس، بيوكرى، إقليم اشتوكة آيت باها</span>
+                            </div>
                         </li>
                         <li>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <span id="footerPhoneDisplay">+212 528 81 80 00</span>
+                            <div class="contact-icon-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong>أوقات الاستقبال الإداري:</strong>
+                                <span>من الإثنين إلى الجمعة: 08:30 صباحاً إلى 16:30 مساءً</span>
+                            </div>
                         </li>
                         <li>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span id="footerEmailDisplay">contact@biougra.ma</span>
+                            <div class="contact-icon-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            </div>
+                            <div>
+                                <strong>الهاتف المباشر:</strong>
+                                <span dir="ltr">+212 528 81 80 00</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong>البريد الإلكتروني المعتمد:</strong>
+                                <span>contact@biougra.ma</span>
+                            </div>
                         </li>
                     </ul>
 
-                    <!-- STYLIZED DARK MINI-MAP -->
-                    <div class="footer-mini-map-card">
-                        <div class="mini-map-header">
-                            <span>📍 مقر الجماعة على الخريطة</span>
-                            <span style="color: var(--accent-color); font-size: 0.75rem;">GPS: 30.2184, -9.3719</span>
+                    <!-- Monochrome Gold Social Circles -->
+                    <div class="footer-social-cluster">
+                        <span style="font-size: 0.82rem; color: #94a3b8; font-weight: 600;">قنوات التواصل:</span>
+                        <div class="social-pills-row">
+                            <a href="https://facebook.com" target="_blank" class="social-circle-pill" aria-label="Facebook">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" class="social-circle-pill" aria-label="X Twitter">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                            <a href="https://youtube.com" target="_blank" class="social-circle-pill" aria-label="YouTube">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" class="social-circle-pill" aria-label="Instagram">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            </a>
                         </div>
-                        <div class="mini-map-preview">
-                            <div class="mini-map-pin" title="مقر جماعة بيوكرى">📍</div>
-                        </div>
-                        <a href="https://maps.google.com/?q=30.2184,-9.3719" target="_blank" class="btn-mini-map-directions">
-                            <span>فتح الاتجاهات عبر Google Maps ↗</span>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer Bottom Bar -->
+        <!-- Dignified Legal Footer Bottom Bar -->
         <div class="footer-bottom-bar">
-            <div class="container footer-bottom-container">
-                <div>
-                    <p style="margin: 0;">جميع الحقوق محفوظة © 2026 - المملكة المغربية • وزارة الداخلية • جماعة بيوكرى الترابية</p>
+            <div class="container footer-bottom-flex">
+                <div class="footer-copyright-text">
+                    <span>جميع الحقوق محفوظة © 2026 - الجماعة الترابية لبيوكرى • المملكة المغربية</span>
                 </div>
-                <div class="footer-legal-links">
+                <div class="footer-legal-links-cluster">
                     <a href="javascript:void(0)" onclick="openLegalPopup()">سياسة الخصوصية</a>
-                    <span>•</span>
-                    <a href="javascript:void(0)" onclick="openLegalPopup()">إمكانية الوصول (WCAG AA)</a>
-                    <span>•</span>
-                    <a href="publications.html">خريطة البوابة</a>
+                    <span class="dot-sep">•</span>
+                    <a href="javascript:void(0)" onclick="openLegalPopup()">حماية المعطيات الشخصية (CNDP)</a>
+                    <span class="dot-sep">•</span>
+                    <a href="javascript:void(0)" onclick="openLegalPopup()">شروط الاستخدام</a>
+                    <span class="dot-sep">•</span>
+                    <a href="publications.html">إمكانية الوصول (WCAG AA)</a>
                 </div>
             </div>
         </div>
