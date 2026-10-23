@@ -1,4 +1,4 @@
-export class AdminView {
+﻿export class AdminView {
     static showToast(message, isError = false) {
         const toast = document.getElementById('toastNotify');
         const toastMsg = document.getElementById('toastMessage');

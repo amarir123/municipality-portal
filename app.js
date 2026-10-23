@@ -221,12 +221,6 @@ langButtons.forEach(btn => {
 
 // --- DYNAMIC RENDERING ON DOM LOAD ---
 window.addEventListener('DOMContentLoaded', () => {
-    applyDynamicBranding();
-    renderDynamicNews();
-    renderDynamicEvents();
-    renderDynamicPublications();
-    renderDynamicVideos();
-    updateActionProgramUI();
     checkAdminControlsVisibility();
 });
 
@@ -944,7 +938,8 @@ window.addEventListener('scroll', () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
-        scrollBar.style.width = scrolled + '%';
+        scrollBar.style.transform = `scaleX(${scrolled / 100})`;
+        scrollBar.style.width = '100%';
     }
     
     const header = document.getElementById('mainHeader');
@@ -957,16 +952,57 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 2. Viewport Reveal Observers
+// 2. Viewport Reveal Observers & Visual Micro-interactions
 document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.reveal, .news-item, .event-card, .pub-item, .urban-card, .info-card');
+    // Inject Hero Floating Luminous Orbs if in Hero Section
+    const heroSec = document.querySelector('.hero-section') || document.querySelector('.hero-slider-container');
+    if (heroSec && !heroSec.querySelector('.hero-mesh-wrapper')) {
+        const meshWrapper = document.createElement('div');
+        meshWrapper.className = 'hero-mesh-wrapper';
+        meshWrapper.innerHTML = `
+            <div class="hero-mesh-orb hero-mesh-orb-1"></div>
+            <div class="hero-mesh-orb hero-mesh-orb-2"></div>
+            <div class="hero-mesh-orb hero-mesh-orb-3"></div>
+        `;
+        heroSec.appendChild(meshWrapper);
+    }
+
+    // Interactive Mouse Spotlight & 3D Tilt on Cards
+    const interactiveCards = document.querySelectorAll(
+        '.info-card, .proc-card, .service-hub-card, .muni-box-card, .poll-box-card, .subvention-fiche-card, .mandate-member-card'
+    );
+
+    interactiveCards.forEach(card => {
+        card.classList.add('has-spotlight');
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+
+            // Subtle 3D tilt
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -4;
+            const rotateY = ((x - centerX) / centerX) * 4;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.015)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal, .news-item, .event-card, .pub-item, .urban-card, .info-card, .proc-card, .muni-box-card');
     
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                entry.target.classList.add('revealed');
                 // If the stats counter block is entered, trigger count up
-                if (entry.target.id === 'stats-section') {
+                if (entry.target.id === 'stats-section' || entry.target.querySelector('.stat-number')) {
                     animateStatsCounters();
                 }
                 observer.unobserve(entry.target);
@@ -975,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.15 });
     
     revealElements.forEach(el => {
-        el.classList.add('reveal');
+        el.classList.add('reveal-on-scroll');
         revealObserver.observe(el);
     });
 });
@@ -984,15 +1020,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function animateStatsCounters() {
     const counters = document.querySelectorAll('.stat-number');
     counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const increment = target / 80;
+        const rawTarget = counter.getAttribute('data-target') || counter.textContent.replace(/[^0-9]/g, '');
+        const target = +rawTarget || 100;
+        const increment = target / 70;
         
         let current = 0;
         const updateCounter = () => {
             current += increment;
             if (current < target) {
                 counter.textContent = Math.ceil(current).toLocaleString();
-                setTimeout(updateCounter, 15);
+                setTimeout(updateCounter, 18);
             } else {
                 counter.textContent = target.toLocaleString();
             }
@@ -1001,13 +1038,13 @@ function animateStatsCounters() {
     });
 }
 
-// 4. Quick Theme Switcher from homepage top bar
+// 4. Quick Theme Switcher from homepage top bar (Palette: #00A6A6, #7BDFF2, #F2E8CF, #F4A261, #264653)
 window.applyQuickTheme = function(themeKey) {
     const themePresets = {
-        classic: { primary: '#0d5ea6', accent: '#c69c55', dark: '#1e293b', text: '#334155' },
-        eco: { primary: '#15803d', accent: '#86efac', dark: '#0f172a', text: '#334155' },
-        royal: { primary: '#991b1b', accent: '#fcd34d', dark: '#111827', text: '#334155' },
-        modern: { primary: '#1f2937', accent: '#9ca3af', dark: '#111827', text: '#334155' }
+        classic: { primary: '#00A6A6', accent: '#F4A261', dark: '#264653', text: '#264653', secondary: '#7BDFF2', cream: '#F2E8CF' },
+        eco: { primary: '#15803d', accent: '#86efac', dark: '#0f172a', text: '#334155', secondary: '#86efac', cream: '#f0fdf4' },
+        royal: { primary: '#991b1b', accent: '#fcd34d', dark: '#111827', text: '#334155', secondary: '#fcd34d', cream: '#fef2f2' },
+        modern: { primary: '#264653', accent: '#F4A261', dark: '#1b323b', text: '#264653', secondary: '#7BDFF2', cream: '#F2E8CF' }
     };
     
     const p = themePresets[themeKey];
@@ -1179,3 +1216,377 @@ window.toggleDarkMode = function() {
     showQuickToast('تم تغيير الوضع الداكن.');
 };
 
+
+// CHEF'S NEW FEATURES GLOBAL FALLBACK WRAPPERS
+window.openLegalPopup = window.openLegalPopup || function() {
+    const el = document.getElementById('legalPopupOverlay');
+    if (el) el.classList.add('active');
+};
+window.closeLegalPopup = window.closeLegalPopup || function() {
+    const el = document.getElementById('legalPopupOverlay');
+    if (el) el.classList.remove('active');
+};
+window.openMandateModal = window.openMandateModal || function() {
+    if (window.appController && window.appController.openMandateModal) {
+        window.appController.openMandateModal();
+    } else {
+        const el = document.getElementById('mandateModalOverlay');
+        if (el) el.style.display = 'flex';
+    }
+};
+window.closeMandateModal = window.closeMandateModal || function() {
+    const el = document.getElementById('mandateModalOverlay');
+    if (el) el.style.display = 'none';
+};
+window.openSubventionsModal = window.openSubventionsModal || function() {
+    if (window.appController && window.appController.openSubventionsModal) {
+        window.appController.openSubventionsModal();
+    } else {
+        const el = document.getElementById('subventionsModalOverlay');
+        if (el) el.style.display = 'flex';
+    }
+};
+window.closeSubventionsModal = window.closeSubventionsModal || function() {
+    const el = document.getElementById('subventionsModalOverlay');
+    if (el) el.style.display = 'none';
+};
+
+// ==========================================
+// HERO VIDEO CAPSULE & DYNAMIC PARTICLES EFFECT
+// ==========================================
+window.openHeroVideoCapsule = function() {
+    const el = document.getElementById('heroVideoModalOverlay');
+    if (el) el.style.display = 'flex';
+};
+
+window.closeHeroVideoCapsule = function() {
+    const el = document.getElementById('heroVideoModalOverlay');
+    if (el) el.style.display = 'none';
+};
+
+window.switchActiveVideo = function(id, title, thumb, duration) {
+    const thumbEl = document.getElementById('activeVideoThumb');
+    const titleEl = document.getElementById('activeVideoTitle');
+    const durEl = document.getElementById('activeVideoDuration');
+
+    if (thumbEl) thumbEl.src = thumb;
+    if (titleEl) titleEl.textContent = title;
+    if (durEl) durEl.textContent = `⏱️ المدة: ${duration} دقيقة`;
+
+    document.querySelectorAll('.video-switch-thumb').forEach(el => el.classList.remove('active'));
+    const chosen = document.getElementById(`vThumb-${id}`);
+    if (chosen) chosen.classList.add('active');
+};
+
+window.playSimulatedVideo = function() {
+    if (typeof showQuickToast === 'function') {
+        showQuickToast('🎬 جاري تشغيل العرض المرئي عالي الدقة...');
+    } else {
+        alert('🎬 جاري تشغيل العرض المرئي للمشاريع...');
+    }
+    const playBtn = document.querySelector('.video-big-play-btn');
+    if (playBtn) {
+        playBtn.style.transform = 'scale(0.85)';
+        setTimeout(() => { playBtn.style.transform = 'scale(1)'; }, 300);
+    }
+};
+
+// HERO PARTICLES CONSTELLATION ANIMATION (تأثير شبكة النجوم والجسيمات الذكية)
+function initHeroParticlesCanvas() {
+    const canvas = document.getElementById('heroParticlesCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.parentElement.offsetWidth || window.innerWidth);
+    let height = (canvas.height = canvas.parentElement.offsetHeight || 560);
+
+    window.addEventListener('resize', () => {
+        if (!canvas.parentElement) return;
+        width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+        height = canvas.height = canvas.parentElement.offsetHeight || 560;
+    });
+
+    const numParticles = 55;
+    const particles = [];
+    const colors = ['#F2A93B', '#0F9D8A', '#1B3A8A', '#ffffff', '#D9603B'];
+
+    for (let i = 0; i < numParticles; i++) {
+        particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2.4 + 0.9,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            alpha: Math.random() * 0.6 + 0.35
+        });
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < numParticles; i++) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.fill();
+
+            // Connect nearby particles
+            for (let j = i + 1; j < numParticles; j++) {
+                const p2 = particles[j];
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 95) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#F2A93B';
+                    ctx.globalAlpha = (1 - dist / 95) * 0.22;
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroParticlesCanvas);
+} else {
+    initHeroParticlesCanvas();
+}
+
+// ==========================================
+// SOUSS-MASSA MOROCCAN HERITAGE 10/10 SUITE:
+// Command Palette (Cmd+K), File Tracking, Aura & Accessibility
+// ==========================================
+
+// 1. COMMAND PALETTE (Cmd+K / Ctrl+K)
+window.openCmdKModal = function() {
+    const modal = document.getElementById('cmdKModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    const input = document.getElementById('cmdkInput');
+    if (input) {
+        input.value = '';
+        setTimeout(() => input.focus(), 50);
+    }
+};
+
+window.closeCmdKModal = function() {
+    const modal = document.getElementById('cmdKModal');
+    if (modal) modal.style.display = 'none';
+};
+
+// Global Keyboard Shortcut: Ctrl+K / Cmd+K / Esc
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const modal = document.getElementById('cmdKModal');
+        if (modal && modal.style.display === 'flex') {
+            closeCmdKModal();
+        } else {
+            openCmdKModal();
+        }
+    }
+    if (e.key === 'Escape') {
+        closeCmdKModal();
+        closeTrackingModal();
+        if (typeof closeLegalPopup === 'function') closeLegalPopup();
+        if (typeof closeHeroVideoCapsule === 'function') closeHeroVideoCapsule();
+    }
+});
+
+window.handleCmdKSearch = function(query) {
+    const q = (query || '').trim().toLowerCase();
+    const items = document.querySelectorAll('.cmdk-item');
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+};
+
+// 2. CITIZEN FILE & COMPLAINT TRACKING
+window.handleCitizenTracking = function(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById('trackingCodeInput');
+    const code = (input ? input.value : '').trim().toUpperCase();
+    if (!code) return;
+
+    const modal = document.getElementById('trackingResultModal');
+    const body = document.getElementById('trackingModalBody');
+    if (!modal || !body) return;
+
+    // Simulate authentic institutional status steps
+    body.innerHTML = `
+        <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; border-right: 4px solid var(--primary-color); margin-bottom: 20px;">
+            <div style="font-size: 0.82rem; color: var(--text-muted);">رقم الإيداع المعتمد لجماعة بيوكرى:</div>
+            <strong style="font-size: 1.15rem; color: var(--primary-color);">${code}</strong>
+            <div style="font-size: 0.85rem; color: var(--dark-color); margin-top: 4px;">موضوع الطلب: <strong>معالجة إدارية رسمية بالمصالح الجماعية</strong></div>
+        </div>
+
+        <div style="margin-bottom: 22px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700;">
+                <span style="color: var(--secondary-color);">الحالة الحالية: قيد المعالجة الميدانية والتأشير</span>
+                <span style="color: var(--primary-color);">75%</span>
+            </div>
+            <div style="height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                <div style="width: 75%; height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--accent-color)); border-radius: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- Progress Timeline Steps -->
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; font-size: 0.9rem;">
+            <div style="display: flex; align-items: center; gap: 10px; color: var(--secondary-color); font-weight: 600;">
+                <span>✅</span> <span>1. تسجيل الملف بمكتب الضبط الرقمي المركزي</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; color: var(--secondary-color); font-weight: 600;">
+                <span>✅</span> <span>2. فحص الوثائق واستيفاء الشروط القانونية</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; color: var(--accent-color); font-weight: 700;">
+                <span>⏳</span> <span>3. مرحلة المراجعة التقنية وقرار المصلحة المختصة</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                <span>⚪</span> <span>4. التأشير النهائي والتسليم للمرتفق</span>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button onclick="closeTrackingModal()" class="btn btn-primary" style="padding: 10px 24px;">حسناً، إغلاق</button>
+        </div>
+    `;
+
+    modal.style.display = 'flex';
+};
+
+window.closeTrackingModal = function() {
+    const modal = document.getElementById('trackingResultModal');
+    if (modal) modal.style.display = 'none';
+};
+
+// 3. ESSENTIAL SERVICE DETAIL MODAL TRIGGER
+window.openServiceDetail = function(key) {
+    const details = {
+        residence: {
+            title: "شهادة السكنى والإقامة",
+            icon: "📜",
+            docs: ["نسخة من بطاقة التعريف الوطنية الإلكترونية", "عقد الكراء أو شهادة الملكية أو وصل الكراء الأخير", "شهادة العمل أو وثيقة تثبت ممارسة نشاط مهني بالمدينة"],
+            dept: "مكتب الشؤون الإدارية ومصلحة الحالة المدنية",
+            delay: "24 ساعة إلى 48 ساعة كحد أقصى"
+        },
+        birth: {
+            title: "عقد الازدياد والحالة المدنية",
+            icon: "👶",
+            docs: ["الدفتر العائلي الأصلي أو نسخة منه", "رقم وتاريخ رسم الولادة", "بطاقة التعريف الوطنية لطالب الوثيقة"],
+            dept: "مكاتب الحالة المدنية لجماعة بيوكرى",
+            delay: "تسليم فوري ومباشر بالمكتب"
+        },
+        legalization: {
+            title: "تصحيح الإمضاء ومطابقة النسخ",
+            icon: "✍️",
+            docs: ["أصل الوثيقة المراد الإشهاد على صحة توقيعها", "أصل البطاقة الوطنية للتعريف سارية الصلاحية", "النسخ المادية المراد مطابقتها مع الأصل"],
+            dept: "مكاتب الإشهاد بمقر الجماعة والملحقات الإدارية",
+            delay: "إنجاز فوري خلال دقائق معدودة"
+        },
+        urbanism: {
+            title: "رخص البناء والتعمير والربط",
+            icon: "🏗️",
+            docs: ["التصميم المعماري مصادق عليه من مهندس معماري معتمد", "شهادة الملكية العقارية لا تتعدى 3 أشهر", "الإيداع الرقمي عبر المنصة الوطنية www.rokhas.ma"],
+            dept: "مصلحة التعمير والتهيئة الحضرية والممتلكات",
+            delay: "تتم المعالجة عبر اللجنة التقنية الإقليمية"
+        }
+    };
+
+    const s = details[key];
+    if (!s) return;
+
+    const modalBody = document.getElementById('modalBody');
+    const modalOverlay = document.getElementById('modalOverlay');
+    if (!modalBody || !modalOverlay) return;
+
+    modalBody.innerHTML = `
+        <div style="text-align: center; margin-bottom: 22px;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">${s.icon}</div>
+            <h2 style="color: var(--primary-color); font-size: 1.6rem; font-weight: 800; margin: 0;">${s.title}</h2>
+            <span class="hero-badge-tag" style="background: rgba(15, 157, 138, 0.12); color: var(--secondary-color); margin-top: 10px;">المصلحة: ${s.dept}</span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: var(--dark-color); font-size: 1.05rem; margin-bottom: 10px; font-weight: 700;">📋 الوثائق والشروط المطلوبة:</h4>
+            <ul style="list-style: none; padding: 0;">
+                ${s.docs.map(d => `<li style="padding: 8px 12px; background: #f8fafc; border-radius: 8px; margin-bottom: 8px; border-right: 3px solid var(--secondary-color); font-size: 0.95rem;">• ${d}</li>`).join('')}
+            </ul>
+        </div>
+
+        <div style="background: rgba(242, 169, 59, 0.15); padding: 12px 16px; border-radius: 10px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">⏱️</span>
+            <div>
+                <strong>المدة الزمنية للإنجاز والتسليم:</strong>
+                <div style="font-size: 0.9rem; color: #784803;">${s.delay}</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: center;">
+            <button onclick="document.getElementById('modalOverlay').style.display='none'" class="btn btn-primary btn-lg">فهمت المتطلبات، إغلاق</button>
+            <button onclick="document.getElementById('modalOverlay').style.display='none'; openComplaintModal();" class="btn btn-gold btn-lg">استفسار أو موعد 📩</button>
+        </div>
+    `;
+
+    modalOverlay.style.display = 'flex';
+};
+
+// 4. ACCESSIBILITY: FONT SIZE SCALER
+let isLargeFont = false;
+window.toggleFontSize = function() {
+    isLargeFont = !isLargeFont;
+    if (isLargeFont) {
+        document.documentElement.style.fontSize = '18.5px';
+        if (typeof showQuickToast === 'function') showQuickToast('تم تكبير حجم الخط لسهولة القراءة.');
+    } else {
+        document.documentElement.style.fontSize = '16px';
+        if (typeof showQuickToast === 'function') showQuickToast('تمت استعادة حجم الخط الافتراضي.');
+    }
+};
+
+// 5. ACCESSIBILITY: LUXURY DARK MODE TOGGLE
+window.toggleDarkMode = function() {
+    const isDark = document.body.classList.toggle('dark-mode-theme');
+    localStorage.setItem('biougra_dark_mode', isDark ? 'true' : 'false');
+    if (typeof showQuickToast === 'function') {
+        showQuickToast(isDark ? 'تم تفعيل الوضع الليلي الفاخر (Majorelle & Or) 🌙' : 'تم تفعيل الوضع النهاري المشرق ☀️');
+    }
+};
+
+// Initialize saved dark mode
+if (localStorage.getItem('biougra_dark_mode') === 'true') {
+    document.body.classList.add('dark-mode-theme');
+}
+
+// 6. GLOWING MOUSE CURSOR AURA (DESKTOP)
+document.addEventListener('mousemove', (e) => {
+    const aura = document.getElementById('cursorGlowAura');
+    if (aura && window.innerWidth > 992) {
+        aura.style.left = e.clientX + 'px';
+        aura.style.top = e.clientY + 'px';
+    }
+});

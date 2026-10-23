@@ -1,4 +1,4 @@
-export class PublicationView {
+﻿export class PublicationView {
     static renderList(publications, containerId = 'pubsGrid') {
         const container = document.getElementById(containerId);
         if (!container) return;

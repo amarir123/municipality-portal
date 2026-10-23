@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,7 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-card-top-bar"></div>
-            <img src="assets/logo.png" alt="Ville Logo" class="login-logo" id="adminLoginLogo">
+            <img src="assets/logo_transparent.png" alt="Ville Logo" class="login-logo" id="adminLoginLogo">
             <h2 class="login-title">بوابة إدارة الجماعة الترابية</h2>
             <p class="login-subtitle">نظام التحكم والتدبير الرقمي الموحد</p>
             
@@ -54,7 +54,7 @@
     <aside class="admin-sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
-                <img src="assets/logo.png" alt="Ville Logo" id="adminSidebarLogo">
+                <img src="assets/logo_transparent.png" alt="Ville Logo" id="adminSidebarLogo">
             </div>
             <div class="sidebar-title">لوحة التحكم الإدارية</div>
         </div>
@@ -62,6 +62,22 @@
             <button class="sidebar-btn active" onclick="switchPanel(this, 'analytics-panel')">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 <span>إحصائيات المنصة 📊</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'mandate-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2L2 7h20L12 2z"></path></svg>
+                <span>الولاية 2021-2027 🏛️</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'synthesis-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>التقرير التركيبي والمشاريع 📋</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'subventions-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>تدبير دعم الجمعيات 🤝</span>
+            </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'polls-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path></svg>
+                <span>سبر الآراء والمشاعر 🗳️</span>
             </button>
             <button class="sidebar-btn" onclick="switchPanel(this, 'complaints-panel')">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -150,6 +166,251 @@
                 <div class="card" style="padding: 20px;">
                     <h3 style="color: var(--primary-color); font-size: 1.1rem; margin-bottom: 15px;">حالة شكايات وطلبات المواطنين</h3>
                     <canvas id="complaintsChartCanvas" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL: MANDATE 2021-2027 (المكتب، اللجان، وأعضاء المجلس CA) -->
+        <section class="admin-panel-content" id="mandate-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">🏛️ تدبير الولاية الانتدابية 2021-2027</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddCouncilMemberModal()">+ إضافة عضو مجلس / مكتب جديد</button>
+            </div>
+
+            <!-- Sub-tabs for Mandate -->
+            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                <button onclick="window.adminController.showMandateSubTab('bureau')" id="adminMandateTabBureau" class="btn btn-primary btn-sm">المكتب المسير 🏛️</button>
+                <button onclick="window.adminController.showMandateSubTab('committees')" id="adminMandateTabCommittees" class="btn btn-outline btn-sm">اللجان الدائمة 📑</button>
+                <button onclick="window.adminController.showMandateSubTab('council')" id="adminMandateTabCouncil" class="btn btn-outline btn-sm">أعضاء المجلس الجماعي [CA] 👥</button>
+            </div>
+
+            <!-- Bureau Sub-panel -->
+            <div class="card" id="adminMandateBureauCard">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">تشكيلة أعضاء المكتب المسير للجماعة</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>الصفة في المكتب</th>
+                            <th>الاسم الكامل</th>
+                            <th>الانتماء السياسي</th>
+                            <th>الهاتف والتواصل</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminBureauTableBody">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Committees Sub-panel -->
+            <div class="card" id="adminMandateCommitteesCard" style="display: none;">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">اللجان الدائمة بالمجلس الجماعي</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>اسم اللجنة الدائمة</th>
+                            <th>رئيس اللجنة</th>
+                            <th>نائب الرئيس</th>
+                            <th>عدد الأعضاء</th>
+                            <th>الاختصاص والمهام</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminCommitteesTableBody">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Council Members [CA] Sub-panel -->
+            <div class="card" id="adminMandateCouncilCard" style="display: none;">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">لائحة كافة أعضاء المجلس الجماعي [CA]</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>الاسم الكامل</th>
+                            <th>الصفة</th>
+                            <th>الدائرة الانتخابية</th>
+                            <th>اللجنة التابع لها</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminCouncilMembersTableBody">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PANEL: SYNTHESIS REPORT & COMPETENCE PROJECTS (التقرير التركيبي ومشاريع الاختصاصات) -->
+        <section class="admin-panel-content" id="synthesis-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">📋 كتابة التقرير التركيبي ومشاريع الاختصاصات</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-gold" onclick="window.adminController.printSynthesisReport()">طباعة / تصدير التقرير 🖨️</button>
+                    <button class="btn btn-primary" onclick="window.adminController.openAddCompetenceProjectModal()">+ إضافة مشروع اختصاص جديد</button>
+                </div>
+            </div>
+
+            <!-- Synthesis Report Writer (كتابة التقرير التركيبي مع Introduction) -->
+            <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--primary-color);">
+                <h3 style="color: var(--primary-color); margin-bottom: 12px;">✍️ تحرير التقرير التركيبي للولاية 2021-2027 (Rapport de Synthèse)</h3>
+                <form onsubmit="window.adminController.saveSynthesisIntro(event)">
+                    <div style="margin-bottom: 14px;">
+                        <label class="form-label">عنوان التقرير التركيبي</label>
+                        <input type="text" id="synthesisReportTitleInput" class="form-input" required>
+                    </div>
+                    <div style="margin-bottom: 14px;">
+                        <label class="form-label">مقدمة التقرير (Introduction) والسياق العام</label>
+                        <textarea id="synthesisReportIntroInput" class="form-input" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">حفظ نص التقرير والمقدمة 💾</button>
+                </form>
+            </div>
+
+            <!-- Activity Axes (محاور الأنشطة) -->
+            <div class="card" style="margin-bottom: 25px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">محاور الأنشطة والبرامج التنموية الكبرى</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>المحور التنموي</th>
+                            <th>الاعتمادات المالية المرصودة</th>
+                            <th>عدد المشاريع</th>
+                            <th>نسبة الإنجاز المحققة</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminActivityAxesTableBody">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Les compétences : المشاريع (لدراسة، في طور الإنجاز، تم تنفيذه) -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: var(--primary-color); margin: 0;">مشاريع الجماعة حسب الاختصاصات (Les Compétences)</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="window.adminController.filterCompProjects('all')" class="btn btn-outline btn-sm">الكل</button>
+                        <button onclick="window.adminController.filterCompProjects('لدراسة')" class="btn btn-outline btn-sm">لدراسة</button>
+                        <button onclick="window.adminController.filterCompProjects('في طور الإنجاز')" class="btn btn-outline btn-sm">في طور الإنجاز</button>
+                        <button onclick="window.adminController.filterCompProjects('تم تنفيذه')" class="btn btn-outline btn-sm">تم تنفيذه / منجز</button>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>اسم المشروع</th>
+                                <th>مجال الاختصاص (Compétence)</th>
+                                <th>الحالة</th>
+                                <th>المخطط الزمني</th>
+                                <th>الاعتمادات المالية (درهم)</th>
+                                <th>نسبة الإنجاز</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminCompProjectsTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL: SUBVENTIONS (تدبير الدعم المالي للجمعيات) -->
+        <section class="admin-panel-content" id="subventions-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">🤝 تدبير الدعم والمنح الممنوحة للجمعيات (الدعم)</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddSubventionModal()">+ إضافة جمعية مستفيدة جديدة</button>
+            </div>
+
+            <!-- Fiche & Decision Card -->
+            <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--accent-color);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 8px;" id="adminSubventionDecisionTitle">قرار توزيع الدعم المالي واستمارة الترشيح</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;" id="adminSubventionDecisionDetails"></p>
+                    </div>
+                    <button onclick="window.adminController.downloadSubventionFiche()" class="btn btn-gold">معاينة وتحميل استمارة الدعم (Fiche) 📥</button>
+                </div>
+            </div>
+
+            <!-- Beneficiaries Table (الناس/الجمعيات اللي استفادت من الدعم) -->
+            <div class="card">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">لوائح الجمعيات والاتحادات المستفيدة والمطالب القانونية ومحاضر التوزيع</h3>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الجمعية / الاتحاد</th>
+                                <th>المكتب / الرئيس</th>
+                                <th>نوع الجمعية</th>
+                                <th>القانون الأساسي</th>
+                                <th>المطالب والملف القانوني</th>
+                                <th>محضر التوزيع</th>
+                                <th>الدعم المالي (درهم)</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminSubventionsTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL: CITIZEN POLLS (crée question : للرأي - تصويت - حسب مشاعر) -->
+        <section class="admin-panel-content" id="polls-panel">
+            <h2 class="panel-section-title">🗳️ سبر الآراء والمشاعر وتصويت المواطنين</h2>
+
+            <!-- Form: Crée Question للرأي -->
+            <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--accent-color);">
+                <h3 style="color: var(--primary-color); margin-bottom: 14px;">➕ إنشاء سؤال جديد لسبر الآراء (Crée Question)</h3>
+                <form onsubmit="window.adminController.handleCreatePoll(event)">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">نص السؤال المطروح على المواطنين *</label>
+                            <input type="text" id="newPollQuestion" class="form-input" placeholder="مثال: ما هو رأيكم في مشاريع تهيئة وتوسعة المساحات الخضراء؟" required>
+                        </div>
+                        <div>
+                            <label class="form-label">تصنيف الموضوع</label>
+                            <select id="newPollCategory" class="form-input" style="background: white;">
+                                <option value="خدمات القرب والبيئة">خدمات القرب والبيئة</option>
+                                <option value="التنقل والمواصلات">التنقل والمواصلات</option>
+                                <option value="الثقافة والرياضة">الثقافة والرياضة</option>
+                                <option value="التحول الرقمي">التحول الرقمي</option>
+                                <option value="التنمية الحضرية">التنمية الحضرية</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <label class="form-label">نوع التصويت *</label>
+                            <select id="newPollType" class="form-input" style="background: white;">
+                                <option value="sentiment">حسب المشاعر (Sentiment: 😍, 🙂, 😐, 🙁, 😡)</option>
+                                <option value="standard">تصويت قياسي (نعم / لا / محايد)</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: center; padding-top: 25px;">
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer;">
+                                <input type="checkbox" id="newPollIsActive" checked>
+                                تفعيل ونشر الاستطلاع مباشرة على البوابة الرئيسية
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg">نشر سؤال الاستطلاع الجديد 🚀</button>
+                </form>
+            </div>
+
+            <!-- Existing Polls & Live Stats -->
+            <div class="card">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">قائمة الاستطلاعات ومؤشرات التصويت والمشاعر</h3>
+                <div id="adminPollsListContainer">
+                    <!-- Rendered dynamically -->
                 </div>
             </div>
         </section>
@@ -421,6 +682,151 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ التحديث وإرسال الرد 🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD COUNCIL / BUREAU MEMBER -->
+    <div class="modal-overlay" id="adminAddCouncilMemberModal" style="display: none;">
+        <div class="modal-content" style="max-width: 550px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeCouncilMemberModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة عضو جديد بالمجلس / المكتب</h3>
+                <form onsubmit="window.adminController.saveCouncilMember(event)">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الاسم الكامل *</label>
+                        <input type="text" id="memberFullName" class="form-input" required>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الصفة / المهمة بالمكتب أو المجلس *</label>
+                        <input type="text" id="memberRole" class="form-input" placeholder="مثال: نائب الرئيس أو مستشار جماعي" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">الدائرة الانتخابية</label>
+                            <input type="text" id="memberDistrict" class="form-input" placeholder="مثال: الدائرة 3">
+                        </div>
+                        <div>
+                            <label class="form-label">اللجنة أو الانتماء</label>
+                            <input type="text" id="memberCommittee" class="form-input" placeholder="مثال: لجنة الميزانية">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">إضافة إلى:</label>
+                        <select id="memberTargetType" class="form-input" style="background: white;">
+                            <option value="both">المكتب المسير وأعضاء المجلس [CA]</option>
+                            <option value="council">أعضاء المجلس الجماعي فقط</option>
+                            <option value="bureau">المكتب المسير فقط</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">إضافة العضو 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD COMPETENCE PROJECT -->
+    <div class="modal-overlay" id="adminAddCompetenceProjectModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeCompetenceProjectModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة مشروع حسب مجالات الاختصاص</h3>
+                <form onsubmit="window.adminController.saveCompetenceProject(event)">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">اسم المشروع *</label>
+                        <input type="text" id="compProjName" class="form-input" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">مجال الاختصاص *</label>
+                            <select id="compProjType" class="form-input" style="background: white;">
+                                <option value="اختصاصات ذاتية (Compétences Propres)">اختصاصات ذاتية (Compétences Propres)</option>
+                                <option value="اختصاصات مشتركة (Compétences Partagées)">اختصاصات مشتركة (Compétences Partagées)</option>
+                                <option value="اختصاصات منقولة (Compétences Transférées)">اختصاصات منقولة (Compétences Transférées)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">حالة المشروع *</label>
+                            <select id="compProjStatus" class="form-input" style="background: white;">
+                                <option value="لدراسة">لدراسة</option>
+                                <option value="في طور الإنجاز">في طور الإنجاز</option>
+                                <option value="تم تنفيذه">تم تنفيذه / منجز</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">الاعتمادات المالية (درهم)</label>
+                            <input type="number" id="compProjBudget" class="form-input" placeholder="0" required>
+                        </div>
+                        <div>
+                            <label class="form-label">المخطط الزمني</label>
+                            <input type="text" id="compProjTimeline" class="form-input" placeholder="2024 - 2026" required>
+                        </div>
+                        <div>
+                            <label class="form-label">نسبة الإنجاز %</label>
+                            <input type="number" id="compProjProgress" class="form-input" min="0" max="100" placeholder="0" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">ملاحظات وتفاصيل إضافية</label>
+                        <textarea id="compProjNotes" class="form-input" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ المشروع 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD SUBVENTION BENEFICIARY -->
+    <div class="modal-overlay" id="adminAddSubventionModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeSubventionModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة جمعية مستفيدة من الدعم العمومي</h3>
+                <form onsubmit="window.adminController.saveSubventionBeneficiary(event)">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">اسم الجمعية أو الاتحاد *</label>
+                        <input type="text" id="subAssocName" class="form-input" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">رئيس / مكتب الجمعية *</label>
+                            <input type="text" id="subPresident" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">نوع وتصنيف الجمعية *</label>
+                            <select id="subAssocType" class="form-input" style="background: white;">
+                                <option value="تنموية واجتماعية">تنموية واجتماعية</option>
+                                <option value="رياضية">رياضية</option>
+                                <option value="ثقافية وتراثية">ثقافية وتراثية</option>
+                                <option value="بيئية وتأهيل الأحياء">بيئية وتأهيل الأحياء</option>
+                                <option value="تعليمية وتربوية">تعليمية وتربوية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">وضعية القانون الأساسي *</label>
+                            <input type="text" id="subStatut" class="form-input" value="مطابق ومحيّن" required>
+                        </div>
+                        <div>
+                            <label class="form-label">المطالب والملف القانوني *</label>
+                            <input type="text" id="subLegalStatus" class="form-input" value="ملف قانوني مكتمل (وصل إيداع نهائي)" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">محضر أو قرار التوزيع *</label>
+                            <input type="text" id="subPvNumber" class="form-input" value="محضر دورة ماي 2026 - مقرر عدد 109" required>
+                        </div>
+                        <div>
+                            <label class="form-label">مبلغ الدعم المالي (درهم) *</label>
+                            <input type="number" id="subAmount" class="form-input" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الجمعية المستفيدة 💾</button>
                 </form>
             </div>
         </div>

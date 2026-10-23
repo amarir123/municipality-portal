@@ -1,4 +1,4 @@
-import { NewsModel } from '../models/NewsModel.js';
+﻿import { NewsModel } from '../models/NewsModel.js';
 import { ProjectModel } from '../models/ProjectModel.js';
 import { PublicationModel } from '../models/PublicationModel.js';
 import { EventModel } from '../models/EventModel.js';
@@ -6,12 +6,17 @@ import { BrandingModel } from '../models/BrandingModel.js';
 import { VideoModel } from '../models/VideoModel.js';
 import { ComplaintModel } from '../models/ComplaintModel.js';
 import { ServiceModel } from '../models/ServiceModel.js';
+import { MandateModel } from '../models/MandateModel.js';
+import { SynthesisReportModel } from '../models/SynthesisReportModel.js';
+import { SubventionModel } from '../models/SubventionModel.js';
+import { PollModel } from '../models/PollModel.js';
 import { AdminView } from '../views/AdminView.js';
 
 export class AdminController {
     constructor() {
         this.projectsChart = null;
         this.complaintsChart = null;
+        this.currentCompFilter = 'all';
         this.init();
     }
 
@@ -76,6 +81,11 @@ export class AdminController {
         this.renderStatsWidget(news.length, projects.length, complaints.length, services.length);
         this.renderEventsForm(EventModel.getAll());
         this.renderVideosForm(VideoModel.getAll());
+
+        this.loadMandateData();
+        this.loadSynthesisData();
+        this.loadSubventionsData();
+        this.loadPollsData();
 
         this.initCharts(projects, complaints);
     }
@@ -489,4 +499,557 @@ export class AdminController {
 
     renderEventsForm(events) {}
     renderVideosForm(videos) {}
+
+    // ==========================================
+    // MANDATE 2021-2027 METHODS (الولاية 2021-2027)
+    // ==========================================
+    showMandateSubTab(tab) {
+        document.getElementById('adminMandateBureauCard').style.display = (tab === 'bureau') ? 'block' : 'none';
+        document.getElementById('adminMandateCommitteesCard').style.display = (tab === 'committees') ? 'block' : 'none';
+        document.getElementById('adminMandateCouncilCard').style.display = (tab === 'council') ? 'block' : 'none';
+
+        document.getElementById('adminMandateTabBureau').className = (tab === 'bureau') ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm';
+        document.getElementById('adminMandateTabCommittees').className = (tab === 'committees') ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm';
+        document.getElementById('adminMandateTabCouncil').className = (tab === 'council') ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm';
+    }
+
+    loadMandateData() {
+        const mandate = MandateModel.get();
+        if (!mandate) return;
+
+        // Render Bureau Table
+        const bureauTbody = document.getElementById('adminBureauTableBody');
+        if (bureauTbody) {
+            bureauTbody.innerHTML = mandate.bureau.map(m => `
+                <tr>
+                    <td><strong style="color: var(--primary-color);">${m.role}</strong></td>
+                    <td>${m.name}</td>
+                    <td><span class="badge badge-info">${m.party || 'الأغلبية'}</span></td>
+                    <td>${m.phone || '-'}</td>
+                    <td>
+                        <button onclick="window.adminController.deleteBureauMember(${m.id})" class="btn btn-sm btn-outline" style="color: #ef4444; border-color: #ef4444;">حذف</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Render Committees Table
+        const commTbody = document.getElementById('adminCommitteesTableBody');
+        if (commTbody) {
+            commTbody.innerHTML = mandate.committees.map(c => `
+                <tr>
+                    <td><strong style="color: var(--primary-color);">${c.name}</strong></td>
+                    <td>${c.president}</td>
+                    <td>${c.vice}</td>
+                    <td><span class="badge badge-warning">${c.membersCount} أعضاء</span></td>
+                    <td style="font-size: 0.85rem; color: #64748b;">${c.description}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Render Council Members Table
+        const councilTbody = document.getElementById('adminCouncilMembersTableBody');
+        if (councilTbody) {
+            councilTbody.innerHTML = mandate.councilMembers.map(m => `
+                <tr>
+                    <td><strong>${m.name}</strong></td>
+                    <td><span class="badge badge-info">${m.role}</span></td>
+                    <td>${m.district || '-'}</td>
+                    <td>${m.committee || '-'}</td>
+                    <td>
+                        <button onclick="window.adminController.deleteCouncilMember(${m.id})" class="btn btn-sm btn-outline" style="color: #ef4444; border-color: #ef4444;">حذف</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    openAddCouncilMemberModal() {
+        document.getElementById('adminAddCouncilMemberModal').style.display = 'flex';
+    }
+
+    closeCouncilMemberModal() {
+        document.getElementById('adminAddCouncilMemberModal').style.display = 'none';
+    }
+
+    saveCouncilMember(e) {
+        if (e) e.preventDefault();
+        const name = document.getElementById('memberFullName')?.value;
+        const role = document.getElementById('memberRole')?.value;
+        const district = document.getElementById('memberDistrict')?.value;
+        const committee = document.getElementById('memberCommittee')?.value;
+        const targetType = document.getElementById('memberTargetType')?.value;
+
+        if (!name || !role) return;
+
+        if (targetType === 'both' || targetType === 'bureau') {
+            MandateModel.addBureauMember({ role, name, party: 'الأغلبية', phone: '-' });
+        }
+        if (targetType === 'both' || targetType === 'council') {
+            MandateModel.addCouncilMember({ name, role, district, committee });
+        }
+
+        this.closeCouncilMemberModal();
+        AdminView.showToast('تمت إضافة العضو بنجاح إلى تشكيلة المجلس!');
+        this.loadMandateData();
+    }
+
+    deleteBureauMember(id) {
+        if (confirm('هل أنت متأكد من حذف هذا العضو من المكتب المسير؟')) {
+            MandateModel.deleteBureauMember(id);
+            AdminView.showToast('تم حذف العضو من المكتب.');
+            this.loadMandateData();
+        }
+    }
+
+    deleteCouncilMember(id) {
+        if (confirm('هل أنت متأكد من حذف هذا العضو من المجلس؟')) {
+            MandateModel.deleteCouncilMember(id);
+            AdminView.showToast('تم حذف العضو.');
+            this.loadMandateData();
+        }
+    }
+
+    // ==========================================
+    // SYNTHESIS REPORT & COMPETENCES METHODS
+    // ==========================================
+    loadSynthesisData() {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+
+        const titleInput = document.getElementById('synthesisReportTitleInput');
+        const introInput = document.getElementById('synthesisReportIntroInput');
+        if (titleInput) titleInput.value = report.title || '';
+        if (introInput) introInput.value = report.introduction || '';
+
+        // Render Activity Axes
+        const axesTbody = document.getElementById('adminActivityAxesTableBody');
+        if (axesTbody) {
+            axesTbody.innerHTML = report.activityAxes.map(axis => `
+                <tr>
+                    <td><strong style="color: var(--primary-color);">${axis.name}</strong></td>
+                    <td><span class="badge badge-info">${axis.budget}</span></td>
+                    <td>${axis.projectsCount} مشاريع</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="flex-grow: 1; background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="width: ${axis.completionRate}%; background: var(--accent-color); height: 100%;"></div>
+                            </div>
+                            <strong>${axis.completionRate}%</strong>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        this.renderCompProjectsTable();
+    }
+
+    saveSynthesisIntro(e) {
+        if (e) e.preventDefault();
+        const title = document.getElementById('synthesisReportTitleInput')?.value;
+        const intro = document.getElementById('synthesisReportIntroInput')?.value;
+        if (!intro) return;
+
+        SynthesisReportModel.updateIntro(intro, title);
+        AdminView.showToast('تم حفظ التقرير التركيبي والمقدمة بنجاح!');
+    }
+
+    filterCompProjects(status) {
+        this.currentCompFilter = status;
+        this.renderCompProjectsTable();
+    }
+
+    renderCompProjectsTable() {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+
+        let projects = report.competenceProjects || [];
+        if (this.currentCompFilter && this.currentCompFilter !== 'all') {
+            projects = projects.filter(p => p.status === this.currentCompFilter);
+        }
+
+        const tbody = document.getElementById('adminCompProjectsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = projects.map(p => {
+            let statusBadge = '<span class="badge-status-etude">لدراسة</span>';
+            if (p.status === 'في طور الإنجاز') statusBadge = '<span class="badge-status-encours">في طور الإنجاز</span>';
+            if (p.status === 'تم تنفيذه') statusBadge = '<span class="badge-status-realise">تم تنفيذه / منجز</span>';
+
+            return `
+                <tr>
+                    <td>
+                        <strong>${p.projectName}</strong>
+                        ${p.notes ? `<div style="font-size: 0.8rem; color: #64748b; margin-top: 3px;">${p.notes}</div>` : ''}
+                    </td>
+                    <td><span style="font-size: 0.85rem; font-weight: 600;">${p.competenceType}</span></td>
+                    <td>${statusBadge}</td>
+                    <td>${p.timeline || '-'}</td>
+                    <td><strong>${Number(p.budget).toLocaleString()} درهم</strong></td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-weight: 700; color: var(--primary-color);">${p.progress}%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="window.adminController.deleteCompProject(${p.id})" class="btn btn-sm btn-outline" style="color: #ef4444; border-color: #ef4444;">حذف</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    openAddCompetenceProjectModal() {
+        document.getElementById('adminAddCompetenceProjectModal').style.display = 'flex';
+    }
+
+    closeCompetenceProjectModal() {
+        document.getElementById('adminAddCompetenceProjectModal').style.display = 'none';
+    }
+
+    saveCompetenceProject(e) {
+        if (e) e.preventDefault();
+        const name = document.getElementById('compProjName')?.value;
+        const type = document.getElementById('compProjType')?.value;
+        const status = document.getElementById('compProjStatus')?.value;
+        const budget = Number(document.getElementById('compProjBudget')?.value) || 0;
+        const timeline = document.getElementById('compProjTimeline')?.value;
+        const progress = Number(document.getElementById('compProjProgress')?.value) || 0;
+        const notes = document.getElementById('compProjNotes')?.value;
+
+        if (!name) return;
+
+        SynthesisReportModel.addProject({
+            projectName: name,
+            competenceType: type,
+            status: status,
+            budget: budget,
+            timeline: timeline,
+            progress: progress,
+            notes: notes
+        });
+
+        this.closeCompetenceProjectModal();
+        AdminView.showToast('تمت إضافة مشروع الاختصاص بنجاح!');
+        this.loadSynthesisData();
+    }
+
+    deleteCompProject(id) {
+        if (confirm('هل تود حذف هذا المشروع من التقرير التركيبي؟')) {
+            SynthesisReportModel.deleteProject(id);
+            AdminView.showToast('تم حذف المشروع.');
+            this.loadSynthesisData();
+        }
+    }
+
+    printSynthesisReport() {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html lang="ar" dir="rtl">
+            <head>
+                <title>${report.title}</title>
+                <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+                <style>
+                    body { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; padding: 40px; color: #1e293b; }
+                    h1 { color: #0d5ea6; text-align: center; border-bottom: 3px solid #c69c55; padding-bottom: 15px; }
+                    .intro { background: #f8fafc; padding: 20px; border-right: 4px solid #0d5ea6; margin: 25px 0; font-size: 1.05rem; line-height: 1.8; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #cbd5e1; padding: 10px 14px; text-align: right; }
+                    th { background-color: #0d5ea6; color: white; }
+                    tr:nth-child(even) { background-color: #f8fafc; }
+                    .header-tag { text-align: center; color: #64748b; margin-bottom: 25px; }
+                </style>
+            </head>
+            <body>
+                <div class="header-tag">المملكة المغربية • وزارة الداخلية • الجماعة الترابية</div>
+                <h1>${report.title}</h1>
+                <div class="intro">
+                    <strong>مقدمة التقرير والسياق العام:</strong><br>
+                    ${report.introduction}
+                </div>
+                <h2>مشاريع الجماعة حسب الاختصاصات (Les Compétences)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المشروع</th>
+                            <th>مجال الاختصاص</th>
+                            <th>الحالة</th>
+                            <th>الاعتمادات المالية</th>
+                            <th>المخطط</th>
+                            <th>نسبة الإنجاز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${report.competenceProjects.map(p => `
+                            <tr>
+                                <td><strong>${p.projectName}</strong></td>
+                                <td>${p.competenceType}</td>
+                                <td>${p.status}</td>
+                                <td>${Number(p.budget).toLocaleString()} درهم</td>
+                                <td>${p.timeline}</td>
+                                <td>${p.progress}%</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => { printWindow.print(); }, 500);
+    }
+
+    // ==========================================
+    // SUBVENTIONS METHODS (تدبير الدعم للجمعيات)
+    // ==========================================
+    loadSubventionsData() {
+        const sub = SubventionModel.get();
+        if (!sub) return;
+
+        const titleEl = document.getElementById('adminSubventionDecisionTitle');
+        const detailsEl = document.getElementById('adminSubventionDecisionDetails');
+        if (titleEl) titleEl.innerText = sub.decisionTitle;
+        if (detailsEl) detailsEl.innerText = sub.decisionDetails;
+
+        const tbody = document.getElementById('adminSubventionsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = sub.beneficiaries.map(b => `
+            <tr>
+                <td><strong>${b.assocName}</strong></td>
+                <td>${b.president}</td>
+                <td><span class="badge badge-info">${b.assocType}</span></td>
+                <td><span class="badge badge-success">${b.statutStatus}</span></td>
+                <td style="font-size: 0.85rem; color: #15803d;">${b.legalStatus}</td>
+                <td style="font-size: 0.85rem; color: #64748b;">${b.pvNumber}</td>
+                <td><strong style="color: var(--primary-color);">${Number(b.amount).toLocaleString()} درهم</strong></td>
+                <td>
+                    <button onclick="window.adminController.deleteSubventionBeneficiary(${b.id})" class="btn btn-sm btn-outline" style="color: #ef4444; border-color: #ef4444;">حذف</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    openAddSubventionModal() {
+        document.getElementById('adminAddSubventionModal').style.display = 'flex';
+    }
+
+    closeSubventionModal() {
+        document.getElementById('adminAddSubventionModal').style.display = 'none';
+    }
+
+    saveSubventionBeneficiary(e) {
+        if (e) e.preventDefault();
+        const assocName = document.getElementById('subAssocName')?.value;
+        const president = document.getElementById('subPresident')?.value;
+        const assocType = document.getElementById('subAssocType')?.value;
+        const statut = document.getElementById('subStatut')?.value;
+        const legalStatus = document.getElementById('subLegalStatus')?.value;
+        const pvNumber = document.getElementById('subPvNumber')?.value;
+        const amount = Number(document.getElementById('subAmount')?.value) || 0;
+
+        if (!assocName || !amount) return;
+
+        SubventionModel.addBeneficiary({
+            assocName,
+            president,
+            assocType,
+            statutStatus: statut,
+            legalStatus,
+            pvNumber,
+            amount,
+            year: new Date().getFullYear(),
+            projectSupported: "دعم الأنشطة السنوية وبرامج القرب"
+        });
+
+        this.closeSubventionModal();
+        AdminView.showToast('تم تسجيل الجمعية المستفيدة بنجاح!');
+        this.loadSubventionsData();
+    }
+
+    deleteSubventionBeneficiary(id) {
+        if (confirm('هل تود حذف هذه الجمعية من لائحة المستفيدين؟')) {
+            SubventionModel.deleteBeneficiary(id);
+            AdminView.showToast('تم حذف الجمعية.');
+            this.loadSubventionsData();
+        }
+    }
+
+    downloadSubventionFiche() {
+        // Generate and download formal institutional printable application fiche
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html lang="ar" dir="rtl">
+            <head>
+                <title>استمارة طلب الدعم السنوي للجماعة الترابية</title>
+                <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+                <style>
+                    body { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; padding: 40px; color: #1e293b; line-height: 1.8; }
+                    .header { text-align: center; border-bottom: 2px solid #0d5ea6; padding-bottom: 20px; margin-bottom: 30px; }
+                    h1 { color: #0d5ea6; font-size: 1.6rem; margin-top: 10px; }
+                    .box { border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+                    .title { font-weight: 700; color: #0d5ea6; margin-bottom: 12px; font-size: 1.15rem; }
+                    .field-line { margin-bottom: 12px; border-bottom: 1px dotted #cbd5e1; padding-bottom: 6px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                    th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: right; }
+                    th { background: #f1f5f9; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div>المملكة المغربية • وزارة الداخلية • الجماعة الترابية</div>
+                    <h1>استمارة وملف طلب منحة / دعم مالي لفائدة الجمعيات (Fiche de Demande)</h1>
+                    <div>برسم السنة المالية ${new Date().getFullYear()}</div>
+                </div>
+
+                <div class="box">
+                    <div class="title">1. التعريف بالجمعية أو الاتحاد</div>
+                    <div class="field-line">اسم الجمعية الكامل: ............................................................................</div>
+                    <div class="field-line">رقم وتاريخ وصل الإيداع القانوني النهائي: ...........................................................</div>
+                    <div class="field-line">اسم الرئيس(ة): ............................................. رقم الهاتف: ...........................</div>
+                    <div class="field-line">رقم الحساب البنكي (RIB - 24 رقماً): ...........................................................</div>
+                </div>
+
+                <div class="box">
+                    <div class="title">2. الوثائق القانونية المرفقة الواجب الإدلاء بها (Dossier Juridique)</div>
+                    <table>
+                        <tr><th>الوثيقة المطلوبة</th><th>الوضعية</th></tr>
+                        <tr><td>نسخة من القانون الأساسي محين ومصادق عليه</td><td>[ ] نعم  [ ] لا</td></tr>
+                        <tr><td>نسخة من وصل الإيداع القانوني المسلم من السلطة المحلية</td><td>[ ] نعم  [ ] لا</td></tr>
+                        <tr><td>لائحة أعضاء المكتب المسير للجمعية مع أرقام بطاقاتهم</td><td>[ ] نعم  [ ] لا</td></tr>
+                        <tr><td>التقريرين الأدبي والمالي لآخر جمع عام مصادق عليهما</td><td>[ ] نعم  [ ] لا</td></tr>
+                        <tr><td>شهادة التعريف البنكي الأصلية (Attestation de RIB)</td><td>[ ] نعم  [ ] لا</td></tr>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <div class="title">3. موضوع المشروع أو النشاط المراد تمويله ومبلغ الدعم المطلوب</div>
+                    <div class="field-line">عنوان المشروع / النشاط: ....................................................................</div>
+                    <div class="field-line">المبلغ المالي المطلوب من الجماعة (بالدرهم): ..................................................</div>
+                    <div class="field-line">مساهمة الجمعية أو الشركاء الآخرين: ...........................................................</div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 50px;">
+                    <div><strong>توقيع وخاتم رئيس الجمعية:</strong></div>
+                    <div><strong>تاريخ وتأشيرة مكتب الضبط بالجماعة:</strong></div>
+                </div>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => { printWindow.print(); }, 500);
+    }
+
+    // ==========================================
+    // POLLS METHODS (سبر الآراء والمشاعر)
+    // ==========================================
+    loadPollsData() {
+        const polls = PollModel.getAll();
+        const container = document.getElementById('adminPollsListContainer');
+        if (!container) return;
+
+        if (polls.length === 0) {
+            container.innerHTML = '<div style="color: #64748b; padding: 20px; text-align: center;">لا توجد استطلاعات رأي حالياً. قم بإنشاء سؤال جديد أعلاه.</div>';
+            return;
+        }
+
+        container.innerHTML = polls.map(p => {
+            let optionsHtml = '';
+            if (p.type === 'sentiment' && p.sentimentOptions) {
+                optionsHtml = p.sentimentOptions.map(opt => {
+                    const pct = p.totalVotes > 0 ? Math.round((opt.votes / p.totalVotes) * 100) : 0;
+                    return `
+                        <div style="margin-bottom: 8px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 2px;">
+                                <span>${opt.emoji} ${opt.label} (${opt.votes} صوت)</span>
+                                <strong>${pct}%</strong>
+                            </div>
+                            <div style="background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden;">
+                                <div style="background: var(--accent-color); width: ${pct}%; height: 100%;"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else if (p.options) {
+                optionsHtml = p.options.map(opt => {
+                    const pct = p.totalVotes > 0 ? Math.round((opt.votes / p.totalVotes) * 100) : 0;
+                    return `
+                        <div style="margin-bottom: 8px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 2px;">
+                                <span>${opt.label} (${opt.votes} صوت)</span>
+                                <strong>${pct}%</strong>
+                            </div>
+                            <div style="background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden;">
+                                <div style="background: var(--primary-color); width: ${pct}%; height: 100%;"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            return `
+                <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 15px; background: ${p.isActive ? '#f0fdf4' : '#ffffff'};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <span class="badge ${p.isActive ? 'badge-success' : 'badge-info'}">${p.isActive ? 'نشط على البوابة حالياً ✓' : 'أرشيف'}</span>
+                            <span style="font-size: 0.85rem; color: #64748b; margin-right: 8px;">التصنيف: ${p.category} • تاريخ النشر: ${p.createdAt}</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="window.adminController.togglePollActive(${p.id})" class="btn btn-sm ${p.isActive ? 'btn-outline' : 'btn-primary'}">
+                                ${p.isActive ? 'إيقاف النشاط' : 'تفعيل ونشر'}
+                            </button>
+                            <button onclick="window.adminController.deletePoll(${p.id})" class="btn btn-sm btn-outline" style="color: #ef4444; border-color: #ef4444;">حذف</button>
+                        </div>
+                    </div>
+                    <h4 style="color: var(--primary-color); font-size: 1.1rem; margin-bottom: 14px;">${p.question}</h4>
+                    <div style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; color: #334155;">إجمالي المصوتين: ${p.totalVotes} مواطن</div>
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    handleCreatePoll(e) {
+        if (e) e.preventDefault();
+        const question = document.getElementById('newPollQuestion')?.value;
+        const category = document.getElementById('newPollCategory')?.value;
+        const type = document.getElementById('newPollType')?.value;
+        const isActive = document.getElementById('newPollIsActive')?.checked;
+
+        if (!question) return;
+
+        PollModel.createPoll({
+            question,
+            category,
+            type,
+            isActive
+        });
+
+        document.getElementById('newPollQuestion').value = '';
+        AdminView.showToast('تم نشر سؤال استطلاع الرأي والمشاعر بنجاح!');
+        this.loadPollsData();
+    }
+
+    togglePollActive(id) {
+        PollModel.setActive(id);
+        AdminView.showToast('تم تحديث حالة تفعيل الاستطلاع على البوابة.');
+        this.loadPollsData();
+    }
+
+    deletePoll(id) {
+        if (confirm('هل تود حذف هذا الاستطلاع؟')) {
+            PollModel.deletePoll(id);
+            AdminView.showToast('تم حذف الاستطلاع.');
+            this.loadPollsData();
+        }
+    }
 }
+

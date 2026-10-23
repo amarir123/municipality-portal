@@ -1,4 +1,4 @@
-const defaultPublications = [
+﻿const defaultPublications = [
     {
         id: 1,
         title: "التقرير السنوي لأنشطة جماعة بيوكرى 2025",

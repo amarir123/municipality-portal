@@ -1,4 +1,4 @@
-export class ProjectView {
+﻿export class ProjectView {
     static renderGrid(projects, containerId = 'projectsGridContainer') {
         const container = document.getElementById(containerId) || document.getElementById('projectsContainer');
         if (!container) return;

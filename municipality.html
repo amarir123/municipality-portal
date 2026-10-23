@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الجماعة الترابية - كلمة الرئيس، المجلس الجماعي، الهيكل التنظيمي، أدوار ووظائف، والمجالس البلدية السابقة.">
+    <title>الجماعة الترابية | البوابة الرسمية للجماعة</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=5.0">
+    <style>
+        /* MUNICIPALITY PAGE HERO MATCHING EXACT OFFICIAL DESIGN */
+        .municipality-hero {
+            position: relative;
+            background-color: #0b5597;
+            background-image: 
+                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+                radial-gradient(circle at 90% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+            padding: 85px 20px;
+            text-align: center;
+            color: #ffffff;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        /* Traditional Moroccan geometric triangular side borders */
+        .municipality-hero::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background-image: 
+                linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%);
+            background-size: 28px 28px;
+            background-position: 0 0, 0 14px, 14px -14px, -14px 0px;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .municipality-hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background-image: 
+                linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%);
+            background-size: 28px 28px;
+            background-position: 0 0, 0 14px, 14px -14px, -14px 0px;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .municipality-hero-title {
+            position: relative;
+            z-index: 2;
+            font-size: 2.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 6 CARDS GRID SECTION */
+        .muni-section-wrapper {
+            background-color: #f8fafc;
+            padding: 60px 0 90px;
+            min-height: 520px;
+        }
+
+        .muni-portal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 960px) {
+            .muni-portal-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .municipality-hero::before, .municipality-hero::after {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .muni-portal-grid {
+                grid-template-columns: 1fr;
+            }
+            .municipality-hero-title {
+                font-size: 2.2rem;
+            }
+            .municipality-hero::before, .municipality-hero::after {
+                display: none;
+            }
+        }
+
+        .muni-box-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 42px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            min-height: 190px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .muni-box-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .muni-box-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px var(--primary-glow);
+            border-color: var(--primary-color);
+        }
+
+        .muni-box-card:hover::after {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        .muni-box-icon {
+            width: 58px;
+            height: 58px;
+            margin-bottom: 18px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .muni-box-card:hover .muni-box-icon {
+            transform: scale(1.15);
+            color: var(--accent-color);
+        }
+
+        .muni-box-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+            transition: color 0.2s ease;
+        }
+
+        .muni-box-card:hover .muni-box-title {
+            color: var(--primary-color);
+        }
+
+        /* DETAIL POPUP MODAL STYLING */
+        .muni-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .muni-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .muni-modal-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 860px;
+            max-height: 88vh;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border-top: 5px solid var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: legalZoomEffect 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .muni-modal-header {
+            padding: 22px 28px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .muni-modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .muni-modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            line-height: 1.85;
+            color: #334155;
+            font-size: 0.98rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR (Utility Header) -->
+    <div class="top-bar" id="topBar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <div class="search-container">
+                    <button class="search-toggle-btn" id="searchToggleBtn" aria-label="بحث">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <div class="search-input-wrapper" id="searchInputWrapper">
+                        <input type="text" id="searchInput" placeholder="ابحث في البوابة...">
+                    </div>
+                </div>
+                <span class="divider">|</span>
+                <a href="contact.html" class="top-link">التواصل</a>
+                <a href="index.html#news" class="top-link">أخبار الجماعة</a>
+                <a href="javascript:void(0)" onclick="openLegalPopup()" class="top-link">المعلومات القانونية</a>
+                <a href="admin.html" class="top-link admin-only" target="_blank" style="font-weight: 700; color: var(--accent-color);">بوابة المدير ⚙️</a>
+                <a href="index.html#servicesSection" class="btn btn-gold">خدمات إلكترونية</a>
+            </div>
+            
+            <div class="top-bar-right" style="display: flex; align-items: center; gap: 15px;">
+                <div class="weather-widget-badge">
+                    <span>☀️</span> <span id="weatherCityDisplay">أكادير</span> <strong>24°C</strong>
+                </div>
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="ar">العربية</button>
+                    <button class="lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+                    <button class="lang-btn" data-lang="fr">Français</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & NAVIGATION -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <nav class="main-nav" id="mainNav">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="القائمة">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
+                    <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
+                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية الحضرية</a></li>
+                    <li><a href="action-program.html" class="nav-link">برنامج عمل الجماعة</a></li>
+                    <li><a href="index.html#procedures-grid" class="nav-link">الإجراءات الإدارية</a></li>
+                    <li><a href="sustainable.html" class="nav-link">مدينة مستدامة</a></li>
+                    <li><a href="municipality.html" class="nav-link active">الجماعة الترابية</a></li>
+                </ul>
+            </nav>
+
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo_transparent.png" alt="شعار الجماعة الترابية" class="main-logo" id="mainLogoHeaderImg">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MUNICIPALITY HERO BANNER (MATCHING USER SCREENSHOT) -->
+    <section class="municipality-hero">
+        <h1 class="municipality-hero-title">الجماعة الترابية</h1>
+    </section>
+
+    <!-- 6 CARDS MAIN SECTION (MATCHING USER SCREENSHOT) -->
+    <main class="muni-section-wrapper">
+        <div class="container">
+            <div class="muni-portal-grid">
+                
+                <!-- CARD 1: كلمة الرئيس -->
+                <div class="muni-box-card" onclick="openMuniModal('president')">
+                    <div class="muni-box-icon">
+                        <!-- Stylized Feather/Signature Pen Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                            <path d="M2 2l7.586 7.586"></path>
+                            <circle cx="11" cy="11" r="2"></circle>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">كلمة الرئيس</h2>
+                </div>
+
+                <!-- CARD 2: المجلس الجماعي -->
+                <div class="muni-box-card" onclick="openMuniModal('council')">
+                    <div class="muni-box-icon">
+                        <!-- Council Members Group Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">المجلس الجماعي</h2>
+                </div>
+
+                <!-- CARD 3: الهيكل التنظيمي للجماعة -->
+                <div class="muni-box-card" onclick="openMuniModal('structure')">
+                    <div class="muni-box-icon">
+                        <!-- Organization Chart / Checklist Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            <path d="M9 14l2 2 4-4"></path>
+                            <line x1="9" y1="10" x2="15" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">الهيكل التنظيمي للجماعة</h2>
+                </div>
+
+                <!-- CARD 4: أدوار ووظائف -->
+                <div class="muni-box-card" onclick="openMuniModal('roles')">
+                    <div class="muni-box-icon">
+                        <!-- Roles and Handshake / Duties Document Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <path d="M9 15h6M9 11h6"></path>
+                            <path d="M10 18l2-2 2 2"></path>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">أدوار ووظائف</h2>
+                </div>
+
+                <!-- CARD 5: المجالس البلدية السابقة -->
+                <div class="muni-box-card" onclick="openMuniModal('history')">
+                    <div class="muni-box-icon">
+                        <!-- Historical Scroll / Archive Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <circle cx="10" cy="14" r="2"></circle>
+                            <path d="M10 16v3M8 19h4"></path>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">المجالس البلدية السابقة</h2>
+                </div>
+
+                <!-- CARD 6: هيئة المساواة وتكافؤ الفرص -->
+                <div class="muni-box-card" onclick="openMuniModal('parity')">
+                    <div class="muni-box-icon">
+                        <!-- Equality & Opportunity Seal / Scales Icon -->
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7v10M8 12h8"></path>
+                            <path d="M7 17l10-10"></path>
+                        </svg>
+                    </div>
+                    <h2 class="muni-box-title">هيئة المساواة وتكافؤ الفرص</h2>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3 class="footer-col-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="municipality.html">الجماعة الترابية</a></li>
+                    <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
+                    <li><a href="sustainable.html">مدينة مستدامة</a></li>
+                    <li><a href="publications.html">منشوراتنا والتقارير</a></li>
+                    <li><a href="contact.html">أوقات العمل والتواصل</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-col-title">اتصل بالجماعة</h3>
+                <ul class="footer-contact-info">
+                    <li>📍 المقر الرئيسي للجماعة الترابية</li>
+                    <li>📞 الهاتف: +212 528 84 00 00</li>
+                    <li>✉️ البريد: contact@commune.ma</li>
+                    <li>🕒 الأوقات: من الإثنين إلى الجمعة: 08:30 - 16:30</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">موقع الجماعة</h3>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">بوابة رقمية تفاعلية مخصصة لتقريب الإدارة من المواطنين وتسهيل الولوج إلى المعلومة والمساطر الإدارية للجماعة الترابية.</p>
+            </div>
+
+            <div class="footer-col footer-logo-col">
+                <img src="assets/logo_transparent.png" alt="شعار الجماعة" class="footer-logo">
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <div>&copy; 2026 جميع الحقوق محفوظة لـ <span class="muni-name-display">الجماعة الترابية</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE DETAIL MODAL -->
+    <div class="muni-modal-overlay" id="muniDetailModalOverlay" onclick="if(event.target===this) closeMuniModal()">
+        <div class="muni-modal-card">
+            <div class="muni-modal-header">
+                <div class="muni-modal-title" id="muniModalTitle">عنوان التفاصيل</div>
+                <button onclick="closeMuniModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#64748b;">✕</button>
+            </div>
+            <div class="muni-modal-body" id="muniModalContent">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LEGAL POPUP (Zoom effect) -->
+    <div class="legal-popup-overlay" id="legalPopupOverlay" onclick="if(event.target===this) closeLegalPopup()">
+        <div class="legal-popup-card">
+            <div class="legal-popup-header">
+                <div class="legal-popup-title">
+                    <span>⚖️</span>
+                    <span>المعلومات القانونية والإشعار المؤسساتي الرسمي</span>
+                </div>
+                <button onclick="closeLegalPopup()" style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:#64748b;">✕</button>
+            </div>
+            <div class="legal-popup-body">
+                <div class="legal-article-box">
+                    <div class="legal-article-title">📜 القانون التنظيمي رقم 113.14 المتعلق بالجماعات الترابية</div>
+                    <p>تخضع هذه البوابة والمحتويات المنشورة بها لمقتضيات الظهير الشريف رقم 1.15.85 الصادر بتنفيذ القانون التنظيمي 113.14، ولا سيما المبادئ المتعلقة بالحكامة الجيدة، الشفافية، الديمقراطية التشاركية، وتسهيل ولوج المواطنات والمواطنين للمعلومات الإدارية ومتابعة أشغال المجلس الجماعي.</p>
+                </div>
+                <div class="legal-article-box">
+                    <div class="legal-article-title">🔍 القانون رقم 31.13 المتعلق بالحق في الحصول على المعلومات</div>
+                    <p>تكريساً لأحكام الفصل 27 من الدستور المغربي، تلتزم الجماعة بالنشر الاستباقي لكافة المقررات، الميزانيات السنوية، برامج التنمية، ومحاضر الدورات.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT FOR CARD INTERACTIONS -->
+    <script>
+        const muniDetailsData = {
+            president: {
+                title: "كلمة رئيس المجلس الجماعي",
+                icon: "✍️",
+                html: `
+                    <div style="background: #f8fafc; padding: 20px; border-right: 4px solid var(--accent-color); border-radius: 8px; margin-bottom: 20px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 8px;">حضرات المواطنات والمواطنين، شركاء التنمية الأعزاء،</h3>
+                        <p style="margin: 0; font-size: 1.05rem; font-weight: 500;">يسعدني أن أرحب بكم في البوابة الرقمية الرسمية لجماعتنا الترابية، والتي تجسد عزمنا الراسخ على الانخراط الفعلي في مسار التحول الرقمي وتحديث المرفق العمومي الجماعي.</p>
+                    </div>
+                    <p>إن تدبير الشأن المحلي في المرحلة الراهنة يفرض علينا نهج مقاربة القرب والإنصات المتبادل، وتكريس مبادئ الحكامة الترابية التشاركية، تماشياً مع التوجيهات الملكية السامية لصاحب الجلالة الملك محمد السادس نصره الله وأيده، والداعية إلى تقريب الإدارة من المرتفقين والارتقاء بجودة الخدمات الأساسية.</p>
+                    <p>نعمل بمعية أعضاء المجلس الجماعي وأطر وموظفي الجماعة، وبشراكة وثيقة مع السلطات الولائية والمجتمع المدني، على تنزيل برنامج عمل الجماعة 2021-2027 الذي يضم مشاريع مهيكلة لتأهيل البنية التحتية، توسيع المساحات الخضراء، وتوفير بيئة استثمارية واعدة تخلق فرص الشغل لأبناء وبنات المدينة.</p>
+                    <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>رئيس المجلس الجماعي</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">الولاية الانتدابية 2021 - 2027</span>
+                        </div>
+                        <div style="color: var(--accent-color); font-weight: 700; font-size: 1.1rem;">الجماعة الترابية 🇲🇦</div>
+                    </div>
+                `
+            },
+            council: {
+                title: "المجلس الجماعي - الولاية 2021-2027",
+                icon: "🏛️",
+                html: `
+                    <p>يتألف المجلس الجماعي من أعضاء منتخبين يمثلون مختلف الدوائر الانتخابية للمدينة، ويسهر على تداول واتخاذ المقررات الهادفة إلى تنمية الجماعة في مختلف الميادين الاقتصادية والاجتماعية والثقافية والبيئية.</p>
+                    
+                    <h4 style="color: var(--primary-color); margin: 20px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">1. تشكيلة المكتب المسير</h4>
+                    <ul style="list-style-type: disc; margin-right: 25px; margin-bottom: 20px;">
+                        <li><strong>رئيس المجلس الجماعي:</strong> يسهر على تنفيذ مقررات المجلس وإدارة المصالح الجماعية.</li>
+                        <li><strong>نواب الرئيس:</strong> مفوضون في قطاعات التعمير والممتلكات، الميزانية والمالية، المرافق والإنارة، والشؤون الثقافية والاجتماعية.</li>
+                        <li><strong>كاتب المجلس ونائب الكاتب:</strong> تدوين محاضر الجلسات وتوثيق مداولات الدورات العادية والاستثنائية.</li>
+                    </ul>
+
+                    <h4 style="color: var(--primary-color); margin: 20px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">2. اللجان الدائمة بالمجلس</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border-right: 3px solid var(--primary-color);">
+                            <strong>لجنة الميزانية والشؤون المالية والبرمجة</strong>
+                        </div>
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border-right: 3px solid var(--primary-color);">
+                            <strong>لجنة المرافق العمومية والخدمات</strong>
+                        </div>
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border-right: 3px solid var(--primary-color);">
+                            <strong>لجنة التنمية البشرية والشؤون الاجتماعية</strong>
+                        </div>
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border-right: 3px solid var(--primary-color);">
+                            <strong>لجنة التعمير وإعداد التراب والبيئة</strong>
+                        </div>
+                    </div>
+                `
+            },
+            structure: {
+                title: "الهيكل التنظيمي لإدارة الجماعة",
+                icon: "📊",
+                html: `
+                    <p>يعتمد الهيكل التنظيمي لإدارة الجماعة على تنظيم عصري مرن يهدف إلى الرفع من مردودية الموارد البشرية وتسريع وتيرة معالجة ملفات المواطنين.</p>
+                    
+                    <div style="background: #f1f5f9; padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+                        <strong style="color: var(--primary-color); font-size: 1.1rem;">المديرية العامة للمصالح الجماعية (DGS)</strong>
+                        <div style="font-size: 0.85rem; color: #64748b; margin-top: 4px;">تنسيق ومتابعة كافة الأقسام والمصالح الإدارية والتقنية والمالية</div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; background: white;">
+                            <strong style="color: var(--primary-color);">🏗️ قسم التعمير والممتلكات والبيئة:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">مصلحة رخص البناء، مصلحة التخطيط الحضري وتصاميم التهيئة، مصلحة الممتلكات والمنازعات، ومصلحة المناطق الخضراء والبيئة.</p>
+                        </div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; background: white;">
+                            <strong style="color: var(--primary-color);">💰 قسم الشؤون المالية والصفقات:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">مصلحة الميزانية والمحاسبة، مصلحة الصفقات العمومية، مصلحة تدبير المداخيل والجبايات الجماعية، ومصلحة المشتريات والمخازن.</p>
+                        </div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; background: white;">
+                            <strong style="color: var(--primary-color);">🤝 قسم العمل الاجتماعي والثقافي والرياضي:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">مصلحة دعم ومواكبة الجمعيات، مصلحة تدبير الملاعب والقاعات الرياضية، ومصلحة المراكز الثقافية ودور الشباب.</p>
+                        </div>
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; background: white;">
+                            <strong style="color: var(--primary-color);">💻 مصلحة نظم المعلومات والتحول الرقمي ومكتب الضبط:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">إدارة البوابة الإلكترونية، الرقمنة الشاملة للوثائق، معالجة شكايات المواطنين، ومكتب الضبط الموحد.</p>
+                        </div>
+                    </div>
+                `
+            },
+            roles: {
+                title: "أدوار ووظائف الجماعة الترابية",
+                icon: "⚖️",
+                html: `
+                    <p>تمارس الجماعة الترابية اختصاصاتها وفقاً لمقتضيات القانون التنظيمي رقم 113.14، والتي تنقسم إلى ثلاثة أصناف رئيسية تكفل تحقيق تنمية مجالية شاملة:</p>
+
+                    <div style="margin-top: 18px;">
+                        <div style="background: var(--primary-light); border-right: 4px solid var(--primary-color); padding: 15px; border-radius: 6px; margin-bottom: 14px;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 6px;">1. الاختصاصات الذاتية (Compétences Propres)</h4>
+                            <p style="font-size: 0.92rem; margin: 0;">تشمل وضع وتنفيذ برنامج عمل الجماعة، إعداد وتدبير المرافق العمومية الجماعية (توزيع الماء والكهرباء، التطهير السائل، النظافة وجمع النفايات، الإنارة العمومية، النقل الحضري، أسواق القرب، والمجازر)، وتخطيط وإعداد التراب ومخططات التهيئة.</p>
+                        </div>
+
+                        <div style="background: #fffbeb; border-right: 4px solid #d97706; padding: 15px; border-radius: 6px; margin-bottom: 14px;">
+                            <h4 style="color: #b45309; margin-bottom: 6px;">2. الاختصاصات المشتركة (Compétences Partagées)</h4>
+                            <p style="font-size: 0.92rem; margin: 0;">تمارسها الجماعة بشراكة وتعاقد مع الدولة والجهات والعمالات/الأقاليم، لا سيما تنمية الاقتصاد المحلي وإنعاش الشغل، المحافظة على التراث الثقافي وتطوير المرافق الثقافية والرياضية، واتخاذ الإجراءات اللازمة لإنعاش السياحة وحماية البيئة.</p>
+                        </div>
+
+                        <div style="background: #f0fdf4; border-right: 4px solid #16a34a; padding: 15px; border-radius: 6px;">
+                            <h4 style="color: #15803d; margin-bottom: 6px;">3. الاختصاصات المنقولة (Compétences Transférées)</h4>
+                            <p style="font-size: 0.92rem; margin: 0;">اختصاصات تحولها الدولة إلى الجماعة مع رصد الموارد المالية والبشرية اللازمة، مثل إحداث وصيانة المنشآت المائية والمراكز الصحية الابتدائية والمدارس والمؤسسات التعليمية.</p>
+                        </div>
+                    </div>
+                `
+            },
+            history: {
+                title: "المجالس البلدية السابقة وتاريخ التدبير الجماعي",
+                icon: "📜",
+                html: `
+                    <p>عرفت الجماعة الترابية عبر تاريخها العريق محطات تنموية بارزة تعاقبت خلالها مجالس منتخبة ونخب محلية ساهمت في بناء الهوية الحضرية للمدينة وتطوير نسيجها العمراني والاقتصادي.</p>
+
+                    <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <strong style="color: var(--primary-color);">الولاية الانتدابية 2015 - 2021:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">إطلاق برامج التأهيل الحضري للأحياء الناقصة التجهيز، وتوسعة شبكات الصرف الصحي والإنارة العمومية بمختلف المقاطعات.</p>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <strong style="color: var(--primary-color);">الولاية الانتدابية 2009 - 2015:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">تحديث الإدارة البلدية، تأسيس وتأهيل المرافق الرياضية والثقافية، وإحداث أسواق القرب النموذجية لتنظيم الأنشطة التجارية.</p>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <strong style="color: var(--primary-color);">الولاية الانتدابية 2003 - 2009:</strong>
+                            <p style="margin: 4px 0 0; font-size: 0.9rem; color: #475569;">إرساء المخططات التوجيهية الكبرى للتهيئة العمرانية وشق المحاور الطرقية المهيكلة بالمدينة.</p>
+                        </div>
+                    </div>
+                `
+            },
+            parity: {
+                title: "هيئة المساواة وتكافؤ الفرص ومقاربة النوع",
+                icon: "⚖️",
+                html: `
+                    <div style="background: #fefcf3; border-right: 4px solid var(--accent-color); padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+                        <strong style="color: var(--accent-color); font-size: 1.05rem;">آلية تشاركية استشارية للحوار والتشاور المجتمعي</strong>
+                        <p style="margin: 4px 0 0; font-size: 0.93rem; color: #4a5568;">تطبيقا لأحكام الفصل 139 من الدستور والمادة 120 من القانون التنظيمي 113.14، أحدث المجلس الجماعي هيئة استشارية بشراكة مع فعاليات المجتمع المدني تختص بدراسة القضايا المتعلقة بالمساواة وتكافؤ الفرص ومقاربة النوع.</p>
+                    </div>
+
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">أهداف ومهام الهيئة:</h4>
+                    <ul style="list-style-type: disc; margin-right: 25px; line-height: 1.8; margin-bottom: 20px;">
+                        <li>إبداء الرأي وتقديم توصيات واقتراحات للمجلس الجماعي حول إدماج مقاربة النوع الاجتماعي في برامج ومشاريع التنمية.</li>
+                        <li>المساهمة الفعالة في إعداد وتتبع وتقييم برنامج عمل الجماعة من منظور الإنصاف والمساواة المجالية.</li>
+                        <li>تقديم مقترحات لتيسير ولوج الأشخاص في وضعية إعاقة إلى المرافق والخدمات العمومية الجماعية.</li>
+                        <li>تشجيع مشاركة النساء والشباب في تدبير الشأن العام المحلي وصناعة القرار التنموي.</li>
+                    </ul>
+
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                        <strong>تشكيلة الهيئة:</strong> تضم ممثلي وممثلات عن الجمعيات والمنظمات المحلية النشيطة، بالإضافة إلى شخصيات وكفاءات ذات خبرة في مجالات التنمية البشرية، الحقوق، والنوع الاجتماعي.
+                    </div>
+                `
+            }
+        };
+
+        function openMuniModal(key) {
+            const data = muniDetailsData[key];
+            if (!data) return;
+
+            document.getElementById('muniModalTitle').innerHTML = `<span>${data.icon}</span> <span>${data.title}</span>`;
+            document.getElementById('muniModalContent').innerHTML = data.html;
+
+            const modal = document.getElementById('muniDetailModalOverlay');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeMuniModal() {
+            const modal = document.getElementById('muniDetailModalOverlay');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function openLegalPopup() {
+            const el = document.getElementById('legalPopupOverlay');
+            if (el) el.classList.add('active');
+        }
+
+        function closeLegalPopup() {
+            const el = document.getElementById('legalPopupOverlay');
+            if (el) el.classList.remove('active');
+        }
+    </script>
+</body>
+</html>

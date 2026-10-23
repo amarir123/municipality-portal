@@ -3,114 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="البوابة الرسمية للجماعة الترابية - نافذتكم للاطلاع على مستجدات المدينة، الخدمات الإلكترونية، والمشاريع التنموية.">
-    <title>بوابة الجماعة الترابية | البوابة الرسمية</title>
+    <meta name="description" content="البوابة الرسمية لجماعة بيوكرى - نافذتكم للاطلاع على مستجدات المدينة، الخدمات الإلكترونية، والمشاريع التنموية.">
+    <title>بوابة جماعة بيوكرى | البوابة الرقمية الرسمية</title>
     
-    <!-- Google Fonts: IBM Plex Sans Arabic & Cairo for Arabic institutional typography -->
+    <!-- Google Fonts: Cairo, IBM Plex Sans Arabic & Reem Kufi for Moroccan Institutional Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
+    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=5.0">
 </head>
 <body id="appBody">
+    <!-- Scroll Progress Indicator Bar -->
     <div class="scroll-progress-bar" id="scrollBar"></div>
+    
+    <!-- Ambient Glowing Mouse Cursor Aura -->
+    <div id="cursorGlowAura" class="cursor-glow-aura"></div>
 
+    <!-- FLOATING CAPSULE HEADER (SINGLE ELEGANT GLASS NAV) -->
+    <header class="nav" id="nav">
+        <!-- Brand & Logo -->
+        <a class="brand" href="index.html">
+            <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى">
+            <span>
+                <b>جماعة بيوكرى</b>
+                <small>Commune de Biougra</small>
+            </span>
+        </a>
 
-
-    <!-- TOP BAR (Utility Header) -->
-    <div class="top-bar" id="topBar">
-        <div class="container top-bar-content">
-            <!-- Left Side: Search, Contact, Weather & Prayer Widget -->
-            <div class="top-bar-left">
-                <div class="search-container">
-                    <button class="search-toggle-btn" id="searchToggleBtn" aria-label="بحث">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </button>
-                    <div class="search-input-wrapper" id="searchInputWrapper">
-                        <input type="text" id="searchInput" placeholder="ابحث في البوابة...">
+        <!-- Desktop Navigation with Gold Magic Sliding Indicator -->
+        <nav class="menu" id="menu">
+            <a class="nav-item active" href="municipality.html">الجماعة الترابية</a>
+            <a class="nav-item" href="action-program.html">برنامج العمل</a>
+            <a class="nav-item" href="#urban-development">التنمية الحضرية</a>
+            
+            <!-- Mega Menu Trigger Item for Services & Documents -->
+            <div class="menu-dropdown" id="servicesDropdown">
+                <a class="nav-item nav-item-has-sub" href="#servicesSection">
+                    <span>الخدمات والوثائق</span>
+                    <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </a>
+                
+                <!-- Mega Menu Panel (2 Columns) -->
+                <div class="mega-panel" id="megaPanel">
+                    <div class="mega-grid">
+                        <div class="mega-links-col">
+                            <span class="mega-title">الخدمات الأكثر طلباً</span>
+                            <div class="mega-items-list">
+                                <a href="javascript:void(0)" onclick="openServiceDetail('residence')">
+                                    <span class="mega-tag">01</span>
+                                    <span>شهادة السكنى والإقامة</span>
+                                </a>
+                                <a href="javascript:void(0)" onclick="openServiceDetail('birth')">
+                                    <span class="mega-tag">02</span>
+                                    <span>عقد الازدياد والحالة المدنية</span>
+                                </a>
+                                <a href="javascript:void(0)" onclick="openServiceDetail('legalization')">
+                                    <span class="mega-tag">03</span>
+                                    <span>تصحيح الإمضاء ومطابقة النسخ</span>
+                                </a>
+                                <a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">
+                                    <span class="mega-tag">04</span>
+                                    <span>منصة رخص البناء والتعمير</span>
+                                </a>
+                                <a href="javascript:void(0)" onclick="openLegalPopup()">
+                                    <span class="mega-tag">05</span>
+                                    <span>المعلومات القانونية والنصوص</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mega-feature-col">
+                            <div class="mega-card-box">
+                                <span class="mega-badge">منصة المواطن</span>
+                                <h4>تتبع ملفك أو إيداع شكاية</h4>
+                                <p>متابعة آنية لمراحل دراسة ملفك أو إيداع شكايتك لدى مصالح الجماعة بكل يسر.</p>
+                                <div class="mega-box-actions">
+                                    <button type="button" onclick="openComplaintModal()" class="btn-mega-gold">إيداع شكاية</button>
+                                    <a href="javascript:void(0)" onclick="openComplaintModal()" class="btn-mega-link">تتبع ملفك ←</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <span class="divider">|</span>
-                <a href="contact.html" class="top-link">التواصل</a>
-                <a href="#news" class="top-link">أخبار الجماعة</a>
-                <a href="javascript:void(0)" onclick="openComplaintModal()" class="top-link highlight-link">إيداع شكاية 📩</a>
-                <a href="javascript:void(0)" onclick="openTicketTrackModal()" class="top-link highlight-link">تتبع شكاية 🔍</a>
-                <a href="admin.html" class="top-link admin-only" target="_blank" style="margin-left: 12px; font-weight: 700; color: var(--accent-color);">بوابة المدير ⚙️</a>
-                <a href="#servicesSection" class="btn btn-gold">خدمات ووثائق إلكترونية</a>
             </div>
-            
-            <!-- Right Side: Weather, Prayer & Languages -->
-            <div class="top-bar-right" style="display: flex; align-items: center; gap: 15px;">
-                <div class="weather-widget-badge" id="weatherBadge">
-                    <span id="weatherIcon">☀️</span> <span id="weatherCityDisplay">أكادير</span> <strong id="weatherTempDisplay">24°C</strong>
-                </div>
-                <div class="lang-selector">
-                    <button class="lang-btn active" data-lang="ar">العربية</button>
-                    <button class="lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
-                    <button class="lang-btn" data-lang="fr">Français</button>
-                    <button class="lang-btn" data-lang="en">English</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- MAIN HEADER & NAVIGATION -->
-    <header class="main-header" id="mainHeader">
-        <div class="container header-container">
-            <!-- Left: Main Navigation Menu -->
-            <nav class="main-nav" id="mainNav">
-                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="القائمة">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+            <a class="nav-item" href="publications.html">منشوراتنا</a>
+            <a class="nav-item" href="sustainable.html">مدينة مستدامة</a>
+            <a class="nav-item" href="contact.html">أوقات العمل</a>
+            <i class="line" id="line"></i>
+        </nav>
+
+        <!-- Right: Actions Group -->
+        <div class="actions">
+            <!-- Consolidated Tools Button (Language, Display, Weather) -->
+            <div class="tools-wrapper" id="toolsWrapper">
+                <button type="button" class="tools" id="toolsBtn" aria-label="اللغة والعرض">
+                    <span>ع</span>
+                    <span>|</span>
+                    <span>FR</span>
+                    <span>|</span>
+                    <span>ⵜ</span>
                 </button>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
-                    <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
-                    <li><a href="#urban-development" class="nav-link" id="navUrbanLink">برنامج التنمية الحضرية</a></li>
-                    <li><a href="action-program.html" class="nav-link">برنامج عمل الجماعة</a></li>
-                    <li><a href="#servicesSection" class="nav-link">الخدمات والوثائق</a></li>
-                    <li><a href="sustainable.html" class="nav-link">مدينة مستدامة</a></li>
-                    <li><a href="index.html" class="nav-link active">الجماعة الترابية</a></li>
-                </ul>
-            </nav>
+                
+                <!-- Tools Floating Popup Palette -->
+                <div class="tools-popup" id="toolsPopup">
+                    <div class="tools-weather-row">
+                        <span id="weatherIconMini">☀️</span>
+                        <span id="weatherCityMini">بيوكرى</span>:
+                        <strong id="weatherTempMini">23°C</strong>
+                    </div>
 
-            <!-- Right: Logo -->
-            <div class="logo-container">
-                <a href="index.html" class="logo-link">
-                    <img src="assets/logo.png" alt="شعار الجماعة الترابية" class="main-logo" id="mainLogoHeaderImg">
-                </a>
+                    <div class="tools-divider"></div>
+
+                    <div class="tools-section-label">اللغات الرسمية</div>
+                    <div class="tools-langs-grid">
+                        <button class="tools-lang-btn active" data-lang="ar">العربية</button>
+                        <button class="tools-lang-btn" data-lang="tz">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+                        <button class="tools-lang-btn" data-lang="fr">Français</button>
+                    </div>
+
+                    <div class="tools-divider"></div>
+
+                    <div class="tools-options-grid">
+                        <button type="button" class="tools-opt-btn" onclick="toggleDarkMode()">
+                            <span>🌙 الوضع الليلي</span>
+                        </button>
+                        <button type="button" class="tools-opt-btn" onclick="toggleFontSize()">
+                            <span>A± حجم الخط</span>
+                        </button>
+                    </div>
+
+                    <div class="tools-divider"></div>
+
+                    <div class="tools-footer-row">
+                        <a href="admin.html" target="_blank" class="tools-link">بوابة المدير ⚙️</a>
+                        <button type="button" onclick="openLegalPopup()" class="tools-link-btn">المعلومات القانونية ⚖️</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Single Prominent Gold CTA Button -->
+            <a class="cta" href="#servicesSection">خدمات إلكترونية</a>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
-    <!-- HERO BANNER SECTION -->
-    <section class="hero-section" id="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title animate-up">بوابة <span class="muni-name-display">الجماعة الترابية</span></h1>
-            <div class="hero-search-wrapper animate-up-delay">
-                <input type="text" id="heroSearchInput" placeholder="ابحث في المستجدات والخدمات والوثائق..." onkeyup="handleHeroLiveSearch()">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <!-- ========================================================
+         HERO SECTION: 3D CURVED PANORAMIC CYLINDER THEATER
+         ======================================================== -->
+    <section class="hero-3d-panoramic" id="hero">
+        <!-- Deep Mountain Backdrop with Atmospheric Vignette -->
+        <div class="hero-3d-backdrop"></div>
+        <div class="hero-3d-glow"></div>
+        
+        <!-- Magical Golden Dust Ambient Particles Canvas -->
+        <canvas id="heroParticlesCanvas" class="hero-particles-canvas"></canvas>
+
+        <!-- Ambient Cursor Spotlight Tracker -->
+        <div id="heroCursorSpotlight" class="hero-cursor-spotlight"></div>
+        
+        <!-- 3D Perspective Floor Grid -->
+        <div class="panoramic-grid-floor"></div>
+
+        <!-- Hero Header: Title & Subtitle Only -->
+        <div class="hero-header-content">
+            <h1 class="hero-main-title">
+                بوابة الجماعة الترابية <span>بيوكرى</span>
+            </h1>
+
+            
+        </div>
+
+        <!-- 3D Perspective Stage in the Center of Hero -->
+        <div class="panoramic-stage-container" id="panoramicStage">
+            <!-- Realistic Ground Shadow Plane ("خيال الأرضية ثلاثي الأبعاد") -->
+            <div class="pano-stage-ground-shadow"></div>
+            <!-- Left / Right Navigation Touch/Click Paddles -->
+            <button class="pano-nav-btn pano-prev-btn" id="panoPrevBtn" aria-label="السابق">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="pano-nav-btn pano-next-btn" id="panoNextBtn" aria-label="التالي">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <!-- The Rotating 3D Cylinder / Ribbon Carousel Track -->
+            <div class="panoramic-cylinder-track" id="panoramicTrack">
+                <!-- Slide 0: Urban Park Video Capsule -->
+                <div class="pano-card" data-index="0" onclick="handlePanoCardClick(0)">
+                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_park.png');">
+                        <div class="pano-card-top-bar">
+                            <span class="pano-pill-badge">🌿 المشاريع البيئية والترفيهية</span>
+                            <span class="pano-duration-pill">02:45 • 4K</span>
+                        </div>
+                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                        </div>
+                        <div class="pano-card-bottom-info">
+                            <h3 class="pano-card-title">تهيئة وتأهيل المنتزه الحضري لبيوكرى</h3>
+                            <p class="pano-card-desc">متنفس طبيعي متكامل، مساحات خضراء، فضاءات ألعاب، ومسارات رياضية عصرية لساكنة المدينة.</p>
+                            <div class="pano-card-action-row">
+                                <span class="pano-watch-text">▶ اضغط لمشاهدة الكبسولة المرئية</span>
+                                <span class="pano-num-indicator">01 / 05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 1: Sports Hall -->
+                <div class="pano-card" data-index="1" onclick="handlePanoCardClick(1)">
+                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_hall.png');">
+                        <div class="pano-card-top-bar">
+                            <span class="pano-pill-badge">⚽ البنية الرياضية والشبابية</span>
+                            <span class="pano-duration-pill">01:50 • HD</span>
+                        </div>
+                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                        </div>
+                        <div class="pano-card-bottom-info">
+                            <h3 class="pano-card-title">القاعة المغطاة وملاعب القرب الحديثة</h3>
+                            <p class="pano-card-desc">تجهيزات رياضية بمعايير حديثة لاحتضان البطولات الجهوية والوطنية وتأطير المواهب الرياضية الشابة.</p>
+                            <div class="pano-card-action-row">
+                                <span class="pano-watch-text">▶ استكشف المنشأة الرياضية</span>
+                                <span class="pano-num-indicator">02 / 05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Urban Roads & Infrastructure (Progress Metric Card) -->
+                <div class="pano-card" data-index="2" onclick="handlePanoCardClick(2)">
+                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(18,18,22,0.92) 100%), url('assets/card_territory.png');">
+                        <div class="pano-card-top-bar">
+                            <span class="pano-pill-badge">🏗️ برنامج التنمية 2021-2027</span>
+                            <span class="pano-duration-pill">نسبة الإنجاز: 85%</span>
+                        </div>
+                        <div class="pano-metric-capsule">
+                            <div class="metric-circle-box">
+                                <span class="metric-percent">85%</span>
+                                <span class="metric-sub">إنجاز المحاور</span>
+                            </div>
+                        </div>
+                        <div class="pano-card-bottom-info">
+                            <h3 class="pano-card-title">توسيع وتقوية المحاور الطرقية الكبرى</h3>
+                            <p class="pano-card-desc">تأهيل مداخل المدينة، الإنارة العمومية بالطاقة المستدامة، وتهيئة الأرصفة والساحات الحضرية.</p>
+                            <div class="pano-card-action-row">
+                                <span class="pano-watch-text">الميزانية الإجمالية: 1.1 مليار درهم</span>
+                                <span class="pano-num-indicator">03 / 05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Smart Urban Transport -->
+                <div class="pano-card" data-index="3" onclick="handlePanoCardClick(3)">
+                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_bus.png');">
+                        <div class="pano-card-top-bar">
+                            <span class="pano-pill-badge">🚌 النقل الحضري والربط الترابي</span>
+                            <span class="pano-duration-pill">03:15 • HD</span>
+                        </div>
+                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                        </div>
+                        <div class="pano-card-bottom-info">
+                            <h3 class="pano-card-title">إطلاق أسطول خدمات النقل الحضري الحديث</h3>
+                            <p class="pano-card-desc">ربط أحياء المدينة والمرافق التعليمية والصحية بشبكة حافلات عصرية وميسرة لكافة المواطنين.</p>
+                            <div class="pano-card-action-row">
+                                <span class="pano-watch-text">▶ شاهد تقرير إطلاق الخدمات</span>
+                                <span class="pano-num-indicator">04 / 05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Cultural Center & Artisans -->
+                <div class="pano-card" data-index="4" onclick="handlePanoCardClick(4)">
+                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/card_council.png');">
+                        <div class="pano-card-top-bar">
+                            <span class="pano-pill-badge">🏛️ الثقافة والتراث السوسي</span>
+                            <span class="pano-duration-pill">صرح حضاري</span>
+                        </div>
+                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                        </div>
+                        <div class="pano-card-bottom-info">
+                            <h3 class="pano-card-title">المركب الثقافي وفضاءات دار الصانعة</h3>
+                            <p class="pano-card-desc">حاضنة للفنون التراثية، المعارض التشكيلية، ودعم إبداعات المرأة الصانعة والشباب بعاصمة اشتوكة.</p>
+                            <div class="pano-card-action-row">
+                                <span class="pano-watch-text">▶ اكتشف مرافق المركب الثقافي</span>
+                                <span class="pano-num-indicator">05 / 05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
-                <a href="#municipality" class="btn btn-primary btn-lg animate-up-delay">تعرف على الجماعة</a>
-                <button onclick="openComplaintModal()" class="btn btn-gold btn-lg animate-up-delay">إيداع شكاية أو طلب إلكتروني 📩</button>
+        </div>
+
+        <!-- Cinema Bottom Player Scrubber Bar in Hero -->
+        <div class="container panoramic-cinema-bar-wrapper">
+            <div class="panoramic-cinema-bar">
+                <button type="button" class="cinema-ctrl-btn" id="panoPlayPauseBtn" aria-label="تشغيل / إيقاف التدوير التلقائي" title="إيقاف / تشغيل">
+                    <span id="panoPlayIcon">❚❚</span>
+                </button>
+                <div class="cinema-progress-track" id="panoProgressTrack">
+                    <div class="cinema-progress-fill" id="panoProgressFill"></div>
+                </div>
+                <div class="cinema-time-indicator">
+                    <span id="panoTimerText">00:01 / 00:05</span>
+                </div>
+                <button type="button" class="cinema-ctrl-btn" onclick="togglePanoSound(this)" aria-label="كتم / تشغيل الصوت" title="الصوت">
+                    <span>🔊</span>
+                </button>
+                <button type="button" class="cinema-ctrl-btn" onclick="openHeroVideoCapsule()" aria-label="شاشة كاملة" title="شاشة كاملة">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- MUNICIPALITY UPDATES & NEWS -->
-    <section class="news-section" id="news">
+    <!-- ESSENTIAL SERVICES (الخدمات الأكثر طلباً بهندسة الأقواس المغربية) -->
+    <section class="essential-services-section zellige-bg" id="essentialServices">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <span class="hero-badge-tag" style="background: rgba(15, 157, 138, 0.12); color: var(--secondary-color); border-color: var(--secondary-color);">✨ فضاء المواطن الميسر</span>
+                <h2 class="section-title center" style="margin-top: 10px; margin-bottom: 12px;">الخدمات الإدارية الأكثر طلباً</h2>
+                <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1rem;">ولوج مباشر وسريع لأهم الإجراءات والوثائق الجماعية لتوفير الوقت وتسهيل قضاء أغراضكم الإدارية.</p>
+            </div>
+
+            <div class="essential-grid">
+                <!-- Service 1: Residence Certificate -->
+                <div class="essential-card" onclick="openServiceDetail('residence')">
+                    <div class="essential-card-num">01</div>
+                    <h3 class="essential-title">شهادة السكنى والإقامة</h3>
+                    <p class="essential-desc">شروط وإجراءات الحصول على شهادة السكنى لتجديد أو إنجاز البطاقة الوطنية والمصالح الإدارية.</p>
+                    <span class="essential-action-btn">طلب الإجراء ←</span>
+                </div>
+
+                <!-- Service 2: Civil Status -->
+                <div class="essential-card" onclick="openServiceDetail('birth')">
+                    <div class="essential-card-num">02</div>
+                    <h3 class="essential-title">عقد الازدياد والحالة المدنية</h3>
+                    <p class="essential-desc">استخراج النسخة الموجزة والكاملة من رسم الولادة والدفتر العائلي بمكاتب الحالة المدنية ببيوكرى.</p>
+                    <span class="essential-action-btn">طلب الإجراء ←</span>
+                </div>
+
+                <!-- Service 3: Legalization -->
+                <div class="essential-card" onclick="openServiceDetail('legalization')">
+                    <div class="essential-card-num">03</div>
+                    <h3 class="essential-title">تصحيح الإمضاء ومطابقة النسخ</h3>
+                    <p class="essential-desc">خدمات الإشهاد على صحة التوقيع ومطابقة النسخ لأصولها بالمقر الرئيسي وملحقات الجماعة.</p>
+                    <span class="essential-action-btn">طلب الإجراء ←</span>
+                </div>
+
+                <!-- Service 4: Construction & Urban Planning -->
+                <div class="essential-card" onclick="openServiceDetail('urbanism')">
+                    <div class="essential-card-num">04</div>
+                    <h3 class="essential-title">رخص البناء والتعمير</h3>
+                    <p class="essential-desc">إيداع ملفات رخص البناء، الإصلاح، الربط بشبكات الماء والكهرباء عبر منصة رخص الرقمية.</p>
+                    <span class="essential-action-btn">منصة رخص ←</span>
+                </div>
+
+                <!-- Service 5: Online Complaint -->
+                <div class="essential-card" onclick="openComplaintModal()">
+                    <div class="essential-card-num">05</div>
+                    <h3 class="essential-title">إيداع شكاية أو مقترح</h3>
+                    <p class="essential-desc">توجيه ملاحظاتكم وتظلماتكم بخصوص الإنارة، النظافة، أو الطرق مباشرة إلى المصالح المختصة.</p>
+                    <span class="essential-action-btn">إيداع شكاية ←</span>
+                </div>
+
+                <!-- Service 6: Association Subventions -->
+                <div class="essential-card" onclick="openSubventionsModal()">
+                    <div class="essential-card-num">06</div>
+                    <h3 class="essential-title">منح ودعم الجمعيات</h3>
+                    <p class="essential-desc">تحميل بطاقة طلب الدعم السنوي والاطلاع على لوائح الجمعيات والاتحادات المستفيدة والمحاضر.</p>
+                    <span class="essential-action-btn">تحميل الاستمارة ←</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUNICIPALITY UPDATES & NEWS SECTION -->
+    <section class="news-section zellige-subtle" id="news">
         <div class="container news-container">
             <!-- Left Column: Core Cards -->
             <div class="cards-grid">
                 <!-- Card 1: Municipal Council -->
                 <div class="info-card" data-modal="council">
                     <div class="card-img-wrapper">
-                        <img src="assets/card_council.png" id="card-img-council" alt="المجلس الجماعي">
+                        <img src="assets/card_council.png" id="card-img-council" alt="المجلس الجماعي لبيوكرى">
                         <div class="card-overlay-badge">المجلس الجماعي</div>
                     </div>
                 </div>
@@ -132,11 +419,122 @@
 
             <!-- Right Column: News List -->
             <div class="news-list-wrapper">
-                <h2 class="section-title">مستجدات الجماعة</h2>
+                <h2 class="section-title">مستجدات جماعة بيوكرى</h2>
                 <div class="news-list" id="newsListContainer">
-                    <!-- Dynamic rendering via NewsView -->
+                    <div class="news-item" onclick="window.appController?.openNewsModal(3)">
+                        <div class="news-date">17 مارس</div>
+                        <div class="news-details">
+                            <h3 class="news-title">النتائج النهائية لولوج درجة مهندس معماري من الدرجة الأولى</h3>
+                            <p class="news-excerpt">تعلن جماعة بيوكرى عن لائحة الناجحين بصفة نهائية في مباراة التوظيف لدرجة مهندس معماري من الدرجة الأولى...</p>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.appController?.openNewsModal(4)">
+                        <div class="news-date">17 مارس</div>
+                        <div class="news-details">
+                            <h3 class="news-title">النتائج النهائية لولوج درجة مهندس دولة من الدرجة الأولى</h3>
+                            <p class="news-excerpt">تعلن جماعة بيوكرى عن لائحة الناجحين بصفة نهائية في مباراة التوظيف تخصص الهندسة المدنية...</p>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.appController?.openNewsModal(5)">
+                        <div class="news-date">17 مارس</div>
+                        <div class="news-details">
+                            <h3 class="news-title">النتائج النهائية لمباراة التوظيف لولوج درجة تقني من الدرجة الثالثة</h3>
+                            <p class="news-excerpt">لائحة المترشحين الناجحين بصفة نهائية ولائحة الانتظار لولوج درجة تقني تخصص الأنظمة المعلوماتية والشبكات...</p>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-outline btn-more" id="moreNewsBtn">مستجدات أكثر &gt;</button>
+                <button class="btn btn-outline btn-more" id="moreNewsBtn" onclick="location.href='publications.html'">مستجدات أكثر &gt;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CITIZEN SENTIMENT & OPINION POLL SECTION (سبر الآراء والمشاعر) -->
+    <section class="citizen-poll-section" id="citizenPollSection">
+        <div class="container">
+            <div class="poll-box-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span class="hero-badge-tag" id="pollCategoryBadge" style="background: rgba(242, 169, 59, 0.2); color: var(--accent-color); border-color: var(--accent-color); margin-bottom: 8px;">🗳️ استطلاع رأي المواطنين</span>
+                        <h3 id="pollQuestionText" style="color: var(--primary-color); font-size: 1.45rem; font-weight: 800; margin: 4px 0;">ما رأيك في جودة الخدمات الرقمية والإدارية المقدمة بجماعة بيوكرى؟</h3>
+                    </div>
+                    <div style="text-align: left;">
+                        <span id="pollDateDisplay" style="font-size: 0.85rem; color: var(--text-muted); display: block;">تاريخ النشر: 2026-10-15</span>
+                        <span id="pollTotalVotesCount" style="font-size: 0.9rem; font-weight: 700; color: var(--secondary-color);">إجمالي المصوتين: 342 مواطن</span>
+                    </div>
+                </div>
+
+                <!-- Sentiment Emoji Buttons (5 Horizontal Grid Columns Across Full Width) -->
+                <div class="sentiment-poll-grid" id="pollSentimentButtons">
+                    <button class="sentiment-emoji-btn" onclick="submitSentimentVote('very_good')" data-key="very_good">
+                        <span class="emoji">🌟</span>
+                        <span class="label">ممتاز جداً</span>
+                    </button>
+                    <button class="sentiment-emoji-btn" onclick="submitSentimentVote('good')" data-key="good">
+                        <span class="emoji">👍</span>
+                        <span class="label">جيد</span>
+                    </button>
+                    <button class="sentiment-emoji-btn" onclick="submitSentimentVote('average')" data-key="average">
+                        <span class="emoji">😐</span>
+                        <span class="label">متوسط</span>
+                    </button>
+                    <button class="sentiment-emoji-btn" onclick="submitSentimentVote('needs_improvement')" data-key="needs_improvement">
+                        <span class="emoji">⚠️</span>
+                        <span class="label">يحتاج تحسين</span>
+                    </button>
+                    <button class="sentiment-emoji-btn" onclick="submitSentimentVote('dissatisfied')" data-key="dissatisfied">
+                        <span class="emoji">👎</span>
+                        <span class="label">غير راضٍ</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Poll Results Bars Container (5 Metrics) -->
+                <div class="poll-results-container" id="pollBarsList" style="margin-top: 24px;">
+                    <div class="poll-result-bar-item">
+                        <div class="poll-bar-header">
+                            <span>🌟 ممتاز جداً</span>
+                            <span><strong>62%</strong> (218 صوت)</span>
+                        </div>
+                        <div class="poll-progress-track">
+                            <div class="poll-progress-fill" style="width: 62%;"></div>
+                        </div>
+                    </div>
+                    <div class="poll-result-bar-item">
+                        <div class="poll-bar-header">
+                            <span>👍 جيد</span>
+                            <span><strong>27%</strong> (94 صوت)</span>
+                        </div>
+                        <div class="poll-progress-track">
+                            <div class="poll-progress-fill" style="width: 27%;"></div>
+                        </div>
+                    </div>
+                    <div class="poll-result-bar-item">
+                        <div class="poll-bar-header">
+                            <span>😐 متوسط</span>
+                            <span><strong>6%</strong> (22 صوت)</span>
+                        </div>
+                        <div class="poll-progress-track">
+                            <div class="poll-progress-fill" style="width: 6%;"></div>
+                        </div>
+                    </div>
+                    <div class="poll-result-bar-item">
+                        <div class="poll-bar-header">
+                            <span>⚠️ يحتاج تحسين</span>
+                            <span><strong>4%</strong> (14 صوت)</span>
+                        </div>
+                        <div class="poll-progress-track">
+                            <div class="poll-progress-fill" style="width: 4%;"></div>
+                        </div>
+                    </div>
+                    <div class="poll-result-bar-item">
+                        <div class="poll-bar-header">
+                            <span>👎 غير راضٍ</span>
+                            <span><strong>1%</strong> (6 أصوات)</span>
+                        </div>
+                        <div class="poll-progress-track">
+                            <div class="poll-progress-fill" style="width: 1%;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -148,7 +546,65 @@
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 35px;">تحميل الاستمارات، الميزانيات السنوية، وبرنامج عمل الجماعة بصيغة PDF الرقمية</p>
             
             <div class="services-hub-grid" id="servicesHubContainer">
-                <!-- Dynamic Rendering via ServiceModel -->
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">الحالة المدنية</div>
+                    <h3 class="service-hub-title">طلب شواهد الحالة المدنية والولادة</h3>
+                    <p class="service-hub-desc">دليل وخدمة إيداع طلب الحصول على عقود الازدياد والشواهد الفردية والعائلية عبر منصة وثيقة الوطنية.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">رقمي مباشر</span>
+                        <a href="https://www.watiqa.ma" target="_blank" class="btn btn-outline btn-sm">الانتقال للخدمة ↗</a>
+                    </div>
+                </div>
+
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">التعمير والبناء</div>
+                    <h3 class="service-hub-title">دليل مساطر رخص التعمير والبناء 2026</h3>
+                    <p class="service-hub-desc">تحميل الدليل الموحد للمستندات والوثائق المطلوبة لطلب الحصول على رخصة البناء والتأهيل عبر منصة رخص.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">2.4 MB PDF</span>
+                        <a href="https://www.rokhas.ma" target="_blank" class="btn btn-outline btn-sm">منصة رخص ↗</a>
+                    </div>
+                </div>
+
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">برامج وخطط العمل</div>
+                    <h3 class="service-hub-title">برنامج عمل الجماعة للفترة 2021-2027</h3>
+                    <p class="service-hub-desc">البرنامج الكامل لمشاريع الجماعة والاستراتيجيات التنموية المعتمدة للنهوض بالمدينة وتأهيل مرافقها.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">5.1 MB PDF</span>
+                        <a href="action-program.html" class="btn btn-outline btn-sm">تحميل الوثيقة PDF 📥</a>
+                    </div>
+                </div>
+
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">المالية والميزانية</div>
+                    <h3 class="service-hub-title">ميزانية الجماعة وحصر الفائض المالي</h3>
+                    <p class="service-hub-desc">التقرير المالي السنوي للمداخيل والمصاريف وحسابات القرب الرسمية المعتمدة برسم الدورة العادية للمجلس.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">1.8 MB PDF</span>
+                        <a href="publications.html" class="btn btn-outline btn-sm">تحميل الوثيقة PDF 📥</a>
+                    </div>
+                </div>
+
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">دعم المجتمع المدني</div>
+                    <h3 class="service-hub-title">بطاقة واستمارة طلب دعم الجمعيات</h3>
+                    <p class="service-hub-desc">استمارة الترشيح السنوية للاستفادة من المنح الجماعية لدعم المشاريع الرياضية والاجتماعية والثقافية.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">Fiche PDF</span>
+                        <button type="button" onclick="openSubventionsModal()" class="btn btn-gold btn-sm" style="border: none; cursor: pointer;">تحميل الاستمارة 📥</button>
+                    </div>
+                </div>
+
+                <div class="service-hub-card">
+                    <div class="service-hub-badge">الشكايات الإلكترونية</div>
+                    <h3 class="service-hub-title">منصة تتبع الشكايات والمقترحات</h3>
+                    <p class="service-hub-desc">تسجيل ومتابعة الشكايات الموجهة لمصالح النظافة، الإنارة، الطرقات، والمرافق الحضرية مع إشعار فوري.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">رقمي فوري</span>
+                        <button type="button" onclick="openComplaintModal()" class="btn btn-outline btn-sm" style="cursor: pointer;">إيداع شكاية 📩</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -156,60 +612,120 @@
     <!-- ADMINISTRATIVE PROCEDURES SECTION -->
     <section class="procedures-section" id="procedures-grid">
         <div class="container">
-            <h2 class="section-title center">الاجراءات الادارية</h2>
+            <h2 class="section-title center">الإجراءات والمساطر الإدارية</h2>
             
             <div class="procedures-grid">
                 <div class="proc-card" data-proc="health">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <div class="proc-num-badge">01</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">حفظ الصحة والسلامة</h3>
+                        <p class="proc-card-sub">معاينة المحلات ومراقبة النظافة</p>
                     </div>
-                    <h3 class="proc-card-title">حفظ الصحة</h3>
                 </div>
 
                 <div class="proc-card" data-proc="culture">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path></svg>
+                    <div class="proc-num-badge">02</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">الشؤون الثقافية والرياضية</h3>
+                        <p class="proc-card-sub">الملاعب، المركب الثقافي والأنشطة</p>
                     </div>
-                    <h3 class="proc-card-title">الشؤون الثقافية والرياضية</h3>
                 </div>
 
                 <div class="proc-card" data-proc="urbanism">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    <div class="proc-num-badge">03</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">التعمير ورخص البناء</h3>
+                        <p class="proc-card-sub">إيداع ومتابعة طلبات رخص البناء</p>
                     </div>
-                    <h3 class="proc-card-title">التعمير والبناء</h3>
                 </div>
 
                 <div class="proc-card" data-proc="civil">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                    <div class="proc-num-badge">04</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">الحالة المدنية والتصديق</h3>
+                        <p class="proc-card-sub">الشواهد الإدارية وتصحيح الإمضاء</p>
                     </div>
-                    <h3 class="proc-card-title">الحالة المدنية والتصديق</h3>
                 </div>
 
                 <div class="proc-card" data-proc="economic">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle></svg>
+                    <div class="proc-num-badge">05</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">الأنشطة الاقتصادية والأسواق</h3>
+                        <p class="proc-card-sub">الرخص التجارية واحتلال الملك العام</p>
                     </div>
-                    <h3 class="proc-card-title">الشؤون الاقتصادية والأسواق</h3>
                 </div>
 
                 <div class="proc-card" data-proc="administrative">
-                    <div class="proc-icon-wrapper">
-                        <svg class="proc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect></svg>
+                    <div class="proc-num-badge">06</div>
+                    <div class="proc-card-content">
+                        <h3 class="proc-card-title">الشرطة الإدارية والمرافق</h3>
+                        <p class="proc-card-sub">تنظيم السير والسكينة العامة</p>
                     </div>
-                    <h3 class="proc-card-title">الشرطة الإدارية</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- URBAN DEVELOPMENT PROGRAM SECTION -->
-    <section class="urban-development-section" id="urban-development">
-        <div class="container">
-            <h2 class="section-title center">برنامج التنمية الحضرية</h2>
+    <section class="urban-development-section zellige-bg" id="urban-development">
+        <div class="container" style="position: relative; z-index: 2;">
+            <h2 class="section-title center">برنامج التنمية الحضرية لبيوكرى</h2>
             <div class="urban-grid" id="projectsGridContainer">
-                <!-- Dynamic Rendering via ProjectView -->
+                <div class="urban-card" onclick="window.appController?.openProjectModal('roads')">
+                    <div class="urban-card-header">
+                        <h3 class="urban-card-title">تأهيل وتوسيع الطرق والمحاور الكبرى</h3>
+                        <span class="urban-badge">قيد الإنجاز</span>
+                    </div>
+                    <div class="urban-progress-wrapper">
+                        <div class="urban-progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="urban-meta-info">
+                        <span>نسبة الإنجاز: <strong>85%</strong></span>
+                        <span>الميزانية: 1.1 مليار درهم</span>
+                    </div>
+                </div>
+
+                <div class="urban-card" onclick="window.appController?.openProjectModal('environment')">
+                    <div class="urban-card-header">
+                        <h3 class="urban-card-title">تهيئة المنتزه الحضري والبيئة</h3>
+                        <span class="urban-badge">مكتمل ومستمر</span>
+                    </div>
+                    <div class="urban-progress-wrapper">
+                        <div class="urban-progress-bar" style="width: 95%;"></div>
+                    </div>
+                    <div class="urban-meta-info">
+                        <span>نسبة الإنجاز: <strong>95%</strong></span>
+                        <span>الميزانية: 450 مليون درهم</span>
+                    </div>
+                </div>
+
+                <div class="urban-card" onclick="window.appController?.openProjectModal('sports-dev')">
+                    <div class="urban-card-header">
+                        <h3 class="urban-card-title">تجهيز القاعات المغطاة وملاعب القرب</h3>
+                        <span class="urban-badge">مستمر</span>
+                    </div>
+                    <div class="urban-progress-wrapper">
+                        <div class="urban-progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="urban-meta-info">
+                        <span>نسبة الإنجاز: <strong>85%</strong></span>
+                        <span>الميزانية: 300 مليون درهم</span>
+                    </div>
+                </div>
+
+                <div class="urban-card" onclick="window.appController?.openProjectModal('culture-dev')">
+                    <div class="urban-card-header">
+                        <h3 class="urban-card-title">المركب الثقافي ودار الصانعة ببيوكرى</h3>
+                        <span class="urban-badge">قيد الإنجاز</span>
+                    </div>
+                    <div class="urban-progress-wrapper">
+                        <div class="urban-progress-bar" style="width: 70%;"></div>
+                    </div>
+                    <div class="urban-meta-info">
+                        <span>نسبة الإنجاز: <strong>70%</strong></span>
+                        <span>الميزانية: 500 مليون درهم</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -217,9 +733,46 @@
     <!-- MULTIMEDIA & PRESS GALLERY -->
     <section class="multimedia-section" id="multimedia">
         <div class="container">
-            <h2 class="section-title center">صوت و صورة (المعرض المرئي)</h2>
+            <h2 class="section-title center">صوت و صورة (المعرض المرئي للمدينة)</h2>
             <div class="media-grid" id="videoGridContainer">
-                <!-- Dynamic Rendering via VideoView -->
+                <div class="media-card" onclick="openHeroVideoCapsule()">
+                    <div class="media-thumb-wrapper">
+                        <img src="assets/video_park.png" alt="تهيئة المنتزه الحضري لبيوكرى">
+                        <div class="media-play-overlay">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <span class="media-duration">02:45</span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-title">تهيئة المنتزه الحضري لبيوكرى</h3>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openHeroVideoCapsule()">
+                    <div class="media-thumb-wrapper">
+                        <img src="assets/video_hall.png" alt="القاعة المغطاة الرياضية ببيوكرى">
+                        <div class="media-play-overlay">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <span class="media-duration">01:50</span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-title">القاعة المغطاة الرياضية ببيوكرى بحلتها الجديدة</h3>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openHeroVideoCapsule()">
+                    <div class="media-thumb-wrapper">
+                        <img src="assets/video_bus.png" alt="خدمات النقل والتنمية ببيوكرى">
+                        <div class="media-play-overlay">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <span class="media-duration">03:15</span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-title">إطلاق خدمات النقل الحضري والتنمية بمدينة بيوكرى</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -229,71 +782,200 @@
         <div class="container">
             <h2 class="section-title center">أنشطة ومناسبات الجماعة</h2>
             <div class="events-grid" id="eventsGridContainer">
-                <!-- Dynamic Rendering via EventView -->
+                <article class="event-card" onclick="window.appController?.openEventModal('session-oct')">
+                    <div class="event-img-wrapper">
+                        <img src="assets/card_council.png" alt="دورة المجلس الجماعي">
+                        <span class="event-date-badge">15 أكتوبر</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title-text">دورة أكتوبر العادية للمجلس الجماعي لبيوكرى: دراسة والمصادقة على مشروع ميزانية سنة 2027</h3>
+                        <div class="event-meta">📍 قاعة الاجتماعات الكبرى بمقر الجماعة</div>
+                    </div>
+                </article>
+
+                <article class="event-card" onclick="window.appController?.openEventModal('meeting')">
+                    <div class="event-img-wrapper">
+                        <img src="assets/event_right.png" alt="لقاءات تواصلية">
+                        <span class="event-date-badge">10 أكتوبر</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title-text">جماعة بيوكرى تحتضن لقاءات تواصلية مع جمعيات المجتمع المدني لمناقشة القضايا الحضرية</h3>
+                        <div class="event-meta">📍 المركب الثقافي لبيوكرى</div>
+                    </div>
+                </article>
+
+                <article class="event-card" onclick="window.appController?.openEventModal('general')">
+                    <div class="event-img-wrapper">
+                        <img src="assets/event_left.png" alt="لقاء تشاوري">
+                        <span class="event-date-badge">05 أكتوبر</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title-text">انعقاد لقاء تشاوري لمناقشة مخطط التنمية الحضرية المندمجة لمدينة بيوكرى 2021-2027</h3>
+                        <div class="event-meta">📍 مقر جماعة بيوكرى الترابية</div>
+                    </div>
+                </article>
+
+                <article class="event-card" onclick="window.appController?.openEventModal('environment-day')">
+                    <div class="event-img-wrapper">
+                        <img src="assets/card_territory.png" alt="حملة بيئية وتطوعية">
+                        <span class="event-date-badge">28 شتنبر</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title-text">انطلاق فعاليات الحملة البيئية الكبرى لتشجير ونظافة الأحياء والمؤسسات التعليمية</h3>
+                        <div class="event-meta">📍 شوارع وأحياء مدينة بيوكرى</div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- MUNICIPALITY STATS SECTION -->
+    <!-- MUNICIPALITY STATS SECTION (عدادات متحركة) -->
     <section class="stats-section">
         <div class="container stats-grid">
             <div class="stat-card">
-                <div class="stat-number">2026</div>
-                <div class="stat-label">سنة التحول الرقمي</div>
+                <div class="stat-number" data-target="2027">2021-2027</div>
+                <div class="stat-label">الولاية الانتدابية الحالية</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">+100%</div>
+                <div class="stat-number" data-target="100">+100%</div>
                 <div class="stat-label">شفافية وتواصل محلي</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">+50</div>
-                <div class="stat-label">مشروع تنموي مفتوح</div>
+                <div class="stat-number" data-target="54">+50</div>
+                <div class="stat-label">مشروعاً تنموياً معتمداً</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">24/7</div>
-                <div class="stat-label">تواصل إلكتروني مستمر</div>
+                <div class="stat-label">خدمات وبوابات رقمية</div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN FOOTER -->
-    <footer class="main-footer">
-        <div class="container footer-container">
-            <div class="footer-col">
-                <h3 class="footer-col-title">روابط سريعة</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">الجماعة الترابية</a></li>
-                    <li><a href="sustainable.html">مدينة مستدامة</a></li>
-                    <li><a href="#procedures-grid">الإجراءات الإدارية</a></li>
-                    <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
-                    <li><a href="publications.html">منشوراتنا</a></li>
-                    <li><a href="contact.html">أوقات العمل والتواصل</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3 class="footer-col-title">اتصل بالجماعة</h3>
-                <ul class="footer-contact-info">
-                    <li>📍 <span id="footerAddressDisplay">المقر الرئيسي للجماعة</span></li>
-                    <li>📞 الهاتف: <span id="footerPhoneDisplay">+212 528 84 00 00</span></li>
-                    <li>✉️ البريد: <span id="footerEmailDisplay">contact@commune.ma</span></li>
-                    <li>🕒 الأوقات: <span id="footerHoursDisplay">من الإثنين إلى الجمعة: 08:30 - 16:30</span></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3 class="footer-col-title">موقع الجماعة</h3>
-                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">بوابة رقمية تفاعلية مخصصة لتقريب الإدارة من المواطنين وتسهيل الولوج إلى المعلومة والمساطر الإدارية للجماعة الترابية.</p>
-            </div>
-
-            <div class="footer-col footer-logo-col">
-                <img src="assets/logo.png" alt="شعار الجماعة" class="footer-logo" id="footerLogoImg">
+    <!-- THE MASTER FOOTER (PRE-STRIP + 4 BALANCED COLS + DARK MINI-MAP) -->
+    <footer class="master-footer" id="mainFooter">
+        <!-- Pre-footer Call-to-Action Strip -->
+        <div class="footer-cta-strip">
+            <div class="container footer-cta-wrapper">
+                <div>
+                    <h3 class="footer-cta-title">هل لديك سؤال، استفسار أو اقتراح؟</h3>
+                    <p class="footer-cta-subtitle">مصالح وأطر جماعة بيوكرى رهن إشارتكم للإجابة على تساؤلاتكم ومواكبة ملفاتكم</p>
+                </div>
+                <div class="footer-cta-actions">
+                    <a href="https://wa.me/212528818000" target="_blank" class="btn-footer-whatsapp">
+                        <span>تواصل عبر واتساب</span>
+                    </a>
+                    <a href="tel:+212528818000" class="btn-footer-call">
+                        <span>اتصل بنا هاتفياً</span>
+                    </a>
+                    <form onsubmit="event.preventDefault(); alert('شكراً لاشتراككم في النشرة الإخبارية لجماعة بيوكرى!');" style="display: flex; gap: 6px;">
+                        <input type="email" placeholder="بريدك الإلكتروني..." required style="padding: 10px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.85rem; outline: none;">
+                        <button type="submit" class="btn btn-gold btn-sm" style="border-radius: 20px; padding: 0 16px;">اشترك</button>
+                    </form>
+                </div>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <div class="container footer-bottom-content">
-                <div>&copy; 2026 جميع الحقوق محفوظة لـ <span class="muni-name-display">الجماعة الترابية</span></div>
+
+        <!-- 4 Balanced Columns -->
+        <div class="footer-main-content">
+            <div class="container footer-4cols-grid">
+                <!-- Col 1: Institutional Identity & Transparent Logo -->
+                <div class="footer-col">
+                    <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى" class="footer-logo-transparent" id="footerLogoImg">
+                    <h4 style="margin-bottom: 8px;">جماعة بيوكرى الترابية</h4>
+                    <p class="footer-desc-text">
+                        البوابة الرقمية الرسمية الموحدة لتقريب الإدارة الجماعية من المواطنين والمجتمع المدني والمستثمرين، تكريساً لمبادئ الشفافية والمساءلة والتحول الرقمي بإقليم اشتوكة آيت باها.
+                    </p>
+                    <!-- Social Media SVG Icons -->
+                    <div class="footer-social-row">
+                        <a href="https://facebook.com" target="_blank" class="social-icon-btn" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-icon-btn" aria-label="X Twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="footer-col">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="municipality.html">الجماعة الترابية</a></li>
+                        <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
+                        <li><a href="#urban-development">برنامج التنمية الحضرية</a></li>
+                        <li><a href="sustainable.html">مدينة بيوكرى المستدامة</a></li>
+                        <li><a href="publications.html">منشورات ومقررات المجلس</a></li>
+                        <li><a href="contact.html">أوقات العمل والتواصل</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Citizen Services -->
+                <div class="footer-col">
+                    <h4>خدمات المواطن</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('residence')">شهادة السكنى والإقامة</a></li>
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('birth')">عقود الحالة المدنية</a></li>
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">رخص البناء والتعمير</a></li>
+                        <li><a href="javascript:void(0)" onclick="openComplaintModal()">إيداع شكاية أو مقترح</a></li>
+                        <li><a href="javascript:void(0)" onclick="openSubventionsModal()">دعم الجمعيات والاتحادات</a></li>
+                        <li><a href="javascript:void(0)" onclick="openLegalPopup()">المعلومات القانونية</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact & Stylized Mini-Map Widget -->
+                <div class="footer-col">
+                    <h4>الاتصال والموقع</h4>
+                    <ul class="footer-contact-items">
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span id="footerAddressDisplay">شارع محمد الخامس، المقر الرئيسي لجماعة بيوكرى، إقليم اشتوكة آيت باها</span>
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span id="footerPhoneDisplay">+212 528 81 80 00</span>
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span id="footerEmailDisplay">contact@biougra.ma</span>
+                        </li>
+                    </ul>
+
+                    <!-- STYLIZED DARK MINI-MAP -->
+                    <div class="footer-mini-map-card">
+                        <div class="mini-map-header">
+                            <span>📍 مقر الجماعة على الخريطة</span>
+                            <span style="color: var(--accent-color); font-size: 0.75rem;">GPS: 30.2184, -9.3719</span>
+                        </div>
+                        <div class="mini-map-preview">
+                            <div class="mini-map-pin" title="مقر جماعة بيوكرى">📍</div>
+                        </div>
+                        <a href="https://maps.google.com/?q=30.2184,-9.3719" target="_blank" class="btn-mini-map-directions">
+                            <span>فتح الاتجاهات عبر Google Maps ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom-bar">
+            <div class="container footer-bottom-container">
+                <div>
+                    <p style="margin: 0;">جميع الحقوق محفوظة © 2026 - المملكة المغربية • وزارة الداخلية • جماعة بيوكرى الترابية</p>
+                </div>
+                <div class="footer-legal-links">
+                    <a href="javascript:void(0)" onclick="openLegalPopup()">سياسة الخصوصية</a>
+                    <span>•</span>
+                    <a href="javascript:void(0)" onclick="openLegalPopup()">إمكانية الوصول (WCAG AA)</a>
+                    <span>•</span>
+                    <a href="publications.html">خريطة البوابة</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -313,6 +995,248 @@
         </div>
     </div>
 
+    <!-- COMMAND PALETTE MODAL (Cmd+K / Ctrl+K SPOTLIGHT SEARCH) -->
+    <div class="cmdk-modal" id="cmdKModal" style="display: none !important;" onclick="if(event.target===this) closeCmdKModal()">
+        <div class="cmdk-dialog">
+            <div class="cmdk-search-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="cmdkInput" class="cmdk-search-input" placeholder="ابحث عن وثيقة، إجراء، رخصة، أو مصلحة إدارية..." oninput="handleCmdKSearch(this.value)">
+                <span class="cmdk-kbd">ESC</span>
+            </div>
+            <div class="cmdk-results-list" id="cmdkResultsList">
+                <div class="cmdk-group-title">الخدمات الأكثر طلباً</div>
+                <a href="javascript:void(0)" onclick="openServiceDetail('residence'); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">📜</div>
+                        <div>
+                            <strong>شهادة السكنى والإقامة</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">إجراءات ومطبوع شهادة الإقامة الرسمية</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--secondary-color);">فتح ←</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openServiceDetail('birth'); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">👶</div>
+                        <div>
+                            <strong>عقد الازدياد والحالة المدنية</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">رسم الولادة والدفتر العائلي</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--secondary-color);">فتح ←</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openServiceDetail('legalization'); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">✍️</div>
+                        <div>
+                            <strong>تصحيح الإمضاء ومطابقة النسخ</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">الإشهاد على صحة الإمضاء ومطابقة الأصول</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--secondary-color);">فتح ←</span>
+                </a>
+
+                <div class="cmdk-group-title" style="margin-top: 10px;">إجراءات سريعة</div>
+                <a href="javascript:void(0)" onclick="openComplaintModal(); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">📩</div>
+                        <div>
+                            <strong>إيداع شكاية أو مقترح إلكتروني</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">متابعة الإنارة، النظافة، الطرق، والمرافق</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--accent-color);">إيداع ←</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openLegalPopup(); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">⚖️</div>
+                        <div>
+                            <strong>المعلومات القانونية والنصوص التنظيمية</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">القانون التنظيمي 113.14 والقرارات الجماعية</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--primary-color);">اطلاع ←</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openSubventionsModal(); closeCmdKModal();" class="cmdk-item">
+                    <div class="cmdk-item-left">
+                        <div class="cmdk-item-icon">🤝</div>
+                        <div>
+                            <strong>منح ودعم الجمعيات (استمارة ولائحة المستفيدين)</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">تحميل استمارة الترشيح السنوية</div>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--secondary-color);">تحميل ←</span>
+                </a>
+            </div>
+            <div class="cmdk-footer">
+                <span>تصفح بالأسهم ↑↓ واضغط Enter للاختيار</span>
+                <span>اضغط <span class="cmdk-kbd">Esc</span> للإغلاق</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CITIZEN TRACKING RESULT MODAL -->
+    <div class="tracking-result-modal" id="trackingResultModal" style="display: none !important;" onclick="if(event.target===this) closeTrackingModal()">
+        <div class="cmdk-dialog" style="max-width: 580px; padding: 26px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: var(--primary-color); margin: 0; font-size: 1.3rem;">📋 حالة تتبع الملف / الشكاية</h3>
+                <button class="modal-close-btn" onclick="closeTrackingModal()" style="position: static;">✕</button>
+            </div>
+            
+            <div id="trackingModalBody">
+                <!-- Dynamically injected -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LEGAL POPUP MODAL (المعلومات القانونية - Zoom animation) -->
+    <div class="legal-popup-overlay" id="legalPopupOverlay" style="display: none !important;" onclick="if(event.target===this) closeLegalPopup()">
+        <div class="legal-popup-dialog">
+            <div class="legal-popup-header">
+                <div class="legal-popup-title">
+                    <span>⚖️</span>
+                    <span>المعلومات القانونية والتنظيمية لجماعة بيوكرى</span>
+                </div>
+                <button class="legal-popup-close-btn" onclick="closeLegalPopup()" aria-label="إغلاق">✕</button>
+            </div>
+            <div class="legal-popup-body">
+                <div class="legal-article-box">
+                    <div class="legal-article-title">
+                        <span>📜</span>
+                        <span>الإطار الدستوري والقانوني للجماعات الترابية</span>
+                    </div>
+                    <p>تخضع الجماعة الترابية لبيوكرى في تنظيمها وتدبيرها لمقتضيات <strong>القانون التنظيمي رقم 113.14</strong> المتعلق بالجماعات، الصادر بتنفيذه الظهير الشريف رقم 1.15.85 بتاريخ 7 يوليوز 2015، وتعديلاته وفق أحكام الدستور المغربي للمملكة.</p>
+                </div>
+
+                <div class="legal-article-box">
+                    <div class="legal-article-title">
+                        <span>🎯</span>
+                        <span>مبدأ التدبير الحر والشفافية والديمقراطية التشاركية</span>
+                    </div>
+                    <p>يمارس المجلس الجماعي لبيوكرى اختصاصاته وفق مبدأ التدبير الحر المنصوص عليه دستورياً، والذي يرتكز على الحكامة الجيدة، وربط المسؤولية بالمحاسبة، وإشراك المواطنين والمجتمع المدني في إعداد وتتبع برامج التنمية والمخططات الترابية.</p>
+                </div>
+
+                <div class="legal-article-box">
+                    <div class="legal-article-title">
+                        <span>🔒</span>
+                        <span>حماية المعطيات ذات الطابع الشخصي (القانون 09-08)</span>
+                    </div>
+                    <p>تلتزم جماعة بيوكرى باحترام الخصوصية التامة لكافة المعطيات والبيانات المصرح بها عبر هذه البوابة الإلكترونية، ولا يتم استعمالها إلا للأغراض الإدارية الرسمية المحددة قانوناً.</p>
+                </div>
+
+                <div class="legal-article-box">
+                    <div class="legal-article-title">
+                        <span>📖</span>
+                        <span>الحق في الحصول على المعلومات (القانون 31.13)</span>
+                    </div>
+                    <p>تكريساً للحق في الحصول على المعلومات، تضع مصالح الجماعة رهن إشارة المرتفقين والباحثين والمواطنين كافة المقررات والقرارات والميزانيات المصادق عليها، عبر النشر الرقمي والمكتبي المباشر.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MANDATE 2021-2027 MODAL (تشكيلة أعضاء المكتب واللجان والمجلس) -->
+    <div class="modal-overlay" id="mandateModalOverlay" style="display: none;" onclick="if(event.target===this) closeMandateModal()">
+        <div class="modal-content" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" onclick="closeMandateModal()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <span class="hero-badge-tag" style="background: rgba(27, 58, 138, 0.1); color: var(--primary-color);">الولاية الانتدابية 2021 - 2027</span>
+                    <h2 style="color: var(--primary-color); font-size: 1.6rem; margin-top: 8px;">تشكيلة المجلس الجماعي وأجهزته المسيرة</h2>
+                </div>
+
+                <!-- Tabs: Bureau, Committees, Council -->
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                    <button onclick="switchMandateTab('bureau')" id="tabBtnBureau" class="btn btn-primary btn-sm">المكتب المسير 🏛️</button>
+                    <button onclick="switchMandateTab('committees')" id="tabBtnCommittees" class="btn btn-outline btn-sm">اللجان الدائمة 📑</button>
+                    <button onclick="switchMandateTab('council')" id="tabBtnCouncil" class="btn btn-outline btn-sm">أعضاء المجلس [CA] 👥</button>
+                </div>
+
+                <div id="mandateTabContent">
+                    <!-- Rendered dynamically via MainController -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBVENTIONS MODAL (دعم الجمعيات واللوائح والاستمارة) -->
+    <div class="modal-overlay" id="subventionsModalOverlay" style="display: none;" onclick="if(event.target===this) closeSubventionsModal()">
+        <div class="modal-content" style="max-width: 920px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" onclick="closeSubventionsModal()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div class="subvention-fiche-card">
+                    <div>
+                        <h3>📄 بطاقة طلب الدعم المالي السنوي للجمعيات (Fiche Téléchargeable)</h3>
+                        <p>استمارة وملف الترشيح للاستفادة من المنح الجماعية برسم السنة المالية الحالية</p>
+                    </div>
+                    <button onclick="downloadSubventionFiche()" class="btn btn-gold btn-lg">تحميل الاستمارة (PDF) 📥</button>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.2rem;">🤝 لائحة الجمعيات والاتحادات المستفيدة من الدعم الجماعي</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 18px;">نشر لوائح المستفيدين، القانون الأساسي، ومحاضر التوزيع تكريساً لمبدأ الشفافية والمساءلة</p>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الجمعية / الاتحاد</th>
+                                <th>الصنف والنوع</th>
+                                <th>الملف والقانون الأساسي</th>
+                                <th>محضر التوزيع</th>
+                                <th>مبلغ الدعم (درهم)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="publicSubventionsTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO VIDEO CAPSULE MODAL (كبسولة الفيديو التفاعلية) -->
+    <div class="modal-overlay" id="heroVideoModalOverlay" style="display: none;" onclick="if(event.target===this) closeHeroVideoCapsule()">
+        <div class="modal-content" style="max-width: 860px; padding: 0; overflow: hidden; background: #0b1530; border: 1.5px solid var(--secondary-color);">
+            <div style="padding: 18px 24px; background: linear-gradient(135deg, var(--dark-color), #0b1530); display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent-color);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;">🎬</span>
+                    <h3 style="color: #ffffff; margin: 0; font-size: 1.2rem;">كبسولة الفيديو الرسمية: مشاريع وإنجازات بيوكرى</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeHeroVideoCapsule()" aria-label="إغلاق" style="position: static; color: #ffffff;">✕</button>
+            </div>
+            
+            <div style="position: relative; padding: 25px; text-align: center;">
+                <div class="video-player-container" style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);">
+                    <img id="activeVideoThumb" src="assets/video_park.png" alt="Video Cover" style="width: 100%; max-height: 400px; object-fit: cover; filter: brightness(0.85);">
+                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(11, 21, 48, 0.45);">
+                        <button onclick="playSimulatedVideo()" class="video-big-play-btn" aria-label="تشغيل">
+                            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </button>
+                        <h4 id="activeVideoTitle" style="color: #ffffff; margin-top: 16px; font-size: 1.25rem; font-weight: 700; text-shadow: 0 2px 6px rgba(0,0,0,0.8);">تهيئة المنتزه الحضري لبيوكرى</h4>
+                        <span id="activeVideoDuration" style="background: rgba(0,0,0,0.7); color: #F2A93B; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; margin-top: 6px; font-weight: 700;">⏱️ المدة: 02:45 دقيقة</span>
+                    </div>
+                </div>
+
+                <!-- Video Project Selector Thumbnails -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px;">
+                    <div class="video-switch-thumb active" id="vThumb-park" onclick="switchActiveVideo('park', 'تهيئة المنتزه الحضري لبيوكرى', 'assets/video_park.png', '02:45')">
+                        <img src="assets/video_park.png" alt="المنتزه الحضري">
+                        <span>المنتزه الحضري</span>
+                    </div>
+                    <div class="video-switch-thumb" id="vThumb-hall" onclick="switchActiveVideo('hall', 'القاعة المغطاة الرياضية ببيوكرى', 'assets/video_hall.png', '01:50')">
+                        <img src="assets/video_hall.png" alt="القاعة المغطاة">
+                        <span>القاعة المغطاة</span>
+                    </div>
+                    <div class="video-switch-thumb" id="vThumb-bus" onclick="switchActiveVideo('bus', 'إطلاق خدمات أسطول النقل والتنمية', 'assets/video_bus.png', '03:15')">
+                        <img src="assets/video_bus.png" alt="خدمات النقل">
+                        <span>أسطول النقل الحضري</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CITIZEN COMPLAINT MODAL -->
     <div class="modal-overlay" id="complaintModalOverlay" style="display: none;">
         <div class="modal-content" style="max-width: 600px;">
@@ -320,7 +1244,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="modal-body">
-                <h3 style="color: var(--primary-color); margin-bottom: 8px; text-align: center;">إيداع شكاية أو طلب إلكتروني 📩</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 8px; text-align: center;">إيداع شكاية أو مقترح إلكتروني 📩</h3>
                 <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">سيتم تزويدكم برقم تتبع خاص لمتابعة حالة الشكاية فور إرسالها</p>
 
                 <form id="complaintForm" onsubmit="submitCitizenComplaint(event)">
@@ -355,7 +1279,7 @@
 
                     <div style="margin-bottom: 12px;">
                         <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">عنوان الموضوع *</label>
-                        <input type="text" id="cmpSubject" required placeholder="مثال: طلب إصلاح عمود إنارة" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <input type="text" id="cmpSubject" required placeholder="مثال: طلب إصلاح عمود إنارة بحي السلام" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
                     </div>
 
                     <div style="margin-bottom: 20px;">
@@ -369,28 +1293,887 @@
         </div>
     </div>
 
-    <!-- TICKET TRACKER MODAL -->
-    <div class="modal-overlay" id="ticketTrackOverlay" style="display: none;">
-        <div class="modal-content" style="max-width: 500px;">
-            <button class="modal-close-btn" onclick="closeTicketTrackModal()" aria-label="إغلاق">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div class="modal-body">
-                <h3 style="color: var(--primary-color); margin-bottom: 8px; text-align: center;">تتبع حالة الشكاية أو الطلب 🔍</h3>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">أدخل رقم التتبع الخاص بك (مثال: TKT-2026-001)</p>
+    <!-- JavaScript MVC Bundle -->
+    <script type="module" src="js/app.js"></script>
+    <script src="app.js"></script>
 
-                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
-                    <input type="text" id="trackTicketInput" placeholder="أدخل رقم التتبع..." style="flex-grow: 1; padding: 10px; border: 2px solid var(--primary-color); border-radius: 6px; text-align: center; font-weight: 700;">
-                    <button onclick="handleTrackTicketSearch()" class="btn btn-primary">بحث</button>
+    <!-- 10/10 Interactive Polish Suite (3D Tilt, Ambient Glow, Cmd+K, Tracking) -->
+    <script>
+    // 1. Ambient Glowing Mouse Cursor Follower
+    const cursorAura = document.getElementById('cursorGlowAura');
+    if (cursorAura && window.innerWidth > 992) {
+        window.addEventListener('mousemove', (e) => {
+            cursorAura.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        });
+    }
+
+    // 2. 3D Tilt Effect on Interactive Cards
+    document.addEventListener('DOMContentLoaded', () => {
+        const tiltCards = document.querySelectorAll('.essential-card, .service-hub-card, .urban-card, .media-card, .proc-card, .stat-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -6;
+                const rotateY = ((x - centerX) / centerX) * 6;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    });
+
+    // 3. Command Palette (Cmd+K / Ctrl+K)
+    window.openCmdKModal = function() {
+        const modal = document.getElementById('cmdKModal');
+        if (modal) {
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.classList.add('active');
+            const input = document.getElementById('cmdkInput');
+            if (input) {
+                input.value = '';
+                setTimeout(() => input.focus(), 50);
+            }
+        }
+    };
+
+    window.closeCmdKModal = function() {
+        const modal = document.getElementById('cmdKModal');
+        if (modal) {
+            modal.style.setProperty('display', 'none', 'important');
+            modal.classList.remove('active');
+        }
+    };
+
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            const modal = document.getElementById('cmdKModal');
+            if (modal && modal.style.display === 'flex') {
+                closeCmdKModal();
+            } else {
+                openCmdKModal();
+            }
+        } else if (e.key === 'Escape') {
+            closeCmdKModal();
+            closeTrackingModal();
+            closeLegalPopup();
+            if (typeof closeHeroVideoCapsule === 'function') closeHeroVideoCapsule();
+        }
+    });
+
+    // 4. Legal Popup Controls
+    window.openLegalPopup = function() {
+        const modal = document.getElementById('legalPopupOverlay');
+        if (modal) {
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.classList.add('active');
+        }
+    };
+
+    window.closeLegalPopup = function() {
+        const modal = document.getElementById('legalPopupOverlay');
+        if (modal) {
+            modal.style.setProperty('display', 'none', 'important');
+            modal.classList.remove('active');
+        }
+    };
+
+    // 5. Citizen File Tracking Handler
+    window.handleCitizenTracking = function(e) {
+        if (e) e.preventDefault();
+        const codeInput = document.getElementById('trackingCodeInput');
+        const code = codeInput ? codeInput.value.trim() : '';
+        if (!code) return;
+
+        const modal = document.getElementById('trackingResultModal');
+        const body = document.getElementById('trackingModalBody');
+        if (!modal || !body) return;
+
+        body.innerHTML = `
+            <div style="background: rgba(15, 157, 138, 0.1); border: 1.5px solid var(--secondary-color); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-weight: 800; color: var(--primary-color); font-size: 1.1rem;">رقم الملف: ${code}</span>
+                    <span style="background: var(--secondary-color); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;">قيد المعالجة الإدارية ⏳</span>
                 </div>
+                <p style="margin: 0; font-size: 0.92rem; color: var(--dark-color); line-height: 1.6;">تم استلام طلبكم بمكتب الضبط الرقمي لجماعة بيوكرى، وتمت إحالته على المصلحة المختصة للدراسة وإعداد القرار الإداري.</p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; border-right: 3px solid var(--accent-color); padding-right: 16px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 700; color: var(--primary-color);">1. إيداع الطلب وتسجيله بالسجل العام</span>
+                    <span style="color: var(--secondary-color); font-weight: 700;">✓ مكتمل</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 700; color: var(--primary-color);">2. دراسة الملف ومطابقة الوثائق</span>
+                    <span style="color: var(--accent-color); font-weight: 700;">🔄 جاري الإنجاز</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: #94a3b8;">
+                    <span>3. التوقيع النهائي والتأشير</span>
+                    <span>في الانتظار</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: #94a3b8;">
+                    <span>4. التسليم للمواطن</span>
+                    <span>في الانتظار</span>
+                </div>
+            </div>
 
-                <div id="ticketResultDisplay" style="display: none; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;"></div>
+            <button onclick="closeTrackingModal()" class="btn btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">إغلاق النافذة</button>
+        `;
+
+        modal.style.setProperty('display', 'flex', 'important');
+        modal.classList.add('active');
+    };
+
+    window.closeTrackingModal = function() {
+        const modal = document.getElementById('trackingResultModal');
+        if (modal) {
+            modal.style.setProperty('display', 'none', 'important');
+            modal.classList.remove('active');
+        }
+    };
+
+    // 6. Dark Mode & Accessibility
+    window.toggleDarkMode = function() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('biougra_theme', isDark ? 'dark' : 'light');
+    };
+
+    if (localStorage.getItem('biougra_theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    let isLargeFont = false;
+    window.toggleFontSize = function() {
+        isLargeFont = !isLargeFont;
+        document.documentElement.style.fontSize = isLargeFont ? '18px' : '';
+    };
+
+    // 7. Stats Counter Animation on Scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'), 10);
+                    if (isNaN(target)) return;
+                    let count = 0;
+                    const speed = 25;
+                    const step = Math.max(1, Math.ceil(target / 60));
+                    const timer = setInterval(() => {
+                        count += step;
+                        if (count >= target) {
+                            counter.innerText = (counter.innerText.includes('+') ? '+' : '') + target;
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = (counter.innerText.includes('+') ? '+' : '') + count;
+                        }
+                    }, speed);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const statsSec = document.querySelector('.stats-section');
+    if (statsSec) observer.observe(statsSec);
+    </script>
+<script>
+    // ==========================================
+    // FLOATING CAPSULE HEADER INTERACTION
+    // ==========================================
+    (function initCapsuleNav() {
+        const nav = document.getElementById('nav');
+        const line = document.getElementById('line');
+        const menu = document.getElementById('menu');
+        const links = document.querySelectorAll('#menu .nav-item');
+        const toolsBtn = document.getElementById('toolsBtn');
+        const toolsPopup = document.getElementById('toolsPopup');
+        const mobileToggle = document.getElementById('mobileToggle');
+
+        if (!nav) return;
+
+        // 1. Scroll State (Permanently Fixed & Transparent Glass)
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            nav.classList.toggle('scrolled', currentScrollY > 40);
+
+            // Also update scroll progress bar if present
+            const bar = document.getElementById('scrollBar');
+            if (bar) {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? (currentScrollY / docHeight) * 100 : 0;
+                bar.style.width = progress + '%';
+            }
+        }, { passive: true });
+
+        // 2. Magic Line Follower (RTL & LTR Pixel-Perfect with getBoundingClientRect)
+        function moveLine(el) {
+            if (!el || !line || !menu) return;
+            const menuRect = menu.getBoundingClientRect();
+            const elRect = el.getBoundingClientRect();
+            const width = Math.max(20, elRect.width * 0.5);
+            const left = (elRect.left - menuRect.left) + (elRect.width - width) / 2;
+            line.style.width = width + 'px';
+            line.style.left = left + 'px';
+            line.style.opacity = '1';
+        }
+
+        links.forEach(a => {
+            a.addEventListener('mouseenter', () => moveLine(a));
+        });
+
+        if (menu) {
+            menu.addEventListener('mouseleave', () => {
+                const active = document.querySelector('#menu .nav-item.active') || links[0];
+                moveLine(active);
+            });
+        }
+
+        // Initial line positioning
+        setTimeout(() => {
+            const active = document.querySelector('#menu .nav-item.active') || links[0];
+            moveLine(active);
+        }, 150);
+
+        // 3. Tools Popup Toggle
+        if (toolsBtn && toolsPopup) {
+            toolsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toolsPopup.classList.toggle('open');
+                toolsBtn.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!toolsPopup.contains(e.target) && !toolsBtn.contains(e.target)) {
+                    toolsPopup.classList.remove('open');
+                    toolsBtn.classList.remove('active');
+                }
+            });
+        }
+
+        // 4. Language Selector inside Tools
+        const langBtns = document.querySelectorAll('.tools-lang-btn');
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const lang = btn.getAttribute('data-lang');
+                if (toolsBtn) {
+                    const label = lang === 'ar' ? 'ع' : (lang === 'fr' ? 'FR' : 'ⵜ');
+                    toolsBtn.innerHTML = `<span>${label}</span> <span style="opacity:0.4;">|</span> <span>خيارات</span>`;
+                }
+            });
+        });
+
+        // 5. Mobile Toggle
+        if (mobileToggle && menu) {
+            mobileToggle.addEventListener('click', () => {
+                menu.classList.toggle('mobile-open');
+                mobileToggle.classList.toggle('active');
+            });
+        }
+    })();
+</script>
+<script>
+    // ==========================================
+    // 3D CURVED PANORAMIC CONTINUOUS RIBBON SHOWCASE (MAGICAL AWWWARDS EDITION)
+    // ==========================================
+    (function initCurvedRibbonShowcase() {
+        const track = document.getElementById('panoramicTrack');
+        const stage = document.getElementById('panoramicStage');
+        const cards = Array.from(document.querySelectorAll('.pano-card'));
+        const prevBtn = document.getElementById('panoPrevBtn');
+        const nextBtn = document.getElementById('panoNextBtn');
+        const playPauseBtn = document.getElementById('panoPlayPauseBtn');
+        const playIcon = document.getElementById('panoPlayIcon');
+        const progressFill = document.getElementById('panoProgressFill');
+        const timerText = document.getElementById('panoTimerText');
+        const backdrop = document.querySelector('.hero-3d-backdrop');
+        const spotlight = document.getElementById('heroCursorSpotlight');
+        const canvas = document.getElementById('heroParticlesCanvas');
+
+        if (!track || !cards.length) return;
+
+        const totalCards = cards.length;
+        let cardWidth = window.innerWidth <= 768 ? 320 : 520;
+        let cardGap = window.innerWidth <= 768 ? 14 : 18;
+        let step = cardWidth + cardGap;
+        let totalWidth = totalCards * step;
+
+        let currentScroll = 0;
+        let targetScroll = 0;
+        let isDragging = false;
+        let startX = 0;
+        let lastX = 0;
+        let dragStartScroll = 0;
+        let velocity = 0;
+        let isAutoPlaying = true;
+        let progressTimer = null;
+        let progressPercent = 0;
+        const progressIntervalMs = 50;
+        const slideDuration = 4500;
+
+        // Sound FX Engine (Synthesized Web Audio API - Zero External Assets)
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function playChime(freq = 560, duration = 0.12) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.6, audioCtx.currentTime + duration);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Project Data for Case Study Modal
+        const projectData = [
+            {
+                title: "تهيئة وتأهيل المنتزه الحضري لبيوكرى",
+                tag: "🌿 المشاريع البيئية والترفيهية",
+                heroBg: "url('assets/video_park.png')",
+                stats: [
+                    { num: "92%", label: "نسبة تقدم الأشغال" },
+                    { num: "45 مليون د.م", label: "الميزانية المرصودة" },
+                    { num: "14 هكتار", label: "المساحة الإجمالية" },
+                    { num: "2024", label: "سنة التسليم الرسمية" }
+                ],
+                desc: "مشروع رائد يهدف إلى خلق رئة خضراء ومتنفس طبيعي متكامل لساكنة جماعة بيوكرى، مجهز بمسارات رياضية عصرية، فضاءات ألعاب بيئية للأطفال، وبحيرة اصطناعية ذكية، مع نظام سقي مستدام يعتمد على إعادة تدوير المياه العادمة المعالجة."
+            },
+            {
+                title: "القاعة المغطاة وملاعب القرب الحديثة",
+                tag: "⚽ البنية التحتية الرياضية",
+                heroBg: "url('assets/video_hall.png')",
+                stats: [
+                    { num: "100%", label: "جاهزة للخدمة" },
+                    { num: "28 مليون د.م", label: "الكلفة الإجمالية" },
+                    { num: "1,500 مقعد", label: "الطاقة الاستيعابية" },
+                    { num: "6 ملاعب", label: "ملاعب قرب ملحقة" }
+                ],
+                desc: "صرح رياضي متعدد الاختصاصات بمعايير دولية لاحتضان التظاهرات والبطولات الجهوية والوطنية، وتأطير شباب وجمعيات مدينة بيوكرى وتنمية المواهب الصاعدة في بيئة احترافية وآمنة."
+            },
+            {
+                title: "توسيع وتقوية المحاور الطرقية الكبرى",
+                tag: "🏗️ برنامج التنمية 2021-2027",
+                heroBg: "url('assets/card_territory.png')",
+                stats: [
+                    { num: "85%", label: "نسبة الإنجاز" },
+                    { num: "1.1 مليار د.م", label: "برنامج التأهيل الشامل" },
+                    { num: "42 كلم", label: "طول المحاور المؤهلة" },
+                    { num: "100%", label: "إنارة LED ذكية" }
+                ],
+                desc: "تأهيل كافة المداخل الاستراتيجية لمدينة بيوكرى وازدواجيتها، وتحديث شبكات التطهير السائل وممرات الراجلين والإنارة العمومية بالطاقة الشمسية لتعزيز انسيابية التنقل وسلامة المواطنين."
+            },
+            {
+                title: "إطلاق أسطول خدمات النقل الحضري الذكي",
+                tag: "🚌 النقل المستدام والتنقل",
+                heroBg: "url('assets/video_bus.png')",
+                stats: [
+                    { num: "24 حافلة", label: "أسطول النقل الجديد" },
+                    { num: "65 مليون د.م", label: "الاستثمار المشترك" },
+                    { num: "12 خطاً", label: "تغطية الأحياء والمداشر" },
+                    { num: "WiFi مجاني", label: "خدمات رقمية على المتن" }
+                ],
+                desc: "حافلات حديثة مكيفة وصديقة للبيئة مجهزة بتطبيقات رقمية لتتبع أوقات الرحلات اللحظية وكاميرات أمان ذكية، مع تذاكر مدعمة للطلبة والتلاميذ لتسهيل الربط بين كافة أحياء ومرافق بيوكرى."
+            },
+            {
+                title: "المركب الثقافي وفضاءات دار الصانعة",
+                tag: "🏛️ الثقافة والتراث السوسي",
+                heroBg: "url('assets/card_council.png')",
+                stats: [
+                    { num: "600 مقعد", label: "طاقة قاعة العروض" },
+                    { num: "32 مليون د.م", label: "الاستثمار الإجمالي" },
+                    { num: "18 ورشة", label: "ورشات الصناعة التقليدية" },
+                    { num: "معهد موسيقي", label: "فضاءات التكوين والشباب" }
+                ],
+                desc: "حاضنة ثقافية ومعمارية كبرى لحماية وتثمين الموروث الحضاري السوسي واشتوكة، تتيح فضاءات مجهزة لعرض الفنون الأمازيغية والمسرح، ومواكبة إبداعات المرأة الصانعة والتعاونيات الحرفية المحلية."
+            }
+        ];
+
+        window.openProjectCaseStudy = function(idx) {
+            playChime(720, 0.18);
+            const data = projectData[idx] || projectData[0];
+            const overlay = document.getElementById('caseStudyOverlay');
+            const hero = document.getElementById('csHero');
+            const tag = document.getElementById('csTag');
+            const title = document.getElementById('csTitle');
+            const stats = document.getElementById('csStats');
+            const desc = document.getElementById('csDesc');
+
+            if (!overlay) return;
+
+            hero.style.backgroundImage = data.heroBg;
+            tag.textContent = data.tag;
+            title.textContent = data.title;
+            desc.textContent = data.desc;
+
+            stats.innerHTML = data.stats.map(s => `
+                <div class="case-stat-box">
+                    <div class="case-stat-num">${s.num}</div>
+                    <div class="case-stat-label">${s.label}</div>
+                </div>
+            `).join('');
+
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            pauseAutoPlay();
+        };
+
+        window.closeProjectCaseStudy = function() {
+            playChime(420, 0.1);
+            const overlay = document.getElementById('caseStudyOverlay');
+            if (overlay) overlay.classList.remove('open');
+            document.body.style.overflow = '';
+            if (isAutoPlaying) startAutoPlay();
+        };
+
+        window.openHeroVideoCapsule = function() {
+            const overlay = document.getElementById('heroVideoModalOverlay');
+            if (overlay) overlay.style.display = 'flex';
+        };
+
+        window.closeHeroVideoCapsule = function() {
+            const overlay = document.getElementById('heroVideoModalOverlay');
+            if (overlay) overlay.style.display = 'none';
+        };
+
+        function updateDimensions() {
+            cardWidth = window.innerWidth <= 768 ? 320 : 520;
+            cardGap = window.innerWidth <= 768 ? 14 : 18;
+            step = cardWidth + cardGap;
+            totalWidth = totalCards * step;
+        }
+
+        window.addEventListener('resize', updateDimensions);
+
+        // 1. Mouse Parallax Variables
+        let mouseX = 0, mouseY = 0;
+        let targetBgX = 0, targetBgY = 0;
+        let currentBgX = 0, currentBgY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            const normX = (e.clientX / window.innerWidth) - 0.5;
+            const normY = (e.clientY / window.innerHeight) - 0.5;
+            targetBgX = normX * -22;
+            targetBgY = normY * -14;
+
+            // Ambient Cursor Spotlight
+            if (spotlight) {
+                spotlight.style.opacity = '1';
+                spotlight.style.background = `radial-gradient(circle 380px at ${e.clientX}px ${e.clientY}px, rgba(227, 179, 81, 0.10) 0%, transparent 75%)`;
+            }
+        });
+
+        // 2. Interactive 3D Card Hover / Gyro Tilt
+        cards.forEach(card => {
+            const inner = card.querySelector('.pano-card-inner');
+            if (!inner) return;
+
+            card.addEventListener('mousemove', (e) => {
+                if (!card.classList.contains('active-center')) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+                const tiltX = -(y / (rect.height / 2)) * 8;
+                const tiltY = (x / (rect.width / 2)) * 8;
+                inner.style.transform = `perspective(800px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                inner.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        });
+
+        // 3. Magnetic Navigation Buttons
+        function setupMagneticButton(btn) {
+            if (!btn) return;
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const btnCenterX = rect.left + rect.width / 2;
+                const btnCenterY = rect.top + rect.height / 2;
+                const deltaX = (e.clientX - btnCenterX) * 0.35;
+                const deltaY = (e.clientY - btnCenterY) * 0.35;
+                btn.style.transform = `translate3d(${deltaX.toFixed(1)}px, calc(-50% + ${deltaY.toFixed(1)}px), 0) scale(1.15)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate3d(0, -50%, 0) scale(1)';
+            });
+        }
+        setupMagneticButton(prevBtn);
+        setupMagneticButton(nextBtn);
+
+        // 4. Floating Golden Ember Particles Engine
+        let particles = [];
+        function initParticles() {
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = canvas.offsetWidth;
+            let h = canvas.height = canvas.offsetHeight;
+
+            window.addEventListener('resize', () => {
+                if (!canvas) return;
+                w = canvas.width = canvas.offsetWidth;
+                h = canvas.height = canvas.offsetHeight;
+            });
+
+            const count = window.innerWidth <= 768 ? 20 : 42;
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 2.2 + 0.8,
+                    vy: -(Math.random() * 0.45 + 0.15),
+                    vx: (Math.random() - 0.5) * 0.3,
+                    alpha: Math.random() * 0.6 + 0.2,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.y += p.vy;
+                    p.x += p.vx + Math.sin(p.phase) * 0.2;
+                    p.phase += 0.02;
+
+                    if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+                    if (p.x < -10) p.x = w + 10;
+                    if (p.x > w + 10) p.x = -10;
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
+                    grad.addColorStop(0, `rgba(242, 169, 59, ${p.alpha})`);
+                    grad.addColorStop(0.5, `rgba(201, 151, 46, ${p.alpha * 0.5})`);
+                    grad.addColorStop(1, 'rgba(201, 151, 46, 0)');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(updateParticles);
+            }
+            requestAnimationFrame(updateParticles);
+        }
+        initParticles();
+
+        // 5. Core Render Loop: Positions all cards along 3D curved continuous ribbon rail ("خيط مربوط")
+        let lastActiveIdx = -1;
+        function renderRibbon() {
+            // Fluid inertial glide physics (lerp)
+            if (!isDragging) {
+                currentScroll += (targetScroll - currentScroll) * 0.088;
+            }
+
+            // Mountain Backdrop Parallax Lerp
+            currentBgX += (targetBgX - currentBgX) * 0.06;
+            currentBgY += (targetBgY - currentBgY) * 0.06;
+            if (backdrop) {
+                backdrop.style.transform = `scale(1.06) translate3d(${currentBgX.toFixed(1)}px, ${currentBgY.toFixed(1)}px, 0)`;
+            }
+
+            let activeIndex = 0;
+            let minDistance = Infinity;
+
+            cards.forEach((card, i) => {
+                let diff = (i * step) - currentScroll;
+                diff = ((diff % totalWidth) + totalWidth) % totalWidth;
+                if (diff > totalWidth / 2) diff -= totalWidth;
+
+                const absDiff = Math.abs(diff);
+
+                if (absDiff < minDistance) {
+                    minDistance = absDiff;
+                    activeIndex = i;
+                }
+
+                const x = diff;
+                const curveDepth = window.innerWidth <= 768 ? 95 : 165;
+                const z = -Math.pow(absDiff / (step * 0.95), 1.55) * curveDepth;
+                const maxRot = window.innerWidth <= 768 ? 24 : 28;
+                const rotY = Math.max(-maxRot, Math.min(maxRot, -(diff / step) * 25));
+                const scale = Math.max(0.84, 1 - absDiff / (totalWidth * 0.9));
+                const blur = Math.min(5.5, Math.pow(absDiff / step, 1.25) * 3.8);
+                const opacity = Math.max(0.4, 1 - absDiff / (totalWidth * 0.55));
+                const brightness = Math.max(0.55, 1.05 - (absDiff / step) * 0.4);
+
+                card.style.transform = `translate3d(${x.toFixed(1)}px, 0, ${z.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+                card.style.filter = `blur(${blur.toFixed(1)}px) brightness(${brightness.toFixed(2)})`;
+                card.style.opacity = opacity.toFixed(2);
+                card.style.zIndex = Math.round(100 - absDiff / 5);
+
+                if (absDiff < step * 0.42) {
+                    card.classList.add('active-center');
+                } else {
+                    card.classList.remove('active-center');
+                }
+            });
+
+            if (activeIndex !== lastActiveIdx) {
+                lastActiveIdx = activeIndex;
+                if (timerText) {
+                    timerText.textContent = `00:0${activeIndex + 1} / 00:0${totalCards}`;
+                }
+            }
+
+            requestAnimationFrame(renderRibbon);
+        }
+
+        requestAnimationFrame(renderRibbon);
+
+        // Slide Navigation
+        function snapToNearest() {
+            let fractional = targetScroll / step;
+            targetScroll = Math.round(fractional) * step;
+        }
+
+        function nextSlide() {
+            playChime(580, 0.1);
+            let currentIdx = Math.round(targetScroll / step);
+            targetScroll = (currentIdx + 1) * step;
+            resetProgressBar();
+        }
+
+        function prevSlide() {
+            playChime(520, 0.1);
+            let currentIdx = Math.round(targetScroll / step);
+            targetScroll = (currentIdx - 1) * step;
+            resetProgressBar();
+        }
+
+        window.handlePanoCardClick = function(index) {
+            let currentIdx = Math.round(targetScroll / step);
+            let targetMod = ((index % totalCards) + totalCards) % totalCards;
+            let currentMod = ((currentIdx % totalCards) + totalCards) % totalCards;
+
+            if (targetMod === currentMod) {
+                openProjectCaseStudy(index);
+            } else {
+                playChime(640, 0.12);
+                let diff = targetMod - currentMod;
+                if (diff > totalCards / 2) diff -= totalCards;
+                if (diff < -totalCards / 2) diff += totalCards;
+                targetScroll = (currentIdx + diff) * step;
+                resetProgressBar();
+            }
+        };
+
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+        // Touch & Mouse Drag
+        function onPointerDown(e) {
+            isDragging = true;
+            startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            lastX = startX;
+            dragStartScroll = currentScroll;
+            velocity = 0;
+            pauseAutoPlay();
+        }
+
+        function onPointerMove(e) {
+            if (!isDragging) return;
+            const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            const deltaX = currentX - startX;
+            velocity = currentX - lastX;
+            lastX = currentX;
+
+            currentScroll = dragStartScroll - deltaX;
+            targetScroll = currentScroll;
+        }
+
+        function onPointerUp(e) {
+            if (!isDragging) return;
+            isDragging = false;
+
+            targetScroll -= velocity * 3.5;
+            snapToNearest();
+
+            if (isAutoPlaying) startAutoPlay();
+        }
+
+        if (stage) {
+            stage.addEventListener('mousedown', onPointerDown);
+            window.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+
+            stage.addEventListener('touchstart', onPointerDown, { passive: true });
+            window.addEventListener('touchmove', onPointerMove, { passive: true });
+            window.addEventListener('touchend', onPointerUp, { passive: true });
+
+            stage.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+                    e.preventDefault();
+                    targetScroll += (e.deltaX || e.deltaY) * 0.9;
+                    snapToNearest();
+                    resetProgressBar();
+                }
+            }, { passive: false });
+
+            stage.addEventListener('mouseenter', () => {
+                if (isAutoPlaying) pauseAutoPlay();
+            });
+            stage.addEventListener('mouseleave', () => {
+                if (isAutoPlaying) startAutoPlay();
+            });
+        }
+
+        // Auto Play & Progress Scrubber
+        function resetProgressBar() {
+            progressPercent = 0;
+            if (progressFill) progressFill.style.width = '0%';
+        }
+
+        function startAutoPlay() {
+            clearInterval(progressTimer);
+            progressTimer = setInterval(() => {
+                progressPercent += (progressIntervalMs / slideDuration) * 100;
+                if (progressFill) progressFill.style.width = `${Math.min(100, progressPercent)}%`;
+
+                if (progressPercent >= 100) {
+                    nextSlide();
+                }
+            }, progressIntervalMs);
+        }
+
+        function pauseAutoPlay() {
+            clearInterval(progressTimer);
+        }
+
+        if (playPauseBtn) {
+            playPauseBtn.addEventListener('click', () => {
+                isAutoPlaying = !isAutoPlaying;
+                if (isAutoPlaying) {
+                    if (playIcon) playIcon.textContent = '❚❚';
+                    startAutoPlay();
+                } else {
+                    if (playIcon) playIcon.textContent = '▶';
+                    pauseAutoPlay();
+                }
+            });
+        }
+
+        window.togglePanoSound = function(btn) {
+            if (!btn) return;
+            soundEnabled = !soundEnabled;
+            btn.innerHTML = soundEnabled ? '<span>🔊</span>' : '<span>🔇</span>';
+            if (soundEnabled) playChime(660, 0.15);
+        };
+
+        
+        // 6. Interactive Custom Cursor Engine (Awwwards Style)
+        const customCursor = document.getElementById('heroCustomCursor');
+        const cursorText = document.getElementById('cursorText');
+        const heroEl = document.getElementById('hero');
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let targetCursorX = cursorX;
+        let targetCursorY = cursorY;
+
+        window.addEventListener('mousemove', (e) => {
+            targetCursorX = e.clientX;
+            targetCursorY = e.clientY;
+
+            if (heroEl && customCursor) {
+                const heroRect = heroEl.getBoundingClientRect();
+                if (e.clientY >= heroRect.top && e.clientY <= heroRect.bottom) {
+                    customCursor.classList.add('active');
+                } else {
+                    customCursor.classList.remove('active');
+                }
+            }
+        });
+
+        function renderCustomCursor() {
+            cursorX += (targetCursorX - cursorX) * 0.18;
+            cursorY += (targetCursorY - cursorY) * 0.18;
+            if (customCursor) {
+                customCursor.style.left = `${cursorX.toFixed(1)}px`;
+                customCursor.style.top = `${cursorY.toFixed(1)}px`;
+            }
+            requestAnimationFrame(renderCustomCursor);
+        }
+        requestAnimationFrame(renderCustomCursor);
+
+        if (stage && customCursor) {
+            stage.addEventListener('mouseenter', () => {
+                customCursor.classList.add('hover-drag');
+                if (cursorText) cursorText.textContent = 'اسحب ↔';
+            });
+            stage.addEventListener('mouseleave', () => {
+                customCursor.classList.remove('hover-drag');
+                customCursor.classList.remove('hover-card');
+            });
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if (customCursor && card.classList.contains('active-center')) {
+                    customCursor.classList.remove('hover-drag');
+                    customCursor.classList.add('hover-card');
+                    if (cursorText) cursorText.textContent = '▶ استكشف';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                if (customCursor) {
+                    customCursor.classList.remove('hover-card');
+                    if (stage && stage.matches(':hover')) {
+                        customCursor.classList.add('hover-drag');
+                        if (cursorText) cursorText.textContent = 'اسحب ↔';
+                    }
+                }
+            });
+        });
+
+        startAutoPlay();
+    })();
+</script>
+
+    <!-- FULLSCREEN CASE STUDY EXPANSION MODAL (كما في فيديو Jesper Landberg) -->
+    <div class="case-study-overlay" id="caseStudyOverlay" onclick="if(event.target===this) closeProjectCaseStudy()">
+        <div class="case-study-modal" id="caseStudyModal">
+            <button class="case-study-close-btn" onclick="closeProjectCaseStudy()" aria-label="إغلاق">✕</button>
+            <div class="case-study-hero" id="csHero">
+                <div class="case-study-header-text">
+                    <span class="case-study-tag" id="csTag">المشاريع الكبرى</span>
+                    <h2 class="case-study-title" id="csTitle">عنوان المشروع</h2>
+                </div>
+            </div>
+            <div class="case-study-body">
+                <div class="case-study-stats-grid" id="csStats">
+                    <!-- Populated dynamically -->
+                </div>
+                <p class="case-study-desc" id="csDesc">وصف المشروع التفصيلي...</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="openHeroVideoCapsule()" style="background: #C9972E; color: #020205; font-weight: 700; border: none; padding: 12px 24px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>▶ تشغيل الكبسولة المرئية (4K)</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="closeProjectCaseStudy()" style="background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 999px; cursor: pointer;">
+                        <span>العودة إلى المعرض الثلاثي الأبعاد</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript MVC Bundle -->
-    <script type="module" src="js/app.js"></script>
-    <script src="app.js"></script>
+<div class="hero-custom-cursor" id="heroCustomCursor"><span class="cursor-text" id="cursorText">سحب ↔</span></div>
 </body>
 </html>

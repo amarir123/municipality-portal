@@ -1,22 +1,25 @@
 const defaultBranding = {
-    muniName: "الجماعة الترابية",
-    cityName: "أكادير",
+    muniName: "جماعة بيوكرى",
+    cityName: "بيوكرى",
     logoUrl: "assets/logo.png",
-    primaryColor: "#0d5ea6",
-    accentColor: "#c69c55",
-    darkColor: "#1e293b",
-    textColor: "#334155",
+    primaryColor: "#1B3A8A",
+    secondaryColor: "#0F9D8A",
+    creamColor: "#FBF6EC",
+    accentColor: "#F2A93B",
+    terracottaColor: "#D9603B",
+    darkColor: "#0B1530",
+    textColor: "#0B1530",
     heroBgUrl: "assets/beach_bg.png",
     cardCouncilUrl: "assets/card_council.png",
     cardProceduresUrl: "assets/card_procedures.png",
     cardTerritoryUrl: "assets/card_territory.png",
-    tickerText: "مرحباً بكم في البوابة الإلكترونية الرسمية للجماعة الترابية - تواصلوا معنا وقدموا طلباتكم وشكاياتكم إلكترونياً على مدار الساعة.",
-    phone: "+212 528 84 00 00",
-    email: "contact@commune.ma",
-    address: "شارع محمد الخامس، المقر الرئيسي للجماعة",
+    tickerText: "مرحباً بكم في البوابة الإلكترونية الرسمية لجماعة بيوكرى - تواصلوا معنا وقدموا طلباتكم وتتبعوا ملفاتكم وشكاياتكم إلكترونياً على مدار الساعة.",
+    phone: "+212 528 81 80 00",
+    email: "contact@biougra.ma",
+    address: "شارع محمد الخامس، المقر الرئيسي لجماعة بيوكرى",
     workingHours: "من الإثنين إلى الجمعة: 08:30 - 16:30",
-    weatherCity: "أكادير",
-    weatherTemp: "24°C",
+    weatherCity: "بيوكرى",
+    weatherTemp: "23°C",
     weatherStatus: "مشمس",
     showTicker: true,
     showUrban: true,
@@ -30,8 +33,24 @@ export class BrandingModel {
     static STORAGE_KEY = 'agadir_branding';
 
     static init() {
-        if (!localStorage.getItem(this.STORAGE_KEY)) {
+        const stored = localStorage.getItem(this.STORAGE_KEY);
+        if (!stored) {
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultBranding));
+        } else {
+            try {
+                const parsed = JSON.parse(stored);
+                // Force-update color palette tokens & municipality name
+                parsed.muniName = defaultBranding.muniName;
+                parsed.cityName = defaultBranding.cityName;
+                parsed.primaryColor = defaultBranding.primaryColor;
+                parsed.secondaryColor = defaultBranding.secondaryColor;
+                parsed.creamColor = defaultBranding.creamColor;
+                parsed.accentColor = defaultBranding.accentColor;
+                parsed.terracottaColor = defaultBranding.terracottaColor;
+                parsed.darkColor = defaultBranding.darkColor;
+                parsed.textColor = defaultBranding.textColor;
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(parsed));
+            } catch (e) {}
         }
     }
 

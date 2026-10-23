@@ -1,4 +1,8 @@
 export class VideoView {
+    static renderGrid(videos, containerId = 'videoGridContainer') {
+        this.renderList(videos, containerId);
+    }
+
     static renderList(videos, containerId = 'videoGridContainer') {
         const container = document.getElementById(containerId);
         if (!container) return;

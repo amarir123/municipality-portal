@@ -1,4 +1,4 @@
-export class NewsView {
+﻿export class NewsView {
     static renderList(newsList, containerId = 'newsListContainer') {
         const container = document.getElementById(containerId) || document.getElementById('newsGrid');
         if (!container) return;

@@ -16,7 +16,10 @@ export class VideoModel {
     static getAll() {
         this.init();
         try {
-            return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
+            const list = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+            if (Array.isArray(list) && list.length > 0) return list;
+            this.saveAll(defaultVideos);
+            return defaultVideos;
         } catch (e) {
             return defaultVideos;
         }

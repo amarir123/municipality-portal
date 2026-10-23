@@ -9,14 +9,14 @@ export class EventView {
         }
 
         container.innerHTML = events.map(ev => `
-            <article class="event-card">
+            <article class="event-card" onclick="window.appController?.openEventModal('${ev.id}')">
                 <div class="event-img-wrapper">
                     <img src="${ev.image || 'assets/event_right.png'}" alt="${ev.title}">
-                    <span class="event-date-badge">${ev.date || '10'} أكتوبر</span>
+                    <span class="event-date-badge">${ev.date || '10 أكتوبر'}</span>
                 </div>
                 <div class="event-body">
                     <h3 class="event-title-text">${ev.title}</h3>
-                    <div class="event-meta">📍 المقر الرئيسي للجماعة الترابية</div>
+                    <div class="event-meta">📍 ${ev.location || 'المقر الرئيسي للجماعة الترابية'}</div>
                 </div>
             </article>
         `).join('');

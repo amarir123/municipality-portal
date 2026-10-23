@@ -1,3 +1,4 @@
+import '../db.js';
 import { MainController } from './controllers/MainController.js';
 import { AdminController } from './controllers/AdminController.js';
 import { AdminView } from './views/AdminView.js';
