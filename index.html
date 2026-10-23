@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
-    <link rel="stylesheet" href="style.css?v=7.2">
-    <link rel="stylesheet" href="moroccan-suite.css?v=7.2">
+    <link rel="stylesheet" href="style.css?v=8.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=8.0">
 </head>
 <body id="appBody">
     <!-- Scroll Progress Indicator Bar -->
@@ -1622,8 +1622,8 @@
         let isAutoPlaying = true;
         let progressTimer = null;
         let progressPercent = 0;
-        const progressIntervalMs = 50;
-        const slideDuration = 4500;
+        const progressIntervalMs = 25;
+        const slideDuration = 2000;
 
         // Sound FX Engine (Synthesized Web Audio API - Zero External Assets)
         let audioCtx = null;
@@ -1840,17 +1840,18 @@
                 h = canvas.height = canvas.offsetHeight;
             });
 
-            const count = window.innerWidth <= 768 ? 20 : 42;
+            const count = window.innerWidth <= 768 ? 30 : 65;
             particles = [];
             for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * w,
                     y: Math.random() * h,
-                    r: Math.random() * 2.2 + 0.8,
-                    vy: -(Math.random() * 0.45 + 0.15),
-                    vx: (Math.random() - 0.5) * 0.3,
-                    alpha: Math.random() * 0.6 + 0.2,
-                    phase: Math.random() * Math.PI * 2
+                    r: Math.random() * 2.5 + 0.8,
+                    vy: -(Math.random() * 0.55 + 0.2),
+                    vx: (Math.random() - 0.5) * 0.35,
+                    alpha: Math.random() * 0.7 + 0.25,
+                    phase: Math.random() * Math.PI * 2,
+                    sparkleSpeed: Math.random() * 0.04 + 0.02
                 });
             }
 
@@ -1886,7 +1887,7 @@
         function renderRibbon() {
             // Fluid inertial glide physics (lerp)
             if (!isDragging) {
-                currentScroll += (targetScroll - currentScroll) * 0.088;
+                currentScroll += (targetScroll - currentScroll) * 0.096;
             }
 
             // Mountain Backdrop Parallax Lerp
@@ -1912,14 +1913,14 @@
                 }
 
                 const x = diff;
-                const curveDepth = window.innerWidth <= 768 ? 95 : 165;
+                const curveDepth = window.innerWidth <= 768 ? 100 : 175;
                 const z = -Math.pow(absDiff / (step * 0.95), 1.55) * curveDepth;
-                const maxRot = window.innerWidth <= 768 ? 24 : 28;
-                const rotY = Math.max(-maxRot, Math.min(maxRot, -(diff / step) * 25));
-                const scale = Math.max(0.84, 1 - absDiff / (totalWidth * 0.9));
-                const blur = Math.min(5.5, Math.pow(absDiff / step, 1.25) * 3.8);
-                const opacity = Math.max(0.4, 1 - absDiff / (totalWidth * 0.55));
-                const brightness = Math.max(0.55, 1.05 - (absDiff / step) * 0.4);
+                const maxRot = window.innerWidth <= 768 ? 26 : 30;
+                const rotY = Math.max(-maxRot, Math.min(maxRot, -(diff / step) * 26));
+                const scale = Math.max(0.88, 1.05 - absDiff / (totalWidth * 0.75));
+                const blur = Math.min(1.8, Math.pow(absDiff / step, 1.1) * 1.4);
+                const opacity = Math.max(0.70, 1 - absDiff / (totalWidth * 0.55));
+                const brightness = Math.max(0.82, 1.08 - (absDiff / step) * 0.22);
 
                 card.style.transform = `translate3d(${x.toFixed(1)}px, 0, ${z.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
                 card.style.filter = `blur(${blur.toFixed(1)}px) brightness(${brightness.toFixed(2)})`;
@@ -2034,11 +2035,12 @@
                 }
             }, { passive: false });
 
+            // 2-Second continuous glide: do not freeze on hover, only during active drag
             stage.addEventListener('mouseenter', () => {
-                if (isAutoPlaying) pauseAutoPlay();
+                // Keep smooth auto-scroll playing continuously
             });
             stage.addEventListener('mouseleave', () => {
-                if (isAutoPlaying) startAutoPlay();
+                if (isAutoPlaying && !progressTimer) startAutoPlay();
             });
         }
 
