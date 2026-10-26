@@ -9,7 +9,7 @@ const defaultBranding = {
     terracottaColor: "#D9603B",
     darkColor: "#0B1530",
     textColor: "#0B1530",
-    heroBgUrl: "assets/beach_bg.png",
+    heroBgUrl: "assets/biougra_bg.png",
     cardCouncilUrl: "assets/card_council.png",
     cardProceduresUrl: "assets/card_procedures.png",
     cardTerritoryUrl: "assets/card_territory.png",

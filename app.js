@@ -48,7 +48,7 @@ const translations = {
             municipality: 'La Commune'
         },
         hero: {
-            title: 'Portail de la Commune d\'Agadir',
+            title: 'Portail de la Commune de Biougra',
             btn: 'Découvrir la Commune'
         },
         sections: {
@@ -67,11 +67,11 @@ const translations = {
             urbanDev: 'Urban Development',
             actionProg: 'Action Plan',
             procedures: 'Administrative Procedures',
-            sustainable: 'Sustainable Agadir',
+            sustainable: 'Sustainable Biougra',
             municipality: 'The Municipality'
         },
         hero: {
-            title: 'Portal of the Municipality of Agadir',
+            title: 'Portal of the Municipality of Biougra',
             btn: 'Discover the Municipality'
         },
         sections: {
