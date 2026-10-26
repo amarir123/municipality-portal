@@ -13,7 +13,7 @@
     
     <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
     <link rel="stylesheet" href="style.css?v=8.0">
-    <link rel="stylesheet" href="moroccan-suite.css?v=9.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=10.0">
 </head>
 <body id="appBody">
     <!-- Scroll Progress Indicator Bar -->
@@ -89,8 +89,9 @@
                 </div>
             </div>
 
-            <a class="nav-item" href="publications.html">منشوراتنا</a>
-            <a class="nav-item" href="sustainable.html">مدينة مستدامة</a>
+            <a class="nav-item" href="#subventionsSection">دعم الجمعيات</a>
+            <a class="nav-item" href="#publicationsSection">منشوراتنا</a>
+            <a class="nav-item" href="#mandateSection">المجلس الجماعي</a>
             <a class="nav-item" href="contact.html">أوقات العمل</a>
             <i class="line" id="line"></i>
         </nav>
@@ -846,6 +847,80 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION: SUBVENTIONS (الشفافية ودعم جمعيات المجتمع المدني)
+         ========================================== -->
+    <section class="subventions-showcase-section" id="subventionsSection">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">المجتمع المدني • الشفافية والمساءلة</span>
+                <h2 class="section-title center" style="color: #ffffff; margin-top: 8px;">دعم جمعيات المجتمع المدني والاتحادات المحلية</h2>
+                <p style="color: #94a3b8; max-width: 760px; margin: 0 auto; font-size: 0.95rem;">نشر قرارات المجلس، لوائح الجمعيات المستفيدة، مبالغ الدعم، والمساطر الإدارية المعتمدة.</p>
+            </div>
+
+            <!-- Decision & Fiche Download Banner -->
+            <div class="subvention-decision-card">
+                <div class="subvention-decision-info">
+                    <h3 id="subventionDecisionTitleDisplay">قرار المجلس الجماعي رقم 48/2026 القاضي بتحديد معايير وشروط توزيع الدعم على الجمعيات</h3>
+                    <p id="subventionDecisionDetailsDisplay">بناء على القانون التنظيمي 113.14 المتعلق بالجماعات، يفتح باب إيداع ملفات طلب الدعم المالي السنوي لفائدة الجمعيات والاتحادات والمنظمات المحلية النشيطة داخل النفوذ الترابي للجماعة.</p>
+                    <div class="subvention-deadline-tag" id="subventionDeadlineDisplay">📅 آخر أجل لإيداع الملفات: 30 نونبر 2026</div>
+                </div>
+                <div>
+                    <button type="button" onclick="downloadSubventionFiche()" class="btn-footer-chikaya" style="padding: 14px 24px;">
+                        <span>📥 تحميل استمارة طلب الدعم (Fiche PDF)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Beneficiaries Table Directly on Homepage -->
+            <div style="margin-top: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0;">🤝 لائحة الجمعيات والاتحادات المستفيدة برسم السنة الحالية:</h3>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">مصادق عليها بمحاضر الدورات الرسمية للمجلس</span>
+                </div>
+                <div class="synthesis-table-wrapper">
+                    <table class="synthesis-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الجمعية أو الاتحاد</th>
+                                <th>الصنف والمجال</th>
+                                <th>الملف والقانون الأساسي</th>
+                                <th>محضر الدورة والمقرر</th>
+                                <th>مبلغ الدعم الممنوح</th>
+                            </tr>
+                        </thead>
+                        <tbody id="frontSubventionsTableBody">
+                            <!-- Dynamically populated via MainController -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION: OFFICIAL PUBLICATIONS (المنشورات والمقررات الرسمية)
+         ========================================== -->
+    <section class="publications-showcase-section" id="publicationsSection">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 30px;">
+                <div>
+                    <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">الحق في الحصول على المعلومات</span>
+                    <h2 class="section-title" style="color: #ffffff; margin-top: 8px;">المنشورات والتقارير ومقررات المجلس الجماعي</h2>
+                    <p style="color: #94a3b8; font-size: 0.92rem; margin: 0;">تحميل المحاضر الرسمية، الحساب الإداري، ودلائل المساطر الإدارية للعموم.</p>
+                </div>
+                <a href="publications.html" class="btn-footer-location">
+                    <span>📚 الأرشيف الكامل للمنشورات ←</span>
+                </a>
+            </div>
+
+            <!-- Publications Cards Grid -->
+            <div class="pubs-front-grid" id="frontPublicationsGrid">
+                <!-- Dynamically populated via MainController -->
             </div>
         </div>
     </section>

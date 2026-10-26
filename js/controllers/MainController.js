@@ -32,6 +32,7 @@ export class MainController {
         this.loadSynthesisData();
         this.loadActivePoll();
         this.loadSubventionsPublicData();
+        this.loadPublicationsData();
         this.bindEvents();
         this.checkAdminControlsVisibility();
         this.initHeroSlider();
@@ -385,17 +386,54 @@ export class MainController {
         const sub = SubventionModel.get();
         if (!sub) return;
 
-        const tbody = document.getElementById('publicSubventionsTableBody');
-        if (!tbody) return;
+        const titleEl = document.getElementById('subventionDecisionTitleDisplay');
+        const detailsEl = document.getElementById('subventionDecisionDetailsDisplay');
+        const deadlineEl = document.getElementById('subventionDeadlineDisplay');
+        if (titleEl && sub.decisionTitle) titleEl.textContent = sub.decisionTitle;
+        if (detailsEl && sub.decisionDetails) detailsEl.textContent = sub.decisionDetails;
+        if (deadlineEl && sub.deadline) deadlineEl.textContent = `📅 آخر أجل لإيداع الملفات: ${sub.deadline}`;
 
-        tbody.innerHTML = sub.beneficiaries.map(b => `
-            <tr>
-                <td><strong>${b.assocName}</strong></td>
-                <td><span class="badge badge-info">${b.assocType}</span></td>
-                <td><span class="badge badge-success">${b.statutStatus}</span></td>
-                <td style="font-size: 0.85rem; color: #64748b;">${b.pvNumber}</td>
-                <td><strong style="color: var(--primary-color);">${Number(b.amount).toLocaleString()} درهم</strong></td>
-            </tr>
+        const renderRows = (tbody) => {
+            if (!tbody) return;
+            tbody.innerHTML = (sub.beneficiaries || []).map(b => `
+                <tr>
+                    <td><strong>${b.assocName}</strong></td>
+                    <td><span class="badge" style="background: rgba(201, 151, 46, 0.15); color: #E3B351; border: 1px solid rgba(201, 151, 46, 0.3);">${b.assocType}</span></td>
+                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">${b.statutStatus}</span></td>
+                    <td style="font-size: 0.85rem; color: #94a3b8;">${b.pvNumber}</td>
+                    <td><strong style="color: #E3B351;">${Number(b.amount).toLocaleString()} درهم</strong></td>
+                </tr>
+            `).join('');
+        };
+
+        renderRows(document.getElementById('publicSubventionsTableBody'));
+        renderRows(document.getElementById('frontSubventionsTableBody'));
+    }
+
+    loadPublicationsData() {
+        const pubs = PublicationModel.getAll() || [];
+        const container = document.getElementById('frontPublicationsGrid');
+        if (!container) return;
+
+        if (pubs.length === 0) {
+            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 30px;">لا توجد منشورات متاحة حالياً.</div>';
+            return;
+        }
+
+        container.innerHTML = pubs.map(p => `
+            <div class="pub-front-card">
+                <div>
+                    <div class="pub-front-header">
+                        <span class="pub-front-type-pill">${p.type || 'PDF'}</span>
+                        <span class="pub-front-size">${p.size || ''}</span>
+                    </div>
+                    <h4 class="pub-front-title">${p.title}</h4>
+                    <p class="pub-front-desc">${p.description}</p>
+                </div>
+                <a href="javascript:void(0)" onclick="alert('جاري تحميل الوثيقة الرسمية: ${p.title}');" class="pub-front-btn">
+                    <span>📥 تحميل الوثيقة الرسمية</span>
+                </a>
+            </div>
         `).join('');
     }
 

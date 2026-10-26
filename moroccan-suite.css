@@ -3409,3 +3409,169 @@ h1, h2, h3, h4, .font-kufi {
     overflow-y: auto;
     flex: 1;
 }
+
+
+/* ==========================================================================
+   HOMEPAGE SHOWCASE: SUBVENTIONS & OFFICIAL PUBLICATIONS SECTIONS
+   ========================================================================== */
+
+/* 1. SUBVENTIONS & CIVIL SOCIETY SUPPORT SECTION */
+.subventions-showcase-section {
+    padding: 85px 0;
+    background: #0b0d14;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.subvention-decision-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(201, 151, 46, 0.35);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.subvention-decision-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #C9972E, #F2A93B);
+}
+
+.subvention-decision-info h3 {
+    font-family: 'Cairo', sans-serif;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+}
+
+.subvention-decision-info p {
+    color: #94a3b8;
+    font-size: 0.94rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 780px;
+}
+
+.subvention-deadline-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201, 151, 46, 0.15);
+    border: 1px solid rgba(201, 151, 46, 0.35);
+    color: #E3B351;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+/* 2. OFFICIAL PUBLICATIONS SHOWCASE SECTION */
+.publications-showcase-section {
+    padding: 85px 0;
+    background: #0e111a;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.pubs-front-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.pub-front-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.pub-front-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(201, 151, 46, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.pub-front-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.pub-front-type-pill {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    background: rgba(201, 151, 46, 0.15);
+    color: #E3B351;
+    border: 1px solid rgba(201, 151, 46, 0.3);
+}
+
+.pub-front-size {
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+.pub-front-title {
+    font-family: 'Cairo', sans-serif;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    line-height: 1.45;
+}
+
+.pub-front-desc {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    flex: 1;
+}
+
+.pub-front-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.pub-front-btn:hover {
+    background: #C9972E;
+    color: #0d0f17;
+    border-color: #C9972E;
+}
