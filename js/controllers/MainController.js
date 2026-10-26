@@ -27,11 +27,14 @@ export class MainController {
     init() {
         this.applyBranding();
         this.loadPageData();
+        this.syncStatsWithDatabase();
+        this.loadMandateData();
+        this.loadSynthesisData();
+        this.loadActivePoll();
+        this.loadSubventionsPublicData();
         this.bindEvents();
         this.checkAdminControlsVisibility();
         this.initHeroSlider();
-        this.loadActivePoll();
-        this.loadSubventionsPublicData();
         this.exposeGlobalHelpers();
     }
 
@@ -59,10 +62,10 @@ export class MainController {
             el.textContent = branding.muniName || 'الجماعة الترابية';
         });
 
-        // Logos
-        const headerLogo = document.getElementById('mainLogoHeaderImg');
+        // Logos (Header, Footer & Brand Mark)
+        const headerLogo = document.getElementById('mainLogoHeaderImg') || document.querySelector('.logo img');
         if (headerLogo && branding.logoUrl) headerLogo.src = branding.logoUrl;
-        const footerLogo = document.getElementById('footerLogoImg');
+        const footerLogo = document.getElementById('footerLogoMainImg') || document.querySelector('.footer-logo-main');
         if (footerLogo && branding.logoUrl) footerLogo.src = branding.logoUrl;
 
         // Ticker
@@ -82,11 +85,11 @@ export class MainController {
         const servicesSec = document.getElementById('servicesSection');
         if (servicesSec) servicesSec.style.display = branding.showServices ? 'block' : 'none';
 
-        // Weather
-        const wCity = document.getElementById('weatherCityDisplay');
-        const wTemp = document.getElementById('weatherTempDisplay');
-        if (wCity) wCity.textContent = branding.weatherCity || 'المدينة';
-        if (wTemp) wTemp.textContent = branding.weatherTemp || '24°C';
+        // Weather (Header Tools Popup & Widgets)
+        const wCity = document.getElementById('weatherCityDisplay') || document.getElementById('weatherCityMini');
+        const wTemp = document.getElementById('weatherTempDisplay') || document.getElementById('weatherTempMini');
+        if (wCity) wCity.textContent = branding.weatherCity || 'بيوكرى';
+        if (wTemp) wTemp.textContent = branding.weatherTemp || '23°C';
 
         // Contact info
         const fPhone = document.getElementById('footerPhoneDisplay');
@@ -537,6 +540,267 @@ export class MainController {
         }
     }
 
+    // ==========================================
+    // DYNAMIC STATS SECTION LIVE SYNC
+    // ==========================================
+    syncStatsWithDatabase() {
+        try {
+            const projects = ProjectModel.getAll() || [];
+            const services = ServiceModel.getAll() || [];
+            const mandate = MandateModel.get();
+            const complaints = ComplaintModel.getAll() || [];
+
+            const statPeriod = document.getElementById('statMandatePeriod');
+            if (statPeriod && mandate && mandate.term) {
+                statPeriod.textContent = mandate.term;
+            }
+
+            const statProjects = document.getElementById('statProjectsCount');
+            if (statProjects) {
+                const count = Math.max(projects.length, 50);
+                statProjects.textContent = `+${count}`;
+                statProjects.setAttribute('data-target', count);
+            }
+
+            const statServices = document.getElementById('statServicesCount');
+            if (statServices) {
+                const count = Math.max(services.length, 25);
+                statServices.textContent = `+${count}`;
+                statServices.setAttribute('data-target', count);
+            }
+
+            const statTransparency = document.getElementById('statTransparencyRate');
+            if (statTransparency) {
+                statTransparency.textContent = '+100%';
+            }
+        } catch (e) {
+            console.error('Error syncing stats with database:', e);
+        }
+    }
+
+    // ==========================================
+    // MANDATE 2021-2027 SHOWCASE DATA LOADER
+    // ==========================================
+    loadMandateData() {
+        const mandate = MandateModel.get();
+        if (!mandate) return;
+
+        // Render Mayor Card on Homepage
+        const mayorNameEl = document.getElementById('mandateMayorName');
+        const mayorRoleEl = document.getElementById('mandateMayorRole');
+        if (mayorNameEl && mandate.bureau && mandate.bureau.length > 0) {
+            mayorNameEl.textContent = mandate.bureau[0].name;
+        }
+        if (mayorRoleEl && mandate.bureau && mandate.bureau.length > 0) {
+            mayorRoleEl.textContent = mandate.bureau[0].role;
+        }
+
+        // Render Bureau preview cards
+        const bureauGrid = document.getElementById('mandateBureauGrid');
+        if (bureauGrid && mandate.bureau) {
+            bureauGrid.innerHTML = mandate.bureau.slice(1, 5).map(m => `
+                <div class="bureau-card">
+                    <div class="bureau-role">${m.role}</div>
+                    <div class="bureau-name">${m.name}</div>
+                    <div class="bureau-party">${m.party || 'الأغلبية'}</div>
+                </div>
+            `).join('');
+        }
+    }
+
+    // ==========================================
+    // SYNTHESIS REPORT & STRATEGIC AXES LOADER
+    // ==========================================
+    loadSynthesisData() {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+
+        const titleEl = document.getElementById('synthesisReportTitle');
+        const introEl = document.getElementById('synthesisReportIntro');
+        const periodEl = document.getElementById('synthesisReportPeriod');
+
+        if (titleEl) titleEl.textContent = report.title;
+        if (introEl) introEl.textContent = report.introduction;
+        if (periodEl) periodEl.textContent = report.reportingPeriod || '2021-2027';
+
+        // Render 4 Strategic Axes
+        const axesContainer = document.getElementById('synthesisAxesGrid');
+        if (axesContainer && report.activityAxes) {
+            axesContainer.innerHTML = report.activityAxes.map(axis => `
+                <div class="synthesis-axis-card">
+                    <div class="synthesis-axis-title">${axis.name}</div>
+                    <div class="synthesis-axis-meta">
+                        <span>الميزانية: <strong>${axis.budget}</strong></span>
+                        <span>المشاريع: <strong>${axis.projectsCount} مشروعاً</strong></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #cbd5e1; margin-top: 10px;">
+                        <span>نسبة الإنجاز الميداني:</span>
+                        <strong style="color: #E3B351;">${axis.completionRate}%</strong>
+                    </div>
+                    <div class="synthesis-progress-track">
+                        <div class="synthesis-progress-fill" style="width: ${axis.completionRate}%;"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Competence Projects Table
+        const tableBody = document.getElementById('synthesisProjectsTableBody');
+        if (tableBody && report.competenceProjects) {
+            tableBody.innerHTML = report.competenceProjects.map(p => `
+                <tr>
+                    <td><strong>${p.projectName}</strong></td>
+                    <td><span class="badge" style="background: rgba(201, 151, 46, 0.15); color: #E3B351; border: 1px solid rgba(201, 151, 46, 0.3);">${p.competenceType}</span></td>
+                    <td><span class="badge" style="background: ${p.status === 'تم تنفيذه' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)'}; color: ${p.status === 'تم تنفيذه' ? '#10b981' : '#f59e0b'};">${p.status}</span></td>
+                    <td><strong>${Number(p.budget).toLocaleString()} درهم</strong></td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span>${p.progress}%</span>
+                            <div style="flex: 1; min-width: 60px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
+                                <div style="height: 100%; width: ${p.progress}%; background: #C9972E;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    // ==========================================
+    // CITIZEN COMPLAINT TRACKING
+    // ==========================================
+    trackCitizenComplaint() {
+        const input = document.getElementById('citizenTrackTicketInput');
+        const resultBox = document.getElementById('citizenTrackResultBox');
+        if (!input || !resultBox) return;
+
+        const ticketId = input.value.trim();
+        if (!ticketId) {
+            alert('يرجى إدخال رقم الشكاية (مثال: TKT-2026-001)');
+            return;
+        }
+
+        const item = ComplaintModel.getById(ticketId);
+        if (!item) {
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = `
+                <div style="padding: 18px; border-radius: 12px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; text-align: center;">
+                    ⚠️ لم يتم العثور على أي شكاية مطابقة للرقم المرجعي <strong>"${ticketId}"</strong>. يرجى التحقق من الرقم والمحاولة مرة أخرى.
+                </div>
+            `;
+            return;
+        }
+
+        const isSolved = item.status === 'تم الحل' || item.status === 'تمت المعالجة';
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `
+            <div class="complaint-result-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                    <div>
+                        <span class="complaint-result-status ${isSolved ? 'solved' : 'pending'}">${item.status}</span>
+                        <strong style="color: #ffffff; font-size: 1.05rem; margin-right: 10px;">الرقم المرجعي: ${item.id}</strong>
+                    </div>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">تاريخ الإيداع: ${item.createdDate}</span>
+                </div>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin: 0 0 8px 0;">${item.subject}</h4>
+                <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0 0 14px 0;"><strong>تفاصيل الطلب:</strong> ${item.details}</p>
+                <div class="complaint-admin-reply">
+                    <div style="font-weight: 700; color: #E3B351; margin-bottom: 4px;">✍️ الرد الإداري الرسمي من مصالح الجماعة:</div>
+                    <div>${item.response || 'طلبكم قيد المتابعة والمعالجة من طرف المصلحة المعنية.'}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // ==========================================
+    // EXPORT SYNTHESIS REPORT PRINTABLE
+    // ==========================================
+    exportSynthesisReportPDF() {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+
+        const printWin = window.open('', '_blank');
+        printWin.document.write(`
+            <html lang="ar" dir="rtl">
+            <head>
+                <title>${report.title}</title>
+                <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+                <style>
+                    body { font-family: 'Cairo', sans-serif; direction: rtl; padding: 40px; color: #0f172a; line-height: 1.8; background: #fff; }
+                    .header { text-align: center; border-bottom: 3px double #C9972E; padding-bottom: 25px; margin-bottom: 30px; }
+                    h1 { color: #1e3a8a; font-size: 1.6rem; margin-top: 10px; }
+                    .intro-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #cbd5e1; padding: 10px 14px; text-align: right; }
+                    th { background: #f1f5f9; color: #1e3a8a; font-weight: 700; }
+                    .print-btn { background: #C9972E; color: #fff; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-family: inherit; }
+                    @media print { .no-print { display: none; } }
+                </style>
+            </head>
+            <body>
+                <div class="no-print" style="margin-bottom: 20px; text-align: left;">
+                    <button class="print-btn" onclick="window.print()">🖨️ طباعة التقرير (Print PDF)</button>
+                </div>
+                <div class="header">
+                    <div>المملكة المغربية • وزارة الداخلية • إقليم اشتوكة آيت باها</div>
+                    <h1>الجماعة الترابية لبيوكرى</h1>
+                    <h2>${report.title}</h2>
+                    <div>الولاية الانتدابية ${report.reportingPeriod || '2021-2027'}</div>
+                </div>
+                <div class="intro-box">
+                    <strong>مقدمة التقرير:</strong>
+                    <p>${report.introduction}</p>
+                </div>
+                <h3>1. محاور العمل الاستراتيجية الكبرى:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المحور الاستراتيجي</th>
+                            <th>الاعتمادات المرصودة</th>
+                            <th>عدد المشاريع</th>
+                            <th>نسبة الإنجاز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(report.activityAxes || []).map(a => `
+                            <tr>
+                                <td><strong>${a.name}</strong></td>
+                                <td>${a.budget}</td>
+                                <td>${a.projectsCount}</td>
+                                <td><strong>${a.completionRate}%</strong></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <h3 style="margin-top: 40px;">2. مشاريع مجالات الاختصاص:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم المشروع</th>
+                            <th>مجال الاختصاص</th>
+                            <th>الحالة</th>
+                            <th>الميزانية (درهم)</th>
+                            <th>نسبة الإنجاز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(report.competenceProjects || []).map(p => `
+                            <tr>
+                                <td><strong>${p.projectName}</strong></td>
+                                <td>${p.competenceType}</td>
+                                <td>${p.status}</td>
+                                <td>${Number(p.budget).toLocaleString()} د.م</td>
+                                <td>${p.progress}%</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </body>
+            </html>
+        `);
+        printWin.document.close();
+    }
+
     exposeGlobalHelpers() {
         window.openLegalPopup = () => this.openLegalPopup();
         window.closeLegalPopup = () => this.closeLegalPopup();
@@ -553,6 +817,8 @@ export class MainController {
         window.openSubventionsModal = () => this.openSubventionsModal();
         window.closeSubventionsModal = () => this.closeSubventionsModal();
         window.downloadSubventionFiche = () => this.downloadSubventionFiche();
+        window.trackCitizenComplaint = () => this.trackCitizenComplaint();
+        window.exportSynthesisReportPDF = () => this.exportSynthesisReportPDF();
     }
 
     bindEvents() {

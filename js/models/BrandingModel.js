@@ -39,17 +39,9 @@ export class BrandingModel {
         } else {
             try {
                 const parsed = JSON.parse(stored);
-                // Force-update color palette tokens & municipality name
-                parsed.muniName = defaultBranding.muniName;
-                parsed.cityName = defaultBranding.cityName;
-                parsed.primaryColor = defaultBranding.primaryColor;
-                parsed.secondaryColor = defaultBranding.secondaryColor;
-                parsed.creamColor = defaultBranding.creamColor;
-                parsed.accentColor = defaultBranding.accentColor;
-                parsed.terracottaColor = defaultBranding.terracottaColor;
-                parsed.darkColor = defaultBranding.darkColor;
-                parsed.textColor = defaultBranding.textColor;
-                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(parsed));
+                // Ensure defaults for any newly introduced keys without overriding saved values
+                const merged = { ...defaultBranding, ...parsed };
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(merged));
             } catch (e) {}
         }
     }

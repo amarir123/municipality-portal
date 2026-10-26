@@ -13,7 +13,7 @@
     
     <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
     <link rel="stylesheet" href="style.css?v=8.0">
-    <link rel="stylesheet" href="moroccan-suite.css?v=8.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=9.0">
 </head>
 <body id="appBody">
     <!-- Scroll Progress Indicator Bar -->
@@ -26,9 +26,9 @@
     <header class="nav" id="nav">
         <!-- Brand & Logo -->
         <a class="brand" href="index.html">
-            <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى">
+            <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى" id="mainLogoHeaderImg">
             <span>
-                <b>جماعة بيوكرى</b>
+                <b class="muni-name-display">جماعة بيوكرى</b>
                 <small>Commune de Biougra</small>
             </span>
         </a>
@@ -155,6 +155,16 @@
             </button>
         </div>
     </header>
+
+    <!-- URGENT NEWS & ANNOUNCEMENT TICKER TAPE (شريط الأخبار والإعلانات العاجلة) -->
+    <div id="tickerSection" class="ticker-strip" style="display: none;">
+        <div class="ticker-container">
+            <span class="ticker-badge">🔴 إعلان عاجل</span>
+            <div class="ticker-marquee">
+                <span id="tickerContent">مرحباً بكم في البوابة الإلكترونية الموحدة لجماعة بيوكرى - تواصلوا معنا وقدموا طلباتكم وتتبعوا ملفاتكم وشكاياتكم إلكترونياً على مدار الساعة.</span>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================================
          HERO SECTION: 3D CURVED PANORAMIC CYLINDER THEATER
@@ -536,6 +546,29 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CITIZEN COMPLAINT & APPLICATION TRACKER (تتبع الشكايات للمواطنين) -->
+            <div class="complaint-tracker-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                    <div>
+                        <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">🔍 خدمة التتبع الرقمي المباشر</span>
+                        <h3 style="color: #ffffff; font-size: 1.45rem; font-weight: 800; margin: 6px 0;">تتبع مآل الشكايات والعرائض (Suivi en Ligne)</h3>
+                        <p style="color: #94a3b8; font-size: 0.94rem; margin: 0;">أدخل الرقم المرجعي لشكايتك للاطلاع الفوري على حالتها وقرار الإدارة الجماعية الرسمي.</p>
+                    </div>
+                    <button type="button" onclick="openComplaintModal()" class="btn-footer-chikaya" style="padding: 10px 20px; font-size: 0.88rem;">
+                        <span>✍️ إيداع شكاية جديدة</span>
+                    </button>
+                </div>
+
+                <div class="complaint-tracker-form">
+                    <input type="text" id="citizenTrackTicketInput" class="complaint-tracker-input" placeholder="أدخل رقم الشكاية المرجعي (مثال: TKT-2026-001)" dir="ltr">
+                    <button type="button" onclick="trackCitizenComplaint()" class="complaint-tracker-btn">
+                        <span>🔍 تتبع مآل الشكاية</span>
+                    </button>
+                </div>
+
+                <div id="citizenTrackResultBox" style="display: none;"></div>
+            </div>
         </div>
     </section>
 
@@ -730,6 +763,93 @@
         </div>
     </section>
 
+    <!-- ==========================================
+         SECTION: MANDATE 2021-2027 (المجلس الجماعي والمكتب المسير)
+         ========================================== -->
+    <section class="mandate-showcase-section" id="mandateSection">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">المؤسسة الدستورية المنتخبة</span>
+                <h2 class="section-title center" style="color: #ffffff; margin-top: 8px;">مؤسسة المجلس الجماعي لبيوكرى (الولاية 2021-2027)</h2>
+                <p style="color: #94a3b8; max-width: 720px; margin: 0 auto; font-size: 0.95rem;">الحكامة الترابية والتدبير التشاركي للشأن المحلي لخدمة الصالح العام ومواكبة تطلعات الساكنة.</p>
+            </div>
+
+            <!-- Featured Mayor Card -->
+            <div class="mandate-mayor-card">
+                <div class="mayor-seal-avatar">🏛️</div>
+                <div class="mayor-info">
+                    <span class="mayor-role-badge" id="mandateMayorRole">رئيس المجلس الجماعي</span>
+                    <h3 class="mayor-name" id="mandateMayorName">محمد أمين البقالي</h3>
+                    <p class="mayor-quote">«نعمل جاهدين بتنسيق تام مع كافة مكونات المجلس والمجتمع المدني والسلطات الإقليمية على تنزيل برنامج عمل جماعة بيوكرى، وتحديث المرافق الحيوية لتكون مدينتنا قطباً عمرانياً واقتصادياً رائداً بإقليم اشتوكة آيت باها.»</p>
+                </div>
+                <div>
+                    <button type="button" onclick="openMandateModal()" class="btn-footer-chikaya" style="white-space: nowrap;">
+                        <span>👥 تشكيلة المجلس كاملة</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bureau Members Cards Grid -->
+            <div class="bureau-members-grid" id="mandateBureauGrid">
+                <!-- Dynamically rendered via MainController -->
+            </div>
+
+            <div style="text-align: center;">
+                <button type="button" onclick="openMandateModal()" class="btn-footer-location" style="padding: 12px 28px; font-size: 0.95rem;">
+                    <span>📑 استعراض اللجان الدائمة وأعضاء المجلس الـ 31 بالتفصيل ←</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION: SYNTHESIS REPORT (التقرير التركيبي ومشاريع الاختصاصات)
+         ========================================== -->
+    <section class="synthesis-section" id="synthesisSection">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 30px;">
+                <div>
+                    <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">برنامج عمل الجماعة • حصيلة الإنجاز</span>
+                    <h2 class="section-title" style="color: #ffffff; margin-top: 8px;" id="synthesisReportTitle">التقرير التركيبي لحصيلة المشاريع التنموية (2021-2027)</h2>
+                </div>
+                <button type="button" onclick="exportSynthesisReportPDF()" class="btn-footer-chikaya">
+                    <span>📄 استخراج وتحميل التقرير الرسمي PDF</span>
+                </button>
+            </div>
+
+            <!-- Intro Text Box -->
+            <div class="synthesis-intro-box" id="synthesisReportIntro">
+                في إطار تنزيل مقتضيات القانون التنظيمي 113.14 المتعلق بالجماعات، وتفعيلاً لمبادئ الحكامة الترابية والشفافية في التدبير العمومي، يهدف هذا التقرير التركيبي إلى استعراض حصيلة تنفيذ المشاريع التنموية الكبرى للجماعة الترابية، وتوزيعها الدقيق حسب مجالات الاختصاص الذاتية والمشتركة والمنقولة، مع إبراز الاعتمادات المالية المرصودة ونسب الإنجاز المحققة.
+            </div>
+
+            <!-- 4 Strategic Axes Grid -->
+            <div class="synthesis-axes-grid" id="synthesisAxesGrid">
+                <!-- Dynamically rendered via MainController -->
+            </div>
+
+            <!-- Competence Projects Table in Affichage -->
+            <div style="margin-top: 40px;">
+                <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin-bottom: 16px;">📋 جدول مشاريع مجالات الاختصاص والشراكات:</h3>
+                <div class="synthesis-table-wrapper">
+                    <table class="synthesis-table">
+                        <thead>
+                            <tr>
+                                <th>اسم المشروع التنموي</th>
+                                <th>مجال الاختصاص</th>
+                                <th>الحالة</th>
+                                <th>الاعتمادات المرصودة</th>
+                                <th>نسبة الإنجاز %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synthesisProjectsTableBody">
+                            <!-- Dynamically rendered via MainController -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MULTIMEDIA & PRESS GALLERY -->
     <section class="multimedia-section" id="multimedia">
         <div class="container">
@@ -833,19 +953,19 @@
     <section class="stats-section" id="portalStats">
         <div class="container stats-grid">
             <div class="stat-card">
-                <div class="stat-number" data-target="2027">2021-2027</div>
+                <div class="stat-number" id="statMandatePeriod" data-target="2027">2021-2027</div>
                 <div class="stat-label">الولاية الانتدابية الحالية</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" data-target="100">+100%</div>
+                <div class="stat-number" id="statTransparencyRate" data-target="100">+100%</div>
                 <div class="stat-label">شفافية وتواصل محلي</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" data-target="54">+50</div>
+                <div class="stat-number" id="statProjectsCount" data-target="54">+50</div>
                 <div class="stat-label">مشروعاً تنموياً معتمداً</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">24/7</div>
+                <div class="stat-number" id="statServicesCount" data-target="25">24/7</div>
                 <div class="stat-label">خدمات وبوابات رقمية</div>
             </div>
         </div>
@@ -856,10 +976,10 @@
         <!-- Institutional Header Strip -->
         <div class="footer-institutional-header">
             <div class="container footer-brand-flex">
-                <img src="assets/logo_transparent.png" alt="شعار المملكة وجماعة بيوكرى" class="footer-logo-main" width="82" height="82" style="max-width:82px; width:82px; height:auto; object-fit:contain;">
+                <img src="assets/logo_transparent.png" alt="شعار المملكة وجماعة بيوكرى" class="footer-logo-main" id="footerLogoMainImg" width="82" height="82" style="max-width:82px; width:82px; height:auto; object-fit:contain;">
                 <div class="footer-brand-info">
                     <span class="footer-kingdom-badge">المملكة المغربية • وزارة الداخلية • إقليم اشتوكة آيت باها</span>
-                    <h3 class="footer-portal-title">الجماعة الترابية لبيوكرى</h3>
+                    <h3 class="footer-portal-title muni-name-display">الجماعة الترابية لبيوكرى</h3>
                     <p class="footer-portal-tagline">البوابة الرقمية الرسمية الموحدة لتدبير الشأن العام المحلي، مواكبة التنمية المستدامة، وتقريب الخدمات الإدارية من المواطنين والمجتمع المدني والمستثمرين.</p>
                 </div>
                 <div class="footer-action-badge-box">
@@ -913,7 +1033,7 @@
                             </div>
                             <div>
                                 <strong>المقر الرئيسي للجماعة:</strong>
-                                <span>شارع محمد الخامس، بيوكرى، إقليم اشتوكة آيت باها</span>
+                                <span id="footerAddressDisplay">شارع محمد الخامس، بيوكرى، إقليم اشتوكة آيت باها</span>
                             </div>
                         </li>
                         <li>
@@ -922,7 +1042,7 @@
                             </div>
                             <div>
                                 <strong>أوقات الاستقبال الإداري:</strong>
-                                <span>من الإثنين إلى الجمعة: 08:30 صباحاً إلى 16:30 مساءً</span>
+                                <span id="footerHoursDisplay">من الإثنين إلى الجمعة: 08:30 صباحاً إلى 16:30 مساءً</span>
                             </div>
                         </li>
                         <li>
@@ -931,7 +1051,7 @@
                             </div>
                             <div>
                                 <strong>الهاتف المباشر:</strong>
-                                <span dir="ltr">+212 528 81 80 00</span>
+                                <span dir="ltr" id="footerPhoneDisplay">+212 528 81 80 00</span>
                             </div>
                         </li>
                         <li>
@@ -940,7 +1060,7 @@
                             </div>
                             <div>
                                 <strong>البريد الإلكتروني المعتمد:</strong>
-                                <span>contact@biougra.ma</span>
+                                <span id="footerEmailDisplay">contact@biougra.ma</span>
                             </div>
                         </li>
                     </ul>
