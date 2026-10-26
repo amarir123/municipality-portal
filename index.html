@@ -164,7 +164,45 @@
             <div class="ticker-marquee">
                 <span id="tickerContent">مرحباً بكم في البوابة الإلكترونية الموحدة لجماعة بيوكرى - تواصلوا معنا وقدموا طلباتكم وتتبعوا ملفاتكم وشكاياتكم إلكترونياً على مدار الساعة.</span>
             </div>
+        
+    <!-- ========================================================
+         PORTAL QUICK DOCK: وصول سريع للهيئات والمشاريع والدعم
+         ======================================================== -->
+    <div class="portal-quick-dock-wrapper">
+        <div class="container">
+            <div class="portal-quick-dock">
+                <a href="#mandateSection" class="quick-dock-pill">
+                    <span class="dock-icon">🏛️</span>
+                    <div class="dock-text">
+                        <strong>المجلس والولاية 2021-2027</strong>
+                        <span>المكتب، اللجان، والسيرة الذاتية [CV]</span>
+                    </div>
+                </a>
+                <a href="#synthesisSection" class="quick-dock-pill">
+                    <span class="dock-icon">📊</span>
+                    <div class="dock-text">
+                        <strong>حصيلة المشاريع وتركيبتها</strong>
+                        <span>دراسة، صفقات، مدة، وميزانية</span>
+                    </div>
+                </a>
+                <a href="#subventionsSection" class="quick-dock-pill">
+                    <span class="dock-icon">🤝</span>
+                    <div class="dock-text">
+                        <strong>دعم الجمعيات واللوائح</strong>
+                        <span>القرارات، مكاتب الجمعيات، ومبيان التوزيع</span>
+                    </div>
+                </a>
+                <a href="#subventionEligibilityBox" class="quick-dock-pill gold">
+                    <span class="dock-icon">💡</span>
+                    <div class="dock-text">
+                        <strong>شروط واستمارة الاستفادة</strong>
+                        <span>دليل وطلب دعم الجمعيات حسب الصنف</span>
+                    </div>
+                </a>
+            </div>
         </div>
+    </div>
+</div>
     </div>
 
     <!-- ========================================================
@@ -813,9 +851,14 @@
                     <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">برنامج عمل الجماعة • حصيلة الإنجاز</span>
                     <h2 class="section-title" style="color: #ffffff; margin-top: 8px;" id="synthesisReportTitle">التقرير التركيبي لحصيلة المشاريع التنموية (2021-2027)</h2>
                 </div>
-                <button type="button" onclick="exportSynthesisReportPDF()" class="btn-footer-chikaya">
-                    <span>📄 استخراج وتحميل التقرير الرسمي PDF</span>
-                </button>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" onclick="openBudgetSheetModal()" class="btn-footer-chikaya" style="background: rgba(201, 151, 46, 0.2); border-color: #C9972E; color: #E3B351;">
+                        <span>📊 ورقة الميزانية (Feuille de Budget)</span>
+                    </button>
+                    <button type="button" onclick="exportSynthesisReportPDF()" class="btn-footer-chikaya">
+                        <span>📄 استخراج التقرير الرسمي PDF</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Intro Text Box -->
@@ -876,6 +919,17 @@
                 </div>
             </div>
 
+            <!-- Categories Distribution Showcase (توزيع الدعم حسب نوع الجمعية) -->
+            <div style="margin: 30px 0 10px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                    <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0;">📊 مبيان وتوزيع ميزانية الدعم المالي حسب أصناف الجمعيات:</h3>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">توزيع الاعتمادات بنزاهة وتكافؤ فرص وفق معايير دفتر التحملات</span>
+                </div>
+                <div class="subvention-cat-grid" id="subventionsCatDistributionGrid">
+                    <!-- Populated dynamically via MainController -->
+                </div>
+            </div>
+
             <!-- Beneficiaries Table Directly on Homepage -->
             <div style="margin-top: 30px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
@@ -891,6 +945,7 @@
                                 <th>الملف والقانون الأساسي</th>
                                 <th>محضر الدورة والمقرر</th>
                                 <th>مبلغ الدعم الممنوح</th>
+                                <th>الملف والمكتب</th>
                             </tr>
                         </thead>
                         <tbody id="frontSubventionsTableBody">
@@ -2378,5 +2433,213 @@
     </div>
 
 <div class="hero-custom-cursor" id="heroCustomCursor"><span class="cursor-text" id="cursorText">سحب ↔</span></div>
+
+    <!-- ==========================================
+         MODAL: MEMBER CV (السيرة الذاتية لعضو المجلس / اللجنة)
+         ========================================== -->
+    <div class="modal-overlay" id="memberCvModal" style="display: none;" onclick="if(event.target===this) closeMemberCv()">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="modal-close-btn" onclick="closeMemberCv()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div class="cv-hero-card">
+                    <div class="cv-avatar-badge">👤</div>
+                    <div>
+                        <div class="cv-name" id="cvMemberName">محمد أمين البقالي</div>
+                        <div class="cv-role" id="cvMemberRole">رئيس المجلس الجماعي لبيوكرى</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 4px;" id="cvMemberCommittee">المكتب المسير</div>
+                    </div>
+                </div>
+
+                <div class="cv-body-box">
+                    <div style="font-weight: 800; color: var(--primary-color); margin-bottom: 8px; font-size: 1.05rem;">📄 السيرة الذاتية والمسار التنموي:</div>
+                    <p id="cvMemberBio" style="margin: 0;">تفاصيل السيرة الذاتية والمؤهلات الأكاديمية والمهنية.</p>
+                </div>
+
+                <div style="background: #f1f5f9; border-radius: 8px; padding: 12px; font-size: 0.85rem; color: #64748b; text-align: center;">
+                    المملكة المغربية • إقليم اشتوكة آيت باها • جماعة بيوكرى الترابية
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL: PROJECT CONSISTANCE (بطاقة تركيبة المشروع: دراسة، صفقات، مدة، مستفيدين، وثائق)
+         ========================================== -->
+    <div class="modal-overlay" id="projectConsistanceModal" style="display: none;" onclick="if(event.target===this) closeProjectConsistance()">
+        <div class="modal-content" style="max-width: 820px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" onclick="closeProjectConsistance()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 14px;">
+                    <span class="hero-badge-tag" id="consTypeBadge" style="background: rgba(201, 151, 46, 0.15); color: #C9972E;">اختصاصات ذاتية</span>
+                    <h3 style="color: var(--primary-color); font-size: 1.35rem; font-weight: 800; margin: 8px 0 6px 0;" id="consTitle">اسم المشروع</h3>
+                    <div style="display: flex; gap: 15px; font-size: 0.9rem; flex-wrap: wrap;">
+                        <span>الوضعية: <strong class="badge" id="consStatusBadge" style="background: #10b981; color: white;">في طور الإنجاز</strong></span>
+                        <span>الاعتمادات المرصودة: <strong id="consBudget" style="color: var(--primary-color);">0 درهم</strong></span>
+                        <span>نسبة الإنجاز: <strong id="consProgress" style="color: #C9972E;">0%</strong></span>
+                    </div>
+                </div>
+
+                <h4 style="color: #1e293b; font-size: 1.1rem; margin-bottom: 12px;">📋 التركيبة التقنية والتعاقدية للمشروع (La Consistance du Projet):</h4>
+                
+                <div class="consistance-grid">
+                    <div class="consistance-card">
+                        <div class="consistance-label">📐 دراسة المشروع (Étude)</div>
+                        <div class="consistance-value" id="consEtude">-</div>
+                    </div>
+                    <div class="consistance-card gold-border">
+                        <div class="consistance-label">📝 الصفقات العمومية (Marchés)</div>
+                        <div class="consistance-value" id="consMarche">-</div>
+                    </div>
+                    <div class="consistance-card green-border">
+                        <div class="consistance-label">⏳ مدة الإنجاز والمخطط الزمني (Durée)</div>
+                        <div class="consistance-value" id="consDuree">-</div>
+                    </div>
+                    <div class="consistance-card purple-border">
+                        <div class="consistance-label">👥 عدد المستفيدين والساكنة (Bénéficiaires)</div>
+                        <div class="consistance-value" id="consBeneficiaires">-</div>
+                    </div>
+                </div>
+
+                <div class="consistance-card" style="margin-top: 16px; border-right-color: #0284c7;">
+                    <div class="consistance-label">📑 الوثائق والتعاقدات (Documents & Contrats)</div>
+                    <div class="consistance-value" id="consDocs">-</div>
+                </div>
+
+                <div style="margin-top: 20px; text-align: left;">
+                    <button type="button" onclick="closeProjectConsistance()" class="btn btn-primary" style="padding: 10px 24px;">إغلاق البطاقة ✕</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL: BUDGET SHEET (ورقة الميزانية المفصلة لبرنامج العمل)
+         ========================================== -->
+    <div class="modal-overlay" id="budgetSheetModal" style="display: none;" onclick="if(event.target===this) closeBudgetSheetModal()">
+        <div class="modal-content" style="max-width: 820px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" onclick="closeBudgetSheetModal()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.15); color: #C9972E;">برنامج عمل الجماعة 2021-2027</span>
+                    <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-top: 8px;">ورقة الميزانية التقديرية ومصادر التمويل (Feuille de Budget)</h2>
+                    <p style="color: #64748b; font-size: 0.92rem; margin: 4px 0 0 0;">الشفافية في تعبئة وتوزيع الموارد المالية لتنزيل المشاريع المهيكلة لبيوكرى</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px;">
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center; border-top: 4px solid var(--primary-color);">
+                        <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">الميزانية الإجمالية المرصودة</div>
+                        <div style="font-size: 1.3rem; font-weight: 900; color: var(--primary-color); margin-top: 4px;">1.64 مليار د.م</div>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center; border-top: 4px solid #10b981;">
+                        <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">التمويل الذاتي للجماعة</div>
+                        <div style="font-size: 1.3rem; font-weight: 900; color: #10b981; margin-top: 4px;">485 مليون د.م</div>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center; border-top: 4px solid #C9972E;">
+                        <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">مساهمات الشركاء والوزارات</div>
+                        <div style="font-size: 1.3rem; font-weight: 900; color: #C9972E; margin-top: 4px;">860 مليون د.م</div>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center; border-top: 4px solid #8b5cf6;">
+                        <div style="font-size: 0.8rem; color: #64748b; font-weight: 700;">نسبة الإنجاز المالي والتعاقدي</div>
+                        <div style="font-size: 1.3rem; font-weight: 900; color: #8b5cf6; margin-top: 4px;">86.4%</div>
+                    </div>
+                </div>
+
+                <table class="admin-table" style="margin-bottom: 20px;">
+                    <thead>
+                        <tr>
+                            <th>مجال الإنفاق والبرمجة</th>
+                            <th>الاعتمادات المخصصة</th>
+                            <th>المصدر التمويلي</th>
+                            <th>النسبة من الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>تهيئة الطرق والمداخل والتنقل الحضري</strong></td>
+                            <td>850,000,000 درهم</td>
+                            <td>ميزانية الجماعة + وزارة التجهيز والجهة</td>
+                            <td><strong>51.6%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>المناطق الخضراء والبيئة والإنارة الذكية</strong></td>
+                            <td>420,000,000 درهم</td>
+                            <td>ميزانية الجماعة + صندوق النجاعة الطاقية</td>
+                            <td><strong>25.5%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>المرافق الرياضية والثقافية والاجتماعية</strong></td>
+                            <td>280,000,000 درهم</td>
+                            <td>المبادرة الوطنية INDH + وزارة الثقافة والرياضة</td>
+                            <td><strong>17.0%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>الرقمنة وتحديث الإدارة والخدمات الذكية</strong></td>
+                            <td>95,000,000 درهم</td>
+                            <td>تمويل ذاتي للجماعة الترابية لبيوكرى</td>
+                            <td><strong>5.8%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <button type="button" onclick="exportSynthesisReportPDF()" class="btn btn-gold">🖨️ طباعة ورقة الميزانية والتقرير PDF</button>
+                    <button type="button" onclick="closeBudgetSheetModal()" class="btn btn-outline">إغلاق ✕</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL: ASSOCIATION DETAILS (مكتب الجمعية والملف القانوني)
+         ========================================== -->
+    <div class="modal-overlay" id="assocDetailsModal" style="display: none;" onclick="if(event.target===this) closeAssocDetails()">
+        <div class="modal-content" style="max-width: 780px; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" onclick="closeAssocDetails()" aria-label="إغلاق">✕</button>
+            <div class="modal-body">
+                <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 14px; margin-bottom: 18px;">
+                    <span class="badge" id="assocModalType" style="background: rgba(201, 151, 46, 0.2); color: #C9972E; font-size: 0.85rem;">نوع الجمعية</span>
+                    <h3 style="color: var(--primary-color); font-size: 1.35rem; font-weight: 800; margin: 8px 0 4px 0;" id="assocModalName">اسم الجمعية</h3>
+                    <div style="font-size: 0.95rem; color: #10b981; font-weight: 800;">
+                        مبلغ الدعم الممنوح: <span id="assocModalAmount">0 درهم</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #1e293b; font-size: 1.05rem; margin-bottom: 8px;">🎯 المشروع المدعوم:</h4>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 0.92rem; color: #334155;" id="assocModalProject">
+                        تفاصيل المشروع المدعوم.
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #1e293b; font-size: 1.05rem; margin-bottom: 10px;">👥 أعضاء مكتب الجمعية المسير:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;" id="assocModalBureauMembers">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #1e293b; font-size: 1.05rem; margin-bottom: 10px;">📑 الملف والوضعية القانونية:</h4>
+                    <div class="consistance-grid" style="margin-top: 0;">
+                        <div class="consistance-card">
+                            <div class="consistance-label">وضعية القانون الأساسي</div>
+                            <div class="consistance-value" id="assocModalStatut">-</div>
+                        </div>
+                        <div class="consistance-card gold-border">
+                            <div class="consistance-label">وصل الإيداع والملف القانوني</div>
+                            <div class="consistance-value" id="assocModalLegal">-</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: #64748b;" id="assocModalPv">
+                        محضر دورة المجلس الجماعي
+                    </div>
+                </div>
+
+                <div style="text-align: left;">
+                    <button type="button" onclick="closeAssocDetails()" class="btn btn-primary" style="padding: 8px 20px;">إغلاق ✕</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -318,21 +318,39 @@ export class MainController {
                             <div class="mandate-member-name">${m.name}</div>
                             <div style="font-size: 0.85rem; color: #64748b;">الانتماء: ${m.party || 'الأغلبية'}</div>
                             ${m.phone ? `<div style="font-size: 0.85rem; color: var(--primary-color); margin-top: 6px;">📞 ${m.phone}</div>` : ''}
+                            <button type="button" onclick="openMemberCv('${m.name}', '${m.role}', '${m.cv || 'عضو المكتب المسير لجماعة بيوكرى'}', 'المكتب المسير')" class="btn btn-outline btn-sm" style="margin-top: 10px; width: 100%; font-size: 0.8rem; border-color: #cbd5e1;">
+                                <span>📄 السيرة الذاتية [CV]</span>
+                            </button>
                         </div>
                     `).join('')}
                 </div>
             `;
         } else if (tab === 'committees') {
             content.innerHTML = `
-                <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
                     ${mandate.committees.map(c => `
-                        <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; background: #f8fafc; border-right: 4px solid var(--accent-color);">
-                            <h4 style="color: var(--primary-color); font-size: 1.15rem; margin-bottom: 6px;">${c.name}</h4>
-                            <p style="font-size: 0.9rem; color: #475569; margin-bottom: 10px;">${c.description}</p>
-                            <div style="display: flex; gap: 15px; font-size: 0.88rem; font-weight: 600;">
-                                <span>الرئيس: <strong>${c.president}</strong></span>
-                                <span>نائب الرئيس: <strong>${c.vice}</strong></span>
-                                <span class="badge badge-info">${c.membersCount} أعضاء</span>
+                        <div style="border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; background: #ffffff; border-right: 5px solid var(--accent-color); box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                                <div>
+                                    <h4 style="color: var(--primary-color); font-size: 1.2rem; font-weight: 800; margin: 0 0 6px 0;">${c.name}</h4>
+                                    <p style="font-size: 0.92rem; color: #475569; margin: 0 0 12px 0;">${c.description}</p>
+                                </div>
+                                <span class="badge badge-info" style="font-size: 0.85rem; padding: 4px 10px;">${c.membersCount} أعضاء</span>
+                            </div>
+                            <div style="display: flex; gap: 18px; font-size: 0.9rem; font-weight: 700; color: #1e293b; margin-bottom: 14px; background: #f8fafc; padding: 10px 14px; border-radius: 8px;">
+                                <span>رئيس اللجنة: <strong style="color: var(--primary-color);">${c.president}</strong></span>
+                                <span>نائب الرئيس: <strong style="color: var(--primary-color);">${c.vice}</strong></span>
+                            </div>
+                            <div style="margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 12px;">
+                                <div style="font-size: 0.86rem; font-weight: 800; color: #64748b; margin-bottom: 10px;">أعضاء اللجنة [معاينة السيرة الذاتية CV]:</div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    ${(c.membersList || []).map(m => `
+                                        <button type="button" onclick="openMemberCv('${m.name}', '${m.role}', '${m.cv}', '${c.name}')" class="btn btn-outline btn-sm" style="background: #f8fafc; border-color: #cbd5e1; font-size: 0.82rem; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+                                            <span>👤 ${m.name}</span>
+                                            <span style="background: #1e3a8a; color: #ffffff; padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; margin-right: 6px;">CV 📄</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
                             </div>
                         </div>
                     `).join('')}
@@ -348,6 +366,7 @@ export class MainController {
                                 <th>الصفة في المجلس</th>
                                 <th>الدائرة الانتخابية</th>
                                 <th>اللجنة التابع لها</th>
+                                <th>السيرة الذاتية</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -357,6 +376,11 @@ export class MainController {
                                     <td><span class="badge badge-info">${m.role}</span></td>
                                     <td>${m.district || '-'}</td>
                                     <td>${m.committee || '-'}</td>
+                                    <td>
+                                        <button type="button" onclick="openMemberCv('${m.name}', '${m.role}', '${m.cv || 'مستشار جماعي بالمجلس الجماعي لبيوكرى'}', '${m.committee || 'المجلس الجماعي'}')" class="btn btn-outline btn-sm" style="font-size: 0.78rem; padding: 4px 10px; cursor: pointer;">
+                                            <span>معاينة CV 📄</span>
+                                        </button>
+                                    </td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -365,7 +389,6 @@ export class MainController {
             `;
         }
     }
-
     // ==========================================
     // SUBVENTIONS PUBLIC MODAL (دعم الجمعيات)
     // ==========================================
@@ -402,39 +425,39 @@ export class MainController {
                     <td><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">${b.statutStatus}</span></td>
                     <td style="font-size: 0.85rem; color: #94a3b8;">${b.pvNumber}</td>
                     <td><strong style="color: #E3B351;">${Number(b.amount).toLocaleString()} درهم</strong></td>
+                    <td>
+                        <button type="button" onclick="openAssocDetails(${b.id})" class="btn-footer-chikaya" style="padding: 6px 12px; font-size: 0.8rem; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #10b981; border-radius: 6px; cursor: pointer; white-space: nowrap;">
+                            <span>👥 مكتب الجمعية والملف</span>
+                        </button>
+                    </td>
                 </tr>
             `).join('');
         };
 
         renderRows(document.getElementById('publicSubventionsTableBody'));
         renderRows(document.getElementById('frontSubventionsTableBody'));
-    }
+        renderRows(document.getElementById('subventionsModalTableBody'));
 
-    loadPublicationsData() {
-        const pubs = PublicationModel.getAll() || [];
-        const container = document.getElementById('frontPublicationsGrid');
-        if (!container) return;
-
-        if (pubs.length === 0) {
-            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 30px;">لا توجد منشورات متاحة حالياً.</div>';
-            return;
+        // Render Categories Distribution Cards (توزيع الدعم)
+        const catGrid = document.getElementById('subventionsCatDistributionGrid');
+        if (catGrid && sub.categoriesDistribution) {
+            catGrid.innerHTML = sub.categoriesDistribution.map(c => `
+                <div class="subvention-cat-card">
+                    <div class="sub-cat-header">
+                        <span class="sub-cat-title">${c.icon} ${c.category}</span>
+                        <span class="badge" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; font-size: 0.75rem; border: 1px solid rgba(201, 151, 46, 0.3);">${c.count} جمعيات</span>
+                    </div>
+                    <div class="sub-cat-amount">${Number(c.totalAmount).toLocaleString()} د.م</div>
+                    <div class="sub-cat-meta">حصة ${c.percentage}% من ميزانية الدعم السنوي</div>
+                    <div class="sub-cat-bar-track">
+                        <div class="sub-cat-bar-fill" style="width: ${c.percentage}%;"></div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        container.innerHTML = pubs.map(p => `
-            <div class="pub-front-card">
-                <div>
-                    <div class="pub-front-header">
-                        <span class="pub-front-type-pill">${p.type || 'PDF'}</span>
-                        <span class="pub-front-size">${p.size || ''}</span>
-                    </div>
-                    <h4 class="pub-front-title">${p.title}</h4>
-                    <p class="pub-front-desc">${p.description}</p>
-                </div>
-                <a href="javascript:void(0)" onclick="alert('جاري تحميل الوثيقة الرسمية: ${p.title}');" class="pub-front-btn">
-                    <span>📥 تحميل الوثيقة الرسمية</span>
-                </a>
-            </div>
-        `).join('');
+        // Initialize Eligibility Questionnaire (Crée question)
+        this.selectSubventionCategory('رياضية');
     }
 
     downloadSubventionFiche() {
@@ -694,10 +717,15 @@ export class MainController {
                     <td>
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span>${p.progress}%</span>
-                            <div style="flex: 1; min-width: 60px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
+                            <div style="flex: 1; min-width: 50px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
                                 <div style="height: 100%; width: ${p.progress}%; background: #C9972E;"></div>
                             </div>
                         </div>
+                    </td>
+                    <td>
+                        <button type="button" onclick="openProjectConsistance(${p.id})" class="btn-footer-chikaya" style="padding: 6px 12px; font-size: 0.8rem; background: rgba(201, 151, 46, 0.2); border-color: #C9972E; color: #E3B351; border-radius: 6px; cursor: pointer; white-space: nowrap;">
+                            <span>🔍 تركيبة المشروع (Consistance)</span>
+                        </button>
                     </td>
                 </tr>
             `).join('');
@@ -857,6 +885,18 @@ export class MainController {
         window.downloadSubventionFiche = () => this.downloadSubventionFiche();
         window.trackCitizenComplaint = () => this.trackCitizenComplaint();
         window.exportSynthesisReportPDF = () => this.exportSynthesisReportPDF();
+
+        // New Helpers from user requirements
+        window.openMemberCv = (name, role, cv, committee) => this.openMemberCv(name, role, cv, committee);
+        window.closeMemberCv = () => this.closeMemberCv();
+        window.openProjectConsistance = (id) => this.openProjectConsistance(id);
+        window.closeProjectConsistance = () => this.closeProjectConsistance();
+        window.openBudgetSheetModal = () => this.openBudgetSheetModal();
+        window.closeBudgetSheetModal = () => this.closeBudgetSheetModal();
+        window.openAssocDetails = (id) => this.openAssocDetails(id);
+        window.closeAssocDetails = () => this.closeAssocDetails();
+        window.selectSubventionCategory = (cat) => this.selectSubventionCategory(cat);
+        window.submitOnlineSubventionApplication = (e) => this.submitOnlineSubventionApplication(e);
     }
 
     bindEvents() {
@@ -885,4 +925,167 @@ export class MainController {
             el.style.display = isAdminLogged ? 'inline-block' : 'none';
         });
     }
+
+    // ==========================================
+    // MEMBER CV MODAL
+    // ==========================================
+    openMemberCv(name, role, cv, committee) {
+        const overlay = document.getElementById('memberCvModal');
+        if (!overlay) return;
+        const nameEl = document.getElementById('cvMemberName');
+        const roleEl = document.getElementById('cvMemberRole');
+        const commEl = document.getElementById('cvMemberCommittee');
+        const bioEl = document.getElementById('cvMemberBio');
+        if (nameEl) nameEl.textContent = name;
+        if (roleEl) roleEl.textContent = role;
+        if (commEl) commEl.textContent = committee || 'المجلس الجماعي لبيوكرى';
+        if (bioEl) bioEl.textContent = cv || 'فاعل محلي يساهم في تدبير شؤون جماعة بيوكرى وخدمة المصلحة العامة.';
+        overlay.style.display = 'flex';
+    }
+
+    closeMemberCv() {
+        const overlay = document.getElementById('memberCvModal');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    // ==========================================
+    // PROJECT CONSISTANCE MODAL (تركيبة المشروع: دراسة، صفقات، مدة، مستفيدين، وثائق)
+    // ==========================================
+    openProjectConsistance(id) {
+        const report = SynthesisReportModel.get();
+        if (!report) return;
+        const project = (report.competenceProjects || []).find(p => p.id === id);
+        if (!project) return;
+
+        const overlay = document.getElementById('projectConsistanceModal');
+        if (!overlay) return;
+
+        const titleEl = document.getElementById('consTitle');
+        const typeEl = document.getElementById('consTypeBadge');
+        const statusEl = document.getElementById('consStatusBadge');
+        const budgetEl = document.getElementById('consBudget');
+        const progEl = document.getElementById('consProgress');
+
+        if (titleEl) titleEl.textContent = project.projectName;
+        if (typeEl) typeEl.textContent = project.competenceType;
+        if (statusEl) statusEl.textContent = project.status;
+        if (budgetEl) budgetEl.textContent = `${Number(project.budget).toLocaleString()} درهم`;
+        if (progEl) progEl.textContent = `${project.progress}%`;
+
+        // Consistance breakdown items
+        const etudeEl = document.getElementById('consEtude');
+        const marcheEl = document.getElementById('consMarche');
+        const dureeEl = document.getElementById('consDuree');
+        const benEl = document.getElementById('consBeneficiaires');
+        const docsEl = document.getElementById('consDocs');
+
+        if (etudeEl) etudeEl.textContent = project.etude || 'دراسة تقنية ومعمارية مصادق عليها ومودعة لدى قسم التعمير والأشغال.';
+        if (marcheEl) marcheEl.textContent = project.marche || 'طلب عروض أثمان ودفتر تحملات معتمد وفق مرسوم الصفقات العمومية.';
+        if (dureeEl) dureeEl.textContent = project.duree || `${project.timeline} (وفق الجدول الزمني المصادق عليه)`;
+        if (benEl) benEl.textContent = project.beneficiaires || 'ساكنة جماعة بيوكرى والزوار والمرتفقين.';
+        if (docsEl) docsEl.textContent = project.documents || 'دفتر الشروط الخاصة (CPS)، اتفاقيات الشراكة، ومحاضر التسليم المؤقت والنهائي.';
+
+        overlay.style.display = 'flex';
+    }
+
+    closeProjectConsistance() {
+        const overlay = document.getElementById('projectConsistanceModal');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    // ==========================================
+    // BUDGET SHEET MODAL (ورقة الميزانية)
+    // ==========================================
+    openBudgetSheetModal() {
+        const overlay = document.getElementById('budgetSheetModal');
+        if (overlay) overlay.style.display = 'flex';
+    }
+
+    closeBudgetSheetModal() {
+        const overlay = document.getElementById('budgetSheetModal');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    // ==========================================
+    // ASSOCIATION DETAILS MODAL (مكتب الجمعية والملف القانوني)
+    // ==========================================
+    openAssocDetails(id) {
+        const sub = SubventionModel.get();
+        if (!sub) return;
+        const assoc = (sub.beneficiaries || []).find(b => b.id === id);
+        if (!assoc) return;
+
+        const overlay = document.getElementById('assocDetailsModal');
+        if (!overlay) return;
+
+        const nameEl = document.getElementById('assocModalName');
+        const typeEl = document.getElementById('assocModalType');
+        const amountEl = document.getElementById('assocModalAmount');
+        const projEl = document.getElementById('assocModalProject');
+        const statutEl = document.getElementById('assocModalStatut');
+        const legalEl = document.getElementById('assocModalLegal');
+        const pvEl = document.getElementById('assocModalPv');
+
+        if (nameEl) nameEl.textContent = assoc.assocName;
+        if (typeEl) typeEl.textContent = assoc.assocType;
+        if (amountEl) amountEl.textContent = `${Number(assoc.amount).toLocaleString()} درهم`;
+        if (projEl) projEl.textContent = assoc.projectSupported || 'مشروع سنوي معتمد';
+        if (statutEl) statutEl.textContent = assoc.statutStatus || 'مطابق ومحيّن ومصادق عليه';
+        if (legalEl) legalEl.textContent = assoc.legalStatus || 'وصل إيداع نهائي ومحضر قانوني مكتمل';
+        if (pvEl) pvEl.textContent = assoc.pvNumber || 'مقرر دورة المجلس الجماعي';
+
+        const bureauContainer = document.getElementById('assocModalBureauMembers');
+        if (bureauContainer) {
+            const members = assoc.bureauMembers || [{ role: 'الرئيس', name: assoc.president, phone: '0661000000' }];
+            bureauContainer.innerHTML = members.map(m => `
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="color: var(--primary-color); display: block; font-size: 0.95rem;">${m.name}</strong>
+                        <span style="font-size: 0.82rem; color: #64748b;">${m.role} ${m.cin ? `(ب.ت.و: ${m.cin})` : ''}</span>
+                    </div>
+                    ${m.phone ? `<span style="font-size: 0.82rem; color: #10b981; font-weight: 700;">📞 ${m.phone}</span>` : ''}
+                </div>
+            `).join('');
+        }
+
+        overlay.style.display = 'flex';
+    }
+
+    closeAssocDetails() {
+        const overlay = document.getElementById('assocDetailsModal');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    // ==========================================
+    // SUBVENTION ELIGIBILITY QUESTIONNAIRE (Crée question لكي تستفيد)
+    // ==========================================
+    selectSubventionCategory(category) {
+        const sub = SubventionModel.get();
+        if (!sub || !sub.eligibilityQuestions) return;
+
+        const data = sub.eligibilityQuestions[category] || sub.eligibilityQuestions["رياضية"];
+
+        // Update active button state
+        document.querySelectorAll('.eligibility-tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.category === category);
+        });
+
+        const titleEl = document.getElementById('eligibilityCatTitle');
+        const criteriaEl = document.getElementById('eligibilityCriteriaList');
+        const docsEl = document.getElementById('eligibilityDocsList');
+
+        if (titleEl) titleEl.textContent = data.title;
+        if (criteriaEl) {
+            criteriaEl.innerHTML = data.criteria.map(c => `<li>${c}</li>`).join('');
+        }
+        if (docsEl) {
+            docsEl.innerHTML = data.requiredDocs.map(d => `<li>${d}</li>`).join('');
+        }
+    }
+
+    submitOnlineSubventionApplication(event) {
+        if (event) event.preventDefault();
+        alert('تم تسجيل طلب إيداع ملف الدعم الخاص بجمعيتكم بنجاح لدى مصلحة الشؤون الاجتماعية والجمعيات بجماعة بيوكرى! سيتم التواصل معكم فور انتهاء دراسة الملف.');
+    }
+
 }

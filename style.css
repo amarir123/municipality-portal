@@ -3940,3 +3940,323 @@ body.dark-mode-theme .cmdk-footer {
     border-color: #24355c !important;
     background: #0B1530 !important;
 }
+
+
+/* ========================================================
+   QUICK NAVIGATION DOCK (شريط الوصول السريع إلى الهيئات والمشاريع والدعم)
+   ======================================================== */
+.portal-quick-dock-wrapper {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 21, 48, 0.98) 100%);
+    border-bottom: 2px solid rgba(201, 151, 46, 0.35);
+    padding: 14px 0;
+    position: relative;
+    z-index: 90;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.portal-quick-dock {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    align-items: center;
+}
+
+.quick-dock-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #ffffff;
+}
+
+.quick-dock-pill:hover {
+    background: rgba(201, 151, 46, 0.15);
+    border-color: #C9972E;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(201, 151, 46, 0.2);
+}
+
+.quick-dock-pill.gold {
+    border-color: rgba(201, 151, 46, 0.6);
+    background: linear-gradient(135deg, rgba(201, 151, 46, 0.2) 0%, rgba(15, 23, 42, 0.4) 100%);
+}
+
+.quick-dock-pill .dock-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.quick-dock-pill .dock-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.quick-dock-pill .dock-text span {
+    display: block;
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    margin-top: 2px;
+}
+
+.quick-dock-pill:hover .dock-text strong {
+    color: #E3B351;
+}
+
+/* SUBVENTIONS CATEGORY BREAKDOWN CARDS (توزيع الدعم حسب نوع الجمعية) */
+.subvention-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 25px 0;
+}
+
+.subvention-cat-card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    border-top: 3px solid #C9972E;
+    color: #ffffff;
+}
+
+.subvention-cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-top-color: #E3B351;
+}
+
+.sub-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.sub-cat-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+
+.sub-cat-amount {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #E3B351;
+    margin-bottom: 4px;
+}
+
+.sub-cat-meta {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.sub-cat-bar-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.sub-cat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C9972E, #10b981);
+    border-radius: 3px;
+}
+
+/* ELIGIBILITY & QUESTION BOX: كيف تستفيد جمعيتك من الدعم */
+.eligibility-box {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+    border: 2px solid rgba(201, 151, 46, 0.4);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+}
+
+.eligibility-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.eligibility-tab-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.eligibility-tab-btn:hover,
+.eligibility-tab-btn.active {
+    background: #C9972E;
+    color: #0b1530;
+    border-color: #E3B351;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 151, 46, 0.3);
+}
+
+.eligibility-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .eligibility-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.eligibility-col h4 {
+    color: #E3B351;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eligibility-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.eligibility-list li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.eligibility-list li::before {
+    content: "✓";
+    position: absolute;
+    right: 0;
+    color: #10b981;
+    font-weight: 900;
+}
+
+/* CONSISTANCE MODAL STYLES (بطاقة تركيبة المشروع) */
+.consistance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+@media (max-width: 650px) {
+    .consistance-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.consistance-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+    border-right: 4px solid var(--primary-color);
+}
+
+.consistance-card.gold-border {
+    border-right-color: #C9972E;
+}
+
+.consistance-card.green-border {
+    border-right-color: #10b981;
+}
+
+.consistance-card.purple-border {
+    border-right-color: #8b5cf6;
+}
+
+.consistance-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.consistance-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.5;
+}
+
+/* CV MODAL STYLES */
+.cv-hero-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #0b1530 100%);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.cv-avatar-badge {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(201, 151, 46, 0.2);
+    border: 3px solid #C9972E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    flex-shrink: 0;
+}
+
+.cv-name {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.cv-role {
+    font-size: 0.95rem;
+    color: #E3B351;
+    font-weight: 700;
+}
+
+.cv-body-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #334155;
+}

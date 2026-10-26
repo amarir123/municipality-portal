@@ -712,6 +712,10 @@
                             <input type="text" id="memberCommittee" class="form-input" placeholder="مثال: لجنة الميزانية">
                         </div>
                     </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">السيرة الذاتية [CV] والمؤهلات</label>
+                        <textarea id="memberCv" class="form-input" rows="2" placeholder="المؤهلات الأكاديمية والمهنية والتجربة التنموية"></textarea>
+                    </div>
                     <div style="margin-bottom: 15px;">
                         <label class="form-label">إضافة إلى:</label>
                         <select id="memberTargetType" class="form-input" style="background: white;">
@@ -769,9 +773,33 @@
                             <input type="number" id="compProjProgress" class="form-input" min="0" max="100" placeholder="0" required>
                         </div>
                     </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">دراسة المشروع (Étude)</label>
+                            <input type="text" id="compProjEtude" class="form-input" placeholder="اسم مكتب الدراسات وتاريخ المصادقة">
+                        </div>
+                        <div>
+                            <label class="form-label">الصفقة العمومية (Marchés)</label>
+                            <input type="text" id="compProjMarche" class="form-input" placeholder="رقم الصفقة واسم المقاولة">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">مدة الإنجاز (Durée)</label>
+                            <input type="text" id="compProjDuree" class="form-input" placeholder="مثال: 18 شهراً">
+                        </div>
+                        <div>
+                            <label class="form-label">عدد المستفيدين (Bénéficiaires)</label>
+                            <input type="text" id="compProjBeneficiaires" class="form-input" placeholder="مثال: 45,000 نسمة">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الوثائق والتعاقدات (CPS / Contrats)</label>
+                        <input type="text" id="compProjDocuments" class="form-input" placeholder="دفتر التحملات، اتفاقية الشراكة، محضر التسليم">
+                    </div>
                     <div style="margin-bottom: 15px;">
                         <label class="form-label">ملاحظات وتفاصيل إضافية</label>
-                        <textarea id="compProjNotes" class="form-input" rows="3"></textarea>
+                        <textarea id="compProjNotes" class="form-input" rows="2"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ المشروع 💾</button>
                 </form>
@@ -815,6 +843,10 @@
                             <label class="form-label">المطالب والملف القانوني *</label>
                             <input type="text" id="subLegalStatus" class="form-input" value="ملف قانوني مكتمل (وصل إيداع نهائي)" required>
                         </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">أعضاء مكتب الجمعية (الكاتب العام، أمين المال...)</label>
+                        <input type="text" id="subBureauMembersText" class="form-input" placeholder="الكاتب العام: فلان، أمين المال: فلان">
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
                         <div>

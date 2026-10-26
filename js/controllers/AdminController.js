@@ -579,14 +579,15 @@ export class AdminController {
         const district = document.getElementById('memberDistrict')?.value;
         const committee = document.getElementById('memberCommittee')?.value;
         const targetType = document.getElementById('memberTargetType')?.value;
+        const cv = document.getElementById('memberCv')?.value || 'فاعل محلي يساهم في تدبير شؤون جماعة بيوكرى.';
 
         if (!name || !role) return;
 
         if (targetType === 'both' || targetType === 'bureau') {
-            MandateModel.addBureauMember({ role, name, party: 'الأغلبية', phone: '-' });
+            MandateModel.addBureauMember({ role, name, party: 'الأغلبية', cv, phone: '-' });
         }
         if (targetType === 'both' || targetType === 'council') {
-            MandateModel.addCouncilMember({ name, role, district, committee });
+            MandateModel.addCouncilMember({ name, role, district, committee, cv });
         }
 
         this.closeCouncilMemberModal();
