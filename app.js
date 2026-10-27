@@ -1568,19 +1568,20 @@ window.toggleFontSize = function() {
     }
 };
 
-// 5. ACCESSIBILITY: LUXURY DARK MODE TOGGLE
+// 5. ACCESSIBILITY: LUXURY DAY/NIGHT TOGGLE (Default is bright official daylight)
 window.toggleDarkMode = function() {
     const isDark = document.body.classList.toggle('dark-mode-theme');
     localStorage.setItem('biougra_dark_mode', isDark ? 'true' : 'false');
     if (typeof showQuickToast === 'function') {
-        showQuickToast(isDark ? 'تم تفعيل الوضع الليلي الفاخر (Majorelle & Or) 🌙' : 'تم تفعيل الوضع النهاري المشرق ☀️');
+        showQuickToast(isDark ? 'تم تفعيل الوضع الليلي 🌙' : 'تم تفعيل الوضع النهاري الرسمي ☀️');
     }
 };
 
-// Initialize saved dark mode
+// Guarantee clean official daylight theme - clear legacy dark mode cached preference
 if (localStorage.getItem('biougra_dark_mode') === 'true') {
-    document.body.classList.add('dark-mode-theme');
+    localStorage.removeItem('biougra_dark_mode');
 }
+document.body.classList.remove('dark-mode-theme');
 
 // 6. GLOWING MOUSE CURSOR AURA (DESKTOP)
 document.addEventListener('mousemove', (e) => {

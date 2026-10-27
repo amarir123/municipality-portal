@@ -1356,7 +1356,7 @@ button, input {
 .modal-video-container {
     width: 100%;
     aspect-ratio: 16/9;
-    background-color: #000;
+    background-color: #0f172a;
     border-radius: var(--border-radius);
     overflow: hidden;
     position: relative;
@@ -2266,7 +2266,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1010 !important;
-    background: linear-gradient(135deg, var(--dark-color) 0%, #162447 40%, var(--primary-color) 100%) !important;
+    background: linear-gradient(135deg, #1B3A8A 0%, #152d6b 50%, #102354 100%) !important;
     border-bottom: 3.5px solid var(--accent-color) !important;
     box-shadow: 0 4px 20px rgba(11, 21, 48, 0.35) !important;
     transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, box-shadow 0.3s, height 0.3s;
@@ -2274,7 +2274,7 @@ body {
 .main-header.scrolled {
     padding: 4px 0;
     height: 68px !important;
-    background: rgba(11, 21, 48, 0.96) !important;
+    background: rgba(27, 58, 138, 0.96) !important;
     backdrop-filter: blur(14px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
 }
