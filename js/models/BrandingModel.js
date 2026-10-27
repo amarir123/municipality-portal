@@ -21,7 +21,7 @@ const defaultBranding = {
     weatherCity: "بيوكرى",
     weatherTemp: "23°C",
     weatherStatus: "مشمس",
-    showTicker: true,
+    showTicker: false,
     showUrban: true,
     showPublications: true,
     showEvents: true,
