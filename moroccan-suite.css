@@ -2951,25 +2951,25 @@ h1, h2, h3, h4, .font-kufi {
    (TICKER, MANDATE 2021-2027, SYNTHESIS REPORT, COMPLAINT TRACKING)
    ========================================================================== */
 
-/* 2. MANDATE 2021-2027 SHOWCASE SECTION (المجلس والولاية) */
+/* 2. MANDATE 2021-2027 SHOWCASE SECTION (المجلس والولاية - تصميم فاتح وأنيق) */
 .mandate-showcase-section {
-    padding: 80px 0;
-    background: #0d0f17;
+    padding: 85px 0;
+    background: #f8fafc;
     position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .mandate-mayor-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(201, 151, 46, 0.35);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 20px;
     padding: 35px;
     display: flex;
     gap: 30px;
     align-items: center;
     margin-bottom: 35px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
 }
@@ -2981,20 +2981,21 @@ h1, h2, h3, h4, .font-kufi {
     right: 0;
     width: 6px;
     height: 100%;
-    background: linear-gradient(180deg, #C9972E, #F2A93B);
+    background: linear-gradient(180deg, #1B3A8A, #C9972E);
 }
 
 .mayor-seal-avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201, 151, 46, 0.25) 0%, rgba(13, 15, 23, 0.8) 100%);
+    background: radial-gradient(circle, rgba(201, 151, 46, 0.15) 0%, #f1f5f9 100%);
     border: 2px solid #C9972E;
+    color: #1B3A8A;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
-    box-shadow: 0 0 25px rgba(201, 151, 46, 0.4);
+    box-shadow: 0 4px 15px rgba(201, 151, 46, 0.2);
     flex-shrink: 0;
 }
 
@@ -3003,23 +3004,27 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .mayor-role-badge {
-    color: #E3B351;
-    font-weight: 700;
+    color: #B45309;
+    background: rgba(201, 151, 46, 0.12);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 800;
     font-size: 0.85rem;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(201, 151, 46, 0.25);
 }
 
 .mayor-name {
     font-family: 'Cairo', sans-serif;
     font-size: 1.6rem;
     font-weight: 900;
-    color: #ffffff;
+    color: #1B3A8A;
     margin: 0 0 8px 0;
 }
 
 .mayor-quote {
-    color: #94a3b8;
+    color: #475569;
     font-size: 0.95rem;
     line-height: 1.7;
     margin: 0;
@@ -3034,55 +3039,57 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .bureau-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 16px;
     padding: 22px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .bureau-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(201, 151, 46, 0.4);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: #1B3A8A;
+    box-shadow: 0 10px 25px rgba(27, 58, 138, 0.08);
 }
 
 .bureau-role {
     font-size: 0.82rem;
-    color: #C9972E;
-    font-weight: 700;
+    color: #B45309;
+    font-weight: 800;
     margin-bottom: 6px;
 }
 
 .bureau-name {
     font-family: 'Cairo', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #0f172a;
     margin-bottom: 6px;
 }
 
 .bureau-party {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: #64748b;
 }
 
 /* 3. SYNTHESIS REPORT & STRATEGIC AXES (التقرير التركيبي ومشاريع الاختصاصات) */
 .synthesis-section {
     padding: 85px 0;
-    background: #111219;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
     position: relative;
 }
 
 .synthesis-intro-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 18px;
     padding: 30px;
     margin-bottom: 40px;
     line-height: 1.8;
-    color: #cbd5e1;
+    color: #334155;
     font-size: 0.98rem;
     position: relative;
 }
@@ -3095,27 +3102,28 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .synthesis-axis-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 18px;
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .synthesis-axis-card:hover {
-    border-color: rgba(201, 151, 46, 0.45);
+    border-color: #1B3A8A;
     transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 30px rgba(27, 58, 138, 0.08);
 }
 
 .synthesis-axis-title {
     font-family: 'Cairo', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #0f172a;
     margin-bottom: 14px;
     line-height: 1.45;
 }
@@ -3123,19 +3131,19 @@ h1, h2, h3, h4, .font-kufi {
 .synthesis-axis-meta {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
-    color: #94a3b8;
+    font-size: 0.88rem;
+    color: #64748b;
     margin-bottom: 12px;
 }
 
 .synthesis-axis-meta strong {
-    color: #E3B351;
+    color: #1B3A8A;
 }
 
 .synthesis-progress-track {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #e2e8f0;
     border-radius: 999px;
     overflow: hidden;
     margin-top: 6px;
@@ -3143,18 +3151,19 @@ h1, h2, h3, h4, .font-kufi {
 
 .synthesis-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #C9972E, #F2A93B);
+    background: linear-gradient(90deg, #1B3A8A, #C9972E);
     border-radius: 999px;
     transition: width 0.8s ease;
 }
 
 /* Competence Projects Table in Affichage */
 .synthesis-table-wrapper {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 18px;
     overflow: hidden;
     margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .synthesis-table {
@@ -3165,30 +3174,30 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .synthesis-table th {
-    background: rgba(255, 255, 255, 0.04);
-    color: #C9972E;
+    background: #f1f5f9;
+    color: #1B3A8A;
     padding: 16px 20px;
     font-weight: 800;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 2px solid #e2e8f0;
 }
 
 .synthesis-table td {
     padding: 16px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    color: #cbd5e1;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
 }
 
 .synthesis-table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: #f8fafc;
 }
 
 /* 4. CITIZEN COMPLAINT TRACKING CARD (تتبع الشكايات للمواطنين) */
 .complaint-tracker-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(201, 151, 46, 0.35);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 20px;
     padding: 35px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     margin-top: 35px;
 }
 
@@ -3203,10 +3212,10 @@ h1, h2, h3, h4, .font-kufi {
     flex: 1;
     min-width: 250px;
     padding: 14px 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
     border-radius: 12px;
-    color: #ffffff;
+    color: #0f172a;
     font-size: 0.95rem;
     font-family: inherit;
     transition: all 0.25s ease;
@@ -3214,14 +3223,14 @@ h1, h2, h3, h4, .font-kufi {
 
 .complaint-tracker-input:focus {
     outline: none;
-    border-color: #C9972E;
-    box-shadow: 0 0 15px rgba(201, 151, 46, 0.25);
+    border-color: #1B3A8A;
+    box-shadow: 0 0 0 3px rgba(27, 58, 138, 0.1);
 }
 
 .complaint-tracker-btn {
     padding: 14px 28px;
-    background: linear-gradient(135deg, #C9972E, #E3B351);
-    color: #0d0f17;
+    background: #1B3A8A;
+    color: #ffffff;
     font-weight: 800;
     border: none;
     border-radius: 12px;
@@ -3234,16 +3243,17 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .complaint-tracker-btn:hover {
+    background: #152d6b;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(201, 151, 46, 0.4);
+    box-shadow: 0 8px 20px rgba(27, 58, 138, 0.25);
 }
 
 .complaint-result-card {
     margin-top: 25px;
     padding: 24px;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
 }
 
 .complaint-result-status {
@@ -3257,13 +3267,13 @@ h1, h2, h3, h4, .font-kufi {
 
 .complaint-result-status.pending {
     background: rgba(245, 158, 11, 0.15);
-    color: #f59e0b;
+    color: #d97706;
     border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .complaint-result-status.solved {
     background: rgba(16, 185, 129, 0.15);
-    color: #10b981;
+    color: #059669;
     border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
@@ -3273,94 +3283,23 @@ h1, h2, h3, h4, .font-kufi {
     border-radius: 12px;
     background: rgba(201, 151, 46, 0.08);
     border-right: 4px solid #C9972E;
-    color: #f1f5f9;
+    color: #1e293b;
     font-size: 0.95rem;
     line-height: 1.7;
 }
 
-/* 5. MANDATE INTERACTIVE MODAL (نافذة تشكيلة المجلس) */
-.mandate-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 12, 18, 0.88);
-    backdrop-filter: blur(10px);
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.mandate-modal-card {
-    background: #111420;
-    border: 1px solid rgba(201, 151, 46, 0.4);
-    border-radius: 22px;
-    max-width: 950px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-}
-
-.mandate-modal-header {
-    padding: 24px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.mandate-modal-tabs {
-    display: flex;
-    gap: 10px;
-    padding: 16px 30px;
-    background: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    flex-wrap: wrap;
-}
-
-.mandate-tab-btn {
-    padding: 10px 20px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
-    color: #94a3b8;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.mandate-tab-btn.active {
-    background: #C9972E;
-    color: #0d0f17;
-    border-color: #C9972E;
-}
-
-.mandate-modal-body {
-    padding: 30px;
-    overflow-y: auto;
-    flex: 1;
-}
-
-
-/* ==========================================================================
-   HOMEPAGE SHOWCASE: SUBVENTIONS & OFFICIAL PUBLICATIONS SECTIONS
-   ========================================================================== */
-
-/* 1. SUBVENTIONS & CIVIL SOCIETY SUPPORT SECTION */
+/* 5. SUBVENTIONS & CIVIL SOCIETY SUPPORT SECTION */
 .subventions-showcase-section {
     padding: 85px 0;
-    background: #0b0d14;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
     position: relative;
 }
 
 .subvention-decision-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(201, 151, 46, 0.35);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 20px;
     padding: 30px;
     margin-bottom: 35px;
@@ -3369,7 +3308,7 @@ h1, h2, h3, h4, .font-kufi {
     align-items: center;
     gap: 25px;
     flex-wrap: wrap;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     position: relative;
     overflow: hidden;
 }
@@ -3381,44 +3320,30 @@ h1, h2, h3, h4, .font-kufi {
     right: 0;
     width: 6px;
     height: 100%;
-    background: linear-gradient(180deg, #C9972E, #F2A93B);
+    background: linear-gradient(180deg, #1B3A8A, #C9972E);
 }
 
 .subvention-decision-info h3 {
     font-family: 'Cairo', sans-serif;
-    color: #ffffff;
+    color: #1B3A8A;
     font-size: 1.25rem;
     font-weight: 800;
     margin: 0 0 8px 0;
 }
 
 .subvention-decision-info p {
-    color: #94a3b8;
+    color: #475569;
     font-size: 0.94rem;
     line-height: 1.7;
     margin: 0;
     max-width: 780px;
 }
 
-.subvention-deadline-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(201, 151, 46, 0.15);
-    border: 1px solid rgba(201, 151, 46, 0.35);
-    color: #E3B351;
-    padding: 6px 16px;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-top: 10px;
-}
-
-/* 2. OFFICIAL PUBLICATIONS SHOWCASE SECTION */
+/* 6. OFFICIAL PUBLICATIONS SHOWCASE SECTION */
 .publications-showcase-section {
     padding: 85px 0;
-    background: #0e111a;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
     position: relative;
 }
 
@@ -3430,21 +3355,21 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .pub-front-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 18px;
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .pub-front-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(201, 151, 46, 0.45);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: #1B3A8A;
+    box-shadow: 0 14px 30px rgba(27, 58, 138, 0.08);
 }
 
 .pub-front-header {
@@ -3455,13 +3380,13 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .pub-front-type-pill {
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 6px;
     font-weight: 800;
-    font-size: 0.75rem;
-    background: rgba(201, 151, 46, 0.15);
-    color: #E3B351;
-    border: 1px solid rgba(201, 151, 46, 0.3);
+    font-size: 0.78rem;
+    background: rgba(201, 151, 46, 0.12);
+    color: #B45309;
+    border: 1px solid rgba(201, 151, 46, 0.25);
 }
 
 .pub-front-size {
@@ -3471,7 +3396,7 @@ h1, h2, h3, h4, .font-kufi {
 
 .pub-front-title {
     font-family: 'Cairo', sans-serif;
-    color: #ffffff;
+    color: #0f172a;
     font-size: 1.1rem;
     font-weight: 800;
     margin: 0 0 10px 0;
@@ -3479,7 +3404,7 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .pub-front-desc {
-    color: #94a3b8;
+    color: #64748b;
     font-size: 0.88rem;
     line-height: 1.6;
     margin: 0 0 20px 0;
@@ -3490,9 +3415,9 @@ h1, h2, h3, h4, .font-kufi {
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1B3A8A;
     font-weight: 700;
     font-size: 0.88rem;
     cursor: pointer;
@@ -3506,7 +3431,7 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .pub-front-btn:hover {
-    background: #C9972E;
-    color: #0d0f17;
-    border-color: #C9972E;
+    background: #1B3A8A;
+    color: #ffffff;
+    border-color: #1B3A8A;
 }
