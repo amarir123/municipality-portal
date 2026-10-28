@@ -660,7 +660,7 @@ export class MainController {
         const bureauGrid = document.getElementById('mandateBureauGrid');
         if (bureauGrid && mandate.bureau) {
             bureauGrid.innerHTML = mandate.bureau.slice(1, 5).map(m => `
-                <div class="bureau-card">
+                <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
                     <div class="bureau-role">${m.role}</div>
                     <div class="bureau-name">${m.name}</div>
                     <div class="bureau-party">${m.party || 'الأغلبية'}</div>

@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
-    <link rel="stylesheet" href="style.css?v=22.0">
-    <link rel="stylesheet" href="moroccan-suite.css?v=22.0">
+    <link rel="stylesheet" href="style.css?v=33.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=33.0">
 </head>
 <body id="appBody">
     <!-- Scroll Progress Indicator Bar -->
@@ -24,88 +24,34 @@
 
     <!-- FLOATING CAPSULE HEADER (SINGLE ELEGANT GLASS NAV) -->
     <header class="nav" id="nav">
-        <!-- Brand & Logo -->
+        <!-- Brand & Royal Moroccan Emblem -->
         <a class="brand" href="index.html">
-            <img src="assets/logo_transparent.png" alt="شعار جماعة بيوكرى" id="mainLogoHeaderImg">
+            <img src="assets/logo.png" alt="المملكة المغربية - جماعة بيوكرى" id="mainLogoHeaderImg" class="royal-crest-img">
             <span>
                 <b class="muni-name-display">جماعة بيوكرى</b>
                 <small>Commune de Biougra</small>
             </span>
         </a>
 
-        <!-- Desktop Navigation with Gold Magic Sliding Indicator -->
+        <!-- Desktop Navigation matching user mockup -->
         <nav class="menu" id="menu">
-            <a class="nav-item active" href="municipality.html">الجماعة الترابية</a>
+            <a class="nav-item active" href="index.html">الرئيسية</a>
             <a class="nav-item" href="action-program.html">برنامج العمل</a>
-            <a class="nav-item" href="#urban-development">التنمية الحضرية</a>
-            
-            <!-- Mega Menu Trigger Item for Services & Documents -->
-            <div class="menu-dropdown" id="servicesDropdown">
-                <a class="nav-item nav-item-has-sub" href="#servicesSection">
-                    <span>الخدمات والوثائق</span>
-                    <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </a>
-                
-                <!-- Mega Menu Panel (2 Columns) -->
-                <div class="mega-panel" id="megaPanel">
-                    <div class="mega-grid">
-                        <div class="mega-links-col">
-                            <span class="mega-title">الخدمات الأكثر طلباً</span>
-                            <div class="mega-items-list">
-                                <a href="javascript:void(0)" onclick="openServiceDetail('residence')">
-                                    <span class="mega-tag">01</span>
-                                    <span>شهادة السكنى والإقامة</span>
-                                </a>
-                                <a href="javascript:void(0)" onclick="openServiceDetail('birth')">
-                                    <span class="mega-tag">02</span>
-                                    <span>عقد الازدياد والحالة المدنية</span>
-                                </a>
-                                <a href="javascript:void(0)" onclick="openServiceDetail('legalization')">
-                                    <span class="mega-tag">03</span>
-                                    <span>تصحيح الإمضاء ومطابقة النسخ</span>
-                                </a>
-                                <a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">
-                                    <span class="mega-tag">04</span>
-                                    <span>منصة رخص البناء والتعمير</span>
-                                </a>
-                                <a href="javascript:void(0)" onclick="openLegalPopup()">
-                                    <span class="mega-tag">05</span>
-                                    <span>المعلومات القانونية والنصوص</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mega-feature-col">
-                            <div class="mega-card-box">
-                                <span class="mega-badge">منصة المواطن</span>
-                                <h4>تتبع ملفك أو إيداع شكاية</h4>
-                                <p>متابعة آنية لمراحل دراسة ملفك أو إيداع شكايتك لدى مصالح الجماعة بكل يسر.</p>
-                                <div class="mega-box-actions">
-                                    <button type="button" onclick="openComplaintModal()" class="btn-mega-gold">إيداع شكاية</button>
-                                    <a href="javascript:void(0)" onclick="openComplaintModal()" class="btn-mega-link">تتبع ملفك ←</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a class="nav-item" href="#subventionsSection">دعم الجمعيات</a>
-            <a class="nav-item" href="#publicationsSection">منشوراتنا</a>
+            <a class="nav-item" href="municipality.html">الجهة الإدارية</a>
+            <a class="nav-item" href="#servicesSection">الخدمات الإلكترونية</a>
+            <a class="nav-item" href="#mandateSection">المنتخبون</a>
             <a class="nav-item" href="#mandateSection">المجلس الجماعي</a>
-            <a class="nav-item" href="contact.html">أوقات العمل</a>
+            <a class="nav-item" href="contact.html">أرقام العمل</a>
             <i class="line" id="line"></i>
         </nav>
 
-        <!-- Right: Actions Group -->
+        <!-- Right / Actions Group matching user mockup -->
         <div class="actions">
-            <!-- Consolidated Tools Button (Language, Display, Weather) -->
+            <!-- Language Pill: AR 🌐 -->
             <div class="tools-wrapper" id="toolsWrapper">
-                <button type="button" class="tools" id="toolsBtn" aria-label="اللغة والعرض">
-                    <span>ع</span>
-                    <span>|</span>
-                    <span>FR</span>
-                    <span>|</span>
-                    <span>ⵜ</span>
+                <button type="button" class="lang-pill-btn" id="toolsBtn" aria-label="اللغة">
+                    <span>AR</span>
+                    <span class="globe-icon">🌐</span>
                 </button>
                 
                 <!-- Tools Floating Popup Palette -->
@@ -145,8 +91,11 @@
                 </div>
             </div>
 
-            <!-- Single Prominent Gold CTA Button -->
-            <a class="cta" href="#servicesSection">خدمات إلكترونية</a>
+            <!-- Prominent Gold CTA Button: خدمات إلكترونية 📄 -->
+            <a class="cta-gold-pill" href="#servicesSection">
+                <span>خدمات إلكترونية</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </a>
 
             <!-- Mobile Hamburger Toggle -->
             <button class="mobile-toggle" id="mobileToggle" aria-label="القائمة">
@@ -158,293 +107,548 @@
     </header>
 
     <!-- ========================================================
-         HERO SECTION: 3D CURVED PANORAMIC CYLINDER THEATER
+         HERO SECTION: 3D CINEMATIC PANORAMIC THEATER (PIXEL-PRECISE REFERENCE)
          ======================================================== -->
     <section class="hero-3d-panoramic" id="hero">
-        <!-- Deep Mountain Backdrop with Atmospheric Vignette -->
-        <div class="hero-3d-backdrop"></div>
-        <div class="hero-3d-glow"></div>
-        
-        <!-- Magical Golden Dust Ambient Particles Canvas -->
+        <!-- Full-Viewport Photographic Landscape Background -->
+        <div class="hero-3d-backdrop" id="heroBackdrop"></div>
+        <div class="hero-dynamic-gradient-overlay"></div>
+        <div class="hero-atmospheric-light"></div>
+
+        <!-- Ambient Golden Dust Particles Canvas -->
         <canvas id="heroParticlesCanvas" class="hero-particles-canvas"></canvas>
 
-        <!-- Ambient Cursor Spotlight Tracker -->
-        <div id="heroCursorSpotlight" class="hero-cursor-spotlight"></div>
-        
-        <!-- 3D Perspective Floor Grid -->
-        <div class="panoramic-grid-floor"></div>
-
-        <!-- Hero Header: Title & Subtitle Only -->
+        <!-- Header Content (Slogan + Main Title + Subtitle) -->
         <div class="hero-header-content">
+            <div class="hero-top-slogan">
+                <span class="slogan-line"></span>
+                <span class="slogan-text">من أجل تنمية مستدامة و خدمة أفضل للمواطنين</span>
+                <span class="slogan-line"></span>
+            </div>
             <h1 class="hero-main-title">
-                بوابة الجماعة الترابية <span>بيوكرى</span>
+                بوابة الجماعة الترابية <span class="hero-title-gold">بيوكرى</span>
             </h1>
-
-            
+            <p class="hero-main-subtitle">
+                تقريب الإدارة من المواطن وتعزيز التنمية المحلية
+            </p>
         </div>
 
-        <!-- 3D Perspective Stage in the Center of Hero -->
-        <div class="panoramic-stage-container" id="panoramicStage">
-            <!-- Realistic Ground Shadow Plane ("خيال الأرضية ثلاثي الأبعاد") -->
-            <div class="pano-stage-ground-shadow"></div>
-            <!-- Left / Right Navigation Touch/Click Paddles -->
-            <button class="pano-nav-btn pano-prev-btn" id="panoPrevBtn" aria-label="السابق">
+        <!-- 3D Media Carousel Stage -->
+        <div class="hero-3d-stage" id="heroCardsStage">
+            <!-- Left Card (أخبار الجماعة - تأهيل البنية التحتية بالمنطقة) -->
+            <article class="stage-card stage-card-left" id="stageCardLeft" onclick="handlePanoPrev()" role="button" tabindex="0" title="أخبار الجماعة - اضغط للتبديل">
+                <div class="card-glass-frame">
+                    <div class="card-thumb-wrap">
+                        <img src="assets/video_hall.png" alt="تأهيل البنية التحتية بالمنطقة" class="stage-img">
+                        <div class="card-glass-badge badge-top-right">
+                            <span>أخبار الجماعة</span>
+                            <span class="badge-icon">📰</span>
+                        </div>
+                    </div>
+                    <div class="card-glass-body">
+                        <h3 class="stage-card-title">تأهيل البنية التحتية بالمنطقة</h3>
+                        <p class="stage-card-subtitle">جماعة بيوكرى تسهر أشغال تهيئة الطرقات والأحياء السكنية.</p>
+                        <div class="stage-card-date">15 ماي 2025</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Center Featured Card (إطلاق أسطول حافلات النقل الحضري بالنيابة) -->
+            <article class="stage-card stage-card-center active" id="stageCardCenter" role="region" aria-label="العرض الرئيسي المميز">
+                <div class="card-glass-frame featured-frame">
+                    <div class="card-thumb-wrap featured-thumb">
+                        <img src="assets/video_bus.png" alt="إطلاق أسطول حافلات النقل الحضري بالنيابة" class="stage-img" id="centerCardImg">
+                        
+                        <!-- Badges -->
+                        <div class="card-glass-badge badge-top-right badge-gold" id="centerBadgeCategory">
+                            <span>الأنشطة التنموية</span>
+                            <span class="badge-icon">🏛️</span>
+                        </div>
+                        <div class="card-glass-badge badge-top-left" id="centerBadgeTime">
+                            <span>⏱️ 05:47</span>
+                        </div>
+
+                        <!-- Center Glowing Play Button -->
+                        <button class="stage-play-btn" onclick="openHeroVideoCapsule()" aria-label="تشغيل الفيديو">
+                            <span class="play-pulse-ring"></span>
+                            <span class="play-inner-circle">
+                                <svg class="play-triangle-svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="7 4 19 12 7 20 7 4"></polygon>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="card-glass-body featured-body">
+                        <div class="featured-info">
+                            <h3 class="stage-card-title featured-title" id="centerCardTitle">إطلاق أسطول حافلات النقل الحضري بالنيابة</h3>
+                            <p class="stage-card-subtitle featured-desc" id="centerCardDesc">في إطار تحسين خدمات النقل الحضري، تم إطلاق أسطول جديد من الحافلات الحديثة لتسهيل تنقل المواطنين داخل الجماعة.</p>
+                        </div>
+                        <button class="btn-watch-video" onclick="openHeroVideoCapsule()">
+                            <span>مشاهدة الفيديو</span>
+                            <span class="watch-icon">▶</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Right Card (المشاريع - مشروع السوق الأسبوعي الجديد) -->
+            <article class="stage-card stage-card-right" id="stageCardRight" onclick="handlePanoNext()" role="button" tabindex="0" title="المشاريع - اضغط للتبديل">
+                <div class="card-glass-frame">
+                    <div class="card-thumb-wrap">
+                        <img src="assets/video_park.png" alt="مشروع السوق الأسبوعي الجديد" class="stage-img">
+                        <div class="card-glass-badge badge-top-right">
+                            <span>المشاريع</span>
+                            <span class="badge-icon">🏗️</span>
+                        </div>
+                    </div>
+                    <div class="card-glass-body">
+                        <h3 class="stage-card-title">مشروع السوق الأسبوعي الجديد</h3>
+                        <p class="stage-card-subtitle">إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة بيوكرى.</p>
+                        <div class="stage-card-date">10 ماي 2025</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circular Chevron Navigation Buttons -->
+            <button class="carousel-arrow arrow-prev" onclick="handlePanoPrev()" aria-label="السابق">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
-            <button class="pano-nav-btn pano-next-btn" id="panoNextBtn" aria-label="التالي">
+            <button class="carousel-arrow arrow-next" onclick="handlePanoNext()" aria-label="التالي">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
-
-            <!-- The Rotating 3D Cylinder / Ribbon Carousel Track -->
-            <div class="panoramic-cylinder-track" id="panoramicTrack">
-                <!-- Slide 0: Urban Park Video Capsule -->
-                <div class="pano-card" data-index="0" onclick="handlePanoCardClick(0)">
-                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_park.png');">
-                        <div class="pano-card-top-bar">
-                            <span class="pano-pill-badge">🌿 المشاريع البيئية والترفيهية</span>
-                            <span class="pano-duration-pill">02:45 • 4K</span>
-                        </div>
-                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        </div>
-                        <div class="pano-card-bottom-info">
-                            <h3 class="pano-card-title">تهيئة وتأهيل المنتزه الحضري لبيوكرى</h3>
-                            <p class="pano-card-desc">متنفس طبيعي متكامل، مساحات خضراء، فضاءات ألعاب، ومسارات رياضية عصرية لساكنة المدينة.</p>
-                            <div class="pano-card-action-row">
-                                <span class="pano-watch-text">▶ اضغط لمشاهدة الكبسولة المرئية</span>
-                                <span class="pano-num-indicator">01 / 05</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 1: Sports Hall -->
-                <div class="pano-card" data-index="1" onclick="handlePanoCardClick(1)">
-                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_hall.png');">
-                        <div class="pano-card-top-bar">
-                            <span class="pano-pill-badge">⚽ البنية الرياضية والشبابية</span>
-                            <span class="pano-duration-pill">01:50 • HD</span>
-                        </div>
-                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        </div>
-                        <div class="pano-card-bottom-info">
-                            <h3 class="pano-card-title">القاعة المغطاة وملاعب القرب الحديثة</h3>
-                            <p class="pano-card-desc">تجهيزات رياضية بمعايير حديثة لاحتضان البطولات الجهوية والوطنية وتأطير المواهب الرياضية الشابة.</p>
-                            <div class="pano-card-action-row">
-                                <span class="pano-watch-text">▶ استكشف المنشأة الرياضية</span>
-                                <span class="pano-num-indicator">02 / 05</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2: Urban Roads & Infrastructure (Progress Metric Card) -->
-                <div class="pano-card" data-index="2" onclick="handlePanoCardClick(2)">
-                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(18,18,22,0.92) 100%), url('assets/card_territory.png');">
-                        <div class="pano-card-top-bar">
-                            <span class="pano-pill-badge">🏗️ برنامج التنمية 2021-2027</span>
-                            <span class="pano-duration-pill">نسبة الإنجاز: 85%</span>
-                        </div>
-                        <div class="pano-metric-capsule">
-                            <div class="metric-circle-box">
-                                <span class="metric-percent">85%</span>
-                                <span class="metric-sub">إنجاز المحاور</span>
-                            </div>
-                        </div>
-                        <div class="pano-card-bottom-info">
-                            <h3 class="pano-card-title">توسيع وتقوية المحاور الطرقية الكبرى</h3>
-                            <p class="pano-card-desc">تأهيل مداخل المدينة، الإنارة العمومية بالطاقة المستدامة، وتهيئة الأرصفة والساحات الحضرية.</p>
-                            <div class="pano-card-action-row">
-                                <span class="pano-watch-text">الميزانية الإجمالية: 1.1 مليار درهم</span>
-                                <span class="pano-num-indicator">03 / 05</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Smart Urban Transport -->
-                <div class="pano-card" data-index="3" onclick="handlePanoCardClick(3)">
-                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/video_bus.png');">
-                        <div class="pano-card-top-bar">
-                            <span class="pano-pill-badge">🚌 النقل الحضري والربط الترابي</span>
-                            <span class="pano-duration-pill">03:15 • HD</span>
-                        </div>
-                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        </div>
-                        <div class="pano-card-bottom-info">
-                            <h3 class="pano-card-title">إطلاق أسطول خدمات النقل الحضري الحديث</h3>
-                            <p class="pano-card-desc">ربط أحياء المدينة والمرافق التعليمية والصحية بشبكة حافلات عصرية وميسرة لكافة المواطنين.</p>
-                            <div class="pano-card-action-row">
-                                <span class="pano-watch-text">▶ شاهد تقرير إطلاق الخدمات</span>
-                                <span class="pano-num-indicator">04 / 05</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 4: Cultural Center & Artisans -->
-                <div class="pano-card" data-index="4" onclick="handlePanoCardClick(4)">
-                    <div class="pano-card-inner" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(18,18,22,0.88) 100%), url('assets/card_council.png');">
-                        <div class="pano-card-top-bar">
-                            <span class="pano-pill-badge">🏛️ الثقافة والتراث السوسي</span>
-                            <span class="pano-duration-pill">صرح حضاري</span>
-                        </div>
-                        <div class="pano-play-capsule" onclick="event.stopPropagation(); openHeroVideoCapsule();" title="تشغيل الفيديو">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        </div>
-                        <div class="pano-card-bottom-info">
-                            <h3 class="pano-card-title">المركب الثقافي وفضاءات دار الصانعة</h3>
-                            <p class="pano-card-desc">حاضنة للفنون التراثية، المعارض التشكيلية، ودعم إبداعات المرأة الصانعة والشباب بعاصمة اشتوكة.</p>
-                            <div class="pano-card-action-row">
-                                <span class="pano-watch-text">▶ اكتشف مرافق المركب الثقافي</span>
-                                <span class="pano-num-indicator">05 / 05</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- Cinema Bottom Player Scrubber Bar in Hero -->
-        <div class="container panoramic-cinema-bar-wrapper">
-            <div class="panoramic-cinema-bar">
-                <button type="button" class="cinema-ctrl-btn" id="panoPlayPauseBtn" aria-label="تشغيل / إيقاف التدوير التلقائي" title="إيقاف / تشغيل">
-                    <span id="panoPlayIcon">❚❚</span>
-                </button>
-                <div class="cinema-progress-track" id="panoProgressTrack">
-                    <div class="cinema-progress-fill" id="panoProgressFill"></div>
+        <!-- Carousel Pagination Dashes -->
+        <div class="hero-carousel-dashes" role="tablist">
+            <button class="dash-pill active" id="dash0" onclick="rotatePanoSlide(0)" aria-label="الشريحة 1"></button>
+            <button class="dash-pill" id="dash1" onclick="rotatePanoSlide(1)" aria-label="الشريحة 2"></button>
+            <button class="dash-pill" id="dash2" onclick="rotatePanoSlide(2)" aria-label="الشريحة 3"></button>
+        </div>
+
+        <!-- Bottom-Left Curved Navy Wave with Dual Glowing Gold Ribbon -->
+        <div class="hero-curved-navy-corner">
+            <svg class="corner-wave-svg" viewBox="0 0 460 160" fill="none" preserveAspectRatio="none">
+                <!-- Dark Navy Wave Body with subtle opacity gradient -->
+                <path d="M0,160 L460,160 C380,120 280,60 160,20 C100,0 40,0 0,0 Z" fill="url(#navyWaveGrad)"></path>
+                <!-- Glowing Gold Dual Accent Ribbon -->
+                <path d="M0,0 C40,0 100,0 160,20 C280,60 380,120 460,160" stroke="url(#goldRibbonGlow)" stroke-width="6" stroke-linecap="round" opacity="0.65"></path>
+                <path d="M0,0 C40,0 100,0 160,20 C280,60 380,120 460,160" stroke="url(#goldRibbonGrad)" stroke-width="2.5" stroke-linecap="round"></path>
+                <defs>
+                    <linearGradient id="navyWaveGrad" x1="0" y1="0" x2="460" y2="160" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#071A33" stop-opacity="0.96"></stop>
+                        <stop offset="0.7" stop-color="#0A3158" stop-opacity="0.90"></stop>
+                        <stop offset="1" stop-color="#071A33" stop-opacity="0.80"></stop>
+                    </linearGradient>
+                    <linearGradient id="goldRibbonGrad" x1="0" y1="0" x2="460" y2="160" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                    <linearGradient id="goldRibbonGlow" x1="0" y1="0" x2="460" y2="160" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Location Badge inside the wave -->
+            <a href="municipality.html" class="wave-location-badge">
+                <span class="badge-pin-circle">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                </span>
+                <span class="badge-text-group">
+                    <strong class="badge-title">جماعة بيوكرى</strong>
+                    <span class="badge-tagline">أرض التاريخ .. وموطن المستقبل</span>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION: MANDATE 2021-2027 (المجلس الجماعي والمكتب المسير)
+         ========================================== -->
+    <section class="mandate-showcase-section" id="mandateSection">
+        <div class="container mandate-container">
+            <!-- Header centered -->
+            <div class="mandate-header-center">
+                <span class="mandate-sub-pill">المؤسسة الدستورية المنتخبة</span>
+                <h2 class="mandate-main-title">مؤسسة المجلس الجماعي لبيوكرى (الولاية 2021-2027)</h2>
+                <div class="mandate-gold-divider">
+                    <span class="divider-diamond"></span>
                 </div>
-                <div class="cinema-time-indicator">
-                    <span id="panoTimerText">00:01 / 00:05</span>
+                <p class="mandate-subtitle">الحكامة الترابية والتدبير التشاركي للشأن المحلي لخدمة الصالح العام ومواكبة تطلعات الساكنة.</p>
+            </div>
+
+            <!-- Featured Mayor Card -->
+            <div class="mandate-mayor-card">
+                <div class="mayor-avatar-col">
+                    <div class="mayor-seal-avatar" title="شعار جماعة بيوكرى">
+                        <span class="mayor-seal-icon">🏛️</span>
+                    </div>
                 </div>
-                <button type="button" class="cinema-ctrl-btn" onclick="togglePanoSound(this)" aria-label="كتم / تشغيل الصوت" title="الصوت">
-                    <span>🔊</span>
-                </button>
-                <button type="button" class="cinema-ctrl-btn" onclick="openHeroVideoCapsule()" aria-label="شاشة كاملة" title="شاشة كاملة">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                <div class="mayor-info">
+                    <span class="mayor-role-badge" id="mandateMayorRole">رئيس المجلس الجماعي</span>
+                    <h3 class="mayor-name" id="mandateMayorName">محمد أمين البقالي</h3>
+                    <p class="mayor-quote">«نعمل جاهدين بتنسيق تام مع كافة مكونات المجلس والمجتمع المدني والسلطات الإقليمية على تنزيل برنامج عمل جماعة بيوكرى، وتحديث المرافق الحيوية لتكون مدينتنا قطباً عمرانياً واقتصادياً رائداً بإقليم اشتوكة آيت باها.»</p>
+                </div>
+                <div class="mayor-action-col">
+                    <button type="button" onclick="openMandateModal()" class="btn-mandate-roster">
+                        <span class="btn-icon">👥</span>
+                        <span>تشكيلة المجلس كاملة</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4 Vice Presidents Grid -->
+            <div class="bureau-members-grid" id="mandateBureauGrid">
+                <!-- Card 1 -->
+                <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
+                    <div class="bureau-role">النائب الأول للرئيس (المكلف بالتعمير والممتلكات)</div>
+                    <div class="bureau-name">فاطمة الزهراء الإدريسي</div>
+                    <div class="bureau-party">الأغلبية</div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
+                    <div class="bureau-role">النائب الثاني للرئيس (المكلف بالميزانية والمالية)</div>
+                    <div class="bureau-name">عبد الله أيت المنصور</div>
+                    <div class="bureau-party">الأغلبية</div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
+                    <div class="bureau-role">النائب الثالث للرئيس (المكلف بالأشغال والمرافق)</div>
+                    <div class="bureau-name">عمر الراجي</div>
+                    <div class="bureau-party">الأغلبية</div>
+                </div>
+                <!-- Card 4 -->
+                <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
+                    <div class="bureau-role">النائب الرابع للرئيس (المكلفة بالشؤون الاجتماعية والثقافية)</div>
+                    <div class="bureau-name">سميرة بنجلون</div>
+                    <div class="bureau-party">الأغلبية</div>
+                </div>
+            </div>
+
+            <!-- Bottom Detail Link -->
+            <div class="mandate-bottom-action">
+                <button type="button" onclick="openMandateModal()" class="btn-mandate-details">
+                    <span>📑 استعراض اللجان الدائمة وأعضاء المجلس الـ 31 بالتفصيل ←</span>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- ESSENTIAL SERVICES (الخدمات الأكثر طلباً بهندسة الأقواس المغربية) -->
-    <section class="essential-services-section zellige-bg" id="essentialServices">
-        <div class="container" style="position: relative; z-index: 2;">
-            <div style="text-align: center; margin-bottom: 25px;">
-                <span class="hero-badge-tag" style="background: rgba(15, 157, 138, 0.12); color: var(--secondary-color); border-color: var(--secondary-color);">✨ فضاء المواطن الميسر</span>
-                <h2 class="section-title center" style="margin-top: 10px; margin-bottom: 12px;">الخدمات الإدارية الأكثر طلباً</h2>
-                <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1rem;">ولوج مباشر وسريع لأهم الإجراءات والوثائق الجماعية لتوفير الوقت وتسهيل قضاء أغراضكم الإدارية.</p>
+    <!-- ========================================================
+         ESSENTIAL ADMINISTRATIVE SERVICES (فضاء المواطن الميسر - 3D LUXURY SUITE)
+         ======================================================== -->
+    <section class="essential-services-section" id="essentialServices">
+        <!-- Ambient Panoramic Side Sceneries matching reference -->
+        <div class="services-scenery-vignette scenery-left" style="background-image: url('assets/services_bg_left.png');"></div>
+        <div class="services-scenery-vignette scenery-right" style="background-image: url('assets/services_bg_right.png');"></div>
+        <div class="services-zellige-watermark"></div>
+
+        <div class="container services-container" style="position: relative; z-index: 5;">
+            <!-- Section Header matching reference mockup 1:1 -->
+            <div class="services-header-block">
+                <div class="services-civic-badge">
+                    <span>فضاء المواطن الميسر</span>
+                    <span class="badge-icon">👤</span>
+                </div>
+                <h2 class="services-civic-title">
+                    الخدمات الإدارية <span class="civic-title-gold">الأكثر طلباً</span>
+                </h2>
+                <!-- Refined Moroccan Gold Ornament Divider -->
+                <div class="services-ornament-divider">
+                    <span class="ornament-line"></span>
+                    <span class="ornament-gem">✦</span>
+                    <span class="ornament-line"></span>
+                </div>
+                <p class="services-civic-subtitle">
+                    ولوج مباشر وسريع لأهم الإجراءات والوثائق الجماعية لتوفير الوقت وتسهيل قضاء أغراضكم الإدارية.
+                </p>
             </div>
 
-            <div class="essential-grid">
+            <!-- Tactile 3D Porcelain Services Grid (3 Columns x 2 Rows) -->
+            <div class="essential-grid" id="servicesGrid">
                 <!-- Service 1: Residence Certificate -->
-                <div class="essential-card" onclick="openServiceDetail('residence')">
-                    <div class="essential-card-num">01</div>
-                    <h3 class="essential-title">شهادة السكنى والإقامة</h3>
-                    <p class="essential-desc">شروط وإجراءات الحصول على شهادة السكنى لتجديد أو إنجاز البطاقة الوطنية والمصالح الإدارية.</p>
-                    <span class="essential-action-btn">طلب الإجراء ←</span>
-                </div>
+                <article class="essential-card" onclick="openServiceDetail('residence')" role="button" tabindex="0" aria-label="شهادة السكنى والإقامة">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">01</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_residence.png" alt="شهادة السكنى" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">شهادة السكنى والإقامة</h3>
+                            <p class="essential-desc">شروط وإجراءات الحصول على شهادة السكنى لتجديد أو إنجاز البطاقة الوطنية والمصالح الإدارية.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">طلب الإجراء ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Service 2: Civil Status -->
-                <div class="essential-card" onclick="openServiceDetail('birth')">
-                    <div class="essential-card-num">02</div>
-                    <h3 class="essential-title">عقد الازدياد والحالة المدنية</h3>
-                    <p class="essential-desc">استخراج النسخة الموجزة والكاملة من رسم الولادة والدفتر العائلي بمكاتب الحالة المدنية ببيوكرى.</p>
-                    <span class="essential-action-btn">طلب الإجراء ←</span>
-                </div>
+                <article class="essential-card" onclick="openServiceDetail('birth')" role="button" tabindex="0" aria-label="عقد الازدياد والحالة المدنية">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">02</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_civil.png" alt="عقد الازدياد" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">عقد الازدياد والحالة المدنية</h3>
+                            <p class="essential-desc">استخراج النسخة الموجزة والكاملة من رسم الولادة والدفتر العائلي بمكاتب الحالة المدنية ببيوكرى.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">طلب الإجراء ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Service 3: Legalization -->
-                <div class="essential-card" onclick="openServiceDetail('legalization')">
-                    <div class="essential-card-num">03</div>
-                    <h3 class="essential-title">تصحيح الإمضاء ومطابقة النسخ</h3>
-                    <p class="essential-desc">خدمات الإشهاد على صحة التوقيع ومطابقة النسخ لأصولها بالمقر الرئيسي وملحقات الجماعة.</p>
-                    <span class="essential-action-btn">طلب الإجراء ←</span>
-                </div>
+                <article class="essential-card" onclick="openServiceDetail('legalization')" role="button" tabindex="0" aria-label="تصحيح الإمضاء ومطابقة النسخ">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">03</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_legal.png" alt="تصحيح الإمضاء" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">تصحيح الإمضاء ومطابقة النسخ</h3>
+                            <p class="essential-desc">خدمات الإشهاد على صحة التوقيع ومطابقة النسخ لأصولها بالمقر الرئيسي وملحقات الجماعة.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">طلب الإجراء ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Service 4: Construction & Urban Planning -->
-                <div class="essential-card" onclick="openServiceDetail('urbanism')">
-                    <div class="essential-card-num">04</div>
-                    <h3 class="essential-title">رخص البناء والتعمير</h3>
-                    <p class="essential-desc">إيداع ملفات رخص البناء، الإصلاح، الربط بشبكات الماء والكهرباء عبر منصة رخص الرقمية.</p>
-                    <span class="essential-action-btn">منصة رخص ←</span>
-                </div>
+                <article class="essential-card" onclick="openServiceDetail('urbanism')" role="button" tabindex="0" aria-label="رخص البناء والتعمير">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">04</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_urban.png" alt="رخص البناء" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">رخص البناء والتعمير</h3>
+                            <p class="essential-desc">إيداع ملفات رخص البناء، الإصلاح، الربط بشبكات الماء والكهرباء عبر منصة رخص الرقمية.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">منصة رخص ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Service 5: Online Complaint -->
-                <div class="essential-card" onclick="openComplaintModal()">
-                    <div class="essential-card-num">05</div>
-                    <h3 class="essential-title">إيداع شكاية أو مقترح</h3>
-                    <p class="essential-desc">توجيه ملاحظاتكم وتظلماتكم بخصوص الإنارة، النظافة، أو الطرق مباشرة إلى المصالح المختصة.</p>
-                    <span class="essential-action-btn">إيداع شكاية ←</span>
-                </div>
+                <article class="essential-card" onclick="openComplaintModal()" role="button" tabindex="0" aria-label="إيداع شكاية أو مقترح">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">05</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_complaint.png" alt="إيداع شكاية" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">إيداع شكاية أو مقترح</h3>
+                            <p class="essential-desc">توجيه ملاحظاتكم وتظلماتكم بخصوص الإنارة، النظافة، أو الطرق مباشرة إلى المصالح المختصة.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">إيداع شكاية ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Service 6: Association Subventions -->
-                <div class="essential-card" onclick="openSubventionsModal()">
-                    <div class="essential-card-num">06</div>
-                    <h3 class="essential-title">منح ودعم الجمعيات</h3>
-                    <p class="essential-desc">تحميل بطاقة طلب الدعم السنوي والاطلاع على لوائح الجمعيات والاتحادات المستفيدة والمحاضر.</p>
-                    <span class="essential-action-btn">تحميل الاستمارة ←</span>
-                </div>
+                <article class="essential-card" onclick="openSubventionsModal()" role="button" tabindex="0" aria-label="منح ودعم الجمعيات">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">06</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <!-- Left 3D Medallion Emblem -->
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="assets/medallion_assoc.png" alt="دعم الجمعيات" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Arabic Content -->
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">منح ودعم الجمعيات</h3>
+                            <p class="essential-desc">تحميل بطاقة طلب الدعم السنوي والاطلاع على لوائح الجمعيات والاتحادات المستفيدة والمحاضر.</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">تحميل الاستمارة ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
             </div>
+        </div>
+
+        <!-- Section Bottom Decorative Wave with Dual Gold Ribbon -->
+        <div class="services-bottom-wave-bar">
+            <svg class="services-wave-svg" viewBox="0 0 1440 85" fill="none" preserveAspectRatio="none">
+                <path d="M0,85 L1440,85 L1440,40 C1200,80 960,10 720,45 C480,80 240,15 0,50 Z" fill="#071A33"></path>
+                <path d="M0,50 C240,15 480,80 720,45 C960,10 1200,80 1440,40" stroke="url(#servicesWaveGoldGlow)" stroke-width="4" opacity="0.65"></path>
+                <path d="M0,50 C240,15 480,80 720,45 C960,10 1200,80 1440,40" stroke="url(#servicesWaveGold)" stroke-width="2"></path>
+                <defs>
+                    <linearGradient id="servicesWaveGold" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                    <linearGradient id="servicesWaveGoldGlow" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
     </section>
 
     <!-- MUNICIPALITY UPDATES & NEWS SECTION -->
-    <section class="news-section zellige-subtle" id="news">
-        <div class="container news-container">
-            <!-- Left Column: Core Cards -->
-            <div class="cards-grid">
-                <!-- Card 1: Municipal Council -->
-                <div class="info-card" data-modal="council">
-                    <div class="card-img-wrapper">
-                        <img src="assets/card_council.png" id="card-img-council" alt="المجلس الجماعي لبيوكرى">
-                        <div class="card-overlay-badge">المجلس الجماعي</div>
-                    </div>
+        <!-- ========================================================
+         SECTION: LATEST NEWS & TERRITORY SHOWCASE (آخر الأخبار)
+         ======================================================== -->
+    <section class="news-master-section" id="news">
+        <div class="container" style="position: relative; z-index: 5;">
+            <!-- Header -->
+            <div class="news-master-header">
+                <div class="header-text-side">
+                    <h2 class="news-master-title">آخر الأخبار</h2>
+                    <p class="news-master-subtitle">تابعوا آخر المستجدات والأنشطة الجماعية لبيوكرى</p>
                 </div>
-                <!-- Card 2: Administrative Procedures -->
-                <div class="info-card" data-modal="procedures">
-                    <div class="card-img-wrapper">
-                        <img src="assets/card_procedures.png" id="card-img-procedures" alt="الإجراءات الإدارية">
-                        <div class="card-overlay-badge">الإجراءات الإدارية</div>
-                    </div>
-                </div>
-                <!-- Card 3: Territorial Municipality -->
-                <div class="info-card" data-modal="territory">
-                    <div class="card-img-wrapper">
-                        <img src="assets/card_territory.png" id="card-img-territory" alt="الجماعة الترابية">
-                        <div class="card-overlay-badge">الجماعة الترابية</div>
-                    </div>
+                <div class="header-action-side">
+                    <a href="publications.html" class="btn-all-news">
+                        <span>جميع الأخبار</span>
+                        <span class="arrow-ico">←</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Right Column: News List -->
-            <div class="news-list-wrapper">
-                <h2 class="section-title">مستجدات جماعة بيوكرى</h2>
-                <div class="news-list" id="newsListContainer">
-                    <div class="news-item" onclick="window.appController?.openNewsModal(3)">
-                        <div class="news-date">17 مارس</div>
-                        <div class="news-details">
-                            <h3 class="news-title">النتائج النهائية لولوج درجة مهندس معماري من الدرجة الأولى</h3>
-                            <p class="news-excerpt">تعلن جماعة بيوكرى عن لائحة الناجحين بصفة نهائية في مباراة التوظيف لدرجة مهندس معماري من الدرجة الأولى...</p>
+            <!-- News Grid Layout: 4 Cards on Left + Kasbah Territory Card on Right -->
+            <div class="news-content-grid">
+                <!-- 4 News Cards (Horizontal 4-columns) -->
+                <div class="news-cards-quad">
+                    <!-- News Item 1 -->
+                    <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(3)" role="button" tabindex="0">
+                        <div class="news-card-img-wrap">
+                            <img src="assets/event_left.png" alt="انعقاد الدورة العادية" class="news-card-img">
+                            <span class="news-date-pill">2025-05-20</span>
                         </div>
-                    </div>
-                    <div class="news-item" onclick="window.appController?.openNewsModal(4)">
-                        <div class="news-date">17 مارس</div>
-                        <div class="news-details">
-                            <h3 class="news-title">النتائج النهائية لولوج درجة مهندس دولة من الدرجة الأولى</h3>
-                            <p class="news-excerpt">تعلن جماعة بيوكرى عن لائحة الناجحين بصفة نهائية في مباراة التوظيف تخصص الهندسة المدنية...</p>
+                        <div class="news-card-content">
+                            <h4 class="news-card-title">انعقاد الدورة العادية للمجلس الجماعي لبيوكرى</h4>
+                            <div class="news-card-footer">
+                                <span class="news-cat-tag">أخبار المجلس 🏛️</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="news-item" onclick="window.appController?.openNewsModal(5)">
-                        <div class="news-date">17 مارس</div>
-                        <div class="news-details">
-                            <h3 class="news-title">النتائج النهائية لمباراة التوظيف لولوج درجة تقني من الدرجة الثالثة</h3>
-                            <p class="news-excerpt">لائحة المترشحين الناجحين بصفة نهائية ولائحة الانتظار لولوج درجة تقني تخصص الأنظمة المعلوماتية والشبكات...</p>
+                    </article>
+
+                    <!-- News Item 2 -->
+                    <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(4)" role="button" tabindex="0">
+                        <div class="news-card-img-wrap">
+                            <img src="assets/video_park.png" alt="إطلاق مشروع جديد" class="news-card-img">
+                            <span class="news-date-pill">2025-05-15</span>
                         </div>
-                    </div>
+                        <div class="news-card-content">
+                            <h4 class="news-card-title">إطلاق مشروع جديد في مجال البيئة والمساحات الخضراء</h4>
+                            <div class="news-card-footer">
+                                <span class="news-cat-tag">المشاريع 🌳</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- News Item 3 -->
+                    <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(5)" role="button" tabindex="0">
+                        <div class="news-card-img-wrap">
+                            <img src="assets/event_right.png" alt="زيارة ميدانية" class="news-card-img">
+                            <span class="news-date-pill">2025-05-10</span>
+                        </div>
+                        <div class="news-card-content">
+                            <h4 class="news-card-title">زيارة ميدانية لمركز التكوين المهني والأنشطة</h4>
+                            <div class="news-card-footer">
+                                <span class="news-cat-tag">أنشطة ميدانية 👥</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- News Item 4 -->
+                    <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(3)" role="button" tabindex="0">
+                        <div class="news-card-img-wrap">
+                            <img src="assets/card_council.png" alt="تنظيم ندوة" class="news-card-img">
+                            <span class="news-date-pill">2025-05-05</span>
+                        </div>
+                        <div class="news-card-content">
+                            <h4 class="news-card-title">تنظيم ندوة حول التنمية المستدامة والتنقل الحضري</h4>
+                            <div class="news-card-footer">
+                                <span class="news-cat-tag">فعاليات 📢</span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-                <button class="btn btn-outline btn-more" id="moreNewsBtn" onclick="location.href='publications.html'">مستجدات أكثر &gt;</button>
+
+                <!-- Right Tall Territory Showcase Card -->
+                <article class="territory-showcase-card">
+                    <img src="assets/ref_territory_kasbah.jpg" alt="اكتشف جمال بيوكرى" class="territory-showcase-img">
+                    <div class="territory-showcase-overlay">
+                        <span class="territory-tag-badge">✨ فضاء الإقليم</span>
+                        <h3 class="territory-title-text">اكتشف جمال وعراقة بيوكرى</h3>
+                        <p class="territory-desc-text">تاريخ غني .. طبيعة ساحرة .. وتراث أصيل</p>
+                        <a href="municipality.html" class="btn-discover-territory">استكشف الجماعة ←</a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -691,104 +895,113 @@
     </section>
 
     <!-- URBAN DEVELOPMENT PROGRAM SECTION -->
-    <section class="urban-development-section zellige-bg" id="urban-development">
-        <div class="container" style="position: relative; z-index: 2;">
-            <h2 class="section-title center">برنامج التنمية الحضرية لبيوكرى</h2>
-            <div class="urban-grid" id="projectsGridContainer">
-                <div class="urban-card" onclick="window.appController?.openProjectModal('roads')">
-                    <div class="urban-card-header">
-                        <h3 class="urban-card-title">تأهيل وتوسيع الطرق والمحاور الكبرى</h3>
-                        <span class="urban-badge">قيد الإنجاز</span>
-                    </div>
-                    <div class="urban-progress-wrapper">
-                        <div class="urban-progress-bar" style="width: 85%;"></div>
-                    </div>
-                    <div class="urban-meta-info">
-                        <span>نسبة الإنجاز: <strong>85%</strong></span>
-                        <span>الميزانية: 1.1 مليار درهم</span>
-                    </div>
+        <!-- ========================================================
+         SECTION: PROJECTS & URBAN DEVELOPMENT (برامجنا ومشاريعنا التنموية)
+         ======================================================== -->
+    <section class="urban-development-section" id="urban-development">
+        <div class="container" style="position: relative; z-index: 5;">
+            <!-- Header matching mockup -->
+            <div class="projects-master-header">
+                <div class="header-text-side">
+                    <h2 class="projects-master-title">برامجنا ومشاريعنا <span class="gold-gradient-text">التنموية</span></h2>
+                    <p class="projects-master-subtitle">مشاريع كبرى من أجل تنمية شاملة ومستدامة لمدينة بيوكرى</p>
                 </div>
-
-                <div class="urban-card" onclick="window.appController?.openProjectModal('environment')">
-                    <div class="urban-card-header">
-                        <h3 class="urban-card-title">تهيئة المنتزه الحضري والبيئة</h3>
-                        <span class="urban-badge">مكتمل ومستمر</span>
-                    </div>
-                    <div class="urban-progress-wrapper">
-                        <div class="urban-progress-bar" style="width: 95%;"></div>
-                    </div>
-                    <div class="urban-meta-info">
-                        <span>نسبة الإنجاز: <strong>95%</strong></span>
-                        <span>الميزانية: 450 مليون درهم</span>
-                    </div>
-                </div>
-
-                <div class="urban-card" onclick="window.appController?.openProjectModal('sports-dev')">
-                    <div class="urban-card-header">
-                        <h3 class="urban-card-title">تجهيز القاعات المغطاة وملاعب القرب</h3>
-                        <span class="urban-badge">مستمر</span>
-                    </div>
-                    <div class="urban-progress-wrapper">
-                        <div class="urban-progress-bar" style="width: 85%;"></div>
-                    </div>
-                    <div class="urban-meta-info">
-                        <span>نسبة الإنجاز: <strong>85%</strong></span>
-                        <span>الميزانية: 300 مليون درهم</span>
-                    </div>
-                </div>
-
-                <div class="urban-card" onclick="window.appController?.openProjectModal('culture-dev')">
-                    <div class="urban-card-header">
-                        <h3 class="urban-card-title">المركب الثقافي ودار الصانعة ببيوكرى</h3>
-                        <span class="urban-badge">قيد الإنجاز</span>
-                    </div>
-                    <div class="urban-progress-wrapper">
-                        <div class="urban-progress-bar" style="width: 70%;"></div>
-                    </div>
-                    <div class="urban-meta-info">
-                        <span>نسبة الإنجاز: <strong>70%</strong></span>
-                        <span>الميزانية: 500 مليون درهم</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION: MANDATE 2021-2027 (المجلس الجماعي والمكتب المسير)
-         ========================================== -->
-    <section class="mandate-showcase-section" id="mandateSection">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <span class="hero-badge-tag" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; border-color: #C9972E;">المؤسسة الدستورية المنتخبة</span>
-                <h2 class="section-title center" style="color: var(--primary-color); margin-top: 8px;">مؤسسة المجلس الجماعي لبيوكرى (الولاية 2021-2027)</h2>
-                <p style="color: #64748b; max-width: 720px; margin: 0 auto; font-size: 0.95rem;">الحكامة الترابية والتدبير التشاركي للشأن المحلي لخدمة الصالح العام ومواكبة تطلعات الساكنة.</p>
-            </div>
-
-            <!-- Featured Mayor Card -->
-            <div class="mandate-mayor-card">
-                <div class="mayor-seal-avatar">🏛️</div>
-                <div class="mayor-info">
-                    <span class="mayor-role-badge" id="mandateMayorRole">رئيس المجلس الجماعي</span>
-                    <h3 class="mayor-name" id="mandateMayorName">محمد أمين البقالي</h3>
-                    <p class="mayor-quote">«نعمل جاهدين بتنسيق تام مع كافة مكونات المجلس والمجتمع المدني والسلطات الإقليمية على تنزيل برنامج عمل جماعة بيوكرى، وتحديث المرافق الحيوية لتكون مدينتنا قطباً عمرانياً واقتصادياً رائداً بإقليم اشتوكة آيت باها.»</p>
-                </div>
-                <div>
-                    <button type="button" onclick="openMandateModal()" class="btn-footer-chikaya" style="white-space: nowrap;">
-                        <span>👥 تشكيلة المجلس كاملة</span>
-                    </button>
+                <div class="header-action-side">
+                    <a href="action-program.html" class="btn-all-projects">
+                        <span>جميع المشاريع</span>
+                        <span class="arrow-ico">←</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Bureau Members Cards Grid -->
-            <div class="bureau-members-grid" id="mandateBureauGrid">
-                <!-- Dynamically rendered via MainController -->
-            </div>
+            <!-- Master Projects Grid (Featured Wide Card + 2x2 Grid) -->
+            <div class="projects-showcase-grid">
+                <!-- Featured Wide Card (Road Project) -->
+                <article class="featured-project-card" onclick="window.appController?.openProjectModal('roads')" role="button" tabindex="0">
+                    <div class="featured-img-wrap">
+                        <img src="assets/ref_project_road.jpg" alt="تهيئة وتوسيع الطرق الكبرى" class="featured-proj-img">
+                        <div class="featured-badge-tag">مشاريع البنية التحتية 🛣️</div>
+                    </div>
+                    <div class="featured-proj-overlay">
+                        <h3 class="featured-proj-title">تهيئة وتوسيع الطرق والمحاور الكبرى</h3>
+                        <p class="featured-proj-desc">مشروع مهيكل يهدف إلى تحسين البنية التحتية الطرقية وتسهيل حركة التنقل داخل الإقليم والجماعة.</p>
+                        <div class="featured-proj-footer">
+                            <span class="btn-proj-details">التفاصيل ←</span>
+                            <div class="featured-proj-meta">
+                                <span>نسبة الإنجاز: <strong>85%</strong></span>
+                                <span class="sep">•</span>
+                                <span>الميزانية: <strong>1.1 مليار د.م</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-            <div style="text-align: center;">
-                <button type="button" onclick="openMandateModal()" class="btn-footer-location" style="padding: 12px 28px; font-size: 0.95rem;">
-                    <span>📑 استعراض اللجان الدائمة وأعضاء المجلس الـ 31 بالتفصيل ←</span>
-                </button>
+                <!-- 2x2 Sub-Projects Grid -->
+                <div class="sub-projects-2x2-grid">
+                    <!-- Project 1: Education & Youth -->
+                    <article class="sub-project-card" onclick="window.appController?.openProjectModal('culture-dev')" role="button" tabindex="0">
+                        <div class="sub-proj-thumb-wrap">
+                            <img src="assets/video_hall.png" alt="قطاع التعليم والمؤسسات" class="sub-proj-img">
+                            <span class="sub-proj-badge">قطاع التعليم 🏫</span>
+                        </div>
+                        <div class="sub-proj-body">
+                            <h4 class="sub-proj-title">المركب الثقافي ودار الصانعة ببيوكرى</h4>
+                            <p class="sub-proj-desc">بناء وتجهيز المؤسسات والمرافق التنموية لتعزيز التكوين والشباب.</p>
+                            <div class="sub-proj-progress">
+                                <span class="prog-label">نسبة الإنجاز: 70%</span>
+                                <div class="prog-track"><div class="prog-fill" style="width: 70%;"></div></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Environment -->
+                    <article class="sub-project-card" onclick="window.appController?.openProjectModal('environment')" role="button" tabindex="0">
+                        <div class="sub-proj-thumb-wrap">
+                            <img src="assets/video_park.png" alt="البيئة والتنمية المستدامة" class="sub-proj-img">
+                            <span class="sub-proj-badge">البيئة والتنمية المستدامة 🌿</span>
+                        </div>
+                        <div class="sub-proj-body">
+                            <h4 class="sub-proj-title">تهيئة المنتزه الحضري والبيئة</h4>
+                            <p class="sub-proj-desc">حماية الموارد الطبيعية وتوسيع المساحات الخضراء بالمدينة.</p>
+                            <div class="sub-proj-progress">
+                                <span class="prog-label">نسبة الإنجاز: 95%</span>
+                                <div class="prog-track"><div class="prog-fill" style="width: 95%;"></div></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Sports -->
+                    <article class="sub-project-card" onclick="window.appController?.openProjectModal('sports-dev')" role="button" tabindex="0">
+                        <div class="sub-proj-thumb-wrap">
+                            <img src="assets/video_bus.png" alt="قطاع الرياضة" class="sub-proj-img">
+                            <span class="sub-proj-badge">قطاع الرياضة ⚽</span>
+                        </div>
+                        <div class="sub-proj-body">
+                            <h4 class="sub-proj-title">تجهيز القاعات المغطاة وملاعب القرب</h4>
+                            <p class="sub-proj-desc">تأهيل البنيات الرياضية وتشجيع الممارسة الرياضية للناشئة.</p>
+                            <div class="sub-proj-progress">
+                                <span class="prog-label">نسبة الإنجاز: 85%</span>
+                                <div class="prog-track"><div class="prog-fill" style="width: 85%;"></div></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: Economic Development -->
+                    <article class="sub-project-card" onclick="openProjectCaseStudy(2)" role="button" tabindex="0">
+                        <div class="sub-proj-thumb-wrap">
+                            <img src="assets/card_territory.png" alt="التنمية الاقتصادية" class="sub-proj-img">
+                            <span class="sub-proj-badge">التنمية الاقتصادية 💼</span>
+                        </div>
+                        <div class="sub-proj-body">
+                            <h4 class="sub-proj-title">مشروع السوق الأسبوعي الجديد</h4>
+                            <p class="sub-proj-desc">دعم المقاولات المحلية وتنشيط الحركية التجارية ببيوكرى.</p>
+                            <div class="sub-proj-progress">
+                                <span class="prog-label">نسبة الإنجاز: 80%</span>
+                                <div class="prog-track"><div class="prog-fill" style="width: 80%;"></div></div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -933,46 +1146,57 @@
     </section>
 
     <!-- MULTIMEDIA & PRESS GALLERY -->
-    <section class="multimedia-section" id="multimedia">
-        <div class="container">
-            <h2 class="section-title center">صوت و صورة (المعرض المرئي للمدينة)</h2>
-            <div class="media-grid" id="videoGridContainer">
-                <div class="media-card" onclick="openHeroVideoCapsule()">
-                    <div class="media-thumb-wrapper">
-                        <img src="assets/video_park.png" alt="تهيئة المنتزه الحضري لبيوكرى">
-                        <div class="media-play-overlay">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                        <span class="media-duration">02:45</span>
+        <!-- ========================================================
+         SECTION: PHOTO GALLERY (معرض الصور بالبوابة الذهبية 3D)
+         ======================================================== -->
+    <section class="gallery-master-section" id="multimedia">
+        <div class="container" style="position: relative; z-index: 5;">
+            <!-- Header -->
+            <div class="gallery-master-header">
+                <div class="header-text-side">
+                    <h2 class="gallery-master-title">معرض الصور</h2>
+                    <p class="gallery-master-subtitle">لحظات ومشاهد حية من حياة المدينة وأنشطتها الميدانية</p>
+                </div>
+                <div class="header-action-side">
+                    <div class="gallery-arrows-group">
+                        <button class="gallery-nav-btn" onclick="openHeroVideoCapsule()" aria-label="السابق">‹</button>
+                        <button class="gallery-nav-btn" onclick="openHeroVideoCapsule()" aria-label="التالي">›</button>
                     </div>
-                    <div class="media-body">
-                        <h3 class="media-title">تهيئة المنتزه الحضري لبيوكرى</h3>
-                    </div>
+                    <a href="publications.html" class="btn-all-gallery">
+                        <span>جميع الصور</span>
+                        <span class="arrow-ico">←</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gallery Layout: Golden 3D Portal Arch on Left + 5 Thumbnails on Right -->
+            <div class="gallery-master-layout">
+                <!-- Left 3D Golden Architectural Frame -->
+                <div class="gallery-portal-arch">
+                    <img src="assets/ref_gallery_arch.jpg" alt="بوابة المعرض التراثية" class="portal-arch-img">
                 </div>
 
-                <div class="media-card" onclick="openHeroVideoCapsule()">
-                    <div class="media-thumb-wrapper">
-                        <img src="assets/video_hall.png" alt="القاعة المغطاة الرياضية ببيوكرى">
-                        <div class="media-play-overlay">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                        <span class="media-duration">01:50</span>
+                <!-- Right 5 Photo Thumbnails -->
+                <div class="gallery-thumbs-row">
+                    <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
+                        <img src="assets/video_bus.png" alt="النقل الحضري" class="thumb-img">
+                        <div class="thumb-hover-overlay"><span>🔍</span></div>
                     </div>
-                    <div class="media-body">
-                        <h3 class="media-title">القاعة المغطاة الرياضية ببيوكرى بحلتها الجديدة</h3>
+                    <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
+                        <img src="assets/ref_project_road.jpg" alt="البنية التحتية" class="thumb-img">
+                        <div class="thumb-hover-overlay"><span>🔍</span></div>
                     </div>
-                </div>
-
-                <div class="media-card" onclick="openHeroVideoCapsule()">
-                    <div class="media-thumb-wrapper">
-                        <img src="assets/video_bus.png" alt="خدمات النقل والتنمية ببيوكرى">
-                        <div class="media-play-overlay">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                        <span class="media-duration">03:15</span>
+                    <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
+                        <img src="assets/event_left.png" alt="اجتماع المجلس" class="thumb-img">
+                        <div class="thumb-hover-overlay"><span>🔍</span></div>
                     </div>
-                    <div class="media-body">
-                        <h3 class="media-title">إطلاق خدمات النقل الحضري والتنمية بمدينة بيوكرى</h3>
+                    <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
+                        <img src="assets/video_park.png" alt="المنتزه الحضري" class="thumb-img">
+                        <div class="thumb-hover-overlay"><span>🔍</span></div>
+                    </div>
+                    <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
+                        <img src="assets/event_right.png" alt="أنشطة القرب" class="thumb-img">
+                        <div class="thumb-hover-overlay"><span>🔍</span></div>
                     </div>
                 </div>
             </div>
@@ -1032,157 +1256,188 @@
     </section>
 
     <!-- MUNICIPALITY STATS SECTION (عدادات إحصائية زجاجية فاخرة) -->
-    <section class="stats-section" id="portalStats">
-        <div class="container stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" id="statMandatePeriod" data-target="2027">2021-2027</div>
-                <div class="stat-label">الولاية الانتدابية الحالية</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="statTransparencyRate" data-target="100">+100%</div>
-                <div class="stat-label">شفافية وتواصل محلي</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="statProjectsCount" data-target="54">+50</div>
-                <div class="stat-label">مشروعاً تنموياً معتمداً</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="statServicesCount" data-target="25">24/7</div>
-                <div class="stat-label">خدمات وبوابات رقمية</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WORLD-CLASS INSTITUTIONAL MASTER FOOTER -->
-    <footer class="master-footer" id="mainFooter">
-        <!-- Institutional Header Strip -->
-        <div class="footer-institutional-header">
-            <div class="container footer-brand-flex">
-                <img src="assets/logo_transparent.png" alt="شعار المملكة وجماعة بيوكرى" class="footer-logo-main" id="footerLogoMainImg" width="82" height="82" style="max-width:82px; width:82px; height:auto; object-fit:contain;">
-                <div class="footer-brand-info">
-                    <span class="footer-kingdom-badge">المملكة المغربية • وزارة الداخلية • إقليم اشتوكة آيت باها</span>
-                    <h3 class="footer-portal-title muni-name-display">الجماعة الترابية لبيوكرى</h3>
-                    <p class="footer-portal-tagline">البوابة الرقمية الرسمية الموحدة لتدبير الشأن العام المحلي، مواكبة التنمية المستدامة، وتقريب الخدمات الإدارية من المواطنين والمجتمع المدني والمستثمرين.</p>
-                </div>
-                <div class="footer-action-badge-box">
-                    <button type="button" onclick="openComplaintModal()" class="btn-footer-chikaya">
-                        <span>✍️ إيداع شكاية أو مقترح</span>
-                    </button>
-                    <a href="https://maps.google.com/?q=30.2184,-9.3719" target="_blank" class="btn-footer-location">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        <span>مقر الجماعة على الخريطة</span>
-                    </a>
-                </div>
-            </div>
+        <!-- ========================================================
+         SECTION: STATS & TERRITORY MAP (أرقام وإحصائيات - سحر الليل الكحلي)
+         ======================================================== -->
+    <section class="stats-master-section" id="portalStats">
+        <!-- Top Wave Transition -->
+        <div class="stats-top-wave">
+            <svg viewBox="0 0 1440 65" fill="none" preserveAspectRatio="none">
+                <path d="M0,0 C360,50 1080,50 1440,0 L1440,65 L0,65 Z" fill="#071A33"></path>
+                <path d="M0,0 C360,50 1080,50 1440,0" stroke="url(#goldLineGrad)" stroke-width="2.5"></path>
+                <defs>
+                    <linearGradient id="goldLineGrad" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
 
-        <!-- 3 Elegant Organized Columns -->
-        <div class="footer-columns-wrapper">
-            <div class="container footer-3cols-grid">
-                <!-- Column 1: Services -->
-                <div class="footer-col-block">
-                    <h4 class="footer-col-heading">الخدمات الإدارية الرقمية</h4>
-                    <ul class="footer-stylish-links">
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('residence')">شهادة السكنى والإقامة الجماعية</a></li>
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('birth')">عقود ورسوم الحالة المدنية</a></li>
-                        <li><a href="javascript:void(0)" onclick="openServiceDetail('urbanism')">منصة رخص البناء والتعمير (Rokhas)</a></li>
-                        <li><a href="javascript:void(0)" onclick="openComplaintModal()">إيداع وتتبع الشكايات (Chikaya)</a></li>
-                        <li><a href="javascript:void(0)" onclick="openSubventionsModal()">دعم جمعيات المجتمع المدني والاتحادات</a></li>
-                        <li><a href="javascript:void(0)" onclick="openLegalPopup()">المعلومات القانونية والنصوص التنظيمية</a></li>
-                    </ul>
+        <div class="container stats-master-container" style="position: relative; z-index: 5;">
+            <!-- Header in Center -->
+            <div class="stats-header-center">
+                <h2 class="stats-title-text">أرقام وإحصائيات</h2>
+                <p class="stats-subtitle-text">
+                    تعكس هذه الأرقام <span class="gold-highlight">حجم الجهود المبذولة</span> لخدمة الإقليم والجماعة
+                </p>
+            </div>
+
+            <!-- Stats Flex Layout: Left 4 Cards + Right 3D Illuminated Map -->
+            <div class="stats-content-layout">
+                <!-- Left 4 Glassmorphic Stat Cards -->
+                <div class="stats-cards-row">
+                    <!-- Stat 1 -->
+                    <div class="stat-glass-card">
+                        <div class="stat-icon-wrap">
+                            <span class="stat-ico">📑</span>
+                        </div>
+                        <div class="stat-big-number" id="statServicesCount" data-target="120">+120</div>
+                        <div class="stat-caption-text">طلب معالجة شهرياً</div>
+                    </div>
+
+                    <!-- Stat 2 -->
+                    <div class="stat-glass-card">
+                        <div class="stat-icon-wrap">
+                            <span class="stat-ico">⏱️</span>
+                        </div>
+                        <div class="stat-big-number" id="statTransparencyRate" data-target="98">+98%</div>
+                        <div class="stat-caption-text">معدل إنجاز المشاريع</div>
+                    </div>
+
+                    <!-- Stat 3 -->
+                    <div class="stat-glass-card">
+                        <div class="stat-icon-wrap">
+                            <span class="stat-ico">🎯</span>
+                        </div>
+                        <div class="stat-big-number" id="statMandatePeriod" data-target="12">+12</div>
+                        <div class="stat-caption-text">برنامج قطاعي</div>
+                    </div>
+
+                    <!-- Stat 4 -->
+                    <div class="stat-glass-card">
+                        <div class="stat-icon-wrap">
+                            <span class="stat-ico">🏆</span>
+                        </div>
+                        <div class="stat-big-number" id="statProjectsCount" data-target="45">+45</div>
+                        <div class="stat-caption-text">مشروع تنموي</div>
+                    </div>
                 </div>
 
-                <!-- Column 2: Municipality & Development -->
-                <div class="footer-col-block">
-                    <h4 class="footer-col-heading">التنمية والشأن المحلي</h4>
-                    <ul class="footer-stylish-links">
-                        <li><a href="action-program.html">برنامج عمل الجماعة (2021-2027)</a></li>
-                        <li><a href="#urban-development">مشاريع التنمية الحضرية الكبرى</a></li>
-                        <li><a href="sustainable.html">بيوكرى عاصمة بيئية مستدامة</a></li>
-                        <li><a href="publications.html">منشورات ومقررات المجلس الجماعي</a></li>
-                        <li><a href="municipality.html">الهيكل التنظيمي والمصالح الجماعية</a></li>
-                        <li><a href="contact.html">دليل المساطر والإجراءات الإدارية</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Contact, Hours & Official Channels -->
-                <div class="footer-col-block">
-                    <h4 class="footer-col-heading">المقر الرسمي والتواصل</h4>
-                    <ul class="footer-stylish-contact">
-                        <li>
-                            <div class="contact-icon-box">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            </div>
-                            <div>
-                                <strong>المقر الرئيسي للجماعة:</strong>
-                                <span id="footerAddressDisplay">شارع محمد الخامس، بيوكرى، إقليم اشتوكة آيت باها</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon-box">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            </div>
-                            <div>
-                                <strong>أوقات الاستقبال الإداري:</strong>
-                                <span id="footerHoursDisplay">من الإثنين إلى الجمعة: 08:30 صباحاً إلى 16:30 مساءً</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon-box">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            </div>
-                            <div>
-                                <strong>الهاتف المباشر:</strong>
-                                <span dir="ltr" id="footerPhoneDisplay">+212 528 81 80 00</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon-box">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            </div>
-                            <div>
-                                <strong>البريد الإلكتروني المعتمد:</strong>
-                                <span id="footerEmailDisplay">contact@biougra.ma</span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- Monochrome Gold Social Circles -->
-                    <div class="footer-social-cluster">
-                        <span style="font-size: 0.82rem; color: #94a3b8; font-weight: 600;">قنوات التواصل:</span>
-                        <div class="social-pills-row">
-                            <a href="https://facebook.com" target="_blank" class="social-circle-pill" aria-label="Facebook">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                            </a>
-                            <a href="https://twitter.com" target="_blank" class="social-circle-pill" aria-label="X Twitter">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            </a>
-                            <a href="https://youtube.com" target="_blank" class="social-circle-pill" aria-label="YouTube">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            </a>
-                            <a href="https://instagram.com" target="_blank" class="social-circle-pill" aria-label="Instagram">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            </a>
+                <!-- Right 3D Illuminated Glowing Territory Map -->
+                <div class="territory-map-showcase">
+                    <div class="map-inner-glow">
+                        <img src="assets/ref_stats_map.jpg" alt="خريطة إقليم وجماعة بيوكرى المضيئة" class="territory-map-img">
+                        <div class="map-location-tag">
+                            <span class="map-pin">📍</span>
+                            <span>إقليم اشتوكة آيت باها • بيوكرى</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Dignified Legal Footer Bottom Bar -->
-        <div class="footer-bottom-bar">
-            <div class="container footer-bottom-flex">
-                <div class="footer-copyright-text">
-                    <span>جميع الحقوق محفوظة © 2026 - الجماعة الترابية لبيوكرى • المملكة المغربية</span>
+        <!-- Bottom Wave Transition -->
+        <div class="stats-bottom-wave">
+            <svg viewBox="0 0 1440 65" fill="none" preserveAspectRatio="none">
+                <path d="M0,65 C360,15 1080,15 1440,65 L1440,0 L0,0 Z" fill="#071A33"></path>
+                <path d="M0,65 C360,15 1080,15 1440,65" stroke="url(#goldLineGrad2)" stroke-width="2.5"></path>
+                <defs>
+                    <linearGradient id="goldLineGrad2" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFE699"></stop>
+                        <stop offset="0.5" stop-color="#E9BE62"></stop>
+                        <stop offset="1" stop-color="#D6A63A"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <!-- WORLD-CLASS INSTITUTIONAL MASTER FOOTER -->
+        <!-- ========================================================
+         MASTER ROYAL FOOTER (الفوتر الملكي الكحلي الفاخر)
+         ======================================================== -->
+    <footer class="master-footer" id="mainFooter">
+        <!-- Background Arch Silhouette Watermark -->
+        <div class="footer-arch-watermark"></div>
+
+        <div class="container footer-master-container" style="position: relative; z-index: 5;">
+            <div class="footer-4cols-grid">
+                <!-- Col 1: Brand & Municipal Crest -->
+                <div class="footer-col-brand">
+                    <div class="footer-brand-crest">
+                        <img src="assets/logo.png" alt="شعار جماعة بيوكرى" class="footer-crest-img">
+                        <div>
+                            <h3 class="footer-brand-title">المجلس الجماعي لبيوكرى</h3>
+                            <p class="footer-brand-tagline">معاً من أجل تنمية ترابية مستدامة</p>
+                        </div>
+                    </div>
+                    <div class="footer-social-cluster">
+                        <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="footer-social-pill" aria-label="Twitter">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="footer-legal-links-cluster">
-                    <a href="javascript:void(0)" onclick="openLegalPopup()">سياسة الخصوصية</a>
-                    <span class="dot-sep">•</span>
-                    <a href="javascript:void(0)" onclick="openLegalPopup()">حماية المعطيات الشخصية (CNDP)</a>
-                    <span class="dot-sep">•</span>
-                    <a href="javascript:void(0)" onclick="openLegalPopup()">شروط الاستخدام</a>
-                    <span class="dot-sep">•</span>
-                    <a href="publications.html">إمكانية الوصول (WCAG AA)</a>
+
+                <!-- Col 2: Quick Links -->
+                <div class="footer-col-links">
+                    <h4 class="footer-col-title">روابط سريعة</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="municipality.html">المجلس الجماعي</a></li>
+                        <li><a href="action-program.html">البرامج والمشاريع</a></li>
+                        <li><a href="#servicesSection">الخدمات الإلكترونية</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Citizen Services -->
+                <div class="footer-col-links">
+                    <h4 class="footer-col-title">خدمات المواطن</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="javascript:void(0)" onclick="openServiceDetail('residence')">طلب وثائق إدارية</a></li>
+                        <li><a href="#trackingStrip">تتبع الطلبات</a></li>
+                        <li><a href="javascript:void(0)" onclick="openComplaintModal()">شكايات واقتراحات</a></li>
+                        <li><a href="#essentialServices">فضاء المواطن</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact Info -->
+                <div class="footer-col-contact">
+                    <h4 class="footer-col-title">معلومات التواصل</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <span class="ico">📍</span>
+                            <span>شارع محمد الخامس، بيوكرى، إقليم اشتوكة آيت باها</span>
+                        </li>
+                        <li>
+                            <span class="ico">📞</span>
+                            <span dir="ltr">+212 528 81 80 00</span>
+                        </li>
+                        <li>
+                            <span class="ico">✉️</span>
+                            <span>contact@biougra.ma</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Line -->
+            <div class="footer-bottom-bar">
+                <div class="footer-copyright">
+                    © المجلس الجماعي لبيوكرى - جميع الحقوق محفوظة 2026
+                </div>
+                <div class="footer-credits">
+                    <a href="admin.html" class="footer-admin-link">تصميم وتطوير ⚙️</a>
                 </div>
             </div>
         </div>
@@ -1502,8 +1757,8 @@
     </div>
 
     <!-- JavaScript MVC Bundle -->
-    <script type="module" src="js/app.js?v=22.0"></script>
-    <script src="app.js?v=22.0"></script>
+    <script type="module" src="js/app.js?v=31.0"></script>
+    <script src="app.js?v=31.0"></script>
 
     <!-- 10/10 Interactive Polish Suite (3D Tilt, Ambient Glow, Cmd+K, Tracking) -->
     <script>
@@ -1798,10 +2053,6 @@
         const cards = Array.from(document.querySelectorAll('.pano-card'));
         const prevBtn = document.getElementById('panoPrevBtn');
         const nextBtn = document.getElementById('panoNextBtn');
-        const playPauseBtn = document.getElementById('panoPlayPauseBtn');
-        const playIcon = document.getElementById('panoPlayIcon');
-        const progressFill = document.getElementById('panoProgressFill');
-        const timerText = document.getElementById('panoTimerText');
         const backdrop = document.querySelector('.hero-3d-backdrop');
         const spotlight = document.getElementById('heroCursorSpotlight');
         const canvas = document.getElementById('heroParticlesCanvas');
@@ -1809,13 +2060,13 @@
         if (!track || !cards.length) return;
 
         const totalCards = cards.length;
-        let cardWidth = window.innerWidth <= 768 ? 320 : 520;
-        let cardGap = window.innerWidth <= 768 ? 14 : 18;
+        let cardWidth = window.innerWidth <= 768 ? 320 : 540;
+        let cardGap = window.innerWidth <= 768 ? 14 : 20;
         let step = cardWidth + cardGap;
         let totalWidth = totalCards * step;
 
-        let currentScroll = 0;
-        let targetScroll = 0;
+        let currentScroll = step;
+        let targetScroll = step;
         let isDragging = false;
         let startX = 0;
         let lastX = 0;
@@ -1825,7 +2076,7 @@
         let progressTimer = null;
         let progressPercent = 0;
         const progressIntervalMs = 25;
-        const slideDuration = 2000;
+        const slideDuration = 2800;
 
         // Sound FX Engine (Synthesized Web Audio API - Zero External Assets)
         let audioCtx = null;
@@ -1849,6 +2100,22 @@
                 osc.stop(audioCtx.currentTime + duration);
             } catch(e) {}
         }
+
+        window.toggleHeroAmbientSound = function(btn) {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('ambientSoundIcon');
+            const label = document.getElementById('ambientSoundLabel');
+            if (soundEnabled) {
+                if (icon) icon.textContent = '🔊';
+                if (label) label.textContent = 'صوت سينمائي';
+                playChime(660, 0.2);
+                if (typeof showQuickToast === 'function') showQuickToast('تم تفعيل الصوت السينمائي المحيطي 🔊');
+            } else {
+                if (icon) icon.textContent = '🔇';
+                if (label) label.textContent = 'الصوت مكتوم';
+                if (typeof showQuickToast === 'function') showQuickToast('تم كتم الصوت المحيطي 🔇');
+            }
+        };
 
         // Project Data for Case Study Modal
         const projectData = [
@@ -1914,6 +2181,16 @@
             }
         ];
 
+        
+        window.handlePanoPrev = function() {
+            playChime(540, 0.12);
+            openProjectCaseStudy(0);
+        };
+        window.handlePanoNext = function() {
+            playChime(620, 0.12);
+            openProjectCaseStudy(2);
+        };
+    
         window.openProjectCaseStudy = function(idx) {
             playChime(720, 0.18);
             const data = projectData[idx] || projectData[0];
@@ -1962,15 +2239,15 @@
         };
 
         function updateDimensions() {
-            cardWidth = window.innerWidth <= 768 ? 320 : 520;
-            cardGap = window.innerWidth <= 768 ? 14 : 18;
+            cardWidth = window.innerWidth <= 768 ? 320 : 540;
+            cardGap = window.innerWidth <= 768 ? 14 : 20;
             step = cardWidth + cardGap;
             totalWidth = totalCards * step;
         }
 
         window.addEventListener('resize', updateDimensions);
 
-        // 1. Mouse Parallax Variables
+        // 1. Mouse Movement Parallax on Mountain Backdrop & Ambient Lights
         let mouseX = 0, mouseY = 0;
         let targetBgX = 0, targetBgY = 0;
         let currentBgX = 0, currentBgY = 0;
@@ -1980,19 +2257,26 @@
             mouseY = e.clientY;
             const normX = (e.clientX / window.innerWidth) - 0.5;
             const normY = (e.clientY / window.innerHeight) - 0.5;
-            targetBgX = normX * -22;
-            targetBgY = normY * -14;
+            targetBgX = normX * -36;
+            targetBgY = normY * -24;
 
             // Ambient Cursor Spotlight
             if (spotlight) {
                 spotlight.style.opacity = '1';
-                spotlight.style.background = `radial-gradient(circle 380px at ${e.clientX}px ${e.clientY}px, rgba(227, 179, 81, 0.10) 0%, transparent 75%)`;
+                spotlight.style.background = `radial-gradient(circle 420px at ${e.clientX}px ${e.clientY}px, rgba(201, 151, 46, 0.14) 0%, rgba(27, 58, 138, 0.08) 50%, transparent 80%)`;
             }
+
+            // Sub-parallax on ambient glow orbs
+            const orbBlue = document.querySelector('.hero-dynamic-glow.orb-royal-blue');
+            const orbGold = document.querySelector('.hero-dynamic-glow.orb-imperial-gold');
+            if (orbBlue) orbBlue.style.transform = `translate3d(${-targetBgX * 0.6}px, ${-targetBgY * 0.6}px, 0)`;
+            if (orbGold) orbGold.style.transform = `translate3d(${-targetBgX * 0.8}px, ${-targetBgY * 0.8}px, 0)`;
         });
 
-        // 2. Interactive 3D Card Hover / Gyro Tilt
+        // 2. Interactive 3D Card Hover / Gyro Tilt with Dynamic Glare Shine
         cards.forEach(card => {
             const inner = card.querySelector('.pano-card-inner');
+            const glare = card.querySelector('.card-glare-effect');
             if (!inner) return;
 
             card.addEventListener('mousemove', (e) => {
@@ -2000,13 +2284,21 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left - (rect.width / 2);
                 const y = e.clientY - rect.top - (rect.height / 2);
-                const tiltX = -(y / (rect.height / 2)) * 8;
-                const tiltY = (x / (rect.width / 2)) * 8;
-                inner.style.transform = `perspective(800px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale(1.02)`;
+                const tiltX = -(y / (rect.height / 2)) * 11;
+                const tiltY = (x / (rect.width / 2)) * 11;
+                inner.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`;
+
+                if (glare) {
+                    glare.style.opacity = '1';
+                    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+                    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+                    glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.3) 0%, transparent 60%)`;
+                }
             });
 
             card.addEventListener('mouseleave', () => {
-                inner.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+                inner.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                if (glare) glare.style.opacity = '0';
             });
         });
 
@@ -2084,7 +2376,43 @@
         }
         initParticles();
 
-        // 5. Core Render Loop: Positions all cards along 3D curved continuous ribbon rail ("خيط مربوط")
+        // 5. Living Animated Progress Metric Ring & Counter
+        let metricAnimated = false;
+        function triggerMetricAnimation() {
+            const circle = document.getElementById('metricProgressCircle');
+            const text = document.getElementById('metricPercentText');
+            if (!circle || !text) return;
+
+            // Animate stroke dashoffset from 263.89 to 39.58 (85%)
+            circle.style.strokeDashoffset = '39.58';
+
+            let startVal = 0;
+            const endVal = 85;
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // easeOutCubic
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const currentNum = Math.round(startVal + (endVal - startVal) * ease);
+                text.textContent = currentNum + '%';
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        function resetMetricAnimation() {
+            const circle = document.getElementById('metricProgressCircle');
+            const text = document.getElementById('metricPercentText');
+            if (circle) circle.style.strokeDashoffset = '263.89';
+            if (text) text.textContent = '0%';
+        }
+
+        // 6. Core Render Loop: Positions all cards along 3D curved continuous ribbon rail
         let lastActiveIdx = -1;
         function renderRibbon() {
             // Fluid inertial glide physics (lerp)
@@ -2093,10 +2421,10 @@
             }
 
             // Mountain Backdrop Parallax Lerp
-            currentBgX += (targetBgX - currentBgX) * 0.06;
-            currentBgY += (targetBgY - currentBgY) * 0.06;
+            currentBgX += (targetBgX - currentBgX) * 0.055;
+            currentBgY += (targetBgY - currentBgY) * 0.055;
             if (backdrop) {
-                backdrop.style.transform = `scale(1.06) translate3d(${currentBgX.toFixed(1)}px, ${currentBgY.toFixed(1)}px, 0)`;
+                backdrop.style.transform = `scale(1.12) translate3d(${currentBgX.toFixed(2)}px, ${currentBgY.toFixed(2)}px, 0)`;
             }
 
             let activeIndex = 0;
@@ -2115,14 +2443,14 @@
                 }
 
                 const x = diff;
-                const curveDepth = window.innerWidth <= 768 ? 100 : 175;
+                const curveDepth = window.innerWidth <= 768 ? 100 : 185;
                 const z = -Math.pow(absDiff / (step * 0.95), 1.55) * curveDepth;
                 const maxRot = window.innerWidth <= 768 ? 26 : 30;
                 const rotY = Math.max(-maxRot, Math.min(maxRot, -(diff / step) * 26));
-                const scale = Math.max(0.88, 1.05 - absDiff / (totalWidth * 0.75));
-                const blur = Math.min(1.8, Math.pow(absDiff / step, 1.1) * 1.4);
-                const opacity = Math.max(0.70, 1 - absDiff / (totalWidth * 0.55));
-                const brightness = Math.max(0.82, 1.08 - (absDiff / step) * 0.22);
+                const scale = Math.max(0.86, 1.08 - absDiff / (totalWidth * 0.72));
+                const blur = Math.min(2.0, Math.pow(absDiff / step, 1.1) * 1.6);
+                const opacity = Math.max(0.68, 1 - absDiff / (totalWidth * 0.52));
+                const brightness = Math.max(0.78, 1.08 - (absDiff / step) * 0.25);
 
                 card.style.transform = `translate3d(${x.toFixed(1)}px, 0, ${z.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
                 card.style.filter = `blur(${blur.toFixed(1)}px) brightness(${brightness.toFixed(2)})`;
@@ -2138,8 +2466,23 @@
 
             if (activeIndex !== lastActiveIdx) {
                 lastActiveIdx = activeIndex;
-                if (timerText) {
-                    timerText.textContent = `00:0${activeIndex + 1} / 00:0${totalCards}`;
+                ['dash0', 'dash1', 'dash2'].forEach((dId, dIdx) => {
+                    const dashEl = document.getElementById(dId);
+                    if (dashEl) {
+                        if (dIdx === activeIndex) dashEl.classList.add('active');
+                        else dashEl.classList.remove('active');
+                    }
+                });
+                if (activeIndex === 2) {
+                    if (!metricAnimated) {
+                        metricAnimated = true;
+                        triggerMetricAnimation();
+                    }
+                } else {
+                    if (metricAnimated) {
+                        metricAnimated = false;
+                        resetMetricAnimation();
+                    }
                 }
             }
 
@@ -2158,14 +2501,12 @@
             playChime(580, 0.1);
             let currentIdx = Math.round(targetScroll / step);
             targetScroll = (currentIdx + 1) * step;
-            resetProgressBar();
         }
 
         function prevSlide() {
             playChime(520, 0.1);
             let currentIdx = Math.round(targetScroll / step);
             targetScroll = (currentIdx - 1) * step;
-            resetProgressBar();
         }
 
         window.handlePanoCardClick = function(index) {
@@ -2181,7 +2522,6 @@
                 if (diff > totalCards / 2) diff -= totalCards;
                 if (diff < -totalCards / 2) diff += totalCards;
                 targetScroll = (currentIdx + diff) * step;
-                resetProgressBar();
             }
         };
 
@@ -2233,32 +2573,21 @@
                     e.preventDefault();
                     targetScroll += (e.deltaX || e.deltaY) * 0.9;
                     snapToNearest();
-                    resetProgressBar();
                 }
             }, { passive: false });
 
-            // 2-Second continuous glide: do not freeze on hover, only during active drag
-            stage.addEventListener('mouseenter', () => {
-                // Keep smooth auto-scroll playing continuously
-            });
             stage.addEventListener('mouseleave', () => {
                 if (isAutoPlaying && !progressTimer) startAutoPlay();
             });
         }
 
-        // Auto Play & Progress Scrubber
-        function resetProgressBar() {
-            progressPercent = 0;
-            if (progressFill) progressFill.style.width = '0%';
-        }
-
+        // Auto Play Engine
         function startAutoPlay() {
             clearInterval(progressTimer);
             progressTimer = setInterval(() => {
                 progressPercent += (progressIntervalMs / slideDuration) * 100;
-                if (progressFill) progressFill.style.width = `${Math.min(100, progressPercent)}%`;
-
                 if (progressPercent >= 100) {
+                    progressPercent = 0;
                     nextSlide();
                 }
             }, progressIntervalMs);
@@ -2267,91 +2596,6 @@
         function pauseAutoPlay() {
             clearInterval(progressTimer);
         }
-
-        if (playPauseBtn) {
-            playPauseBtn.addEventListener('click', () => {
-                isAutoPlaying = !isAutoPlaying;
-                if (isAutoPlaying) {
-                    if (playIcon) playIcon.textContent = '❚❚';
-                    startAutoPlay();
-                } else {
-                    if (playIcon) playIcon.textContent = '▶';
-                    pauseAutoPlay();
-                }
-            });
-        }
-
-        window.togglePanoSound = function(btn) {
-            if (!btn) return;
-            soundEnabled = !soundEnabled;
-            btn.innerHTML = soundEnabled ? '<span>🔊</span>' : '<span>🔇</span>';
-            if (soundEnabled) playChime(660, 0.15);
-        };
-
-        
-        // 6. Interactive Custom Cursor Engine (Awwwards Style)
-        const customCursor = document.getElementById('heroCustomCursor');
-        const cursorText = document.getElementById('cursorText');
-        const heroEl = document.getElementById('hero');
-        let cursorX = window.innerWidth / 2;
-        let cursorY = window.innerHeight / 2;
-        let targetCursorX = cursorX;
-        let targetCursorY = cursorY;
-
-        window.addEventListener('mousemove', (e) => {
-            targetCursorX = e.clientX;
-            targetCursorY = e.clientY;
-
-            if (heroEl && customCursor) {
-                const heroRect = heroEl.getBoundingClientRect();
-                if (e.clientY >= heroRect.top && e.clientY <= heroRect.bottom) {
-                    customCursor.classList.add('active');
-                } else {
-                    customCursor.classList.remove('active');
-                }
-            }
-        });
-
-        function renderCustomCursor() {
-            cursorX += (targetCursorX - cursorX) * 0.18;
-            cursorY += (targetCursorY - cursorY) * 0.18;
-            if (customCursor) {
-                customCursor.style.left = `${cursorX.toFixed(1)}px`;
-                customCursor.style.top = `${cursorY.toFixed(1)}px`;
-            }
-            requestAnimationFrame(renderCustomCursor);
-        }
-        requestAnimationFrame(renderCustomCursor);
-
-        if (stage && customCursor) {
-            stage.addEventListener('mouseenter', () => {
-                customCursor.classList.add('hover-drag');
-                if (cursorText) cursorText.textContent = 'اسحب ↔';
-            });
-            stage.addEventListener('mouseleave', () => {
-                customCursor.classList.remove('hover-drag');
-                customCursor.classList.remove('hover-card');
-            });
-        }
-
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                if (customCursor && card.classList.contains('active-center')) {
-                    customCursor.classList.remove('hover-drag');
-                    customCursor.classList.add('hover-card');
-                    if (cursorText) cursorText.textContent = '▶ استكشف';
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                if (customCursor) {
-                    customCursor.classList.remove('hover-card');
-                    if (stage && stage.matches(':hover')) {
-                        customCursor.classList.add('hover-drag');
-                        if (cursorText) cursorText.textContent = 'اسحب ↔';
-                    }
-                }
-            });
-        });
 
         startAutoPlay();
     })();

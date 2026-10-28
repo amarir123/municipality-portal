@@ -1591,3 +1591,159 @@ document.addEventListener('mousemove', (e) => {
         aura.style.top = e.clientY + 'px';
     }
 });
+
+
+// ==========================================
+// MASTER 3D CINEMATIC HERO CAROUSEL ENGINE (PIXEL-PRECISE REFERENCE)
+// ==========================================
+
+const heroPanoSlides = [
+    {
+        category: "الأنشطة التنموية",
+        icon: "🏛️",
+        time: "⏱️ 05:47",
+        title: "إطلاق أسطول حافلات النقل الحضري بالنيابة",
+        desc: "في إطار تحسين خدمات النقل الحضري، تم إطلاق أسطول جديد من الحافلات الحديثة لتسهيل تنقل المواطنين داخل الجماعة.",
+        img: "assets/video_bus.png",
+        date: "12 ماي 2025"
+    },
+    {
+        category: "أخبار الجماعة",
+        icon: "📰",
+        time: "⏱️ 03:20",
+        title: "تأهيل البنية التحتية بالمنطقة",
+        desc: "جماعة بيوكرى تسهر أشغال تهيئة الطرقات والأحياء السكنية وتعزيز شبكات الإنارة والماء الصالح للشرب.",
+        img: "assets/video_hall.png",
+        date: "15 ماي 2025"
+    },
+    {
+        category: "المشاريع",
+        icon: "🏗️",
+        time: "⏱️ 04:15",
+        title: "مشروع السوق الأسبوعي الجديد",
+        desc: "إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة بيوكرى لتنشيط الحركة التجارية والاقتصادية.",
+        img: "assets/video_park.png",
+        date: "10 ماي 2025"
+    }
+];
+
+let activePanoIdx = 0;
+
+window.rotatePanoSlide = function(idx) {
+    if (idx < 0) idx = heroPanoSlides.length - 1;
+    if (idx >= heroPanoSlides.length) idx = 0;
+    activePanoIdx = idx;
+
+    const center = heroPanoSlides[activePanoIdx];
+    const prev = heroPanoSlides[(activePanoIdx - 1 + heroPanoSlides.length) % heroPanoSlides.length];
+    const next = heroPanoSlides[(activePanoIdx + 1) % heroPanoSlides.length];
+
+    // Center Card Elements
+    const cImg = document.getElementById('centerCardImg');
+    const cCat = document.getElementById('centerBadgeCategory');
+    const cTime = document.getElementById('centerBadgeTime');
+    const cTitle = document.getElementById('centerCardTitle');
+    const cDesc = document.getElementById('centerCardDesc');
+
+    if (cImg) {
+        cImg.style.opacity = '0.6';
+        cImg.src = center.img;
+        setTimeout(() => { cImg.style.opacity = '1'; }, 150);
+    }
+    if (cCat) {
+        cCat.innerHTML = `<span>${center.category}</span> <span class="badge-icon">${center.icon}</span>`;
+    }
+    if (cTime) cTime.textContent = center.time;
+    if (cTitle) cTitle.textContent = center.title;
+    if (cDesc) cDesc.textContent = center.desc;
+
+    // Left Secondary Card
+    const lImg = document.querySelector('#stageCardLeft .stage-img');
+    const lTitle = document.querySelector('#stageCardLeft .stage-card-title');
+    const lSub = document.querySelector('#stageCardLeft .stage-card-subtitle');
+    const lDate = document.querySelector('#stageCardLeft .stage-card-date');
+    const lCat = document.querySelector('#stageCardLeft .card-glass-badge');
+
+    if (lImg) lImg.src = prev.img;
+    if (lTitle) lTitle.textContent = prev.title;
+    if (lSub) lSub.textContent = prev.desc;
+    if (lDate) lDate.textContent = prev.date;
+    if (lCat) lCat.innerHTML = `<span>${prev.category}</span> <span class="badge-icon">${prev.icon}</span>`;
+
+    // Right Secondary Card
+    const rImg = document.querySelector('#stageCardRight .stage-img');
+    const rTitle = document.querySelector('#stageCardRight .stage-card-title');
+    const rSub = document.querySelector('#stageCardRight .stage-card-subtitle');
+    const rDate = document.querySelector('#stageCardRight .stage-card-date');
+    const rCat = document.querySelector('#stageCardRight .card-glass-badge');
+
+    if (rImg) rImg.src = next.img;
+    if (rTitle) rTitle.textContent = next.title;
+    if (rSub) rSub.textContent = next.desc;
+    if (rDate) rDate.textContent = next.date;
+    if (rCat) rCat.innerHTML = `<span>${next.category}</span> <span class="badge-icon">${next.icon}</span>`;
+
+    // Update Pagination Dashes
+    for (let i = 0; i < heroPanoSlides.length; i++) {
+        const dash = document.getElementById(`dash${i}`);
+        if (dash) {
+            if (i === activePanoIdx) dash.classList.add('active');
+            else dash.classList.remove('active');
+        }
+    }
+};
+
+window.handlePanoPrev = function() {
+    rotatePanoSlide(activePanoIdx - 1);
+};
+
+window.handlePanoNext = function() {
+    rotatePanoSlide(activePanoIdx + 1);
+};
+
+// Keyboard Accessibility: ArrowLeft & ArrowRight
+document.addEventListener('keydown', (e) => {
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+    if (e.key === 'ArrowRight') {
+        window.handlePanoPrev(); // RTL: Right arrow goes to previous in RTL
+    } else if (e.key === 'ArrowLeft') {
+        window.handlePanoNext(); // RTL: Left arrow goes to next in RTL
+    }
+});
+
+// Subtle Parallax Effect on Hero Pointer Movement
+(function initHeroParallax() {
+    const heroSection = document.getElementById('hero');
+    const backdrop = document.getElementById('heroBackdrop');
+    const stage = document.getElementById('heroCardsStage');
+
+    if (!heroSection || !backdrop || window.innerWidth < 992) return;
+
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        targetX = x * -14;
+        targetY = y * -10;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+        targetX = 0;
+        targetY = 0;
+    });
+
+    function renderParallax() {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+
+        backdrop.style.transform = `scale(1.03) translate3d(${currentX}px, ${currentY}px, 0)`;
+        if (stage) {
+            stage.style.transform = `translate3d(${-currentX * 0.35}px, ${-currentY * 0.35}px, 0)`;
+        }
+        requestAnimationFrame(renderParallax);
+    }
+    renderParallax();
+})();
