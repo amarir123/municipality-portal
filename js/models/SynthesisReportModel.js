@@ -244,5 +244,12 @@ export const SynthesisReportModel = {
             this.save(data);
         }
         return data;
+    },
+
+    updateAxes(axes) {
+        const data = this.get();
+        data.activityAxes = axes;
+        this.save(data);
+        return data;
     }
 };

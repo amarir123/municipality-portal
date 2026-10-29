@@ -16,6 +16,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="admin-body">
+    <script>
+        window.switchPanel = function(btn, panelId) {
+            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.admin-panel-content').forEach(p => p.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            const targetPanel = document.getElementById(panelId);
+            if (targetPanel) targetPanel.classList.add('active');
+        };
+        window.handleAdminLogin = function(e) {
+            if (e) e.preventDefault();
+            sessionStorage.setItem('agadir_admin_logged', 'true');
+            const ov = document.getElementById('loginOverlay');
+            if (ov) { ov.style.display = 'none'; ov.style.pointerEvents = 'none'; }
+            if (window.adminController) window.adminController.loadAllData();
+        };
+    </script>
 
     <!-- 1. LOGIN OVERLAY CARD -->
     <div class="login-overlay" id="loginOverlay">
@@ -25,7 +41,7 @@
             <h2 class="login-title">بوابة إدارة الجماعة الترابية</h2>
             <p class="login-subtitle">نظام التحكم والتدبير الرقمي الموحد</p>
             
-            <form id="loginForm" onsubmit="window.adminController ? window.adminController.handleLogin(event) : handleAdminLogin(event)">
+            <form novalidate id="loginForm" onsubmit="window.adminController ? window.adminController.handleLogin(event) : handleAdminLogin(event)">
                 <div class="form-group">
                     <label class="form-label" for="adminUser">اسم المستخدم</label>
                     <input type="text" id="adminUser" class="form-input" placeholder="أدخل اسم المستخدم" value="admin" required autocomplete="username">
@@ -107,6 +123,10 @@
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect></svg>
                 <span>أنشطة ومناسبات</span>
             </button>
+            <button class="sidebar-btn" onclick="switchPanel(this, 'gallery-panel')">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <span>معرض الصور والفيديوهات 🎥</span>
+            </button>
         </nav>
         <div class="sidebar-footer">
             <button class="btn btn-outline" style="width: 100%; border-color: #ef4444; color: #ef4444;" onclick="window.adminController ? window.adminController.handleLogout() : handleLogout()">تسجيل الخروج</button>
@@ -175,6 +195,28 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 class="panel-section-title" style="margin-bottom: 0;">🏛️ تدبير الولاية الانتدابية 2021-2027</h2>
                 <button class="btn btn-primary" onclick="window.adminController.openAddCouncilMemberModal()">+ إضافة عضو مجلس / مكتب جديد</button>
+            </div>
+
+            <!-- Mayor Edit Form -->
+            <div class="card" style="margin-bottom: 20px; border-top: 4px solid var(--accent-color);">
+                <h3 style="color: var(--primary-color); margin-bottom: 12px;">👑 بيانات وكلمة رئيس المجلس الجماعي (تظهر بالصفحة الرئيسية)</h3>
+                <form novalidate onsubmit="window.adminController.saveMayorData(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">الاسم الكامل لرئيس المجلس *</label>
+                            <input type="text" id="mayorNameInput" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">الصفة الرسمية *</label>
+                            <input type="text" id="mayorRoleInput" class="form-input" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">كلمة وتوجه الرئيس للساكنة (Citation / Mot du Président) *</label>
+                        <textarea id="mayorQuoteInput" class="form-input" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">حفظ بيانات وكلمة الرئيس 💾</button>
+                </form>
             </div>
 
             <!-- Sub-tabs for Mandate -->
@@ -252,10 +294,52 @@
                 </div>
             </div>
 
+            <!-- STRATEGIC AXES (محاور الاختصاصات الأربعة) -->
+            <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--secondary-color);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: var(--primary-color); margin: 0;">🏛️ تعديل مجالات ومحاور التنمية الاستراتيجية الأربعة (Axes Stratégiques)</h3>
+                    <button class="btn btn-primary btn-sm" onclick="window.adminController.saveSynthesisAxes(event)">حفظ محاور التقرير التركيبي 💾</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="background: #f8fafc; padding: 12px; border-radius: 8px;">
+                        <label class="form-label">المجال 1: التهيئة والبنية التحتية</label>
+                        <input type="text" id="axis1Name" class="form-input" style="margin-bottom: 6px;" placeholder="اسم المحور">
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="axis1Budget" class="form-input" placeholder="الميزانية">
+                            <input type="number" id="axis1Projects" class="form-input" style="width: 80px;" placeholder="عدد المشاريع">
+                        </div>
+                    </div>
+                    <div style="background: #f8fafc; padding: 12px; border-radius: 8px;">
+                        <label class="form-label">المجال 2: التعليم والثقافة والرياضة</label>
+                        <input type="text" id="axis2Name" class="form-input" style="margin-bottom: 6px;" placeholder="اسم المحور">
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="axis2Budget" class="form-input" placeholder="الميزانية">
+                            <input type="number" id="axis2Projects" class="form-input" style="width: 80px;" placeholder="عدد المشاريع">
+                        </div>
+                    </div>
+                    <div style="background: #f8fafc; padding: 12px; border-radius: 8px;">
+                        <label class="form-label">المجال 3: الحكامة والتحول الرقمي</label>
+                        <input type="text" id="axis3Name" class="form-input" style="margin-bottom: 6px;" placeholder="اسم المحور">
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="axis3Budget" class="form-input" placeholder="الميزانية">
+                            <input type="number" id="axis3Projects" class="form-input" style="width: 80px;" placeholder="عدد المشاريع">
+                        </div>
+                    </div>
+                    <div style="background: #f8fafc; padding: 12px; border-radius: 8px;">
+                        <label class="form-label">المجال 4: البيئة والتنمية المستدامة</label>
+                        <input type="text" id="axis4Name" class="form-input" style="margin-bottom: 6px;" placeholder="اسم المحور">
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="axis4Budget" class="form-input" placeholder="الميزانية">
+                            <input type="number" id="axis4Projects" class="form-input" style="width: 80px;" placeholder="عدد المشاريع">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Synthesis Report Writer (كتابة التقرير التركيبي مع Introduction) -->
             <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--primary-color);">
                 <h3 style="color: var(--primary-color); margin-bottom: 12px;">✍️ تحرير التقرير التركيبي للولاية 2021-2027 (Rapport de Synthèse)</h3>
-                <form onsubmit="window.adminController.saveSynthesisIntro(event)">
+                <form novalidate onsubmit="window.adminController.saveSynthesisIntro(event)">
                     <div style="margin-bottom: 14px;">
                         <label class="form-label">عنوان التقرير التركيبي</label>
                         <input type="text" id="synthesisReportTitleInput" class="form-input" required>
@@ -325,15 +409,23 @@
                 <button class="btn btn-primary" onclick="window.adminController.openAddSubventionModal()">+ إضافة جمعية مستفيدة جديدة</button>
             </div>
 
-            <!-- Fiche & Decision Card -->
+            <!-- Fiche & Decision Card (Editable) -->
             <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--accent-color);">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                    <div>
-                        <h3 style="color: var(--primary-color); margin-bottom: 8px;" id="adminSubventionDecisionTitle">قرار توزيع الدعم المالي واستمارة الترشيح</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;" id="adminSubventionDecisionDetails"></p>
+                <h3 style="color: var(--primary-color); margin-bottom: 12px;">✍️ نص قرار المجلس الجماعي وشروط ومعايير توزيع الدعم</h3>
+                <form novalidate onsubmit="window.adminController.saveSubventionDecision(event)">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان القرار الجماعي *</label>
+                        <input type="text" id="adminSubDecisionTitleInput" class="form-input" required>
                     </div>
-                    <button onclick="window.adminController.downloadSubventionFiche()" class="btn btn-gold">معاينة وتحميل استمارة الدعم (Fiche) 📥</button>
-                </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">تفاصيل ومقتضيات المداولة القانونية *</label>
+                        <textarea id="adminSubDecisionDetailsInput" class="form-input" rows="3" required></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <button type="submit" class="btn btn-primary">حفظ وتحديث نص القرار للعموم 💾</button>
+                        <button type="button" onclick="window.adminController.downloadSubventionFiche()" class="btn btn-gold">معاينة وتحميل استمارة الدعم (Fiche) 📥</button>
+                    </div>
+                </form>
             </div>
 
             <!-- Beneficiaries Table (الناس/الجمعيات اللي استفادت من الدعم) -->
@@ -368,7 +460,7 @@
             <!-- Form: Crée Question للرأي -->
             <div class="card" style="margin-bottom: 25px; border-top: 4px solid var(--accent-color);">
                 <h3 style="color: var(--primary-color); margin-bottom: 14px;">➕ إنشاء سؤال جديد لسبر الآراء (Crée Question)</h3>
-                <form onsubmit="window.adminController.handleCreatePoll(event)">
+                <form novalidate onsubmit="window.adminController.handleCreatePoll(event)">
                     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 15px;">
                         <div>
                             <label class="form-label">نص السؤال المطروح على المواطنين *</label>
@@ -471,6 +563,30 @@
                     </table>
                 </div>
             </div>
+
+            <!-- ESSENTIAL CIVIC PROCEDURES TABLE -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">🏛️ الإجراءات الإدارية الأكثر طلباً (فضاء المواطن 3D)</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddProcedureModal()">+ إضافة إجراء إداري جديد</button>
+            </div>
+            <div class="card">
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>الرقم</th>
+                                <th>اسم الإجراء الإداري</th>
+                                <th>الوصف والمصلحة</th>
+                                <th>المدة والواجبات</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminProceduresTableBody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
 
         <!-- PANEL 4: WHITE-LABEL BRANDING & SAAS PACKAGING -->
@@ -487,9 +603,22 @@
                 </div>
             </div>
 
-            <form id="brandingForm" onsubmit="window.adminController.saveBrandingSettings(event)">
+            <form novalidate id="brandingForm" onsubmit="window.adminController.saveBrandingSettings(event)">
                 <div class="card" style="margin-bottom: 20px;">
                     <h3 style="color: var(--primary-color); margin-bottom: 15px;">1. المعلومات الأساسية والتواصل للجماعة</h3>
+                    
+                    <!-- Municipality Logo Upload Box -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 15px; margin-bottom: 18px; border: 1px dashed #cbd5e1; display: flex; align-items: center; gap: 20px;">
+                        <div style="background: white; padding: 6px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; width: 75px; height: 75px; flex-shrink: 0;">
+                            <img id="brandLogoPreview" src="assets/logo.png" alt="شعار الجماعة" style="max-width: 65px; max-height: 65px; object-fit: contain;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label class="form-label" style="font-weight: 700; margin-bottom: 5px; color: var(--primary-color);">🏛️ الشعار الرسمي للجماعة (Logo):</label>
+                            <span style="font-size: 0.85rem; color: #64748b; display: block; margin-bottom: 8px;">يظهر الشعار في أعلى شريط الموقع (الهيدر)، أسفل الصفحة (الفوتر)، ولوحة التحكم. (يُفضل صورة شفافة PNG).</span>
+                            <input type="file" id="brandLogoFileInput" accept="image/*" class="form-input" style="padding: 5px; font-size: 0.85rem;" onchange="window.adminController.handleLogoUpload(event)">
+                            <input type="hidden" id="brandLogoUrlInput">
+                        </div>
+                    </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                         <div>
                             <label class="form-label">اسم الجماعة الترابية *</label>
@@ -498,6 +627,17 @@
                         <div>
                             <label class="form-label">اسم المدينة/الإقليم *</label>
                             <input type="text" id="brandCityName" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">شعار الجماعة والتنمية (Slogan) *</label>
+                            <input type="text" id="brandSloganInput" class="form-input" placeholder="من أجل تنمية مستدامة و خدمة أفضل للمواطنين">
+                        </div>
+                        <div>
+                            <label class="form-label">النص التعريفي بالهيرو (Hero Subtitle) *</label>
+                            <input type="text" id="brandHeroSubtitleInput" class="form-input" placeholder="تقريب الإدارة من المواطن وتعزيز التنمية المحلية">
                         </div>
                     </div>
                     
@@ -559,6 +699,161 @@
                     </div>
                 </div>
 
+                <!-- PORTAL STATS RIBBON CONTROLS -->
+                <div class="card" style="margin-bottom: 20px; border-top: 4px solid var(--accent-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">📊 شريط الأرقام والإحصائيات المقوس (Portal Stats Ribbon)</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">نص العنوان التوضيحي للإحصائيات</label>
+                        <input type="text" id="brandStatsSubtitleInput" class="form-input" placeholder="تعكس هذه الأرقام حجم الجهود المبذولة لخدمة الإقليم">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">الرقم 1 (المشاريع التنموية)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="brandStat4Val" class="form-input" style="width: 90px;" placeholder="+45">
+                                <input type="text" id="brandStat4Label" class="form-input" placeholder="مشروع تنموي">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">الرقم 2 (البرامج واللقاءات)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="brandStat3Val" class="form-input" style="width: 90px;" placeholder="+12">
+                                <input type="text" id="brandStat3Label" class="form-input" placeholder="برنامج قطاعي">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">الرقم 3 (نسبة الإنجاز والشفافية)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="brandStat2Val" class="form-input" style="width: 90px;" placeholder="+98%">
+                                <input type="text" id="brandStat2Label" class="form-input" placeholder="معدل إنجاز المشاريع">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">الرقم 4 (الخدمات والطلبات)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="brandStat1Val" class="form-input" style="width: 90px;" placeholder="+120">
+                                <input type="text" id="brandStat1Label" class="form-input" placeholder="طلب معالجة شهرياً">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HERO 3D STAGE SLIDES CONTROLS -->
+                <div class="card" style="margin-bottom: 20px; border-top: 4px solid var(--secondary-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="color: var(--primary-color); margin: 0;">🎬 شرائح سلايدر الاستقبال والواجهة الرئيسية (Hero 3D Stage Carousel)</h3>
+                        <span class="badge badge-info" style="font-size: 0.85rem;">تحكم بصري كامل 100% 📸</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 18px;">يمكنك هنا رفع الصور الخاصة بكل شريحة من شرائح السلايدر، أو تغيير نصوصها والشارات المعروضة فوقها.</p>
+
+                    <!-- Slide 1 -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 16px; border-right: 4px solid var(--primary-color); border: 1px solid #e2e8f0; border-right-width: 4px;">
+                        <strong style="color: var(--primary-color); display: block; margin-bottom: 12px; font-size: 1.05rem;">🖼️ الشريحة 1 (اليمين)</strong>
+                        
+                        <!-- Image Upload Box -->
+                        <div style="display: flex; gap: 15px; align-items: center; background: white; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 12px;">
+                            <img id="heroSlide1ImgPreview" src="assets/video_hall.png" style="width: 100px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem; font-weight: 700; color: #334155; display: block; margin-bottom: 5px;">📤 رفع صورة الشريحة 1 من الحاسوب:</label>
+                                <input type="file" id="heroSlide1FileInput" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.85rem;" onchange="window.adminController.handleSlideImageUpload(1, event)">
+                                <input type="hidden" id="heroSlide1ImgInput">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                            <input type="text" id="heroSlide1TitleInput" class="form-input" placeholder="عنوان الشريحة 1">
+                            <input type="text" id="heroSlide1BadgeInput" class="form-input" placeholder="الشارة (Badge)">
+                            <input type="text" id="heroSlide1DateInput" class="form-input" placeholder="التاريخ">
+                        </div>
+                        <input type="text" id="heroSlide1SubtitleInput" class="form-input" placeholder="الوصف الموجز للشريحة 1">
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 16px; border-right: 4px solid var(--accent-color); border: 1px solid #e2e8f0; border-right-width: 4px;">
+                        <strong style="color: var(--accent-color); display: block; margin-bottom: 12px; font-size: 1.05rem;">⭐ الشريحة 2 (الوسطية المميزة - Featured)</strong>
+                        
+                        <!-- Image Upload Box -->
+                        <div style="display: flex; gap: 15px; align-items: center; background: white; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 12px;">
+                            <img id="heroSlide2ImgPreview" src="assets/video_bus.png" style="width: 100px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem; font-weight: 700; color: #334155; display: block; margin-bottom: 5px;">📤 رفع صورة الشريحة 2 من الحاسوب:</label>
+                                <input type="file" id="heroSlide2FileInput" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.85rem;" onchange="window.adminController.handleSlideImageUpload(2, event)">
+                                <input type="hidden" id="heroSlide2ImgInput">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                            <input type="text" id="heroSlide2TitleInput" class="form-input" placeholder="عنوان الشريحة 2">
+                            <input type="text" id="heroSlide2BadgeInput" class="form-input" placeholder="الشارة (Badge)">
+                            <input type="text" id="heroSlide2DateInput" class="form-input" placeholder="التاريخ">
+                        </div>
+                        <input type="text" id="heroSlide2SubtitleInput" class="form-input" placeholder="الوصف الموجز للشريحة 2">
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 16px; border-right: 4px solid var(--secondary-color); border: 1px solid #e2e8f0; border-right-width: 4px;">
+                        <strong style="color: var(--secondary-color); display: block; margin-bottom: 12px; font-size: 1.05rem;">🖼️ الشريحة 3 (اليسار)</strong>
+                        
+                        <!-- Image Upload Box -->
+                        <div style="display: flex; gap: 15px; align-items: center; background: white; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 12px;">
+                            <img id="heroSlide3ImgPreview" src="assets/video_park.png" style="width: 100px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem; font-weight: 700; color: #334155; display: block; margin-bottom: 5px;">📤 رفع صورة الشريحة 3 من الحاسوب:</label>
+                                <input type="file" id="heroSlide3FileInput" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.85rem;" onchange="window.adminController.handleSlideImageUpload(3, event)">
+                                <input type="hidden" id="heroSlide3ImgInput">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                            <input type="text" id="heroSlide3TitleInput" class="form-input" placeholder="عنوان الشريحة 3">
+                            <input type="text" id="heroSlide3BadgeInput" class="form-input" placeholder="الشارة (Badge)">
+                            <input type="text" id="heroSlide3DateInput" class="form-input" placeholder="التاريخ">
+                        </div>
+                        <input type="text" id="heroSlide3SubtitleInput" class="form-input" placeholder="الوصف الموجز للشريحة 3">
+                    </div>
+
+                    <!-- Hero Background Wallpaper Upload -->
+                    <div style="background: #f1f5f9; border-radius: 10px; padding: 16px; border-right: 4px solid #6366f1; border: 1px solid #e2e8f0; border-right-width: 4px;">
+                        <strong style="color: #4f46e5; display: block; margin-bottom: 12px; font-size: 1.05rem;">🌄 صورة الخلفية البانورامية للواجهة الرئيسية (Hero Wallpaper)</strong>
+                        
+                        <div style="display: flex; gap: 15px; align-items: center; background: white; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            <img id="heroBgImgPreview" src="assets/biougra_landscape_clean.png" style="width: 120px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem; font-weight: 700; color: #334155; display: block; margin-bottom: 5px;">📤 رفع صورة خلفية جديدة للواجهة الرئيسية 📁:</label>
+                                <input type="file" id="heroBgFileInput" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.85rem;" onchange="window.adminController.handleHeroBgUpload(event)">
+                                <input type="hidden" id="heroBgImgInput">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOCIAL & EMERGENCY -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">🌐 شبكات التواصل الاجتماعي وأرقام الطوارئ</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">رابط صفحة فيسبوك (Facebook)</label>
+                            <input type="text" id="brandFacebookInput" class="form-input" placeholder="https://facebook.com/...">
+                        </div>
+                        <div>
+                            <label class="form-label">رابط منصة إكس / تويتر (X / Twitter)</label>
+                            <input type="text" id="brandTwitterInput" class="form-input" placeholder="https://x.com/...">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label class="form-label">رابط إنستغرام (Instagram)</label>
+                            <input type="text" id="brandInstagramInput" class="form-input" placeholder="https://instagram.com/...">
+                        </div>
+                        <div>
+                            <label class="form-label">رابط قناة يوتيوب (YouTube)</label>
+                            <input type="text" id="brandYoutubeInput" class="form-input" placeholder="https://youtube.com/...">
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">حفظ وإرسال التغييرات إلى البوابة المباشرة 💾</button>
             </form>
         </section>
@@ -586,7 +881,10 @@
 
         <!-- PANEL 6: PROJECTS MANAGEMENT -->
         <section class="admin-panel-content" id="projects-panel">
-            <h2 class="panel-section-title">المشاريع التنموية</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">🏗️ إدارة المشاريع التنموية والمهيكلة</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddProjectModal()">+ إضافة مشروع تنموي جديد</button>
+            </div>
             <div class="proj-admin-grid" id="adminProjectsGrid"></div>
         </section>
 
@@ -613,14 +911,58 @@
 
         <!-- PANEL 8: EVENTS -->
         <section class="admin-panel-content" id="events-panel">
-            <h2 class="panel-section-title">أنشطة ومناسبات الجماعة</h2>
-            <div id="adminEventsContainer"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">📅 إدارة أنشطة ومناسبات الجماعة</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddEventModal()">+ إضافة نشاط أو مناسبة جديدة</button>
+            </div>
+            <div class="card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>تاريخ النشاط</th>
+                            <th>عنوان النشاط أو الدورة</th>
+                            <th>المكان / المقر</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminEventsTableBody">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PANEL 13: MULTIMEDIA & GALLERY -->
+        <section class="admin-panel-content" id="gallery-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="panel-section-title" style="margin-bottom: 0;">🎥 إدارة معرض الوسائط والفيديوهات</h2>
+                <button class="btn btn-primary" onclick="window.adminController.openAddVideoModal()">+ إضافة وسيط / فيديو جديد</button>
+            </div>
+            <div class="card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>معاينة</th>
+                            <th>عنوان الفيديو / الصورة</th>
+                            <th>المدة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminVideosTableBody">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
-    <!-- TOAST NOTIFICATION NOTIFIER -->
-    <div class="toast-notify" id="toastNotify">
-        <span id="toastMessage">تم التحديث بنجاح!</span>
+    
+        <div class="toast-content-pane">
+            <strong class="toast-title" id="toastTitle">تم الحفظ بنجاح!</strong>
+            <span class="toast-msg" id="toastMessage">تم تحديث البيانات بالواجهة الرئيسية.</span>
+        </div>
+        <button type="button" class="toast-dismiss-btn" onclick="document.getElementById('toastNotify').classList.remove('show')" aria-label="إغلاق التنبيه">✕</button>
+        <div class="toast-progress-bar" id="toastProgressBar"></div>
     </div>
 
     <!-- MODAL EDIT NEWS -->
@@ -629,7 +971,7 @@
             <button class="modal-close-btn" onclick="window.adminController.closeNewsModal()">✕</button>
             <div class="modal-body">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="newsModalTitle">إضافة / تعديل خبر</h3>
-                <form id="newsEditForm" onsubmit="window.adminController.saveNewsItem(event)">
+                <form novalidate id="newsEditForm" onsubmit="window.adminController.saveNewsItem(event)">
                     <input type="hidden" id="editNewsId">
                     <div style="margin-bottom: 12px;">
                         <label class="form-label">عنوان الخبر</label>
@@ -659,7 +1001,7 @@
             <button class="modal-close-btn" onclick="window.adminController.closeComplaintEditModal()">✕</button>
             <div class="modal-body">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;">معالجة والرد على شكاية المواطن</h3>
-                <form onsubmit="window.adminController.saveComplaintResponse(event)">
+                <form novalidate onsubmit="window.adminController.saveComplaintResponse(event)">
                     <input type="hidden" id="editCmpId">
                     <div style="margin-bottom: 12px; background: #f8fafc; padding: 12px; border-radius: 6px;">
                         <div style="font-weight: 700; color: var(--primary-color);" id="cmpModalSubject"></div>
@@ -693,7 +1035,7 @@
             <button class="modal-close-btn" onclick="window.adminController.closeCouncilMemberModal()">✕</button>
             <div class="modal-body">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة عضو جديد بالمجلس / المكتب</h3>
-                <form onsubmit="window.adminController.saveCouncilMember(event)">
+                <form novalidate onsubmit="window.adminController.saveCouncilMember(event)">
                     <div style="margin-bottom: 12px;">
                         <label class="form-label">الاسم الكامل *</label>
                         <input type="text" id="memberFullName" class="form-input" required>
@@ -736,7 +1078,7 @@
             <button class="modal-close-btn" onclick="window.adminController.closeCompetenceProjectModal()">✕</button>
             <div class="modal-body">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة مشروع حسب مجالات الاختصاص</h3>
-                <form onsubmit="window.adminController.saveCompetenceProject(event)">
+                <form novalidate onsubmit="window.adminController.saveCompetenceProject(event)">
                     <div style="margin-bottom: 12px;">
                         <label class="form-label">اسم المشروع *</label>
                         <input type="text" id="compProjName" class="form-input" required>
@@ -809,63 +1151,287 @@
 
     <!-- MODAL ADD SUBVENTION BENEFICIARY -->
     <div class="modal-overlay" id="adminAddSubventionModal" style="display: none;">
-        <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-content" style="max-width: 650px;">
             <button class="modal-close-btn" onclick="window.adminController.closeSubventionModal()">✕</button>
             <div class="modal-body">
-                <h3 style="color: var(--primary-color); margin-bottom: 15px;">إضافة جمعية مستفيدة من الدعم العمومي</h3>
-                <form onsubmit="window.adminController.saveSubventionBeneficiary(event)">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="subModalTitle">إضافة جمعية مستفيدة من الدعم العمومي</h3>
+                <form novalidate id="adminSubventionForm" onsubmit="window.adminController.saveSubventionBeneficiary(event)">
+                    <input type="hidden" id="editSubId">
                     <div style="margin-bottom: 12px;">
-                        <label class="form-label">اسم الجمعية أو الاتحاد *</label>
-                        <input type="text" id="subAssocName" class="form-input" required>
+                        <label class="form-label">اسم المشروع أو البرنامج المدعوم *</label>
+                        <input type="text" id="subProjectName" class="form-input" placeholder="مثال: مشروع تهيئة وتأهيل الفضاء الرياضي والشبابي" required>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
                         <div>
-                            <label class="form-label">رئيس / مكتب الجمعية *</label>
-                            <input type="text" id="subPresident" class="form-input" required>
+                            <label class="form-label">اسم الجمعية أو الاتحاد *</label>
+                            <input type="text" id="subAssocName" class="form-input" placeholder="مثال: جمعية الأمل للرياضة والتنمية" required>
                         </div>
                         <div>
-                            <label class="form-label">نوع وتصنيف الجمعية *</label>
+                            <label class="form-label">رئيس / مكتب الجمعية</label>
+                            <input type="text" id="subPresident" class="form-input" placeholder="اسم الرئيس(ة)">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">مجال الاختصاص *</label>
                             <select id="subAssocType" class="form-input" style="background: white;">
-                                <option value="تنموية واجتماعية">تنموية واجتماعية</option>
                                 <option value="رياضية">رياضية</option>
                                 <option value="ثقافية وتراثية">ثقافية وتراثية</option>
-                                <option value="بيئية وتأهيل الأحياء">بيئية وتأهيل الأحياء</option>
+                                <option value="تنموية واجتماعية">تنموية واجتماعية</option>
+                                <option value="بيئية">بيئية</option>
+                                <option value="تعليمية وتربوية">تعليمية وتربوية</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">الوضعية القانونية *</label>
+                            <select id="subLegalStatus" class="form-input" style="background: white;">
+                                <option value="موافقة">موافقة</option>
+                                <option value="تنموية وتربوية">تنموية وتربوية</option>
+                                <option value="بيئية">بيئية</option>
                                 <option value="تعليمية وتربوية">تعليمية وتربوية</option>
                             </select>
                         </div>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
                         <div>
-                            <label class="form-label">وضعية القانون الأساسي *</label>
-                            <input type="text" id="subStatut" class="form-input" value="مطابق ومحيّن" required>
+                            <label class="form-label">الصفة (Statut) *</label>
+                            <input type="text" id="subStatut" class="form-input" value="مطابقة" required>
                         </div>
                         <div>
-                            <label class="form-label">المطالب والملف القانوني *</label>
-                            <input type="text" id="subLegalStatus" class="form-input" value="ملف قانوني مكتمل (وصل إيداع نهائي)" required>
+                            <label class="form-label">المرجع السنوي *</label>
+                            <input type="text" id="subAnnualRef" class="form-input" value="2026/01" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">مبلغ الدعم المالي (درهم) *</label>
+                            <input type="number" id="subAmount" class="form-input" required placeholder="مثال: 50000">
+                        </div>
+                        <div>
+                            <label class="form-label">نسبة الإنجاز المحققة (%)</label>
+                            <input type="number" id="subProgress" class="form-input" min="0" max="100" value="80">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">رقم محضر وتاريخ المداولة (PV)</label>
+                        <input type="text" id="subPvNumber" class="form-input" placeholder="محضر دورة ماي 2026 - مقرر عدد ...">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ البيانات ونشرها في الواجهة 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT PROJECT -->
+    <div class="modal-overlay" id="adminProjectModal" style="display: none;">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeProjectModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="adminProjectModalTitle">إضافة مشروع تنموي جديد</h3>
+                <form novalidate onsubmit="window.adminController.saveProject(event)">
+                    <input type="hidden" id="editProjId">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان المشروع *</label>
+                        <input type="text" id="projTitleInput" class="form-input" required placeholder="مثال: تهيئة وتوسيع الطرق والمحاور الكبرى">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">تصنيف / قطاع المشروع *</label>
+                            <input type="text" id="projCategoryInput" class="form-input" placeholder="مثال: مشاريع البنية التحتية 🛣️">
+                        </div>
+                        <div>
+                            <label class="form-label">حالة الإنجاز *</label>
+                            <select id="projStatusInput" class="form-input" style="background: white;">
+                                <option value="قيد الإنجاز">قيد الإنجاز</option>
+                                <option value="مكتمل ومستمر">مكتمل ومستمر</option>
+                                <option value="مستمر">مستمر</option>
+                                <option value="في طور الانطلاق">في طور الانطلاق</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">نسبة الإنجاز (%) *</label>
+                            <input type="number" id="projProgressInput" class="form-input" min="0" max="100" value="75" required>
+                        </div>
+                        <div>
+                            <label class="form-label">الميزانية المرصودة *</label>
+                            <input type="text" id="projBudgetInput" class="form-input" placeholder="مثال: 1.1 مليار درهم" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">تفاصيل وأهداف المشروع</label>
+                        <textarea id="projDetailsInput" class="form-input" rows="3" placeholder="أهداف المشروع ومكوناته الرئيسية"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ المشروع التنموي 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT EVENT -->
+    <div class="modal-overlay" id="adminEventModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeEventModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="adminEventModalTitle">إضافة نشاط أو مناسبة جديدة</h3>
+                <form novalidate onsubmit="window.adminController.saveEvent(event)">
+                    <input type="hidden" id="editEventId">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان النشاط أو الدورة *</label>
+                        <input type="text" id="eventTitleInput" class="form-input" required placeholder="مثال: دورة أكتوبر العادية للمجلس الجماعي">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">تاريخ النشاط *</label>
+                            <input type="text" id="eventDateInput" class="form-input" placeholder="مثال: 15 أكتوبر" required>
+                        </div>
+                        <div>
+                            <label class="form-label">المكان / المقر *</label>
+                            <input type="text" id="eventLocationInput" class="form-input" placeholder="مثال: قاعة الاجتماعات الكبرى" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">مسار صورة النشاط</label>
+                        <select id="eventImageInput" class="form-input" style="background: white;">
+                            <option value="assets/card_council.png">جلسات المجلس (card_council.png)</option>
+                            <option value="assets/event_right.png">لقاءات جمعوية (event_right.png)</option>
+                            <option value="assets/event_left.png">لقاءات تشاورية (event_left.png)</option>
+                            <option value="assets/card_territory.png">حملات بيئية (card_territory.png)</option>
+                            <option value="assets/video_hall.png">أنشطة ثقافية (video_hall.png)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ النشاط 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT VIDEO -->
+    <div class="modal-overlay" id="adminVideoModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeVideoModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="adminVideoModalTitle">إضافة وسيط أو فيديو جديد</h3>
+                <form novalidate onsubmit="window.adminController.saveVideo(event)">
+                    <input type="hidden" id="editVideoId">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان الفيديو / الصورة *</label>
+                        <input type="text" id="videoTitleInput" class="form-input" required placeholder="مثال: تهيئة المنتزه الحضري">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">المدة الزمنية</label>
+                            <input type="text" id="videoDurationInput" class="form-input" placeholder="02:30">
+                        </div>
+                        <div>
+                            <label class="form-label">الصورة المصغرة</label>
+                            <select id="videoThumbInput" class="form-input" style="background: white;">
+                                <option value="assets/video_park.png">المنتزه (video_park.png)</option>
+                                <option value="assets/video_hall.png">القاعة المغطاة (video_hall.png)</option>
+                                <option value="assets/video_bus.png">حافلات النقل (video_bus.png)</option>
+                                <option value="assets/ref_project_road.jpg">الطرق (ref_project_road.jpg)</option>
+                                <option value="assets/card_council.png">المجلس (card_council.png)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ الوسيط 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT SERVICE -->
+    <div class="modal-overlay" id="adminServiceModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeServiceModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="adminServiceModalTitle">إضافة خدمة أو وثيقة إلكترونية</h3>
+                <form novalidate onsubmit="window.adminController.saveService(event)">
+                    <input type="hidden" id="editServiceId">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">عنوان الخدمة أو الوثيقة *</label>
+                        <input type="text" id="serviceTitleInput" class="form-input" required placeholder="مثال: دليل مساطر رخص التعمير والبناء">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">التصنيف *</label>
+                            <input type="text" id="serviceCategoryInput" class="form-input" placeholder="مثال: التعمير والبناء" required>
+                        </div>
+                        <div>
+                            <label class="form-label">حجم الملف / النوع</label>
+                            <input type="text" id="serviceSizeInput" class="form-input" placeholder="2.4 MB PDF أو رقمي">
                         </div>
                     </div>
                     <div style="margin-bottom: 12px;">
-                        <label class="form-label">أعضاء مكتب الجمعية (الكاتب العام، أمين المال...)</label>
-                        <input type="text" id="subBureauMembersText" class="form-input" placeholder="الكاتب العام: فلان، أمين المال: فلان">
+                        <label class="form-label">الوصف الموجز *</label>
+                        <textarea id="serviceDescInput" class="form-input" rows="2" required placeholder="وصف الخدمة أو المستندات المطلوبة"></textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">رابط الخدمة أو مسار الملف PDF</label>
+                        <input type="text" id="serviceLinkInput" class="form-input" placeholder="https://... أو assets/docs/...">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ الخدمة ونشرها 💾</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT PROCEDURE -->
+    <div class="modal-overlay" id="adminProcedureModal" style="display: none;">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="modal-close-btn" onclick="window.adminController.closeProcedureModal()">✕</button>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;" id="adminProcedureModalTitle">إضافة إجراء إداري جديد</h3>
+                <form novalidate onsubmit="window.adminController.saveProcedure(event)">
+                    <input type="hidden" id="editProcId">
+                    <div style="display: grid; grid-template-columns: 80px 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label class="form-label">الرقم</label>
+                            <input type="text" id="procNumInput" class="form-input" placeholder="01">
+                        </div>
+                        <div>
+                            <label class="form-label">اسم الإجراء الإداري *</label>
+                            <input type="text" id="procTitleInput" class="form-input" required placeholder="مثال: شهادة السكنى والإقامة">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الوصف الموجز *</label>
+                        <textarea id="procDescInput" class="form-input" rows="2" required placeholder="وصف الإجراء وشروطه الأساسية"></textarea>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">الوثائق والشروط المطلوبة (سطر لكل وثيقة)</label>
+                        <textarea id="procDocsInput" class="form-input" rows="3" placeholder="بطاقة التعريف الوطنية الإلكترونية&#10;شهادة السكنى أو عقد الكراء&#10;صورتان شمسيتان"></textarea>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
                         <div>
-                            <label class="form-label">محضر أو قرار التوزيع *</label>
-                            <input type="text" id="subPvNumber" class="form-input" value="محضر دورة ماي 2026 - مقرر عدد 109" required>
+                            <label class="form-label">أجل التسليم</label>
+                            <input type="text" id="procDeadlineInput" class="form-input" placeholder="تسلم خلال 24 إلى 48 ساعة">
                         </div>
                         <div>
-                            <label class="form-label">مبلغ الدعم المالي (درهم) *</label>
-                            <input type="number" id="subAmount" class="form-input" required>
+                            <label class="form-label">الرسوم والواجبات</label>
+                            <input type="text" id="procCostInput" class="form-input" placeholder="مجانية أو رسم 2 دراهم">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الجمعية المستفيدة 💾</button>
+                    <div style="margin-bottom: 15px;">
+                        <label class="form-label">أيقونة الميدالية 3D</label>
+                        <select id="procIconInput" class="form-input" style="background: white;">
+                            <option value="assets/medallion_residence.png">شهادة السكنى (medallion_residence.png)</option>
+                            <option value="assets/medallion_civil.png">عقد الازدياد (medallion_civil.png)</option>
+                            <option value="assets/medallion_building.png">رخص البناء (medallion_building.png)</option>
+                            <option value="assets/medallion_legalize.png">تصحيح الإمضاء (medallion_legalize.png)</option>
+                            <option value="assets/medallion_taxes.png">الجبايات والرسوم (medallion_taxes.png)</option>
+                            <option value="assets/medallion_complaints.png">شكايات القرب (medallion_complaints.png)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حفظ الإجراء الإداري 💾</button>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- JavaScript MVC Bundle -->
-    <script type="module" src="js/app.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="js/app.js?v=75.0"></script>
+    
 </body>
 </html>

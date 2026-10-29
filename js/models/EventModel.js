@@ -2,30 +2,30 @@ const defaultEvents = [
     {
         id: "session-oct",
         date: "15 أكتوبر",
-        title: "دورة أكتوبر العادية للمجلس الجماعي لبيوكرى: دراسة والمصادقة على مشروع ميزانية سنة 2027",
+        title: "دورة أكتوبر العادية للمجلس الجماعي: دراسة والمصادقة على مشروع ميزانية سنة 2027",
         image: "assets/card_council.png",
         location: "قاعة الاجتماعات الكبرى بمقر الجماعة"
     },
     {
         id: "meeting",
         date: "10 أكتوبر",
-        title: "جماعة بيوكرى تحتضن لقاءات تواصلية مع جمعيات المجتمع المدني لمناقشة القضايا الحضرية",
+        title: "لقاءات تواصلية مع جمعيات المجتمع المدني لمناقشة القضايا الحضرية",
         image: "assets/event_right.png",
-        location: "المركب الثقافي لبيوكرى"
+        location: "المركب الثقافي"
     },
     {
         id: "general",
         date: "05 أكتوبر",
-        title: "انعقاد لقاء تشاوري لمناقشة مخطط التنمية الحضرية المندمجة لمدينة بيوكرى 2021-2027",
+        title: "انعقاد لقاء تشاوري لمناقشة مخطط التنمية الحضرية المندمجة 2021-2027",
         image: "assets/event_left.png",
-        location: "مقر جماعة بيوكرى الترابية"
+        location: "مقر الجماعة الترابية"
     },
     {
         id: "environment-day",
         date: "28 شتنبر",
         title: "انطلاق فعاليات الحملة البيئية الكبرى لتشجير ونظافة الأحياء والمؤسسات التعليمية",
         image: "assets/card_territory.png",
-        location: "شوارع وأحياء مدينة بيوكرى"
+        location: "شوارع وأحياء المدينة"
     }
 ];
 
@@ -36,15 +36,6 @@ export class EventModel {
         const stored = localStorage.getItem(this.STORAGE_KEY);
         if (!stored) {
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultEvents));
-        } else {
-            try {
-                const list = JSON.parse(stored);
-                if (!Array.isArray(list) || list.length < 3) {
-                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultEvents));
-                }
-            } catch (e) {
-                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultEvents));
-            }
         }
     }
 
@@ -52,7 +43,7 @@ export class EventModel {
         this.init();
         try {
             const list = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-            if (Array.isArray(list) && list.length >= 3) return list;
+            if (Array.isArray(list) && list.length > 0) return list;
             this.saveAll(defaultEvents);
             return defaultEvents;
         } catch (e) {
@@ -62,11 +53,28 @@ export class EventModel {
 
     static saveAll(eventsArray) {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(eventsArray));
+        localStorage.setItem('biougra_last_sync_timestamp', Date.now().toString());
     }
 
     static update(id, updatedData) {
         let events = this.getAll();
         events = events.map(e => e.id === id ? { ...e, ...updatedData } : e);
         this.saveAll(events);
+        return events;
+    }
+
+    static add(event) {
+        let events = this.getAll();
+        if (!event.id) event.id = 'ev-' + Date.now();
+        events.unshift(event);
+        this.saveAll(events);
+        return event;
+    }
+
+    static delete(id) {
+        let events = this.getAll();
+        events = events.filter(e => e.id !== id);
+        this.saveAll(events);
+        return events;
     }
 }

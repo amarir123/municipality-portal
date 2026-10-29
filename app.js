@@ -1597,46 +1597,58 @@ document.addEventListener('mousemove', (e) => {
 // MASTER 3D CINEMATIC HERO CAROUSEL ENGINE (PIXEL-PRECISE REFERENCE)
 // ==========================================
 
-const heroPanoSlides = [
-    {
-        category: "الأنشطة التنموية",
-        icon: "🏛️",
-        time: "⏱️ 05:47",
-        title: "إطلاق أسطول حافلات النقل الحضري بالنيابة",
-        desc: "في إطار تحسين خدمات النقل الحضري، تم إطلاق أسطول جديد من الحافلات الحديثة لتسهيل تنقل المواطنين داخل الجماعة.",
-        img: "assets/video_bus.png",
-        date: "12 ماي 2025"
-    },
-    {
-        category: "أخبار الجماعة",
-        icon: "📰",
-        time: "⏱️ 03:20",
-        title: "تأهيل البنية التحتية بالمنطقة",
-        desc: "جماعة بيوكرى تسهر أشغال تهيئة الطرقات والأحياء السكنية وتعزيز شبكات الإنارة والماء الصالح للشرب.",
-        img: "assets/video_hall.png",
-        date: "15 ماي 2025"
-    },
-    {
-        category: "المشاريع",
-        icon: "🏗️",
-        time: "⏱️ 04:15",
-        title: "مشروع السوق الأسبوعي الجديد",
-        desc: "إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة بيوكرى لتنشيط الحركة التجارية والاقتصادية.",
-        img: "assets/video_park.png",
-        date: "10 ماي 2025"
-    }
-];
+function getHeroPanoSlides() {
+    let branding = null;
+    try {
+        const raw = localStorage.getItem('agadir_branding');
+        if (raw) branding = JSON.parse(raw);
+    } catch (e) {}
+
+    return [
+        {
+            // Center (Index 0): Slide 2
+            category: branding?.heroSlide2Badge || "الأنشطة التنموية",
+            icon: "🏛️",
+            time: "⏱️ 05:47",
+            title: branding?.heroSlide2Title || "إطلاق أسطول حافلات النقل الحضري بالنيابة",
+            desc: branding?.heroSlide2Subtitle || "في إطار تحسين خدمات النقل الحضري، تم إطلاق أسطول جديد من الحافلات الحديثة لتسهيل تنقل المواطنين داخل الجماعة.",
+            img: branding?.heroSlide2Img || "assets/video_bus.png",
+            date: branding?.heroSlide2Date || "12 ماي 2025"
+        },
+        {
+            // Left (Index 1): Slide 1
+            category: branding?.heroSlide1Badge || "أخبار الجماعة",
+            icon: "📰",
+            time: "⏱️ 03:20",
+            title: branding?.heroSlide1Title || "تأهيل البنية التحتية بالمنطقة",
+            desc: branding?.heroSlide1Subtitle || "جماعة بيوكرى تسهر أشغال تهيئة الطرقات والأحياء السكنية وتعزيز شبكات الإنارة والماء الصالح للشرب.",
+            img: branding?.heroSlide1Img || "assets/video_hall.png",
+            date: branding?.heroSlide1Date || "15 ماي 2025"
+        },
+        {
+            // Right (Index 2): Slide 3
+            category: branding?.heroSlide3Badge || "المشاريع",
+            icon: "🏗️",
+            time: "⏱️ 04:15",
+            title: branding?.heroSlide3Title || "مشروع السوق الأسبوعي الجديد",
+            desc: branding?.heroSlide3Subtitle || "إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة بيوكرى لتنشيط الحركة التجارية والاقتصادية.",
+            img: branding?.heroSlide3Img || "assets/video_park.png",
+            date: branding?.heroSlide3Date || "10 ماي 2025"
+        }
+    ];
+}
 
 let activePanoIdx = 0;
 
 window.rotatePanoSlide = function(idx) {
-    if (idx < 0) idx = heroPanoSlides.length - 1;
-    if (idx >= heroPanoSlides.length) idx = 0;
+    const slides = getHeroPanoSlides();
+    if (idx < 0) idx = slides.length - 1;
+    if (idx >= slides.length) idx = 0;
     activePanoIdx = idx;
 
-    const center = heroPanoSlides[activePanoIdx];
-    const prev = heroPanoSlides[(activePanoIdx - 1 + heroPanoSlides.length) % heroPanoSlides.length];
-    const next = heroPanoSlides[(activePanoIdx + 1) % heroPanoSlides.length];
+    const center = slides[activePanoIdx];
+    const left = slides[(activePanoIdx + 1) % slides.length];
+    const right = slides[(activePanoIdx + 2) % slides.length];
 
     // Center Card Elements
     const cImg = document.getElementById('centerCardImg');
@@ -1657,34 +1669,34 @@ window.rotatePanoSlide = function(idx) {
     if (cTitle) cTitle.textContent = center.title;
     if (cDesc) cDesc.textContent = center.desc;
 
-    // Left Secondary Card
+    // Left Secondary Card (Slide 1)
     const lImg = document.querySelector('#stageCardLeft .stage-img');
     const lTitle = document.querySelector('#stageCardLeft .stage-card-title');
     const lSub = document.querySelector('#stageCardLeft .stage-card-subtitle');
     const lDate = document.querySelector('#stageCardLeft .stage-card-date');
     const lCat = document.querySelector('#stageCardLeft .card-glass-badge');
 
-    if (lImg) lImg.src = prev.img;
-    if (lTitle) lTitle.textContent = prev.title;
-    if (lSub) lSub.textContent = prev.desc;
-    if (lDate) lDate.textContent = prev.date;
-    if (lCat) lCat.innerHTML = `<span>${prev.category}</span> <span class="badge-icon">${prev.icon}</span>`;
+    if (lImg) lImg.src = left.img;
+    if (lTitle) lTitle.textContent = left.title;
+    if (lSub) lSub.textContent = left.desc;
+    if (lDate) lDate.textContent = left.date;
+    if (lCat) lCat.innerHTML = `<span>${left.category}</span> <span class="badge-icon">${left.icon}</span>`;
 
-    // Right Secondary Card
+    // Right Secondary Card (Slide 3)
     const rImg = document.querySelector('#stageCardRight .stage-img');
     const rTitle = document.querySelector('#stageCardRight .stage-card-title');
     const rSub = document.querySelector('#stageCardRight .stage-card-subtitle');
     const rDate = document.querySelector('#stageCardRight .stage-card-date');
     const rCat = document.querySelector('#stageCardRight .card-glass-badge');
 
-    if (rImg) rImg.src = next.img;
-    if (rTitle) rTitle.textContent = next.title;
-    if (rSub) rSub.textContent = next.desc;
-    if (rDate) rDate.textContent = next.date;
-    if (rCat) rCat.innerHTML = `<span>${next.category}</span> <span class="badge-icon">${next.icon}</span>`;
+    if (rImg) rImg.src = right.img;
+    if (rTitle) rTitle.textContent = right.title;
+    if (rSub) rSub.textContent = right.desc;
+    if (rDate) rDate.textContent = right.date;
+    if (rCat) rCat.innerHTML = `<span>${right.category}</span> <span class="badge-icon">${right.icon}</span>`;
 
     // Update Pagination Dashes
-    for (let i = 0; i < heroPanoSlides.length; i++) {
+    for (let i = 0; i < slides.length; i++) {
         const dash = document.getElementById(`dash${i}`);
         if (dash) {
             if (i === activePanoIdx) dash.classList.add('active');

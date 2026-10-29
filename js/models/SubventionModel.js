@@ -1,4 +1,4 @@
-// SUBVENTION MODEL: تدبير الدعم العمومي للجمعيات والمستفيدين (النسخة المحدثة V4 - مطابقة للتصميم 100%)
+// SUBVENTION MODEL: تدبير الدعم العمومي للجمعيات والمستفيدين (V65.0 - دعم كامل للربط مع Back-Office)
 const SUBVENTION_STORAGE_KEY = 'biougra_subventions_v4';
 
 export const SubventionModel = {
@@ -18,7 +18,6 @@ export const SubventionModel = {
             applicationFormName: "استمارة وبطاقة طلب الدعم المالي السنوي (Fiche de Demande de Subvention).pdf",
             applicationFormUrl: "#download-subvention-fiche",
             deadline: "30 نونبر 2026",
-            // 5 Categories breakdown matching Master Reference
             categoriesDistribution: [
                 { category: "الرياضية", icon: "🏃‍♂️", totalAmount: 180000, percentage: 85, count: 5, description: "دعم الأندية، تأطير الفئات الصغرى والشباب، والتنقل للمسابقات الجهوية والوطنية" },
                 { category: "الثقافية والتراثية", icon: "🏛️", totalAmount: 120000, percentage: 76, count: 4, description: "إحياء التراث السوسي والأمازيغي، تنظيم المهرجانات والمعارض الفنية والمسرح" },
@@ -26,7 +25,6 @@ export const SubventionModel = {
                 { category: "البيئية وتأهيل الأحياء", icon: "🍃", totalAmount: 70000, percentage: 70, count: 3, description: "غرس الأشجار، العناية بالمساحات الخضراء، وحملات النظافة والتحسيس البيئي" },
                 { category: "التعليمية والتربوية", icon: "📖", totalAmount: 45000, percentage: 80, count: 2, description: "محاربة الهدر المدرسي، دروس الدعم المجانية، وتوفير المحافظ واللوازم للتلاميذ المعوزين" }
             ],
-            // 5 Master Beneficiary Projects matching Master Reference Table 100%
             beneficiaries: [
                 {
                     id: 1,
@@ -134,7 +132,6 @@ export const SubventionModel = {
                     projectSupported: "بناء وتجهيز المركب المدرسي الحديث وتوفير المحافظ والدروس الداعمة"
                 }
             ],
-            // Eligibility questionnaire
             eligibilityQuestions: {
                 "رياضية": {
                     title: "معايير وشروط استفادة الجمعيات والأندية الرياضية",
@@ -200,24 +197,40 @@ export const SubventionModel = {
         return data;
     },
 
+    updateDecision(title, details, deadline) {
+        const data = this.get();
+        if (title) data.decisionTitle = title;
+        if (details) data.decisionDetails = details;
+        if (deadline) data.deadline = deadline;
+        this.save(data);
+        return data;
+    },
+
     addBeneficiary(item) {
         const data = this.get();
         item.id = Date.now();
-        data.beneficiaries.push(item);
+        if (!item.projectName) item.projectName = item.projectSupported || item.assocName;
+        if (!item.amount) item.amount = 0;
+        if (!item.progress) item.progress = 80;
+        if (!item.annualRef) item.annualRef = `2026/${String(data.beneficiaries.length + 1).padStart(2, '0')}`;
+        if (!item.legalStatus) item.legalStatus = 'موافقة';
+        if (!item.statutStatus) item.statutStatus = 'مطابقة';
+        
+        data.beneficiaries.unshift(item);
         this.save(data);
         return data;
     },
 
     deleteBeneficiary(id) {
         const data = this.get();
-        data.beneficiaries = data.beneficiaries.filter(b => b.id !== id);
+        data.beneficiaries = data.beneficiaries.filter(b => b.id != id);
         this.save(data);
         return data;
     },
 
     updateBeneficiary(id, fields) {
         const data = this.get();
-        const idx = data.beneficiaries.findIndex(b => b.id === id);
+        const idx = data.beneficiaries.findIndex(b => b.id == id);
         if (idx !== -1) {
             data.beneficiaries[idx] = { ...data.beneficiaries[idx], ...fields };
             this.save(data);

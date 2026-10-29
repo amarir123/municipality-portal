@@ -1,16 +1,16 @@
 ﻿// MVC MODEL ADAPTER FOR BACKWARDS COMPATIBILITY & SAAS SYSTEM
-import { NewsModel } from './js/models/NewsModel.js';
-import { ProjectModel } from './js/models/ProjectModel.js';
-import { PublicationModel } from './js/models/PublicationModel.js';
-import { EventModel } from './js/models/EventModel.js';
-import { BrandingModel } from './js/models/BrandingModel.js';
-import { VideoModel } from './js/models/VideoModel.js';
-import { ComplaintModel } from './js/models/ComplaintModel.js';
-import { ServiceModel } from './js/models/ServiceModel.js';
-import { MandateModel } from './js/models/MandateModel.js';
-import { SynthesisReportModel } from './js/models/SynthesisReportModel.js';
-import { SubventionModel } from './js/models/SubventionModel.js?v=60.0';
-import { PollModel } from './js/models/PollModel.js';
+import { NewsModel } from './js/models/NewsModel.js?v=70.0';
+import { ProjectModel } from './js/models/ProjectModel.js?v=70.0';
+import { PublicationModel } from './js/models/PublicationModel.js?v=70.0';
+import { EventModel } from './js/models/EventModel.js?v=70.0';
+import { BrandingModel } from './js/models/BrandingModel.js?v=70.0';
+import { VideoModel } from './js/models/VideoModel.js?v=70.0';
+import { ComplaintModel } from './js/models/ComplaintModel.js?v=70.0';
+import { ServiceModel } from './js/models/ServiceModel.js?v=70.0';
+import { MandateModel } from './js/models/MandateModel.js?v=70.0';
+import { SynthesisReportModel } from './js/models/SynthesisReportModel.js?v=70.0';
+import { SubventionModel } from './js/models/SubventionModel.js?v=70.0';
+import { PollModel } from './js/models/PollModel.js?v=70.0';
 
 // Init models
 NewsModel.init();

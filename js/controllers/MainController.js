@@ -1,15 +1,16 @@
-import { NewsModel } from '../models/NewsModel.js';
-import { ProjectModel } from '../models/ProjectModel.js';
-import { PublicationModel } from '../models/PublicationModel.js';
-import { EventModel } from '../models/EventModel.js';
-import { BrandingModel } from '../models/BrandingModel.js';
-import { VideoModel } from '../models/VideoModel.js';
-import { ComplaintModel } from '../models/ComplaintModel.js';
-import { ServiceModel } from '../models/ServiceModel.js';
-import { MandateModel } from '../models/MandateModel.js';
-import { SynthesisReportModel } from '../models/SynthesisReportModel.js';
-import { SubventionModel } from '../models/SubventionModel.js?v=60.0';
-import { PollModel } from '../models/PollModel.js';
+import { NewsModel } from '../models/NewsModel.js?v=70.0';
+import { ProjectModel } from '../models/ProjectModel.js?v=70.0';
+import { PublicationModel } from '../models/PublicationModel.js?v=70.0';
+import { EventModel } from '../models/EventModel.js?v=70.0';
+import { BrandingModel } from '../models/BrandingModel.js?v=70.0';
+import { VideoModel } from '../models/VideoModel.js?v=70.0';
+import { ComplaintModel } from '../models/ComplaintModel.js?v=70.0';
+import { ServiceModel } from '../models/ServiceModel.js?v=70.0';
+import { MandateModel } from '../models/MandateModel.js?v=70.0';
+import { SynthesisReportModel } from '../models/SynthesisReportModel.js?v=70.0';
+import { SubventionModel } from '../models/SubventionModel.js?v=70.0';
+import { PollModel } from '../models/PollModel.js?v=70.0';
+import { ProcedureModel } from '../models/ProcedureModel.js?v=75.0';
 
 import { NewsView } from '../views/NewsView.js';
 import { ProjectView } from '../views/ProjectView.js';
@@ -32,17 +33,53 @@ export class MainController {
         this.loadSynthesisData();
         this.loadActivePoll();
         this.loadSubventionsPublicData();
+        this.loadProceduresData();
         // publications handled in loadPageData();
         this.bindEvents();
         this.checkAdminControlsVisibility();
         this.initHeroSlider();
         this.exposeGlobalHelpers();
+        this.setupRealtimeSync();
+    }
+
+    setupRealtimeSync() {
+        // Cross-tab real-time storage event synchronization with back office
+        window.addEventListener('storage', (e) => {
+            console.log('⚡ Realtime Back-Office Sync triggered by key:', e.key);
+            this.applyBranding();
+            this.loadPageData();
+            this.syncStatsWithDatabase();
+            this.loadMandateData();
+            this.loadSynthesisData();
+            this.loadActivePoll();
+            this.loadSubventionsPublicData();
+            this.loadProceduresData();
+        });
+
+        // Window focus synchronization when user switches back to display tab
+        window.addEventListener('focus', () => {
+            this.applyBranding();
+            this.loadPageData();
+            this.syncStatsWithDatabase();
+            this.loadMandateData();
+            this.loadSynthesisData();
+            this.loadActivePoll();
+            this.loadSubventionsPublicData();
+            this.loadProceduresData();
+        });
     }
 
     applyBranding() {
         const branding = BrandingModel.get();
         if (!branding) return;
 
+        const muniName = branding.muniName || 'جماعة بيوكرى';
+        const cityName = branding.cityName || branding.weatherCity || 'بيوكرى';
+
+        // 1. Document Title
+        document.title = `${muniName} | البوابة الرقمية الرسمية`;
+
+        // 2. CSS Custom Properties / Colors
         const root = document.documentElement;
         if (branding.primaryColor) root.style.setProperty('--primary-color', branding.primaryColor);
         if (branding.secondaryColor) root.style.setProperty('--secondary-color', branding.secondaryColor);
@@ -58,41 +95,59 @@ export class MainController {
         }
         if (branding.textColor) root.style.setProperty('--text-main', branding.textColor);
 
-        // Municipality Names
+        // 3. Municipality Name across all displays
         document.querySelectorAll('.muni-name-display').forEach(el => {
-            el.textContent = branding.muniName || 'الجماعة الترابية';
+            el.textContent = muniName;
         });
 
-        // Logos (Header, Footer & Brand Mark)
-        const headerLogo = document.getElementById('mainLogoHeaderImg') || document.querySelector('.logo img');
-        if (headerLogo && branding.logoUrl) headerLogo.src = branding.logoUrl;
-        const footerLogo = document.getElementById('footerLogoMainImg') || document.querySelector('.footer-logo-main');
+        // 4. Header Brand
+        const brandSmall = document.querySelector('.brand small') || document.getElementById('brandCitySub');
+        if (brandSmall) {
+            brandSmall.textContent = `Commune de ${cityName}`;
+        }
+
+        // 5. Hero Section Title & Gold City Name
+        const heroTitleGold = document.querySelector('.hero-title-gold') || document.getElementById('heroMuniName');
+        if (heroTitleGold) {
+            heroTitleGold.textContent = cityName;
+        }
+
+        // 6. Section Subtitles referencing City
+        const newsSubtitle = document.querySelector('.news-master-subtitle');
+        if (newsSubtitle) {
+            newsSubtitle.textContent = `تابعوا آخر المستجدات والأنشطة الجماعية لـ ${cityName}`;
+        }
+        const projSubtitle = document.querySelector('.projects-master-subtitle');
+        if (projSubtitle) {
+            projSubtitle.textContent = `مشاريع كبرى من أجل تنمية شاملة ومستدامة لمدينة ${cityName}`;
+        }
+        const mandateTitle = document.querySelector('.mandate-main-title');
+        if (mandateTitle) {
+            mandateTitle.textContent = `مؤسسة المجلس الجماعي لـ ${cityName} (الولاية 2021-2027)`;
+        }
+
+        // 7. Footer
+        const footerTitle = document.getElementById('footerMuniName') || document.querySelector('.footer-col-title');
+        if (footerTitle) {
+            footerTitle.textContent = muniName;
+        }
+        const footerLogo = document.getElementById('footerLogoMainImg') || document.querySelector('.footer-logo-main') || document.querySelector('.footer-crest-img');
         if (footerLogo && branding.logoUrl) footerLogo.src = branding.logoUrl;
 
-        // Ticker
-        const tickerSec = document.getElementById('tickerSection');
-        const tickerContent = document.getElementById('tickerContent');
-        if (tickerSec) {
-            tickerSec.style.display = branding.showTicker ? 'block' : 'none';
-        }
-        if (tickerContent && branding.tickerText) {
-            tickerContent.textContent = branding.tickerText;
+        // 8. Header Logo
+        const headerLogo = document.getElementById('mainLogoHeaderImg') || document.querySelector('.royal-crest-img');
+        if (headerLogo) {
+            if (branding.logoUrl) headerLogo.src = branding.logoUrl;
+            headerLogo.alt = `المملكة المغربية - ${muniName}`;
         }
 
-        // Section visibility toggles
-        const urbanSec = document.getElementById('urban-development');
-        if (urbanSec) urbanSec.style.display = branding.showUrban ? 'block' : 'none';
-
-        const servicesSec = document.getElementById('servicesSection');
-        if (servicesSec) servicesSec.style.display = branding.showServices ? 'block' : 'none';
-
-        // Weather (Header Tools Popup & Widgets)
-        const wCity = document.getElementById('weatherCityDisplay') || document.getElementById('weatherCityMini');
-        const wTemp = document.getElementById('weatherTempDisplay') || document.getElementById('weatherTempMini');
-        if (wCity) wCity.textContent = branding.weatherCity || 'بيوكرى';
+        // 9. Weather Widgets
+        const wCity = document.getElementById('weatherCityMini') || document.getElementById('weatherCityDisplay');
+        const wTemp = document.getElementById('weatherTempMini') || document.getElementById('weatherTempDisplay');
+        if (wCity) wCity.textContent = cityName;
         if (wTemp) wTemp.textContent = branding.weatherTemp || '23°C';
 
-        // Contact info
+        // 10. Contact Info
         const fPhone = document.getElementById('footerPhoneDisplay');
         const fEmail = document.getElementById('footerEmailDisplay');
         const fAddress = document.getElementById('footerAddressDisplay');
@@ -101,6 +156,122 @@ export class MainController {
         if (fEmail) fEmail.textContent = branding.email || 'contact@commune.ma';
         if (fAddress) fAddress.textContent = branding.address || 'المقر الرئيسي للجماعة';
         if (fHours) fHours.textContent = branding.workingHours || 'من الإثنين إلى الجمعة: 08:30 - 16:30';
+
+        // 11. Slogan & Hero Subtitle
+        const sloganEl = document.querySelector('.slogan-text');
+        if (sloganEl && branding.slogan) sloganEl.textContent = branding.slogan;
+
+        const heroSubEl = document.querySelector('.hero-main-subtitle');
+        if (heroSubEl && branding.heroSubtitle) heroSubEl.textContent = branding.heroSubtitle;
+
+        // 12. Hero 3D Stage Slides
+        const s1 = document.getElementById('stageCardLeft');
+        if (s1) {
+            const t = s1.querySelector('.stage-card-title');
+            const st = s1.querySelector('.stage-card-subtitle');
+            const img = s1.querySelector('.stage-img');
+            const badge = s1.querySelector('.card-glass-badge span:first-child');
+            const date = s1.querySelector('.stage-card-date');
+            if (t && branding.heroSlide1Title) t.textContent = branding.heroSlide1Title;
+            if (st && branding.heroSlide1Subtitle) st.textContent = branding.heroSlide1Subtitle;
+            if (img && branding.heroSlide1Img) img.src = branding.heroSlide1Img;
+            if (badge && branding.heroSlide1Badge) badge.textContent = branding.heroSlide1Badge;
+            if (date && branding.heroSlide1Date) date.textContent = branding.heroSlide1Date;
+        }
+
+        const s2 = document.getElementById('stageCardCenter');
+        if (s2) {
+            const t = s2.querySelector('.stage-card-title');
+            const st = s2.querySelector('.stage-card-subtitle');
+            const img = s2.querySelector('.stage-img');
+            const badge = s2.querySelector('.card-glass-badge span:first-child');
+            const date = s2.querySelector('.stage-card-date');
+            if (t && branding.heroSlide2Title) t.textContent = branding.heroSlide2Title;
+            if (st && branding.heroSlide2Subtitle) st.textContent = branding.heroSlide2Subtitle;
+            if (img && branding.heroSlide2Img) img.src = branding.heroSlide2Img;
+            if (badge && branding.heroSlide2Badge) badge.textContent = branding.heroSlide2Badge;
+            if (date && branding.heroSlide2Date) date.textContent = branding.heroSlide2Date;
+        }
+
+        const s3 = document.getElementById('stageCardRight');
+        if (s3) {
+            const t = s3.querySelector('.stage-card-title');
+            const st = s3.querySelector('.stage-card-subtitle');
+            const img = s3.querySelector('.stage-img');
+            const badge = s3.querySelector('.card-glass-badge span:first-child');
+            const date = s3.querySelector('.stage-card-date');
+            if (t && branding.heroSlide3Title) t.textContent = branding.heroSlide3Title;
+            if (st && branding.heroSlide3Subtitle) st.textContent = branding.heroSlide3Subtitle;
+            if (img && branding.heroSlide3Img) img.src = branding.heroSlide3Img;
+            if (badge && branding.heroSlide3Badge) badge.textContent = branding.heroSlide3Badge;
+            if (date && branding.heroSlide3Date) date.textContent = branding.heroSlide3Date;
+        }
+
+        if (branding.heroBgImg) {
+            const landscape = document.querySelector('.stats-box-landscape');
+            if (landscape) landscape.style.backgroundImage = 'url("' + branding.heroBgImg + '")';
+        }
+
+        if (window.rotatePanoSlide) {
+            window.rotatePanoSlide(window.activePanoIdx || 0);
+        }
+
+        // 13. Portal Curved Ribbon Stats
+        const statsSub = document.querySelector('.stats-curved-subtitle');
+        if (statsSub && branding.statsSubtitle) statsSub.innerHTML = `${branding.statsSubtitle}`;
+
+        const s1Num = document.getElementById('statServicesCount');
+        if (s1Num) {
+            s1Num.textContent = branding.stat1Val || '+120';
+            const s1Lbl = s1Num.nextElementSibling;
+            if (s1Lbl && branding.stat1Label) s1Lbl.textContent = branding.stat1Label;
+        }
+        const s2Num = document.getElementById('statTransparencyRate');
+        if (s2Num) {
+            s2Num.textContent = branding.stat2Val || '+98%';
+            const s2Lbl = s2Num.nextElementSibling;
+            if (s2Lbl && branding.stat2Label) s2Lbl.textContent = branding.stat2Label;
+        }
+        const s3Num = document.getElementById('statMandatePeriod');
+        if (s3Num) {
+            s3Num.textContent = branding.stat3Val || '+12';
+            const s3Lbl = s3Num.nextElementSibling;
+            if (s3Lbl && branding.stat3Label) s3Lbl.textContent = branding.stat3Label;
+        }
+        const s4Num = document.getElementById('statProjectsCount');
+        if (s4Num) {
+            s4Num.textContent = branding.stat4Val || '+45';
+            const s4Lbl = s4Num.nextElementSibling;
+            if (s4Lbl && branding.stat4Label) s4Lbl.textContent = branding.stat4Label;
+        }
+
+        // 14. Social Media Links
+        if (branding.facebookUrl) document.querySelectorAll('a[aria-label="Facebook"], a[href*="facebook.com"]').forEach(a => a.href = branding.facebookUrl);
+        if (branding.twitterUrl) document.querySelectorAll('a[aria-label="Twitter"], a[href*="twitter.com"]').forEach(a => a.href = branding.twitterUrl);
+        if (branding.instagramUrl) document.querySelectorAll('a[aria-label="Instagram"], a[href*="instagram.com"]').forEach(a => a.href = branding.instagramUrl);
+        if (branding.youtubeUrl) document.querySelectorAll('a[aria-label="YouTube"], a[href*="youtube.com"]').forEach(a => a.href = branding.youtubeUrl);
+
+        // 11. Ticker
+        const tickerSec = document.getElementById('tickerSection');
+        const tickerContent = document.getElementById('tickerContent');
+        if (tickerSec) tickerSec.style.display = branding.showTicker ? 'block' : 'none';
+        if (tickerContent && branding.tickerText) tickerContent.textContent = branding.tickerText;
+
+        // 12. Section Visibility Toggles
+        const urbanSec = document.getElementById('urban-development');
+        if (urbanSec) urbanSec.style.display = branding.showUrban !== false ? 'block' : 'none';
+
+        const servicesSec = document.getElementById('servicesSection');
+        if (servicesSec) servicesSec.style.display = branding.showServices !== false ? 'block' : 'none';
+
+        const pubSec = document.getElementById('publicationsSection');
+        if (pubSec) pubSec.style.display = branding.showPublications !== false ? 'block' : 'none';
+
+        const eventSec = document.getElementById('events');
+        if (eventSec) eventSec.style.display = branding.showEvents !== false ? 'block' : 'none';
+
+        const multiSec = document.getElementById('multimedia');
+        if (multiSec) multiSec.style.display = branding.showMultimedia !== false ? 'block' : 'none';
     }
 
     loadPageData() {
@@ -111,7 +282,7 @@ export class MainController {
 
         try {
             const projects = ProjectModel.getAll();
-            ProjectView.renderGrid(projects);
+            ProjectView.renderGrid(projects, 'projectsShowcaseGrid');
         } catch (e) { console.error('Error rendering projects:', e); }
 
         try {
@@ -121,12 +292,12 @@ export class MainController {
 
         try {
             const events = EventModel.getAll();
-            EventView.renderList(events);
+            EventView.renderList(events, 'eventsGridContainer');
         } catch (e) { console.error('Error rendering events:', e); }
 
         try {
             const videos = VideoModel.getAll();
-            VideoView.renderGrid(videos);
+            VideoView.renderGrid(videos, 'galleryThumbsRow');
         } catch (e) { console.error('Error rendering videos:', e); }
 
         try {
@@ -424,12 +595,13 @@ export class MainController {
                 const annualRef = b.annualRef || `2026/${String((idx + 1) * 2 - 1).padStart(2, '0')}`;
                 const legalBadge = b.legalStatus || 'موافقة';
                 const domainIcon = b.domainIcon ? ` <span class="tag-ico">${b.domainIcon}</span>` : '';
+                const projName = b.projectName || b.projectSupported || b.assocName;
 
                 return `
                 <tr class="subvention-table-row">
                     <td class="col-sub-assoc">
                         <div class="assoc-name-wrapper">
-                            <strong class="assoc-name-title">${b.projectName}</strong>
+                            <strong class="assoc-name-title">${projName}</strong>
                             <span class="assoc-sub-name">${b.assocName}</span>
                         </div>
                     </td>
@@ -442,7 +614,7 @@ export class MainController {
                     <td class="col-sub-status">
                         <span class="assoc-status-pill">
                             <span class="status-check-ico">✔</span>
-                            <span>مطابقة</span>
+                            <span>${b.statutStatus || 'مطابقة'}</span>
                         </span>
                     </td>
                     <td class="col-sub-ref">
@@ -655,28 +827,42 @@ export class MainController {
     // ==========================================
     syncStatsWithDatabase() {
         try {
+            const branding = BrandingModel.get() || {};
+
             const statProjects = document.getElementById('statProjectsCount');
             if (statProjects) {
-                statProjects.textContent = `+45`;
-                statProjects.setAttribute('data-target', '45');
+                const val = branding.stat4Val || '+45';
+                statProjects.textContent = val;
+                statProjects.setAttribute('data-target', val.replace(/[^0-9]/g, '') || '45');
+                const lbl = statProjects.nextElementSibling;
+                if (lbl && branding.stat4Label) lbl.textContent = branding.stat4Label;
             }
 
             const statPeriod = document.getElementById('statMandatePeriod');
             if (statPeriod) {
-                statPeriod.textContent = `+12`;
-                statPeriod.setAttribute('data-target', '12');
+                const val = branding.stat3Val || '+12';
+                statPeriod.textContent = val;
+                statPeriod.setAttribute('data-target', val.replace(/[^0-9]/g, '') || '12');
+                const lbl = statPeriod.nextElementSibling;
+                if (lbl && branding.stat3Label) lbl.textContent = branding.stat3Label;
             }
 
             const statTransparency = document.getElementById('statTransparencyRate');
             if (statTransparency) {
-                statTransparency.textContent = `+98%`;
-                statTransparency.setAttribute('data-target', '98');
+                const val = branding.stat2Val || '+98%';
+                statTransparency.textContent = val;
+                statTransparency.setAttribute('data-target', val.replace(/[^0-9]/g, '') || '98');
+                const lbl = statTransparency.nextElementSibling;
+                if (lbl && branding.stat2Label) lbl.textContent = branding.stat2Label;
             }
 
             const statServices = document.getElementById('statServicesCount');
             if (statServices) {
-                statServices.textContent = `+120`;
-                statServices.setAttribute('data-target', '120');
+                const val = branding.stat1Val || '+120';
+                statServices.textContent = val;
+                statServices.setAttribute('data-target', val.replace(/[^0-9]/g, '') || '120');
+                const lbl = statServices.nextElementSibling;
+                if (lbl && branding.stat1Label) lbl.textContent = branding.stat1Label;
             }
         } catch (e) {
             console.error('Error syncing stats:', e);
@@ -1310,4 +1496,81 @@ export class MainController {
         }
     }
 
+    // ==========================================
+    // ESSENTIAL CIVIC PROCEDURES (فضاء المواطن 3D)
+    // ==========================================
+    loadProceduresData() {
+        try {
+            const procedures = ProcedureModel.getAll();
+            const grid = document.getElementById('servicesGrid');
+            if (!grid || !procedures || procedures.length === 0) return;
+
+            grid.innerHTML = procedures.map((p, idx) => `
+                <article class="essential-card" onclick="window.openServiceDetail('${p.id}')" role="button" tabindex="0" aria-label="${p.title}">
+                    <div class="card-watermark-corner"></div>
+                    <div class="card-top-row">
+                        <div class="essential-card-num">${p.num || String(idx + 1).padStart(2, '0')}</div>
+                    </div>
+                    <div class="card-core-layout">
+                        <div class="service-medallion-box">
+                            <div class="medallion-outer-bezel">
+                                <div class="medallion-inner-core">
+                                    <img src="${p.icon || 'assets/medallion_residence.png'}" alt="${p.title}" class="medallion-icon-img" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-text-pane">
+                            <h3 class="essential-title">${p.title}</h3>
+                            <p class="essential-desc">${p.desc}</p>
+                            <div class="card-action-wrap">
+                                <span class="essential-action-btn">طلب الإجراء ←</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            // Dynamic Modal Function
+            window.openServiceDetail = function(key) {
+                const proc = ProcedureModel.getById(key) || ProcedureModel.getAll().find(p => p.id === key);
+                if (!proc) return;
+
+                const modalBody = document.getElementById('modalBody');
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (!modalBody || !modalOverlay) return;
+
+                const docs = (proc.documents ? proc.documents.split('\n') : []).filter(Boolean);
+
+                modalBody.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 22px;">
+                        <img src="${proc.icon || 'assets/medallion_residence.png'}" style="width: 70px; height: 70px; margin-bottom: 12px; object-fit: contain;">
+                        <h2 style="color: var(--primary-color); font-size: 1.6rem; font-weight: 800; margin: 0;">${proc.title}</h2>
+                        <p style="color: #64748b; font-size: 0.95rem; margin-top: 8px;">${proc.desc}</p>
+                    </div>
+                    <div style="background: #f8fafc; border-radius: 12px; padding: 18px; margin-bottom: 20px; border-right: 4px solid var(--primary-color);">
+                        <h4 style="color: var(--dark-color); font-size: 1.05rem; margin-bottom: 10px; font-weight: 700;">📋 الوثائق والشروط المطلوبة:</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            ${docs.length > 0 ? docs.map(d => `<li style="padding: 6px 0; font-size: 0.95rem; color: #334155;">• ${d}</li>`).join('') : '<li style="color: #64748b;">بطاقة التعريف الوطنية والوثائق الثبوتية المعنية.</li>'}
+                        </ul>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                        <div style="background: rgba(242, 169, 59, 0.1); border-radius: 10px; padding: 12px; text-align: center;">
+                            <strong style="display: block; color: var(--accent-color); font-size: 0.85rem; margin-bottom: 4px;">⏱️ أجل التسليم:</strong>
+                            <span style="font-size: 0.95rem; font-weight: 700; color: var(--primary-color);">${proc.deadline || 'فوري عند الشباك'}</span>
+                        </div>
+                        <div style="background: rgba(15, 157, 138, 0.1); border-radius: 10px; padding: 12px; text-align: center;">
+                            <strong style="display: block; color: var(--secondary-color); font-size: 0.85rem; margin-bottom: 4px;">💰 الرسوم والواجبات:</strong>
+                            <span style="font-size: 0.95rem; font-weight: 700; color: var(--secondary-color);">${proc.cost || 'مجانية'}</span>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="document.getElementById('modalOverlay').style.display='none'" class="btn btn-primary" style="min-width: 140px;">إغلاق النافذة</button>
+                    </div>
+                `;
+                modalOverlay.style.display = 'flex';
+            };
+        } catch (e) {
+            console.error('Error in loadProceduresData:', e);
+        }
+    }
 }

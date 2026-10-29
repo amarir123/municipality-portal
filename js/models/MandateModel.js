@@ -112,6 +112,58 @@ export const MandateModel = {
 
     save(data) {
         localStorage.setItem(MANDATE_STORAGE_KEY, JSON.stringify(data));
+        localStorage.setItem('biougra_last_sync_timestamp', Date.now().toString());
+        return data;
+    },
+
+    updateMayor(name, quote, role) {
+        const data = this.get();
+        if (data && data.bureau && data.bureau.length > 0) {
+            if (name) data.bureau[0].name = name;
+            if (quote) data.bureau[0].quote = quote;
+            if (role) data.bureau[0].role = role;
+            if (data.councilMembers && data.councilMembers.length > 0) {
+                if (name) data.councilMembers[0].name = name;
+            }
+            this.save(data);
+        }
+        return data;
+    },
+
+    addBureauMember(member) {
+        const data = this.get();
+        if (!member.id) member.id = Date.now();
+        data.bureau.push(member);
+        this.save(data);
+        return data;
+    },
+
+    updateBureauMember(id, updated) {
+        const data = this.get();
+        data.bureau = data.bureau.map(m => m.id === id ? { ...m, ...updated } : m);
+        this.save(data);
+        return data;
+    },
+
+    deleteBureauMember(id) {
+        const data = this.get();
+        data.bureau = data.bureau.filter(m => m.id !== id);
+        this.save(data);
+        return data;
+    },
+
+    addCouncilMember(member) {
+        const data = this.get();
+        if (!member.id) member.id = Date.now();
+        data.councilMembers.push(member);
+        this.save(data);
+        return data;
+    },
+
+    deleteCouncilMember(id) {
+        const data = this.get();
+        data.councilMembers = data.councilMembers.filter(m => m.id !== id);
+        this.save(data);
         return data;
     },
 

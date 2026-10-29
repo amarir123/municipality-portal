@@ -13,7 +13,7 @@
     
     <!-- CSS Stylesheets (Souss-Massa 10/10 Moroccan Architecture Suite) -->
     <link rel="stylesheet" href="style.css?v=45.0">
-    <link rel="stylesheet" href="moroccan-suite.css?v=60.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=75.0">
 </head>
 <body id="appBody">
     <!-- Scroll Progress Indicator Bar -->
@@ -712,7 +712,7 @@
             <!-- News Grid Layout: 4 Cards on Left + Kasbah Territory Card on Right -->
             <div class="news-content-grid">
                 <!-- 4 News Cards (Horizontal 4-columns) -->
-                <div class="news-cards-quad">
+                <div class="news-cards-quad" id="newsGrid">
                     <!-- News Item 1 -->
                     <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(3)" role="button" tabindex="0">
                         <div class="news-card-img-wrap">
@@ -1046,7 +1046,7 @@
             </div>
 
             <!-- Master Projects Grid (Featured Wide Card + 2x2 Grid) -->
-            <div class="projects-showcase-grid">
+            <div class="projects-showcase-grid" id="projectsShowcaseGrid">
                 <!-- Featured Wide Card (Road Project) -->
                 <article class="featured-project-card" onclick="window.appController?.openProjectModal('roads')" role="button" tabindex="0">
                     <div class="featured-img-wrap">
@@ -2056,7 +2056,7 @@
                 </div>
 
                 <!-- Right 5 Photo Thumbnails -->
-                <div class="gallery-thumbs-row">
+                <div class="gallery-thumbs-row" id="galleryThumbsRow">
                     <div class="gallery-thumb-card" onclick="openHeroVideoCapsule()">
                         <img src="assets/video_bus.png" alt="النقل الحضري" class="thumb-img">
                         <div class="thumb-hover-overlay"><span>🔍</span></div>
@@ -2645,7 +2645,7 @@
     </div>
 
     <!-- JavaScript MVC Bundle -->
-    <script type="module" src="js/app.js?v=60.0"></script>
+    <script type="module" src="js/app.js?v=75.0"></script>
     <script src="app.js?v=45.0"></script>
 
     <!-- 10/10 Interactive Polish Suite (3D Tilt, Ambient Glow, Cmd+K, Tracking) -->

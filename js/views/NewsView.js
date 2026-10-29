@@ -1,21 +1,29 @@
-﻿export class NewsView {
-    static renderList(newsList, containerId = 'newsListContainer') {
-        const container = document.getElementById(containerId) || document.getElementById('newsGrid');
+export class NewsView {
+    static renderList(newsList, containerId = 'newsGrid') {
+        const container = document.getElementById(containerId) || 
+                          document.querySelector('.news-cards-quad') || 
+                          document.getElementById('newsListContainer');
         if (!container) return;
 
         if (!newsList || newsList.length === 0) {
-            container.innerHTML = `<div style="text-align: center; color: #64748b; padding: 30px;">لا توجد مستجدات حالياً</div>`;
+            container.innerHTML = `<div style="text-align: center; color: #64748b; padding: 30px; grid-column: 1/-1;">لا توجد مستجدات حالياً</div>`;
             return;
         }
 
-        container.innerHTML = newsList.map(item => `
-            <div class="news-item" onclick="window.appController?.openNewsModal(${item.id})">
-                <div class="news-date">${item.date || ''}</div>
-                <div class="news-details">
-                    <h3 class="news-title">${item.title || ''}</h3>
-                    <p class="news-excerpt">${item.excerpt || ''}</p>
+        container.innerHTML = newsList.slice(0, 4).map(item => `
+            <article class="news-porcelain-card" onclick="window.appController?.openNewsModal(${item.id})" role="button" tabindex="0">
+                <div class="news-card-img-wrap">
+                    <img src="${item.imageUrl || item.image || 'assets/event_left.png'}" alt="${item.title}" class="news-card-img">
+                    <span class="news-date-pill">${item.date || ''}</span>
                 </div>
-            </div>
+                <div class="news-card-content">
+                    <h4 class="news-card-title">${item.title || ''}</h4>
+                    <p class="news-card-desc">${item.excerpt || item.description || ''}</p>
+                    <div class="news-card-footer">
+                        <span class="read-more-gold">اقرأ المزيد ←</span>
+                    </div>
+                </div>
+            </article>
         `).join('');
     }
 
