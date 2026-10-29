@@ -1323,7 +1323,7 @@ h1, h2, h3, h4, .font-kufi {
 
 /* Legal Bottom Bar */
 .footer-bottom-bar {
-    background: #070e1f !important;
+    background: transparent !important;
     border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding: 22px 0 !important;
     font-size: 0.88rem !important;
@@ -2957,105 +2957,141 @@ h1, h2, h3, h4, .font-kufi {
    (TICKER, MANDATE 2021-2027, SYNTHESIS REPORT, COMPLAINT TRACKING)
    ========================================================================== */
 
-/* 2. MANDATE 2021-2027 SHOWCASE SECTION (المجلس والولاية - تصميم ملكي فاخر مطابق للمعاينة) */
+/* 2. MANDATE 2021-2027 SHOWCASE SECTION (المؤسسة الدستورية المنتخبة - 3D LUXURY SUITE) */
 .mandate-showcase-section {
-    padding: 68px 0 62px;
-    background: #F8FAFC;
+    padding: 78px 0 85px;
+    background: #FAF8F5;
     position: relative;
-    border-top: 1px solid #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
+    border-top: 1px solid rgba(220, 185, 95, 0.3);
+    border-bottom: 1px solid rgba(220, 185, 95, 0.3);
     overflow: hidden;
 }
 
-.mandate-showcase-section::before {
-    content: '';
+/* Ambient Layers & Flourishes */
+.mandate-tl-flourish {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 150px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.mandate-bottom-wave-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.mandate-zellige-pattern {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(201, 151, 46, 0.06) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.045;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9972E' stroke-width='1'%3E%3Cpath d='M40 0 L55 25 L80 40 L55 55 L40 80 L25 55 L0 40 L25 25 Z'/%3E%3Cpath d='M40 15 L65 40 L40 65 L15 40 Z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
 }
 
 .mandate-container {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    padding: 0 16px;
 }
 
+/* Header centered */
 .mandate-header-center {
     text-align: center;
     margin-bottom: 34px;
 }
 
-.mandate-sub-pill {
-    display: inline-block;
-    font-size: 0.82rem;
-    font-weight: 800;
-    padding: 4px 16px;
+.mandate-constitutional-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 26px;
+    background: linear-gradient(135deg, #FFFDF8 0%, #FBF3E2 100%);
+    border: 1.5px solid #D4A340;
     border-radius: 999px;
-    background: rgba(201, 151, 46, 0.12);
-    color: #B45309;
-    border: 1px solid rgba(201, 151, 46, 0.3);
-    margin-bottom: 10px;
+    color: #0A2540;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(201, 151, 46, 0.16);
+    margin-bottom: 14px;
+}
+
+.mandate-constitutional-badge .star-accent {
+    color: #D4A340;
+    font-size: 0.92rem;
 }
 
 .mandate-main-title {
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    font-size: 1.85rem;
+    font-size: 2.15rem;
     font-weight: 900;
-    color: #0A3158;
+    color: #0A2540;
     margin: 0 0 10px 0;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.4px;
 }
 
 .mandate-gold-divider {
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #C9972E, transparent);
-    margin: 0 auto 12px;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 14px;
+    margin: 0 auto 12px;
+    max-width: 170px;
 }
 
-.divider-diamond {
-    width: 7px;
-    height: 7px;
-    background: #C9972E;
-    transform: rotate(45deg);
-    border-radius: 1px;
+.mandate-gold-divider .divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #D4A340);
+}
+
+.mandate-gold-divider .divider-diamond {
+    color: #D4A340;
+    font-size: 0.95rem;
 }
 
 .mandate-subtitle {
-    font-size: 0.98rem;
-    color: #64748B;
-    max-width: 700px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #475569;
+    max-width: 780px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
-/* Mayor Showcase Card */
+/* President Leadership Glass & Porcelain Card */
 .mandate-mayor-card {
     background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-right: 5px solid #C9972E;
-    border-radius: 16px;
-    padding: 26px 32px;
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 0 4px rgba(245, 235, 210, 0.45), 0 16px 45px rgba(10, 37, 64, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 26px 36px;
     display: flex;
     align-items: center;
-    gap: 28px;
-    box-shadow: 0 8px 30px rgba(10, 37, 64, 0.05);
-    margin-bottom: 26px;
+    gap: 32px;
+    margin-bottom: 28px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mandate-mayor-card:hover {
-    box-shadow: 0 12px 35px rgba(10, 37, 64, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3), 0 20px 50px rgba(10, 37, 64, 0.12);
 }
 
 .mayor-avatar-col {
@@ -3063,19 +3099,23 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .mayor-seal-avatar {
-    width: 84px;
-    height: 84px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(201, 151, 46, 0.16) 0%, #FFFFFF 100%);
-    border: 2px solid #C9972E;
+    background: radial-gradient(circle, #FFFDF8 0%, #F5ECDD 100%);
+    border: 3px solid #D4A340;
+    box-shadow: 0 8px 24px rgba(201, 151, 46, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(201, 151, 46, 0.2);
+    overflow: hidden;
 }
 
-.mayor-seal-icon {
-    font-size: 2.3rem;
+.mayor-medallion-img {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: contain;
 }
 
 .mayor-info {
@@ -3084,31 +3124,40 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .mayor-role-badge {
-    display: inline-block;
-    background: rgba(201, 151, 46, 0.12);
-    color: #B45309;
-    border: 1px solid rgba(201, 151, 46, 0.3);
-    padding: 3px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #FFF3D6 0%, #FDE4AA 100%);
+    color: #8C5302;
+    border: 1px solid rgba(201, 151, 46, 0.45);
+    padding: 4px 14px;
     border-radius: 999px;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 800;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(201, 151, 46, 0.12);
+}
+
+.badge-crown {
+    font-size: 0.95rem;
 }
 
 .mayor-name {
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    font-size: 1.45rem;
+    font-size: 1.65rem;
     font-weight: 900;
-    color: #0A3158;
-    margin: 0 0 6px 0;
+    color: #0A2540;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.3px;
 }
 
 .mayor-quote {
-    color: #475569;
-    font-size: 0.91rem;
-    line-height: 1.68;
+    color: #334155;
+    font-size: 0.92rem;
+    line-height: 1.75;
     margin: 0;
-    max-width: 760px;
+    max-width: 660px;
+    font-weight: 500;
 }
 
 .mayor-action-col {
@@ -3116,130 +3165,212 @@ h1, h2, h3, h4, .font-kufi {
 }
 
 .btn-mandate-roster {
-    background: linear-gradient(135deg, #ECC877 0%, #D4A340 100%);
+    background: linear-gradient(135deg, #F3D288 0%, #DCA842 100%);
     color: #0A2540;
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
     font-weight: 800;
-    font-size: 0.92rem;
-    padding: 12px 24px;
+    font-size: 0.95rem;
+    padding: 13px 26px;
     border-radius: 999px;
-    border: 1px solid rgba(201, 151, 46, 0.5);
-    box-shadow: 0 4px 14px rgba(201, 151, 46, 0.25);
+    border: 1px solid #C9972E;
+    box-shadow: 0 6px 18px rgba(201, 151, 46, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     cursor: pointer;
-    transition: all 0.25s ease;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
 }
 
 .btn-mandate-roster:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(201, 151, 46, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 26px rgba(201, 151, 46, 0.45);
     filter: brightness(1.04);
 }
 
-/* 4 Vice Presidents Cards Grid */
+.btn-mandate-roster .btn-arrow {
+    transition: transform 0.25s ease;
+}
+
+.btn-mandate-roster:hover .btn-arrow {
+    transform: translateX(-4px);
+}
+
+/* 4 Vice Presidents Elevated Porcelain Cards */
 .bureau-members-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
+    gap: 18px;
+    margin-bottom: 30px;
 }
 
 .bureau-card {
     background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-top: 3px solid #C9972E;
-    border-radius: 14px;
-    padding: 20px 16px;
+    border: 1.5px solid rgba(220, 185, 95, 0.45);
+    border-radius: 18px;
+    padding: 24px 18px 20px;
     text-align: center;
-    box-shadow: 0 3px 14px rgba(10, 37, 64, 0.04);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 28px rgba(10, 37, 64, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    min-height: 135px;
+    justify-content: space-between;
+    min-height: 185px;
+    position: relative;
+    overflow: hidden;
 }
 
 .bureau-card:hover {
-    transform: translateY(-4px);
-    border-color: #C9972E;
-    box-shadow: 0 10px 24px rgba(201, 151, 46, 0.16);
+    transform: translateY(-5px);
+    border-color: #D4A340;
+    box-shadow: 0 16px 36px rgba(201, 151, 46, 0.2);
+}
+
+.vice-card-zellige-watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: radial-gradient(#C9972E 2px, transparent 2px);
+    background-size: 8px 8px;
+}
+
+.vice-medallion-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #EDF4FB 0%, #DCE9F6 100%);
+    border: 1.5px solid #BDD5EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    box-shadow: 0 3px 10px rgba(10, 49, 88, 0.08);
+    transition: all 0.3s ease;
+}
+
+.bureau-card:hover .vice-medallion-icon {
+    transform: scale(1.08);
+    border-color: #D4A340;
 }
 
 .bureau-role {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.84rem;
+    font-weight: 800;
     color: #B45309;
-    line-height: 1.45;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.bureau-assignment {
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: #78716C;
     margin-bottom: 8px;
+    line-height: 1.35;
     text-align: center;
 }
 
 .bureau-name {
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    font-size: 1.12rem;
-    font-weight: 800;
-    color: #0A3158;
-    margin-bottom: 10px;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #0A2540;
+    margin-bottom: 12px;
     text-align: center;
 }
 
 .bureau-party {
     font-size: 0.76rem;
-    font-weight: 700;
-    color: #64748B;
-    background: #F1F5F9;
-    border: 1px solid #E2E8F0;
-    padding: 3px 14px;
+    font-weight: 800;
+    color: #1E3A8A;
+    background: #EDF4FB;
+    border: 1px solid #D0E1F2;
+    padding: 4px 18px;
     border-radius: 999px;
     display: inline-block;
 }
 
-/* Bottom Actions */
+/* Bottom Action & Ornamental Diamond */
 .mandate-bottom-action {
     text-align: center;
+    margin-top: 10px;
 }
 
 .btn-mandate-details {
-    background: #FFFFFF;
-    border: 1.5px solid #C9972E;
-    color: #0A3158;
+    background: linear-gradient(135deg, #FFFDF8 0%, #FBF6EA 100%);
+    border: 1.5px solid #D4A340;
+    color: #0A2540;
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    padding: 10px 28px;
+    padding: 12px 32px;
     border-radius: 999px;
     font-weight: 800;
-    font-size: 0.92rem;
+    font-size: 0.94rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 12px rgba(201, 151, 46, 0.1);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    box-shadow: 0 4px 16px rgba(201, 151, 46, 0.16);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-mandate-details:hover {
-    background: #0A3158;
-    color: #F5E6BE;
-    border-color: #0A3158;
+    background: #0A2540;
+    color: #F8E7BE;
+    border-color: #0A2540;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(10, 49, 88, 0.2);
+    box-shadow: 0 8px 24px rgba(10, 37, 64, 0.25);
+}
+
+.btn-mandate-details .btn-arrow {
+    transition: transform 0.25s ease;
+}
+
+.btn-mandate-details:hover .btn-arrow {
+    transform: translateX(-4px);
+}
+
+.mandate-bottom-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    max-width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mandate-bottom-ornament .ornament-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #D4A340);
+}
+
+.mandate-bottom-ornament .ornament-diamond {
+    color: #D4A340;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 992px) {
     .mandate-mayor-card {
         flex-direction: column;
         text-align: center;
+        padding: 24px 20px;
     }
     .mayor-info {
         text-align: center;
     }
     .bureau-members-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
     }
 }
 
@@ -3248,126 +3379,872 @@ h1, h2, h3, h4, .font-kufi {
         grid-template-columns: 1fr;
     }
     .mandate-main-title {
-        font-size: 1.45rem;
+        font-size: 1.6rem;
+    }
+    .btn-mandate-details {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 10px 18px;
     }
 }
 
-/* 3. SYNTHESIS REPORT & STRATEGIC AXES (التقرير التركيبي ومشاريع الاختصاصات) */
+/* 3. SYNTHESIS REPORT & STRATEGIC AXES (التقرير التركيبي ومشاريع الاختصاصات - ULTRA-PREMIUM 3D SUITE) */
 .synthesis-section {
-    padding: 85px 0;
-    background: #ffffff;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    background: #F8F6F0;
     position: relative;
+    overflow: hidden;
+    padding-bottom: 0;
+    border-top: 1px solid rgba(220, 185, 95, 0.25);
+    border-bottom: 1px solid rgba(220, 185, 95, 0.25);
 }
 
-.synthesis-intro-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    padding: 30px;
-    margin-bottom: 40px;
-    line-height: 1.8;
-    color: #334155;
-    font-size: 0.98rem;
+/* 3.1 Scenic Mountain Banner Header */
+.synthesis-hero-banner {
     position: relative;
+    width: 100%;
+    min-height: 250px;
+    padding: 38px 0 65px;
+    overflow: hidden;
 }
 
-.synthesis-axes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 22px;
-    margin-bottom: 45px;
+.synthesis-banner-vector-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: cover;
+    z-index: 1;
 }
 
-.synthesis-axis-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    padding: 24px;
+.synthesis-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 21, 46, 0.40) 0%, rgba(16, 45, 88, 0.35) 60%, rgba(248, 246, 240, 1) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.synthesis-banner-container {
+    position: relative;
+    z-index: 5;
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    padding: 0 16px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    align-items: center;
 }
 
-.synthesis-axis-card:hover {
-    border-color: #1B3A8A;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(27, 58, 138, 0.08);
+.synthesis-top-nav-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
-.synthesis-axis-title {
+.btn-synthesis-budget {
+    background: linear-gradient(135deg, #F3D288 0%, #DCA842 100%);
+    color: #0A2540;
     font-family: 'Cairo', sans-serif;
-    font-size: 1.05rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 14px;
-    line-height: 1.45;
+    font-size: 0.88rem;
+    padding: 9px 22px;
+    border-radius: 999px;
+    border: 1px solid #C9972E;
+    box-shadow: 0 4px 14px rgba(201, 151, 46, 0.35);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
 }
 
-.synthesis-axis-meta {
-    display: flex;
-    justify-content: space-between;
+.btn-synthesis-budget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 151, 46, 0.45);
+    filter: brightness(1.05);
+}
+
+.btn-synthesis-pdf {
+    background: rgba(7, 21, 46, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid #E9BD62;
+    color: #FFFFFF;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
     font-size: 0.88rem;
-    color: #64748b;
+    padding: 9px 22px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-synthesis-pdf:hover {
+    background: #E9BD62;
+    color: #07152E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(233, 189, 98, 0.4);
+}
+
+.synthesis-header-titles {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.synthesis-eyebrow-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(7, 21, 46, 0.75);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid #E9BD62;
+    padding: 5px 22px;
+    border-radius: 999px;
+    color: #FAF8F5;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 800;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     margin-bottom: 12px;
 }
 
-.synthesis-axis-meta strong {
-    color: #1B3A8A;
+.synthesis-eyebrow-badge .star-accent {
+    color: #E9BD62;
+    font-size: 0.95rem;
 }
 
-.synthesis-progress-track {
+.synthesis-main-headline {
+    font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 2.15rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    margin: 0 0 8px 0;
+    letter-spacing: -0.4px;
+    line-height: 1.35;
+}
+
+.synthesis-period-tag {
+    display: block;
+    color: #E9BD62;
+    font-size: 1.65rem;
+    font-weight: 900;
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+
+.synthesis-header-sub {
+    color: #E2E8F0;
+    font-size: 0.98rem;
+    font-weight: 600;
+    max-width: 780px;
+    margin: 0 auto;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.65;
+}
+
+/* 3.2 Content Container */
+.synthesis-content-container {
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* 3.3 Executive Metrics Bar (5 Elevated Porcelain Cards) */
+.synthesis-executive-metrics-bar {
+    margin-top: -45px;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border-radius: 22px;
+    padding: 16px;
+    border: 1.5px solid rgba(220, 185, 95, 0.45);
+    box-shadow: 0 16px 45px rgba(10, 37, 64, 0.08), 0 2px 10px rgba(0, 0, 0, 0.04);
+    display: grid;
+    grid-template-columns: 1.45fr 1.1fr 1fr 1fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.metric-card {
+    background: #FAF8F5;
+    border: 1px solid #ECE7DB;
+    border-radius: 16px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(10, 37, 64, 0.08);
+    border-color: #E9BD62;
+}
+
+.metric-circle-ico {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ico-blue {
+    background: #EDF4FB;
+    border: 1px solid #C8DEF2;
+    color: #102D58;
+}
+
+.ico-emerald {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #059669;
+}
+
+.ico-amber {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    color: #D97706;
+}
+
+.ico-gold {
+    background: #FFFDF8;
+    border: 1px solid #F3D288;
+    color: #B45309;
+}
+
+.metric-standard-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #64748B;
+    margin-bottom: 4px;
+}
+
+.metric-standard-val-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.metric-standard-num {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: #0A2540;
+}
+
+.metric-standard-unit {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #64748B;
+}
+
+/* Card 4 - Rate with progress */
+.metric-card-rate {
+    justify-content: space-between;
+}
+
+.metric-rate-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metric-rate-num {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: #0A2540;
+}
+
+.metric-progress-track {
     width: 100%;
-    height: 8px;
-    background: #e2e8f0;
+    height: 6px;
+    background: #E2E8F0;
     border-radius: 999px;
     overflow: hidden;
     margin-top: 6px;
 }
 
-.synthesis-progress-fill {
+.metric-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #1B3A8A, #C9972E);
+    background: linear-gradient(90deg, #102D58, #E9BD62);
     border-radius: 999px;
-    transition: width 0.8s ease;
 }
 
-/* Competence Projects Table in Affichage */
-.synthesis-table-wrapper {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    overflow: hidden;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-}
-
-.synthesis-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
+/* Card 5 - Featured Dark Royal Navy Card on Left */
+.metric-card-featured {
+    background: linear-gradient(135deg, #07152E 0%, #102D58 100%);
+    border: 1.5px solid #E9BD62;
+    color: #FFFFFF;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 30px rgba(7, 21, 46, 0.35), inset 0 1px 0 rgba(233, 189, 98, 0.4);
+    align-items: center;
     text-align: right;
 }
 
-.synthesis-table th {
-    background: #f1f5f9;
-    color: #1B3A8A;
-    padding: 16px 20px;
+.metric-card-featured:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(7, 21, 46, 0.45);
+    border-color: #F3D288;
+}
+
+.metric-featured-seal {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0F2F63 0%, #07152E 100%);
+    border: 2px solid #E9BD62;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.metric-featured-info {
+    flex: 1;
+}
+
+.metric-featured-label {
+    font-size: 0.8rem;
     font-weight: 800;
-    border-bottom: 2px solid #e2e8f0;
+    color: #E9BD62;
+    margin-bottom: 4px;
 }
 
-.synthesis-table td {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #1e293b;
+.metric-featured-val-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
 }
 
-.synthesis-table tr:hover td {
-    background: #f8fafc;
+.metric-featured-num {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+.metric-featured-unit {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #E2E8F0;
+}
+
+.metric-featured-chart-ico {
+    font-size: 1.15rem;
+    margin-right: auto;
+}
+
+/* 3.4 Development Domains Section (المجالات التنموية) */
+.synthesis-domains-section {
+    margin-bottom: 38px;
+}
+
+.synthesis-domains-header {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.synthesis-domains-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #0A2540;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.domains-diamond {
+    color: #E9BD62;
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.synthesis-domains-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.synthesis-domain-card {
+    background: #FFFFFF;
+    border-radius: 18px;
+    border: 1.5px solid rgba(220, 185, 95, 0.4);
+    box-shadow: 0 10px 25px rgba(10, 37, 64, 0.05);
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.synthesis-domain-card:hover {
+    transform: translateY(-5px);
+    border-color: #E9BD62;
+    box-shadow: 0 16px 36px rgba(201, 151, 46, 0.22);
+}
+
+.domain-card-thumb {
+    height: 145px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #0A2540;
+}
+
+.domain-svg-thumb {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.domain-card-medallion {
+    position: absolute;
+    bottom: -18px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0A2540 0%, #07152E 100%);
+    border: 2.5px solid #E9BD62;
+    color: #E9BD62;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.domain-card-body {
+    padding: 24px 16px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.domain-card-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 14px 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.domain-card-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.domain-stat-col {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-col-label {
+    display: block;
+    font-size: 0.72rem;
+    color: #64748B;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.stat-col-val {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.94rem;
+    font-weight: 900;
+    color: #0A2540;
+}
+
+.stat-col-val small {
+    font-size: 0.72rem;
+    color: #64748B;
+    font-weight: normal;
+}
+
+.domain-stat-divider {
+    width: 1px;
+    height: 28px;
+    background: #E2E8F0;
+}
+
+.domain-progress-track {
+    height: 6px;
+    width: 100%;
+    background: #E2E8F0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.domain-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #102D58, #E9BD62);
+    border-radius: 999px;
+}
+
+/* 3.5 Projects Table (جدول مشاريع مجالات الاختصاص والشراكات) - HIGH CLARITY & LUXURY DATA SUITE */
+.synthesis-table-master-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid rgba(220, 185, 95, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 37, 64, 0.07);
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
+.synthesis-table-master-header {
+    background: linear-gradient(135deg, #07152E 0%, #102D58 100%);
+    color: #FFFFFF;
+    padding: 16px 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2.5px solid #E9BD62;
+}
+
+.table-header-ico {
+    font-size: 1.35rem;
+}
+
+.table-header-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.synthesis-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.synthesis-table-lux {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+
+/* Table Column Proportions for Full-Width Balance */
+.synthesis-table-lux th.col-proj-name, .synthesis-table-lux td.col-proj-name { width: 30%; }
+.synthesis-table-lux th.col-domain, .synthesis-table-lux td.col-domain { width: 15%; }
+.synthesis-table-lux th.col-status, .synthesis-table-lux td.col-status { width: 11%; text-align: center; }
+.synthesis-table-lux th.col-budget, .synthesis-table-lux td.col-budget { width: 13%; }
+.synthesis-table-lux th.col-progress, .synthesis-table-lux td.col-progress { width: 12%; }
+.synthesis-table-lux th.col-orientation, .synthesis-table-lux td.col-orientation { width: 13%; }
+.synthesis-table-lux th.col-action, .synthesis-table-lux td.col-action { width: 6%; text-align: center; }
+
+.synthesis-table-lux thead th {
+    background: #F8FAFC;
+    color: #0A2540;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 16px 18px;
+    border-bottom: 2px solid #CBD5E1;
+    white-space: nowrap;
+}
+
+.synthesis-table-lux tbody td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 0.92rem;
+    color: #1E293B;
+    vertical-align: middle;
+}
+
+.synthesis-table-row:hover {
+    background: #FAF8F5;
+}
+
+.proj-name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 520px;
+}
+
+.proj-bullet-ico {
+    font-size: 0.95rem;
+    color: #D4A340;
+    flex-shrink: 0;
+}
+
+.proj-name-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: #0A2540;
+    line-height: 1.5;
+}
+
+/* Domain Competence Badge - CRYSTAL CLEAR & NO WRAPPING */
+.synthesis-table-lux .domain-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    line-height: 1.3 !important;
+    padding: 6px 16px !important;
+    border-radius: 8px !important;
+    font-family: 'Cairo', sans-serif !important;
+    background: #F1F5F9 !important;
+    color: #0F172A !important;
+    border: 1.5px solid #CBD5E1 !important;
+    font-size: 0.86rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Status Pill - HIGH CONTRAST & CLEAN BORDERS */
+.synthesis-table-lux .status-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 6px 18px !important;
+    border-radius: 999px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    line-height: 1.3 !important;
+}
+
+.synthesis-table-lux .status-completed {
+    background: #ECFDF5 !important;
+    color: #065F46 !important;
+    border: 1.5px solid #6EE7B7 !important;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.12) !important;
+}
+
+.synthesis-table-lux .status-in-progress {
+    background: #FFFBEB !important;
+    color: #92400E !important;
+    border: 1.5px solid #FCD34D !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.12) !important;
+}
+
+.synthesis-table-lux .status-study {
+    background: #EFF6FF !important;
+    color: #1E40AF !important;
+    border: 1.5px solid #93C5FD !important;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.12) !important;
+}
+
+.synthesis-table-lux .budget-num {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    color: #0A2540;
+    font-size: 1.05rem;
+    letter-spacing: -0.3px;
+}
+
+.synthesis-table-lux .budget-cur {
+    font-size: 0.8rem;
+    color: #64748B;
+    margin-right: 4px;
+    font-weight: 700;
+}
+
+.table-progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 110px;
+}
+
+.progress-pct {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 900;
+    color: #0A2540;
+    min-width: 38px;
+}
+
+.table-progress-bar-track {
+    flex: 1;
+    height: 7px;
+    background: #E2E8F0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.table-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #102D58, #E9BD62);
+    border-radius: 999px;
+}
+
+.orientation-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    color: #334155;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.orientation-ico {
+    font-size: 1.05rem;
+}
+
+.synthesis-table-lux .btn-table-details {
+    background: linear-gradient(135deg, #F3D288 0%, #DCA842 100%) !important;
+    color: #0A2540 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 900 !important;
+    padding: 7px 18px !important;
+    border-radius: 999px !important;
+    border: 1px solid #C9972E !important;
+    box-shadow: 0 3px 10px rgba(201, 151, 46, 0.25) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    transition: all 0.25s ease !important;
+}
+
+.synthesis-table-lux .btn-table-details:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(201, 151, 46, 0.4) !important;
+    filter: brightness(1.05) !important;
+}
+
+/* 3.6 Section Bottom Decorative Ambient Wave */
+.synthesis-footer-wave-wrap {
+    height: 95px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.synthesis-footer-wave-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.synthesis-wave-container {
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    padding: 0 16px;
+}
+
+.synthesis-location-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(7, 21, 46, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid #E9BD62;
+    padding: 6px 20px;
+    border-radius: 999px;
+    color: #FFFFFF;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    transition: all 0.3s ease;
+}
+
+.synthesis-location-pill:hover {
+    background: #0A2540;
+    border-color: #F3D288;
+    transform: translateY(-2px);
+}
+
+.synthesis-location-pill .location-pin-circle {
+    font-size: 1.1rem;
+}
+
+.synthesis-location-pill .location-text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    line-height: 1.3;
+}
+
+.synthesis-location-pill strong {
+    font-size: 0.88rem;
+    color: #E9BD62;
+}
+
+.synthesis-location-pill small {
+    font-size: 0.72rem;
+    color: #CBD5E1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .synthesis-executive-metrics-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .metric-card-featured {
+        grid-column: span 2;
+    }
+    .synthesis-domains-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .synthesis-executive-metrics-bar {
+        grid-template-columns: 1fr;
+    }
+    .metric-card-featured {
+        grid-column: span 1;
+    }
+    .synthesis-domains-grid {
+        grid-template-columns: 1fr;
+    }
+    .synthesis-main-headline {
+        font-size: 1.6rem;
+    }
+    .synthesis-period-tag {
+        font-size: 1.3rem;
+    }
+    .synthesis-top-nav-actions {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 /* 4. CITIZEN COMPLAINT TRACKING CARD (تتبع الشكايات للمواطنين) */
@@ -5004,9 +5881,10 @@ input, select, textarea {
 }
 
 .services-container {
-    max-width: 1240px !important;
+    max-width: 1700px !important;
+    width: 96% !important;
     margin: 0 auto !important;
-    padding: 0 20px !important;
+    padding: 0 16px !important;
     position: relative !important;
     z-index: 5 !important;
 }
@@ -6290,4 +7168,1420 @@ input, select, textarea {
     .footer-4cols-grid {
         grid-template-columns: 1fr !important;
     }
+}
+
+
+/* ==========================================================================
+   PREMIUM SUBVENTIONS SECTION (دعم جمعيات المجتمع المدني والاتحادات المحلية)
+   Pixel-faithful to Master Reference Design (Luxury Navy & Champagne Gold)
+   ========================================================================== */
+
+.subventions-showcase-section {
+    position: relative;
+    overflow: hidden;
+    background: #FAF8F5;
+    padding: 30px 0 80px 0;
+    border-top: 1px solid rgba(220, 185, 95, 0.35);
+}
+
+/* Panoramic Moroccan Landscape Upper Banner */
+.subventions-hero-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 340px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.subventions-banner-bg {
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/biougra_cinematic_bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.28;
+    filter: saturate(1.1) brightness(1.02);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);
+}
+
+.subventions-corner-arabesque {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 2;
+}
+
+.corner-top-right {
+    top: 0;
+    right: 0;
+}
+
+.corner-top-left {
+    top: 0;
+    left: 0;
+}
+
+/* Wide Container */
+.subventions-container {
+    position: relative;
+    z-index: 5;
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* 1. Header Block */
+.subventions-header-block {
+    text-align: center;
+    margin-bottom: 34px;
+    position: relative;
+}
+
+.subventions-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(233, 189, 98, 0.16);
+    border: 1.5px solid #E9BD62;
+    color: #0A2540;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 6px 24px;
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(233, 189, 98, 0.15);
+    margin-bottom: 12px;
+}
+
+.pill-badge-ico {
+    font-size: 1.05rem;
+}
+
+.subventions-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #07152E;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.5px;
+}
+
+.subventions-subtitle {
+    color: #4A5568;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 600;
+    max-width: 820px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* 2. Decision Master Card */
+.subvention-decision-master-card {
+    background: #FFFFFF;
+    border-radius: 22px;
+    border: 1.5px solid rgba(220, 185, 95, 0.45);
+    box-shadow: 0 16px 45px rgba(10, 37, 64, 0.08);
+    padding: 24px 34px;
+    margin-bottom: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.decision-card-right-seal {
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #07152E 0%, #102D58 100%);
+    border: 2px solid #E9BD62;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(7, 21, 46, 0.25);
+    flex-shrink: 0;
+}
+
+.decision-seal-svg {
+    width: 44px;
+    height: 44px;
+}
+
+.decision-card-center-content {
+    flex: 1;
+}
+
+.decision-card-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #07152E;
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.decision-card-text {
+    color: #475569;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.decision-card-left-action {
+    flex-shrink: 0;
+}
+
+.btn-subvention-download-gold {
+    background: linear-gradient(135deg, #E9BD62 0%, #D4A340 100%);
+    color: #07152E;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.94rem;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 22px rgba(233, 189, 98, 0.38);
+    transition: all 0.3s ease;
+}
+
+.btn-subvention-download-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(233, 189, 98, 0.52);
+    filter: brightness(1.04);
+}
+
+/* 3. Categories Heading */
+.subventions-categories-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.heading-moroccan-star {
+    color: #D4A340;
+    font-size: 1.35rem;
+}
+
+.heading-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0;
+}
+
+/* 4. Categories Distribution Grid (5 Porcelain Cards) */
+.subvention-cat-lux-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.subvention-cat-lux-card {
+    background: #FFFFFF;
+    border-radius: 18px;
+    border: 1.5px solid rgba(220, 185, 95, 0.4);
+    box-shadow: 0 10px 25px rgba(10, 37, 64, 0.05);
+    padding: 18px 16px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.subvention-cat-lux-card:hover {
+    transform: translateY(-4px);
+    border-color: #E9BD62;
+    box-shadow: 0 16px 36px rgba(201, 151, 46, 0.2);
+}
+
+.cat-card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cat-count-pill {
+    background: #FEF3C7;
+    color: #92400E;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid #FCD34D;
+    white-space: nowrap;
+}
+
+.cat-card-medallion {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.cat-card-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px 0 8px 0;
+}
+
+.cat-card-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #07152E;
+    text-align: center;
+    margin: 0 0 4px 0;
+}
+
+.cat-card-label {
+    color: #64748B;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.cat-card-amount-val {
+    color: #B45309;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.22rem;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.cat-card-amount-val small {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #92400E;
+}
+
+.cat-card-progress-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.cat-card-pct {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #1E3A8A;
+    min-width: 28px;
+}
+
+.cat-card-track {
+    flex: 1;
+    height: 6px;
+    background: #E2E8F0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.cat-card-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #102D58 0%, #D4A340 100%);
+    border-radius: 999px;
+    transition: width 1s ease-in-out;
+}
+
+/* 5. Beneficiaries Master Table Card */
+.subvention-table-master-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid rgba(220, 185, 95, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 37, 64, 0.07);
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
+.subvention-table-header-bar {
+    background: linear-gradient(135deg, #07152E 0%, #102D58 100%);
+    color: #FFFFFF;
+    padding: 16px 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2.5px solid #E9BD62;
+}
+
+.table-header-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subvention-table-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.subvention-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.subvention-table-lux {
+    width: 100% !important;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.subvention-table-lux thead th {
+    background: #F8FAFC;
+    color: #0A2540;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 14px 18px;
+    border-bottom: 2px solid #CBD5E1;
+    white-space: nowrap;
+}
+
+/* Table Column Widths & Alignments */
+.subvention-table-lux th.col-sub-assoc, .subvention-table-lux td.col-sub-assoc { width: 32%; }
+.subvention-table-lux th.col-sub-domain, .subvention-table-lux td.col-sub-domain { width: 14%; text-align: center; }
+.subvention-table-lux th.col-sub-legal, .subvention-table-lux td.col-sub-legal { width: 12%; text-align: center; }
+.subvention-table-lux th.col-sub-status, .subvention-table-lux td.col-sub-status { width: 10%; text-align: center; }
+.subvention-table-lux th.col-sub-ref, .subvention-table-lux td.col-sub-ref { width: 10%; text-align: center; }
+.subvention-table-lux th.col-sub-amount, .subvention-table-lux td.col-sub-amount { width: 14%; }
+.subvention-table-lux th.col-sub-action, .subvention-table-lux td.col-sub-action { width: 8%; text-align: center; }
+
+.subvention-table-lux tbody td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 0.92rem;
+    color: #1E293B;
+    vertical-align: middle;
+}
+
+.subvention-table-row:hover {
+    background: #FAF8F5;
+}
+
+/* Row elements */
+.assoc-name-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.assoc-pin-ico {
+    font-size: 0.95rem;
+    color: #D4A340;
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.assoc-name-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.assoc-title-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: #0A2540;
+    line-height: 1.45;
+}
+
+.assoc-proj-sub {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.82rem;
+    color: #64748B;
+    line-height: 1.35;
+}
+
+/* Category Badge */
+.assoc-domain-tag {
+    background: #FEF3C7 !important;
+    color: #92400E !important;
+    border: 1.5px solid #FCD34D !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.86rem !important;
+    font-weight: 800 !important;
+    padding: 5px 14px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Legal File Badge */
+.assoc-legal-tag {
+    background: #F1F5F9 !important;
+    color: #334155 !important;
+    border: 1.5px solid #CBD5E1 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    padding: 5px 14px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Status Pill (✔ مطابقة) */
+.assoc-status-pill {
+    background: #ECFDF5 !important;
+    color: #065F46 !important;
+    border: 1.5px solid #6EE7B7 !important;
+    border-radius: 999px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    padding: 5px 16px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+.status-check-ico {
+    font-weight: 900;
+    color: #059669;
+}
+
+/* Annual Reference Tag */
+.assoc-ref-tag {
+    color: #0F172A;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 800;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+/* Amount Wrapper & Mini Bar */
+.assoc-amount-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.assoc-amount-num {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    color: #0F172A;
+    font-size: 0.94rem;
+    letter-spacing: 0.5px;
+}
+
+.assoc-mini-bar-track {
+    width: 100%;
+    max-width: 110px;
+    height: 5px;
+    background: #E2E8F0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.assoc-mini-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #102D58 0%, #D4A340 100%);
+    border-radius: 999px;
+}
+
+/* Action Button */
+.btn-assoc-details-lux {
+    background: #FEF3C7;
+    color: #78350F;
+    border: 1.5px solid #F59E0B;
+    border-radius: 999px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 800;
+    padding: 7px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+    transition: all 0.25s ease;
+}
+
+.btn-assoc-details-lux:hover {
+    background: #FDE68A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.28);
+}
+
+.btn-action-ico {
+    font-size: 0.88rem;
+}
+
+/* Bottom Arabesques */
+.subventions-bottom-arabesques {
+    position: relative;
+    width: 100%;
+    height: 0;
+    pointer-events: none;
+}
+
+.subventions-corner-rosette {
+    position: absolute;
+    bottom: -60px;
+    width: 240px;
+    height: 240px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+.corner-bottom-right {
+    right: -40px;
+}
+
+.corner-bottom-left {
+    left: -40px;
+}
+
+/* Responsive Rules for Subventions */
+@media (max-width: 1200px) {
+    .subvention-cat-lux-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .subvention-decision-master-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .decision-card-right-seal {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .subvention-cat-lux-grid {
+        grid-template-columns: 1fr;
+    }
+    .subventions-title {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* ==========================================================================
+   ELEGANT FOOTER BOTTOM BAR (No harsh black, no icons, luxury gold & navy)
+   ========================================================================== */
+.master-footer {
+    position: relative !important;
+    background: linear-gradient(180deg, #0A2244 0%, #061730 100%) !important;
+    color: #ffffff !important;
+    padding: 65px 0 20px 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    border-top: 2.5px solid #E9BD62 !important;
+}
+
+.footer-bottom-bar {
+    background: transparent !important;
+    border-top: 1px solid rgba(233, 189, 98, 0.25) !important;
+    padding: 20px 0 8px 0 !important;
+    font-size: 0.88rem !important;
+    color: #94A3B8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+}
+
+.footer-copyright {
+    color: #94A3B8 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.footer-credits {
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.footer-admin-link {
+    color: #94A3B8 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.25s ease !important;
+}
+
+.footer-admin-link:hover {
+    color: #FFFFFF !important;
+}
+
+.kmt-brand-tag {
+    color: #E9BD62 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 0.94rem !important;
+    letter-spacing: 0.8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.footer-admin-link:hover .kmt-brand-tag {
+    color: #FDE047 !important;
+    text-shadow: 0 0 10px rgba(233, 189, 98, 0.45) !important;
+}
+
+
+/* ==========================================================================
+   STATS CURVED BOX SECTION (أرقام وإحصائيات - بوكس كيرف بانورامي)
+   Faithfully matching reference image media_1793268672025_f98f8d52.png
+   ========================================================================== */
+
+.stats-curved-section {
+    position: relative;
+    background: #FAF8F5;
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.stats-curved-box {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    background: linear-gradient(135deg, #07152E 0%, #0B2548 40%, #163660 70%, #0A1C38 100%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Background layers: Sunset Mountains on Right + Deep Navy on Left */
+.stats-box-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.stats-box-landscape {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100%;
+    background-image: url('assets/biougra_cinematic_bg.jpg');
+    background-size: cover;
+    background-position: right center;
+    opacity: 0.35;
+    mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 45%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 45%, rgba(0,0,0,0) 100%);
+}
+
+.stats-box-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 75% 50%, rgba(233, 189, 98, 0.12) 0%, transparent 60%);
+}
+
+/* Top & Bottom Curved Masks */
+.stats-curve-mask-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 3;
+    pointer-events: none;
+    line-height: 0;
+}
+
+.stats-curve-mask-top svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.stats-curve-mask-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 3;
+    pointer-events: none;
+    line-height: 0;
+}
+
+.stats-curve-mask-bottom svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Main Content Container (Wide Layout) */
+.stats-curved-container {
+    position: relative;
+    z-index: 5;
+    max-width: 1700px !important;
+    width: 96% !important;
+    margin: 0 auto;
+    padding: 65px 16px 70px 16px;
+}
+
+/* Centered Header */
+.stats-curved-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stats-curved-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.stats-curved-subtitle {
+    color: #E2E8F0;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Main Layout: 4 Cards on Left + Map on Right */
+.stats-curved-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 22px;
+    align-items: center;
+}
+
+/* Single Horizontal Row of 4 Stat Cards */
+.stats-curved-cards-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat-curved-glass-card {
+    background: rgba(8, 26, 51, 0.65);
+    border: 1.5px solid rgba(220, 185, 95, 0.35);
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    padding: 24px 14px 20px 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.stat-curved-glass-card:hover {
+    transform: translateY(-5px);
+    border-color: #E9BD62;
+    background: rgba(14, 42, 78, 0.8);
+    box-shadow: 0 18px 45px rgba(233, 189, 98, 0.28);
+}
+
+.stat-curved-icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid #E9BD62;
+    background: radial-gradient(circle, rgba(233, 189, 98, 0.25) 0%, rgba(7, 21, 46, 0.85) 100%);
+    margin: 0 auto 12px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(233, 189, 98, 0.25);
+}
+
+.stat-curved-ico {
+    font-size: 1.15rem;
+}
+
+.stat-curved-number {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.15rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.stat-curved-label {
+    color: #CBD5E1;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* 3D Territory Map Showcase */
+.stats-curved-map-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1.5px solid rgba(220, 185, 95, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(233, 189, 98, 0.2);
+    height: 220px;
+    background: #0A1C38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s ease;
+}
+
+.stats-curved-map-card:hover {
+    transform: translateY(-4px);
+    border-color: #E9BD62;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(233, 189, 98, 0.35);
+}
+
+.stats-curved-map-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.stats-map-pill-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    background: rgba(7, 21, 46, 0.85);
+    border: 1.5px solid #E9BD62;
+    border-radius: 999px;
+    color: #FDE047;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 5px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+}
+
+.pill-star {
+    font-size: 0.9rem;
+    color: #E9BD62;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .stats-curved-layout {
+        grid-template-columns: 1fr;
+    }
+    .stats-curved-map-card {
+        max-width: 480px;
+        margin: 0 auto;
+        height: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-curved-cards-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stats-curved-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-curved-cards-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================================================
+   HIGH CONTRAST & RADIANT TYPOGRAPHY UPGRADE FOR SUBTITLES
+   ========================================================================== */
+
+/* 1. Stats Curved Subtitle (تعكس هذه الأرقام حجم الجهود المبذولة لخدمة الإقليم) */
+.stats-curved-subtitle {
+    color: #FFFFFF !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+    letter-spacing: 0.3px !important;
+}
+
+.stats-curved-subtitle .gold-glow-word {
+    color: #FDE047 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 14px rgba(253, 224, 71, 0.65) !important;
+}
+
+/* 2. Council Section Subtitle (الحكامة الترابية والتدبير التشاركي للشأن المحلي...) */
+.mandate-subtitle {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 1.16rem !important;
+    font-weight: 800 !important;
+    color: #0A2540 !important; /* Deep Royal Navy for 100% Crisp Visibility */
+    max-width: 860px !important;
+    margin: 0 auto !important;
+    line-height: 1.7 !important;
+    letter-spacing: 0.2px !important;
+    text-shadow: 0 1px 2px rgba(10, 37, 64, 0.08) !important;
+}
+
+/* 3. Synthesis Report Banner Subtitle (الحكامة الترابية والتدبير التشاركي للشأن المحلي...) */
+.synthesis-header-sub {
+    color: #FFFFFF !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 1.12rem !important;
+    font-weight: 700 !important;
+    max-width: 860px !important;
+    margin: 12px auto 0 auto !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85) !important;
+    line-height: 1.7 !important;
+    background: rgba(7, 21, 46, 0.65) !important;
+    border: 1.5px solid rgba(233, 189, 98, 0.45) !important;
+    padding: 8px 26px !important;
+    border-radius: 999px !important;
+    display: inline-block !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+
+/* ==========================================================================
+   PIXEL-EXACT SUBVENTIONS TABLE STYLING (Matching Master Reference 100%)
+   ========================================================================== */
+
+.subvention-table-lux {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    text-align: right !important;
+}
+
+.subvention-table-lux thead th {
+    background: #F8FAFC !important;
+    color: #0A2540 !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 800 !important;
+    padding: 16px 18px !important;
+    border-bottom: 2px solid #E2E8F0 !important;
+    white-space: nowrap !important;
+}
+
+.subvention-table-lux tbody td {
+    padding: 16px 18px !important;
+    border-bottom: 1px solid #EDF2F7 !important;
+    vertical-align: middle !important;
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.subvention-table-row:hover {
+    background: #FDFBF7 !important;
+}
+
+/* Col 1: Project Name & Association */
+.subvention-table-lux td.col-sub-assoc {
+    width: 33% !important;
+}
+
+.assoc-name-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+
+.assoc-name-title {
+    font-size: 0.94rem !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    line-height: 1.45 !important;
+}
+
+.assoc-sub-name {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: #64748B !important;
+}
+
+/* Col 2: Domain Tag (Gold Pill) */
+.subvention-table-lux td.col-sub-domain {
+    width: 14% !important;
+    text-align: center !important;
+}
+
+.subvention-table-lux .assoc-domain-tag {
+    background: #FEF3C7 !important;
+    color: #92400E !important;
+    border: 1px solid #FCD34D !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 800 !important;
+    padding: 5px 16px !important;
+    border-radius: 999px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Col 3: Legal Status (Cream Pill) */
+.subvention-table-lux td.col-sub-legal {
+    width: 12% !important;
+    text-align: center !important;
+}
+
+.subvention-table-lux .assoc-legal-tag {
+    background: #FFFBEB !important;
+    color: #B45309 !important;
+    border: 1px solid #FDE68A !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    padding: 5px 16px !important;
+    border-radius: 999px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Col 4: Status (Emerald Pill with Checkmark) */
+.subvention-table-lux td.col-sub-status {
+    width: 10% !important;
+    text-align: center !important;
+}
+
+.subvention-table-lux .assoc-status-pill {
+    background: #ECFDF5 !important;
+    color: #065F46 !important;
+    border: 1px solid #6EE7B7 !important;
+    border-radius: 999px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.84rem !important;
+    font-weight: 800 !important;
+    padding: 5px 16px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+.subvention-table-lux .status-check-ico {
+    font-size: 0.9rem !important;
+    font-weight: 900 !important;
+    color: #059669 !important;
+}
+
+/* Col 5: Annual Ref */
+.subvention-table-lux td.col-sub-ref {
+    width: 10% !important;
+    text-align: center !important;
+}
+
+.subvention-table-lux .assoc-ref-tag {
+    color: #0F172A !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+}
+
+/* Col 6: Financial Amount & Progress Bar (RTL Layout) */
+.subvention-table-lux td.col-sub-amount {
+    width: 17% !important;
+}
+
+.assoc-amount-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    justify-content: flex-end !important;
+}
+
+.assoc-amount-val {
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    font-size: 0.95rem !important;
+    min-width: 82px !important;
+    text-align: right !important;
+}
+
+.assoc-pct-val {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: #64748B !important;
+    min-width: 32px !important;
+}
+
+.assoc-bar-track {
+    width: 85px !important;
+    height: 6px !important;
+    background: #E2E8F0 !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+}
+
+.assoc-bar-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #102D58 0%, #D4A340 100%) !important;
+    border-radius: 999px !important;
+}
+
+/* Col 7: Action Button */
+.subvention-table-lux td.col-sub-action {
+    width: 14% !important;
+    text-align: center !important;
+}
+
+.btn-assoc-details-lux {
+    background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%) !important;
+    color: #78350F !important;
+    border: 1px solid #D97706 !important;
+    border-radius: 999px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    padding: 7px 18px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25) !important;
+    transition: all 0.25s ease !important;
+}
+
+.btn-assoc-details-lux:hover {
+    background: linear-gradient(135deg, #FEF08A 0%, #FBBF24 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4) !important;
+}
+
+
+/* ==========================================================================
+   PERFECT MASTER REFERENCE TUNING - SUBVENTIONS (V60.0)
+   ========================================================================== */
+
+/* Col 6 RTL alignment: Pct on Right, Amount in Center, Bar on Left */
+.subvention-table-lux .assoc-amount-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+}
+
+.subvention-table-lux .assoc-pct-val {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+    min-width: 36px !important;
+    text-align: right !important;
+}
+
+.subvention-table-lux .assoc-amount-val {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    color: #0A2540 !important;
+    min-width: 85px !important;
+    text-align: center !important;
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+}
+
+.subvention-table-lux .assoc-bar-track {
+    width: 80px !important;
+    height: 7px !important;
+    background: #E2E8F0 !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+}
+
+.subvention-table-lux .assoc-bar-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #0A2540 0%, #D97706 100%) !important;
+    border-radius: 999px !important;
+}
+
+/* Category cards exact styling */
+.subvention-cat-lux-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 16px !important;
+    margin-bottom: 35px !important;
+}
+
+.subvention-cat-lux-card {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 20px !important;
+    padding: 20px 18px !important;
+    box-shadow: 0 4px 16px rgba(10, 37, 64, 0.04) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+}
+
+.subvention-cat-lux-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 25px rgba(233, 189, 98, 0.15), 0 4px 12px rgba(10, 37, 64, 0.06) !important;
+    border-color: #FCD34D !important;
+}
+
+.subvention-cat-lux-card .cat-card-top-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 14px !important;
+}
+
+.subvention-cat-lux-card .cat-count-pill {
+    background: #FFFBEB !important;
+    color: #B45309 !important;
+    border: 1px solid #FDE68A !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    padding: 3px 12px !important;
+    border-radius: 999px !important;
+}
+
+.subvention-cat-lux-card .cat-card-medallion {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.15rem !important;
+}
+
+.subvention-cat-lux-card .cat-card-title {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: #0A2540 !important;
+    margin: 0 0 6px 0 !important;
+}
+
+.subvention-cat-lux-card .cat-card-label {
+    font-size: 0.78rem !important;
+    color: #64748B !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+}
+
+.subvention-cat-lux-card .cat-card-amount-val {
+    font-size: 1.25rem !important;
+    font-weight: 900 !important;
+    color: #B45309 !important;
+    font-family: 'Cairo', sans-serif !important;
+    margin-bottom: 14px !important;
+}
+
+.subvention-cat-lux-card .cat-card-amount-val small {
+    font-size: 0.8rem !important;
+    color: #78350F !important;
+    font-weight: 700 !important;
+}
+
+.subvention-cat-lux-card .cat-card-progress-footer {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.subvention-cat-lux-card .cat-card-pct {
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    color: #0A2540 !important;
+    min-width: 32px !important;
+}
+
+.subvention-cat-lux-card .cat-card-track {
+    flex: 1 !important;
+    height: 6px !important;
+    background: #E2E8F0 !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+}
+
+.subvention-cat-lux-card .cat-card-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #0A2540 0%, #059669 100%) !important;
+    border-radius: 999px !important;
 }

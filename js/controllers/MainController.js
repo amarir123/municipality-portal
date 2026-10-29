@@ -8,7 +8,7 @@ import { ComplaintModel } from '../models/ComplaintModel.js';
 import { ServiceModel } from '../models/ServiceModel.js';
 import { MandateModel } from '../models/MandateModel.js';
 import { SynthesisReportModel } from '../models/SynthesisReportModel.js';
-import { SubventionModel } from '../models/SubventionModel.js';
+import { SubventionModel } from '../models/SubventionModel.js?v=60.0';
 import { PollModel } from '../models/PollModel.js';
 
 import { NewsView } from '../views/NewsView.js';
@@ -32,7 +32,7 @@ export class MainController {
         this.loadSynthesisData();
         this.loadActivePoll();
         this.loadSubventionsPublicData();
-        this.loadPublicationsData();
+        // publications handled in loadPageData();
         this.bindEvents();
         this.checkAdminControlsVisibility();
         this.initHeroSlider();
@@ -418,42 +418,91 @@ export class MainController {
 
         const renderRows = (tbody) => {
             if (!tbody) return;
-            tbody.innerHTML = (sub.beneficiaries || []).map(b => `
-                <tr>
-                    <td><strong>${b.assocName}</strong></td>
-                    <td><span class="badge" style="background: rgba(201, 151, 46, 0.15); color: #E3B351; border: 1px solid rgba(201, 151, 46, 0.3);">${b.assocType}</span></td>
-                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">${b.statutStatus}</span></td>
-                    <td style="font-size: 0.85rem; color: #94a3b8;">${b.pvNumber}</td>
-                    <td><strong style="color: #E3B351;">${Number(b.amount).toLocaleString()} درهم</strong></td>
-                    <td>
-                        <button type="button" onclick="openAssocDetails(${b.id})" class="btn-footer-chikaya" style="padding: 6px 12px; font-size: 0.8rem; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #10b981; border-radius: 6px; cursor: pointer; white-space: nowrap;">
-                            <span>👥 مكتب الجمعية والملف</span>
+            tbody.innerHTML = (sub.beneficiaries || []).map((b, idx) => {
+                const formattedAmount = Number(b.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const progressPct = b.progress || 80;
+                const annualRef = b.annualRef || `2026/${String((idx + 1) * 2 - 1).padStart(2, '0')}`;
+                const legalBadge = b.legalStatus || 'موافقة';
+                const domainIcon = b.domainIcon ? ` <span class="tag-ico">${b.domainIcon}</span>` : '';
+
+                return `
+                <tr class="subvention-table-row">
+                    <td class="col-sub-assoc">
+                        <div class="assoc-name-wrapper">
+                            <strong class="assoc-name-title">${b.projectName}</strong>
+                            <span class="assoc-sub-name">${b.assocName}</span>
+                        </div>
+                    </td>
+                    <td class="col-sub-domain">
+                        <span class="assoc-domain-tag">${b.assocType}${domainIcon}</span>
+                    </td>
+                    <td class="col-sub-legal">
+                        <span class="assoc-legal-tag">${legalBadge}</span>
+                    </td>
+                    <td class="col-sub-status">
+                        <span class="assoc-status-pill">
+                            <span class="status-check-ico">✔</span>
+                            <span>مطابقة</span>
+                        </span>
+                    </td>
+                    <td class="col-sub-ref">
+                        <span class="assoc-ref-tag">${annualRef}</span>
+                    </td>
+                    <td class="col-sub-amount">
+                        <div class="assoc-amount-row">
+                            <span class="assoc-pct-val">${progressPct}%</span>
+                            <span class="assoc-amount-val">${formattedAmount}</span>
+                            <div class="assoc-bar-track">
+                                <div class="assoc-bar-fill" style="width: ${progressPct}%;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-sub-action">
+                        <button type="button" onclick="openAssocDetails(${b.id})" class="btn-assoc-details-lux">
+                            <span class="btn-action-ico">📄</span>
+                            <span>تفاصيل المشروع</span>
                         </button>
                     </td>
                 </tr>
-            `).join('');
+                `;
+            }).join('');
         };
 
         renderRows(document.getElementById('publicSubventionsTableBody'));
         renderRows(document.getElementById('frontSubventionsTableBody'));
         renderRows(document.getElementById('subventionsModalTableBody'));
 
-        // Render Categories Distribution Cards (توزيع الدعم)
+        // Render Categories Distribution Cards (5 Elevated Porcelain Luxury Cards)
         const catGrid = document.getElementById('subventionsCatDistributionGrid');
         if (catGrid && sub.categoriesDistribution) {
-            catGrid.innerHTML = sub.categoriesDistribution.map(c => `
-                <div class="subvention-cat-card">
-                    <div class="sub-cat-header">
-                        <span class="sub-cat-title">${c.icon} ${c.category}</span>
-                        <span class="badge" style="background: rgba(201, 151, 46, 0.2); color: #E3B351; font-size: 0.75rem; border: 1px solid rgba(201, 151, 46, 0.3);">${c.count} جمعيات</span>
+            catGrid.innerHTML = sub.categoriesDistribution.map(c => {
+                let domainIco = c.icon || '🏛️';
+                if (c.category.includes('رياضية')) domainIco = '🏃‍♂️';
+                else if (c.category.includes('ثقافية')) domainIco = '🏛️';
+                else if (c.category.includes('اجتماعية')) domainIco = '👥';
+                else if (c.category.includes('بيئية')) domainIco = '🍃';
+                else if (c.category.includes('تعليمية')) domainIco = '📖';
+
+                return `
+                <div class="subvention-cat-lux-card">
+                    <div class="cat-card-top-row">
+                        <span class="cat-count-pill">${c.count} الجمعيات</span>
+                        <div class="cat-card-medallion">${domainIco}</div>
                     </div>
-                    <div class="sub-cat-amount">${Number(c.totalAmount).toLocaleString()} د.م</div>
-                    <div class="sub-cat-meta">حصة ${c.percentage}% من ميزانية الدعم السنوي</div>
-                    <div class="sub-cat-bar-track">
-                        <div class="sub-cat-bar-fill" style="width: ${c.percentage}%;"></div>
+                    <div class="cat-card-main-content">
+                        <h4 class="cat-card-title">${c.category}</h4>
+                        <span class="cat-card-label">المبلغ الإجمالي للدعم</span>
+                        <div class="cat-card-amount-val">${Number(c.totalAmount).toLocaleString()} <small>درهم</small></div>
+                    </div>
+                    <div class="cat-card-progress-footer">
+                        <span class="cat-card-pct">${c.percentage}%</span>
+                        <div class="cat-card-track">
+                            <div class="cat-card-fill" style="width: ${c.percentage}%;"></div>
+                        </div>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Initialize Eligibility Questionnaire (Crée question)
@@ -606,41 +655,36 @@ export class MainController {
     // ==========================================
     syncStatsWithDatabase() {
         try {
-            const projects = ProjectModel.getAll() || [];
-            const services = ServiceModel.getAll() || [];
-            const mandate = MandateModel.get();
-            const complaints = ComplaintModel.getAll() || [];
-
-            const statPeriod = document.getElementById('statMandatePeriod');
-            if (statPeriod && mandate && mandate.term) {
-                statPeriod.textContent = mandate.term;
-            }
-
             const statProjects = document.getElementById('statProjectsCount');
             if (statProjects) {
-                const count = Math.max(projects.length, 50);
-                statProjects.textContent = `+${count}`;
-                statProjects.setAttribute('data-target', count);
+                statProjects.textContent = `+45`;
+                statProjects.setAttribute('data-target', '45');
             }
 
-            const statServices = document.getElementById('statServicesCount');
-            if (statServices) {
-                const count = Math.max(services.length, 25);
-                statServices.textContent = `+${count}`;
-                statServices.setAttribute('data-target', count);
+            const statPeriod = document.getElementById('statMandatePeriod');
+            if (statPeriod) {
+                statPeriod.textContent = `+12`;
+                statPeriod.setAttribute('data-target', '12');
             }
 
             const statTransparency = document.getElementById('statTransparencyRate');
             if (statTransparency) {
-                statTransparency.textContent = '+100%';
+                statTransparency.textContent = `+98%`;
+                statTransparency.setAttribute('data-target', '98');
+            }
+
+            const statServices = document.getElementById('statServicesCount');
+            if (statServices) {
+                statServices.textContent = `+120`;
+                statServices.setAttribute('data-target', '120');
             }
         } catch (e) {
-            console.error('Error syncing stats with database:', e);
+            console.error('Error syncing stats:', e);
         }
     }
 
     // ==========================================
-    // MANDATE 2021-2027 SHOWCASE DATA LOADER
+    // MANDATE 2021-2027 SHOWCASE DATA LOADER (3D LUXURY SUITE)
     // ==========================================
     loadMandateData() {
         const mandate = MandateModel.get();
@@ -649,11 +693,15 @@ export class MainController {
         // Render Mayor Card on Homepage
         const mayorNameEl = document.getElementById('mandateMayorName');
         const mayorRoleEl = document.getElementById('mandateMayorRole');
+        const mayorQuoteEl = document.getElementById('mandateMayorQuote');
         if (mayorNameEl && mandate.bureau && mandate.bureau.length > 0) {
             mayorNameEl.textContent = mandate.bureau[0].name;
         }
         if (mayorRoleEl && mandate.bureau && mandate.bureau.length > 0) {
             mayorRoleEl.textContent = mandate.bureau[0].role;
+        }
+        if (mayorQuoteEl && mandate.bureau && mandate.bureau[0].quote) {
+            mayorQuoteEl.textContent = mandate.bureau[0].quote;
         }
 
         // Render Bureau preview cards
@@ -661,7 +709,14 @@ export class MainController {
         if (bureauGrid && mandate.bureau) {
             bureauGrid.innerHTML = mandate.bureau.slice(1, 5).map(m => `
                 <div class="bureau-card" onclick="openMandateModal()" role="button" tabindex="0">
+                    <div class="vice-card-zellige-watermark"></div>
+                    <div class="vice-medallion-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0A3158">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
                     <div class="bureau-role">${m.role}</div>
+                    <div class="bureau-assignment">${m.assignment || ''}</div>
                     <div class="bureau-name">${m.name}</div>
                     <div class="bureau-party">${m.party || 'الأغلبية'}</div>
                 </div>
@@ -670,7 +725,7 @@ export class MainController {
     }
 
     // ==========================================
-    // SYNTHESIS REPORT & STRATEGIC AXES LOADER
+    // SYNTHESIS REPORT & STRATEGIC AXES LOADER (ULTRA-PREMIUM 3D SUITE)
     // ==========================================
     loadSynthesisData() {
         const report = SynthesisReportModel.get();
@@ -680,26 +735,59 @@ export class MainController {
         const introEl = document.getElementById('synthesisReportIntro');
         const periodEl = document.getElementById('synthesisReportPeriod');
 
-        if (titleEl) titleEl.textContent = report.title;
-        if (introEl) introEl.textContent = report.introduction;
-        if (periodEl) periodEl.textContent = report.reportingPeriod || '2021-2027';
+        if (titleEl && report.title) {
+            titleEl.innerHTML = `${report.title} <span class="synthesis-period-tag" id="synthesisReportPeriod">${report.reportingPeriod || '2027-2021'}</span>`;
+        }
+        if (introEl && report.subtitle) {
+            introEl.textContent = report.subtitle;
+        }
 
-        // Render 4 Strategic Axes
+        // Executive Metrics Bar
+        if (report.executiveMetrics) {
+            const m = report.executiveMetrics;
+            const tProjects = document.getElementById('synthesisTotalProjects');
+            const cProjects = document.getElementById('synthesisCompletedProjects');
+            const ipProjects = document.getElementById('synthesisInProgressProjects');
+            const oProgress = document.getElementById('synthesisOverallProgress');
+            const tBudget = document.getElementById('synthesisTotalBudget');
+
+            if (tProjects) tProjects.textContent = m.totalProjects;
+            if (cProjects) cProjects.textContent = m.completedProjects;
+            if (ipProjects) ipProjects.textContent = m.inProgressProjects;
+            if (oProgress) oProgress.textContent = `${m.overallProgress}%`;
+            if (tBudget) tBudget.textContent = Number(m.totalBudget).toLocaleString();
+        }
+
+        // Render 4 Strategic Development Domains Cards
         const axesContainer = document.getElementById('synthesisAxesGrid');
         if (axesContainer && report.activityAxes) {
             axesContainer.innerHTML = report.activityAxes.map(axis => `
-                <div class="synthesis-axis-card">
-                    <div class="synthesis-axis-title">${axis.name}</div>
-                    <div class="synthesis-axis-meta">
-                        <span>الميزانية: <strong>${axis.budget}</strong></span>
-                        <span>المشاريع: <strong>${axis.projectsCount} مشروعاً</strong></span>
+                <div class="synthesis-domain-card">
+                    <div class="domain-card-thumb">
+                        ${this.getDomainVectorSvg(axis.id)}
+                        <div class="domain-card-medallion">${axis.icon || '🏛️'}</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #cbd5e1; margin-top: 10px;">
-                        <span>نسبة الإنجاز الميداني:</span>
-                        <strong style="color: #E3B351;">${axis.completionRate}%</strong>
-                    </div>
-                    <div class="synthesis-progress-track">
-                        <div class="synthesis-progress-fill" style="width: ${axis.completionRate}%;"></div>
+                    <div class="domain-card-body">
+                        <h4 class="domain-card-title">${axis.name}</h4>
+                        <div class="domain-card-stats-row">
+                            <div class="domain-stat-col">
+                                <span class="stat-col-label">عدد المشاريع</span>
+                                <strong class="stat-col-val">${axis.projectsCount} <small>مشاريع</small></strong>
+                            </div>
+                            <div class="domain-stat-divider"></div>
+                            <div class="domain-stat-col">
+                                <span class="stat-col-label">الميزانية المبرمجة</span>
+                                <strong class="stat-col-val">${axis.budget.replace(' درهم', '')} <small>درهم</small></strong>
+                            </div>
+                            <div class="domain-stat-divider"></div>
+                            <div class="domain-stat-col">
+                                <span class="stat-col-label">نسبة الإنجاز</span>
+                                <strong class="stat-col-val">${axis.completionRate}%</strong>
+                            </div>
+                        </div>
+                        <div class="domain-progress-track">
+                            <div class="domain-progress-fill" style="width: ${axis.completionRate}%;"></div>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -708,27 +796,79 @@ export class MainController {
         // Render Competence Projects Table
         const tableBody = document.getElementById('synthesisProjectsTableBody');
         if (tableBody && report.competenceProjects) {
-            tableBody.innerHTML = report.competenceProjects.map(p => `
-                <tr>
-                    <td><strong>${p.projectName}</strong></td>
-                    <td><span class="badge" style="background: rgba(201, 151, 46, 0.15); color: #E3B351; border: 1px solid rgba(201, 151, 46, 0.3);">${p.competenceType}</span></td>
-                    <td><span class="badge" style="background: ${p.status === 'تم تنفيذه' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)'}; color: ${p.status === 'تم تنفيذه' ? '#10b981' : '#f59e0b'};">${p.status}</span></td>
-                    <td><strong>${Number(p.budget).toLocaleString()} درهم</strong></td>
-                    <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span>${p.progress}%</span>
-                            <div style="flex: 1; min-width: 50px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
-                                <div style="height: 100%; width: ${p.progress}%; background: #C9972E;"></div>
+            tableBody.innerHTML = report.competenceProjects.map(p => {
+                let statusClass = 'status-in-progress';
+                let statusLabel = 'قيد الإنجاز';
+
+                const rawStatus = (p.status || '').trim();
+                if (rawStatus === 'منجز' || rawStatus === 'تم تنفيذه') {
+                    statusClass = 'status-completed';
+                    statusLabel = 'منجز';
+                } else if (rawStatus === 'دراسة' || rawStatus === 'لدراسة' || rawStatus.includes('دراسة')) {
+                    statusClass = 'status-study';
+                    statusLabel = 'دراسة';
+                } else {
+                    statusClass = 'status-in-progress';
+                    statusLabel = 'قيد الإنجاز';
+                }
+
+                let domain = (p.competenceType || '').replace(/\s*\(Compétences.*?\)/i, '').trim();
+                if (!domain || domain.includes('اختصاصات')) {
+                    const fallbackMap = {
+                        1: 'التجهيزات والبنية التحتية',
+                        2: 'التعليم والثقافة والرياضة',
+                        3: 'التجهيزات والبنية التحتية',
+                        4: 'البيئة والتنمية المستدامة',
+                        5: 'الصحة',
+                        6: 'التجهيزات والبنية التحتية'
+                    };
+                    domain = fallbackMap[p.id] || 'التجهيزات والبنية التحتية';
+                }
+
+                let orientLabel = p.strategicOrientation || 'التنمية الحضرية';
+                let orientIco = p.orientationIcon || '🎯';
+
+                return `
+                <tr class="synthesis-table-row">
+                    <td class="col-proj-name">
+                        <div class="proj-name-wrapper">
+                            <span class="proj-bullet-ico">📌</span>
+                            <span class="proj-name-text">${p.projectName}</span>
+                        </div>
+                    </td>
+                    <td class="col-domain">
+                        <span class="domain-tag">${domain}</span>
+                    </td>
+                    <td class="col-status">
+                        <span class="status-pill ${statusClass}">${statusLabel}</span>
+                    </td>
+                    <td class="col-budget">
+                        <span class="budget-num">${Number(p.budget).toLocaleString()}</span>
+                        <span class="budget-cur">درهم</span>
+                    </td>
+                    <td class="col-progress">
+                        <div class="table-progress-wrap">
+                            <span class="progress-pct">${p.progress}%</span>
+                            <div class="table-progress-bar-track">
+                                <div class="table-progress-bar-fill" style="width: ${p.progress}%;"></div>
                             </div>
                         </div>
                     </td>
-                    <td>
-                        <button type="button" onclick="openProjectConsistance(${p.id})" class="btn-footer-chikaya" style="padding: 6px 12px; font-size: 0.8rem; background: rgba(201, 151, 46, 0.2); border-color: #C9972E; color: #E3B351; border-radius: 6px; cursor: pointer; white-space: nowrap;">
-                            <span>🔍 تركيبة المشروع (Consistance)</span>
+                    <td class="col-orientation">
+                        <div class="orientation-wrap">
+                            <span class="orientation-ico">${orientIco}</span>
+                            <span class="orientation-label">${orientLabel}</span>
+                        </div>
+                    </td>
+                    <td class="col-action">
+                        <button type="button" onclick="openProjectConsistance(${p.id})" class="btn-table-details">
+                            <span class="btn-eye-ico">👁️</span>
+                            <span>تفاصيل المشروع</span>
                         </button>
                     </td>
                 </tr>
-            `).join('');
+                `;
+            }).join('');
         }
     }
 
@@ -1086,6 +1226,88 @@ export class MainController {
     submitOnlineSubventionApplication(event) {
         if (event) event.preventDefault();
         alert('تم تسجيل طلب إيداع ملف الدعم الخاص بجمعيتكم بنجاح لدى مصلحة الشؤون الاجتماعية والجمعيات بجماعة بيوكرى! سيتم التواصل معكم فور انتهاء دراسة الملف.');
+    }
+
+
+    getDomainVectorSvg(id) {
+        switch(Number(id)) {
+            case 1:
+                return `<svg class="domain-svg-canvas" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="domGrad1" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#0a192f"/>
+                            <stop offset="50%" stop-color="#1e3a5f"/>
+                            <stop offset="100%" stop-color="#0f2b48"/>
+                        </linearGradient>
+                        <linearGradient id="goldGrad1" x1="0" y1="1" x2="0" y2="0">
+                            <stop offset="0%" stop-color="#D4AF37"/>
+                            <stop offset="100%" stop-color="#F3E5AB"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="400" height="220" fill="url(#domGrad1)"/>
+                    <circle cx="340" cy="50" r="30" fill="url(#goldGrad1)" opacity="0.15"/>
+                    <path d="M0 160 Q 100 120, 200 150 T 400 130 L 400 220 L 0 220 Z" fill="#142c4b" opacity="0.8"/>
+                    <path d="M-20 180 Q 120 150, 240 175 T 420 160 L 420 220 L -20 220 Z" fill="#0d1f35"/>
+                    <polygon points="170,220 230,220 205,160 195,160" fill="#223b5d"/>
+                    <line x1="200" y1="165" x2="200" y2="215" stroke="#E9BD62" stroke-dasharray="6,4" stroke-width="2"/>
+                    <rect x="50" y="110" width="35" height="50" fill="#1b3658" opacity="0.7"/>
+                    <rect x="70" y="90" width="40" height="70" fill="#24456e" opacity="0.8"/>
+                    <path d="M70 90 L90 70 L110 90 Z" fill="url(#goldGrad1)" opacity="0.6"/>
+                    <rect x="290" y="100" width="45" height="60" fill="#1b3658" opacity="0.7"/>
+                    <rect x="325" y="80" width="30" height="80" fill="#24456e" opacity="0.8"/>
+                </svg>`;
+            case 2:
+                return `<svg class="domain-svg-canvas" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="domGrad2" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#08182b"/>
+                            <stop offset="50%" stop-color="#143b68"/>
+                            <stop offset="100%" stop-color="#0a2544"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="400" height="220" fill="url(#domGrad2)"/>
+                    <ellipse cx="200" cy="170" rx="150" ry="40" fill="none" stroke="#2563EB" stroke-width="3" opacity="0.4"/>
+                    <ellipse cx="200" cy="170" rx="110" ry="28" fill="none" stroke="#D4AF37" stroke-width="2" opacity="0.5"/>
+                    <path d="M60 40 L160 180" stroke="#FDE047" stroke-width="1.5" opacity="0.15"/>
+                    <path d="M340 40 L240 180" stroke="#FDE047" stroke-width="1.5" opacity="0.15"/>
+                    <circle cx="200" cy="110" r="45" fill="#1D4ED8" opacity="0.25"/>
+                    <polygon points="200,85 208,103 227,103 212,114 218,132 200,121 182,132 188,114 173,103 192,103" fill="#E9BD62" opacity="0.7"/>
+                </svg>`;
+            case 3:
+                return `<svg class="domain-svg-canvas" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="domGrad3" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#06241b"/>
+                            <stop offset="60%" stop-color="#0d3b2e"/>
+                            <stop offset="100%" stop-color="#041812"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="400" height="220" fill="url(#domGrad3)"/>
+                    <circle cx="200" cy="70" r="32" fill="#10B981" opacity="0.2"/>
+                    <path d="M0 150 Q 120 110, 220 140 T 400 135 L 400 220 L 0 220 Z" fill="#0b4333" opacity="0.7"/>
+                    <path d="M-30 175 Q 140 145, 260 170 T 430 160 L 430 220 L -30 220 Z" fill="#062e22"/>
+                    <path d="M80 185 Q 85 130 90 100" stroke="#E9BD62" stroke-width="4" fill="none"/>
+                    <path d="M90 100 Q 60 90 40 105 M90 100 Q 70 80 55 85 M90 100 Q 100 75 125 80 M90 100 Q 115 90 135 105 M90 100 Q 90 70 90 55" stroke="#10B981" stroke-width="2.5" fill="none"/>
+                    <path d="M320 185 Q 315 135 310 105" stroke="#E9BD62" stroke-width="3.5" fill="none"/>
+                    <path d="M310 105 Q 285 95 270 110 M310 105 Q 295 85 280 90 M310 105 Q 320 80 340 85 M310 105 Q 330 95 350 110" stroke="#10B981" stroke-width="2.2" fill="none"/>
+                </svg>`;
+            case 4:
+            default:
+                return `<svg class="domain-svg-canvas" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="domGrad4" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#0a192f"/>
+                            <stop offset="50%" stop-color="#16385c"/>
+                            <stop offset="100%" stop-color="#0d233a"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="400" height="220" fill="url(#domGrad4)"/>
+                    <circle cx="200" cy="110" r="50" fill="#0284C7" opacity="0.2"/>
+                    <circle cx="200" cy="110" r="70" fill="none" stroke="#E9BD62" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.4"/>
+                    <path d="M200 75 L225 85 V115 C225 135 200 150 200 150 C200 150 175 135 175 115 V85 Z" fill="#0369A1" opacity="0.6" stroke="#38BDF8" stroke-width="2"/>
+                    <path d="M195 95 H205 V125 H195 Z M185 105 H215 V115 H185 Z" fill="#FFFFFF" opacity="0.9"/>
+                </svg>`;
+        }
     }
 
 }

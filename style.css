@@ -58,7 +58,7 @@
     --border-radius-lg: 22px;
     --box-shadow: 0 4px 20px rgba(11, 21, 48, 0.06);
     --box-shadow-hover: 0 20px 45px rgba(27, 58, 138, 0.16);
-    --container-width: 1240px;
+    --container-width: 1700px;
 }
 
 /* RESET & CORE STYLES */
@@ -106,7 +106,8 @@ button, input {
 }
 
 .container {
-    max-width: var(--container-width);
+    max-width: var(--container-width, 1700px);
+    width: 96%;
     margin: 0 auto;
     padding: 0 20px;
 }

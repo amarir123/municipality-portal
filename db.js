@@ -9,7 +9,7 @@ import { ComplaintModel } from './js/models/ComplaintModel.js';
 import { ServiceModel } from './js/models/ServiceModel.js';
 import { MandateModel } from './js/models/MandateModel.js';
 import { SynthesisReportModel } from './js/models/SynthesisReportModel.js';
-import { SubventionModel } from './js/models/SubventionModel.js';
+import { SubventionModel } from './js/models/SubventionModel.js?v=60.0';
 import { PollModel } from './js/models/PollModel.js';
 
 // Init models

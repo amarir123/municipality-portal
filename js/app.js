@@ -1,5 +1,5 @@
-import '../db.js';
-import { MainController } from './controllers/MainController.js';
+import '../db.js?v=60.0';
+import { MainController } from './controllers/MainController.js?v=60.0';
 import { AdminController } from './controllers/AdminController.js';
 import { AdminView } from './views/AdminView.js';
 
@@ -14,5 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.adminController = new AdminController();
     } else {
         window.appController = new MainController();
+        window.mainController = window.appController;
     }
 });
