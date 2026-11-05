@@ -332,19 +332,33 @@ export class AdminController {
 
         if (document.getElementById('brandMuniName')) document.getElementById('brandMuniName').value = branding.muniName || '';
         if (document.getElementById('brandCityName')) document.getElementById('brandCityName').value = branding.cityName || '';
+        if (document.getElementById('brandCityLatin')) document.getElementById('brandCityLatin').value = branding.cityLatin || 'MASSA';
         if (document.getElementById('brandPhone')) document.getElementById('brandPhone').value = branding.phone || '';
         if (document.getElementById('brandEmail')) document.getElementById('brandEmail').value = branding.email || '';
         if (document.getElementById('brandWorkingHours')) document.getElementById('brandWorkingHours').value = branding.workingHours || '';
         if (document.getElementById('brandTickerText')) document.getElementById('brandTickerText').value = branding.tickerText || '';
 
-        if (document.getElementById('brandPrimaryColor')) document.getElementById('brandPrimaryColor').value = branding.primaryColor || '#0d5ea6';
-        if (document.getElementById('brandAccentColor')) document.getElementById('brandAccentColor').value = branding.accentColor || '#c69c55';
-        if (document.getElementById('brandDarkColor')) document.getElementById('brandDarkColor').value = branding.darkColor || '#1e293b';
-        if (document.getElementById('brandTextColor')) document.getElementById('brandTextColor').value = branding.textColor || '#334155';
+        if (document.getElementById('brandPrimaryColor')) document.getElementById('brandPrimaryColor').value = branding.primaryColor || '#07574B';
+        if (document.getElementById('brandAccentColor')) document.getElementById('brandAccentColor').value = branding.accentColor || '#E6B83F';
+        if (document.getElementById('brandDarkColor')) document.getElementById('brandDarkColor').value = branding.darkColor || '#063D35';
+        if (document.getElementById('brandTextColor')) document.getElementById('brandTextColor').value = branding.textColor || '#172B3D';
 
-        if (document.getElementById('brandShowTicker')) document.getElementById('brandShowTicker').checked = branding.showTicker !== false;
-        if (document.getElementById('brandShowUrban')) document.getElementById('brandShowUrban').checked = branding.showUrban !== false;
-        if (document.getElementById('brandShowServices')) document.getElementById('brandShowServices').checked = branding.showServices !== false;
+        const setCheck = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.checked = (val !== false);
+        };
+        setCheck('brandShowHero', branding.showHero);
+        setCheck('brandShowPortalStats', branding.showPortalStats);
+        setCheck('brandShowEssentialServices', branding.showEssentialServices);
+        setCheck('brandShowNews', branding.showNews);
+        setCheck('brandShowUrban', branding.showUrban);
+        setCheck('brandShowMandate', branding.showMandate);
+        setCheck('brandShowSynthesis', branding.showSynthesis);
+        setCheck('brandShowSubventions', branding.showSubventions);
+        setCheck('brandShowPoll', branding.showPoll);
+        setCheck('brandShowPublications', branding.showPublications);
+        setCheck('brandShowMultimedia', branding.showMultimedia);
+        setCheck('brandShowEvents', branding.showEvents);
 
         // Slogan & Hero Subtitle
         if (document.getElementById('brandSloganInput')) document.getElementById('brandSloganInput').value = branding.slogan || '';
@@ -404,6 +418,7 @@ export class AdminController {
         try {
             const muniName = document.getElementById('brandMuniName')?.value?.trim();
             const cityName = document.getElementById('brandCityName')?.value?.trim();
+            const cityLatin = document.getElementById('brandCityLatin')?.value?.trim() || 'MASSA';
 
             if (!muniName) {
                 AdminView.showToast('تعذر الحفظ: يرجى إدخال اسم الجماعة الترابية.', true, 'حقل مطلوب ناقص');
@@ -422,18 +437,28 @@ export class AdminController {
                 ...current,
                 muniName: muniName,
                 cityName: cityName,
+                cityLatin: cityLatin,
                 logoUrl: document.getElementById('brandLogoUrlInput')?.value || current.logoUrl,
                 phone: document.getElementById('brandPhone')?.value || current.phone || '',
                 email: document.getElementById('brandEmail')?.value || current.email || '',
                 workingHours: document.getElementById('brandWorkingHours')?.value || current.workingHours || '',
                 tickerText: document.getElementById('brandTickerText')?.value || current.tickerText || '',
-                primaryColor: document.getElementById('brandPrimaryColor')?.value || current.primaryColor || '#0B5E44',
-                accentColor: document.getElementById('brandAccentColor')?.value || current.accentColor || '#F2A93B',
-                darkColor: document.getElementById('brandDarkColor')?.value || current.darkColor || '#032D20',
-                textColor: document.getElementById('brandTextColor')?.value || current.textColor || '#2D3748',
-                showTicker: document.getElementById('brandShowTicker')?.checked ?? current.showTicker ?? false,
+                primaryColor: document.getElementById('brandPrimaryColor')?.value || current.primaryColor || '#07574B',
+                accentColor: document.getElementById('brandAccentColor')?.value || current.accentColor || '#E6B83F',
+                darkColor: document.getElementById('brandDarkColor')?.value || current.darkColor || '#063D35',
+                textColor: document.getElementById('brandTextColor')?.value || current.textColor || '#172B3D',
+                showHero: document.getElementById('brandShowHero')?.checked ?? current.showHero ?? true,
+                showPortalStats: document.getElementById('brandShowPortalStats')?.checked ?? current.showPortalStats ?? true,
+                showEssentialServices: document.getElementById('brandShowEssentialServices')?.checked ?? current.showEssentialServices ?? true,
+                showNews: document.getElementById('brandShowNews')?.checked ?? current.showNews ?? true,
                 showUrban: document.getElementById('brandShowUrban')?.checked ?? current.showUrban ?? true,
-                showServices: document.getElementById('brandShowServices')?.checked ?? current.showServices ?? true,
+                showMandate: document.getElementById('brandShowMandate')?.checked ?? current.showMandate ?? true,
+                showSynthesis: document.getElementById('brandShowSynthesis')?.checked ?? current.showSynthesis ?? true,
+                showSubventions: document.getElementById('brandShowSubventions')?.checked ?? current.showSubventions ?? true,
+                showPoll: document.getElementById('brandShowPoll')?.checked ?? current.showPoll ?? true,
+                showPublications: document.getElementById('brandShowPublications')?.checked ?? current.showPublications ?? true,
+                showMultimedia: document.getElementById('brandShowMultimedia')?.checked ?? current.showMultimedia ?? true,
+                showEvents: document.getElementById('brandShowEvents')?.checked ?? current.showEvents ?? true,
 
                 // Slogan & Hero Subtitle
                 slogan: document.getElementById('brandSloganInput')?.value || current.slogan,
@@ -977,7 +1002,7 @@ export class AdminController {
         const district = document.getElementById('memberDistrict')?.value;
         const committee = document.getElementById('memberCommittee')?.value;
         const targetType = document.getElementById('memberTargetType')?.value;
-        const cv = document.getElementById('memberCv')?.value || 'فاعل محلي يساهم في تدبير شؤون جماعة بيوكرى.';
+        const cv = document.getElementById('memberCv')?.value || 'فاعل محلي يساهم في تدبير شؤون جماعة ماسة.';
 
         if (!name || !role) return;
 
@@ -1519,6 +1544,19 @@ export class AdminController {
     // ==========================================
     // ESSENTIAL CIVIC PROCEDURES METHODS (فضاء المواطن 3D)
     // ==========================================
+    toggleSectionVisibility(key, isChecked) {
+        try {
+            const current = BrandingModel.get() || {};
+            current[key] = isChecked;
+            BrandingModel.save(current);
+            const msg = isChecked ? 'تم تفعيل وإظهار هذا القسم على البوابة بنجاح!' : 'تم إخفاء هذا القسم من البوابة بنجاح!';
+            AdminView.showToast(msg, false);
+        } catch (e) {
+            console.error('Error toggling section:', e);
+            AdminView.showToast('تعذر تغيير حالة ظهور القسم: ' + e.message, true);
+        }
+    }
+
     handleLogoUpload(event) {
         try {
             const file = event.target.files[0];

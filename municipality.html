@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=22.0">
+    <link rel="stylesheet" href="style.css?v=120.0">
     <link rel="stylesheet" href="moroccan-suite.css?v=22.0">
     <style>
         /* MUNICIPALITY PAGE HERO MATCHING EXACT OFFICIAL DESIGN */
@@ -240,6 +240,23 @@
             font-size: 0.98rem;
         }
     </style>
+    <script>
+        // Automatic cache buster & storage synchronizer for Commune de Massa Portal
+        (function() {
+            const MASSA_SYNC_BUILD = 'massa_build_official_v120_benlachgar';
+            try {
+                if (localStorage.getItem('massa_sync_build') !== MASSA_SYNC_BUILD) {
+                    console.log('Synchronizing official Massa portal data to build:', MASSA_SYNC_BUILD);
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    localStorage.setItem('massa_sync_build', MASSA_SYNC_BUILD);
+                }
+            } catch(e) {
+                console.warn('Storage sync:', e);
+            }
+        })();
+    </script>
+
 </head>
 <body>
 
@@ -265,7 +282,7 @@
             
             <div class="top-bar-right" style="display: flex; align-items: center; gap: 15px;">
                 <div class="weather-widget-badge">
-                    <span>☀️</span> <span id="weatherCityDisplay">بيوكرى</span> <strong>24°C</strong>
+                    <span>☀️</span> <span id="weatherCityDisplay">ماسة</span> <strong>24°C</strong>
                 </div>
                 <div class="lang-selector">
                     <button class="lang-btn active" data-lang="ar">العربية</button>
@@ -491,11 +508,12 @@
                         <p style="margin: 0; font-size: 1.05rem; font-weight: 500;">يسعدني أن أرحب بكم في البوابة الرقمية الرسمية لجماعتنا الترابية، والتي تجسد عزمنا الراسخ على الانخراط الفعلي في مسار التحول الرقمي وتحديث المرفق العمومي الجماعي.</p>
                     </div>
                     <p>إن تدبير الشأن المحلي في المرحلة الراهنة يفرض علينا نهج مقاربة القرب والإنصات المتبادل، وتكريس مبادئ الحكامة الترابية التشاركية، تماشياً مع التوجيهات الملكية السامية لصاحب الجلالة الملك محمد السادس نصره الله وأيده، والداعية إلى تقريب الإدارة من المرتفقين والارتقاء بجودة الخدمات الأساسية.</p>
-                    <p>نعمل بمعية أعضاء المجلس الجماعي وأطر وموظفي الجماعة، وبشراكة وثيقة مع السلطات الولائية والمجتمع المدني، على تنزيل برنامج عمل الجماعة 2021-2027 الذي يضم مشاريع مهيكلة لتأهيل البنية التحتية، توسيع المساحات الخضراء، وتوفير بيئة استثمارية واعدة تخلق فرص الشغل لأبناء وبنات المدينة.</p>
+                    <p>نعمل بمعية أعضاء المجلس الجماعي وأطر وموظفي الجماعة، وبشراكة وثيقة مع السلطات الولائية والمجتمع المدني، على تنزيل برنامج عمل الجماعة الترابية لماسة ومشاريعها التنموية المهيكلة الذي يضم مشاريع مهيكلة لتأهيل البنية التحتية، توسيع المساحات الخضراء، وتوفير بيئة استثمارية واعدة تخلق فرص الشغل لأبناء وبنات المدينة.</p>
                     <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <strong>رئيس المجلس الجماعي</strong><br>
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">الولاية الانتدابية 2021 - 2027</span>
+                            <strong style="font-size: 1.15rem; color: var(--primary-color);">السيد عبد الله بن الأشكر</strong><br>
+                            <span style="color: var(--accent-color); font-weight: 700; font-size: 0.95rem;">رئيس المجلس الجماعي لماسة</span><br>
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">الولاية الانتدابية 2021 - 2027</span>
                         </div>
                         <div style="color: var(--accent-color); font-weight: 700; font-size: 1.1rem;">الجماعة الترابية 🇲🇦</div>
                     </div>
@@ -507,11 +525,17 @@
                 html: `
                     <p>يتألف المجلس الجماعي من أعضاء منتخبين يمثلون مختلف الدوائر الانتخابية للمدينة، ويسهر على تداول واتخاذ المقررات الهادفة إلى تنمية الجماعة في مختلف الميادين الاقتصادية والاجتماعية والثقافية والبيئية.</p>
                     
-                    <h4 style="color: var(--primary-color); margin: 20px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">1. تشكيلة المكتب المسير</h4>
-                    <ul style="list-style-type: disc; margin-right: 25px; margin-bottom: 20px;">
-                        <li><strong>رئيس المجلس الجماعي:</strong> يسهر على تنفيذ مقررات المجلس وإدارة المصالح الجماعية.</li>
-                        <li><strong>نواب الرئيس:</strong> مفوضون في قطاعات التعمير والممتلكات، الميزانية والمالية، المرافق والإنارة، والشؤون الثقافية والاجتماعية.</li>
-                        <li><strong>كاتب المجلس ونائب الكاتب:</strong> تدوين محاضر الجلسات وتوثيق مداولات الدورات العادية والاستثنائية.</li>
+                    <h4 style="color: var(--primary-color); margin: 20px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">1. تشكيلة المكتب المسير للمجلس الجماعي لماسة</h4>
+                    <ul style="list-style-type: disc; margin-right: 25px; margin-bottom: 20px; line-height: 1.8;">
+                        <li><strong>رئيس المجلس الجماعي:</strong> السيد عبد الله بن الأشكر (التجمع الوطني للأحرار).</li>
+                        <li><strong>النائب الأول للرئيس:</strong> السيد اليزيد أقريض (المكلف بالتعمير، الصفقات، وإعداد التراب).</li>
+                        <li><strong>النائب الثاني للرئيس:</strong> السيد الحسين أزلاي (المكلف بالميزانية، المالية، والشؤون الاقتصادية).</li>
+                        <li><strong>النائب الثالث للرئيس:</strong> السيد أحمد أعدي (المكلف بالأشغال، الصيانة، وفك العزلة).</li>
+                        <li><strong>النائبة الرابعة للرئيس:</strong> السيدة نعيمة آيت بي (المكلفة بالشؤون الاجتماعية، الثقافية، ومقاربة النوع).</li>
+                        <li><strong>النائب الخامس للرئيس:</strong> السيد محمد كراج (المكلف بالبيئة، وادي ماسة، والتنمية الفلاحية).</li>
+                        <li><strong>النائب السادس للرئيس:</strong> السيد عمر أفينو (المكلف بالممتلكات الجماعية، الأسواق، والصيد التقليدي).</li>
+                        <li><strong>كاتب المجلس الجماعي:</strong> السيد الحسين بداز.</li>
+                        <li><strong>نائب كاتب المجلس:</strong> السيد الحسن أرويش.</li>
                     </ul>
 
                     <h4 style="color: var(--primary-color); margin: 20px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">2. اللجان الدائمة بالمجلس</h4>

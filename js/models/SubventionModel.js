@@ -1,5 +1,5 @@
-// SUBVENTION MODEL: تدبير الدعم العمومي للجمعيات والمستفيدين (V65.0 - دعم كامل للربط مع Back-Office)
-const SUBVENTION_STORAGE_KEY = 'biougra_subventions_v4';
+// SUBVENTION MODEL: تدبير الدعم العمومي لجمعيات المجتمع المدني بجماعة ماسة
+const SUBVENTION_STORAGE_KEY = 'massa_subventions_v5';
 
 export const SubventionModel = {
     cleanLegacyData() {
@@ -8,184 +8,167 @@ export const SubventionModel = {
             localStorage.removeItem('agadir_subventions_data');
             localStorage.removeItem('biougra_subventions_v2');
             localStorage.removeItem('biougra_subventions_v3');
+            localStorage.removeItem('biougra_subventions_v4');
         } catch (e) {}
     },
 
     getDefaultData() {
         return {
-            decisionTitle: "قرار المجلس الجماعي لبيوكرى رقم 48/2026 القاضي بتحديد شروط ومعايير توزيع الدعم المالي على الجمعيات",
-            decisionDetails: "بناء على القانون التنظيمي رقم 113.14 المتعلق بالجماعات، وخاصة المادة 92 منه، وبناء على مقتضيات المداولة رقم 104، المتخذة خلال الدورة العادية للمجلس الجماعي بتاريخ 10 يناير 2026، تم تحديد شروط ومعايير توزيع الدعم المالي على الجمعيات.",
-            applicationFormName: "استمارة وبطاقة طلب الدعم المالي السنوي (Fiche de Demande de Subvention).pdf",
+            decisionTitle: "مقرر المجلس الجماعي لماسة القاضي بتحديد شروط ومعايير توزيع الدعم المالي السنوي على الجمعيات",
+            decisionDetails: "بناء على القانون التنظيمي رقم 113.14 المتعلق بالجماعات، وخاصة المادتين 65 و92 منه، وبناء على مقرر المجلس الجماعي لماسة المتخذ خلال دورته العادية، تم تحديد المعايير الدقيقة لتوزيع المنح المالية المخصصة لدعم أنشطة المجتمع المدني (التعليم، الرياضة، الصحة، والتراث).",
+            applicationFormName: "استمارة وبطاقة طلب الدعم المالي السنوي لجماعة ماسة (Fiche de Demande).pdf",
             applicationFormUrl: "#download-subvention-fiche",
-            deadline: "30 نونبر 2026",
+            deadline: "30 نونبر",
             categoriesDistribution: [
-                { category: "الرياضية", icon: "🏃‍♂️", totalAmount: 180000, percentage: 85, count: 5, description: "دعم الأندية، تأطير الفئات الصغرى والشباب، والتنقل للمسابقات الجهوية والوطنية" },
-                { category: "الثقافية والتراثية", icon: "🏛️", totalAmount: 120000, percentage: 76, count: 4, description: "إحياء التراث السوسي والأمازيغي، تنظيم المهرجانات والمعارض الفنية والمسرح" },
-                { category: "التنموية والاجتماعية", icon: "👥", totalAmount: 140000, percentage: 90, count: 4, description: "الرعاية الاجتماعية، مساعدة الأشخاص في وضعية إعاقة، والتمكين الاقتصادي" },
-                { category: "البيئية وتأهيل الأحياء", icon: "🍃", totalAmount: 70000, percentage: 70, count: 3, description: "غرس الأشجار، العناية بالمساحات الخضراء، وحملات النظافة والتحسيس البيئي" },
-                { category: "التعليمية والتربوية", icon: "📖", totalAmount: 45000, percentage: 80, count: 2, description: "محاربة الهدر المدرسي، دروس الدعم المجانية، وتوفير المحافظ واللوازم للتلاميذ المعوزين" }
+                { category: "التربية والتعليم والنقل المدرسي", icon: "🚌", totalAmount: 180000, percentage: 92, count: 6, description: "دعم تسيير أسطول حافلات النقل المدرسي ومحاربة الهدر المدرسي بدواوير ماسة" },
+                { category: "الرياضة والشباب", icon: "⚽", totalAmount: 140000, percentage: 88, count: 5, description: "دعم أندية كرة القدم (أمل ماسة، أنازار، أولمبيك الزاوية)، ملاعب القرب، وتأطير الناشئة" },
+                { category: "الرعاية الاجتماعية ودار الطالب", icon: "🤝", totalAmount: 160000, percentage: 95, count: 4, description: "تسيير دار الطالب والطالبة ماسة، دعم الأشخاص في وضعية إعاقة، والحملات الطبية" },
+                { category: "الثقافة والتراث الواحاتي", icon: "🏛️", totalAmount: 90000, percentage: 80, count: 4, description: "تثمين التراث الأمازيغي، صيانة قصبات تاسيلا، والفنون الشعبية (إسمكان وتماست)" },
+                { category: "البيئة والماء الصالح للشرب", icon: "💧", totalAmount: 110000, percentage: 85, count: 5, description: "مواكبة جمعيات تدبير الماء بالدواوير (تسنولت، جوابر، إفنتار) وحماية واحة ماسة" }
             ],
             beneficiaries: [
                 {
                     id: 1,
-                    projectName: "مشروع تهيئة وتهيئة المحور الرياضي بالحي الجديد",
-                    assocName: "الرياضية والتنمية الاجتماعية",
-                    assocType: "رياضية",
-                    domainIcon: "",
-                    legalStatus: "موافقة",
-                    statutStatus: "مطابقة",
+                    projectName: "تسيير أسطول حافلات النقل المدرسي لفائدة تلميذات وتلاميذ دواوير ماسة",
+                    assocName: "جمعية وادي ماسة للنقل المدرسي والثقافة",
+                    assocType: "التربية والتعليم والنقل المدرسي",
+                    domainIcon: "🚌",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
                     annualRef: "2026/01",
-                    amount: 45000,
-                    progress: 80,
-                    president: "رشيد أوبلا",
+                    amount: 90000,
+                    progress: 100,
+                    president: "إبراهيم إدلعرب",
                     bureauMembers: [
-                        { role: "الرئيس", name: "رشيد أوبلا", cin: "JB304928", phone: "0665123456" },
-                        { role: "نائب الرئيس", name: "سعيد بلعيد", cin: "JB928374", phone: "0666234567" },
-                        { role: "الكاتب العام", name: "عمر الدكالي", cin: "JB102938", phone: "0667345678" },
-                        { role: "أمين المال", name: "كمال أيت الطالب", cin: "JB592019", phone: "0668456789" }
+                        { role: "الرئيس", name: "إبراهيم إدلعرب", cin: "JB140293", phone: "0661234567" },
+                        { role: "نائب الرئيس", name: "عمر باحسين", cin: "JB283910", phone: "0662345678" },
+                        { role: "الكاتب العام", name: "الحسين إدبوش", cin: "JB392817", phone: "0663456789" },
+                        { role: "أمين المال", name: "علي أشنكلي", cin: "JB482910", phone: "0664567890" }
                     ],
-                    pvNumber: "محضر دورة ماي 2026 - مقرر عدد 104",
-                    projectSupported: "مشروع تهيئة وتأهيل المحور الرياضي بالحي الجديد وتأطير الفئات الصغرى"
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 18/2026",
+                    projectSupported: "توفير خدمات النقل المدرسي اليومي لأكثر من 850 تلميذاً وتلميذة بمختلف الدواوير للثانويات والإعداديات"
                 },
                 {
                     id: 2,
-                    projectName: "إحداث وتأهيل المراكز الثقافية والتراثية والصناعات التقليدية بالمنطقة",
-                    assocName: "جمعية الإشراق للثقافة والفنون والتراث",
-                    assocType: "ثقافية وتراثية",
-                    domainIcon: "🏛️",
-                    legalStatus: "موافقة",
-                    statutStatus: "مطابقة",
-                    annualRef: "2026/03",
-                    amount: 65000,
+                    projectName: "تسيير مؤسسة الرعاية الاجتماعية وإيواء التلاميذ المعوزين",
+                    assocName: "الجمعية الخيرية الإسلامية دار الطالب والطالبة ماسة",
+                    assocType: "الرعاية الاجتماعية ودار الطالب",
+                    domainIcon: "🤝",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
+                    annualRef: "2026/02",
+                    amount: 80000,
                     progress: 100,
-                    president: "خالد الزياني",
+                    president: "محمد أوعزيز",
                     bureauMembers: [
-                        { role: "الرئيس", name: "خالد الزياني", cin: "JB829102", phone: "0669123456" },
-                        { role: "نائب الرئيس", name: "سميرة الإدريسي", cin: "JB482910", phone: "0670234567" },
-                        { role: "الكاتب العام", name: "ياسين المنصوري", cin: "JB192830", phone: "0671345678" },
-                        { role: "أمين المال", name: "رقية أيت إبراهيم", cin: "JB738291", phone: "0672456789" }
+                        { role: "الرئيس", name: "محمد أوعزيز", cin: "JB201928", phone: "0665123456" },
+                        { role: "نائب الرئيس", name: "الحسن أرويش", cin: "JB392019", phone: "0666234567" },
+                        { role: "الكاتب العام", name: "أحمد أعدي", cin: "JB402918", phone: "0667345678" },
+                        { role: "أمين المال", name: "عبد العزيز بن الطالب", cin: "JB592019", phone: "0668456789" }
                     ],
-                    pvNumber: "محضر دورة ماي 2026 - مقرر عدد 105",
-                    projectSupported: "إحداث وتأهيل المراكز الثقافية والتراثية والصناعات التقليدية ببيوكرى"
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 19/2026",
+                    projectSupported: "التكفل بالإيواء والإطعام والمواكبة التربوية لـ 160 نزيلاً ونزيلة من أبناء الأسر الهشة بالدواوير النائية"
                 },
                 {
                     id: 3,
-                    projectName: "إنجاز المركب الثقافي والاجتماعي بجماعة بيوكرى",
-                    assocName: "اتحاد جمعيات التنمية والتضامن المحلي لبيوكرى",
-                    assocType: "تنموية واجتماعية",
-                    domainIcon: "👥",
-                    legalStatus: "تنموية وتربوية",
-                    statutStatus: "مطابقة",
-                    annualRef: "2026/05",
-                    amount: 120000,
-                    progress: 60,
-                    president: "عبد الكريم المرابط",
+                    projectName: "التأطير الرياضي والمشاركة في منافسات عصبة سوس لكرة القدم",
+                    assocName: "الجمعية الرياضية أمل ماسة (Amal Massa)",
+                    assocType: "الرياضة والشباب",
+                    domainIcon: "⚽",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
+                    annualRef: "2026/03",
+                    amount: 60000,
+                    progress: 90,
+                    president: "الحسين بداز",
                     bureauMembers: [
-                        { role: "الرئيس", name: "عبد الكريم المرابط", cin: "JB192837", phone: "0661234567" },
-                        { role: "نائب الرئيس", name: "فاطمة بوزيد", cin: "JB283910", phone: "0662345678" },
-                        { role: "الكاتب العام", name: "حسن أيت همو", cin: "JB472819", phone: "0663456789" },
-                        { role: "أمين المال", name: "عائشة الصالحي", cin: "JB582910", phone: "0664567890" }
+                        { role: "الرئيس", name: "الحسين بداز", cin: "JB304918", phone: "0669123456" },
+                        { role: "نائب الرئيس", name: "سعيد بلعيد", cin: "JB492018", phone: "0670234567" },
+                        { role: "الكاتب العام", name: "إدريس بوحسون", cin: "JB582910", phone: "0671345678" },
+                        { role: "أمين المال", name: "كمال أيت الطالب", cin: "JB672819", phone: "0672456789" }
                     ],
-                    pvNumber: "محضر دورة ماي 2026 - مقرر عدد 106",
-                    projectSupported: "إنجاز وتجهيز المركب الثقافي والاجتماعي لدعم الأسر والأشخاص في وضعية إعاقة"
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 20/2026",
+                    projectSupported: "تأطير مدرسة كرة القدم للفئات الصغرى وتدبير مشاركة الفريق الأول بالملعب الجماعي بسيدي عبو"
                 },
                 {
                     id: 4,
-                    projectName: "إحداث وتجهيز مركز صحي جماعي والفرق الطبية المتنقلة",
-                    assocName: "اتحاد جمعيات الأحياء للبيئة والصحة المستدامة",
-                    assocType: "بيئية",
-                    domainIcon: "🍃",
-                    legalStatus: "بيئية",
-                    statutStatus: "مطابقة",
-                    annualRef: "2026/07",
-                    amount: 38000,
-                    progress: 100,
-                    president: "حسناء السملالي",
+                    projectName: "تنظيم القوافل الطبية والفحوصات المتخصصة للفئات المعوزة",
+                    assocName: "جمعية بصيص أمل ماسة للأعمال الاجتماعية والطبية",
+                    assocType: "الرعاية الاجتماعية ودار الطالب",
+                    domainIcon: "🩺",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
+                    annualRef: "2026/04",
+                    amount: 45000,
+                    progress: 85,
+                    president: "رشيد أوبلا",
                     bureauMembers: [
-                        { role: "الرئيسة", name: "حسناء السملالي", cin: "JB910293", phone: "0673123456" },
-                        { role: "نائب الرئيس", name: "أحمد بنعلي", cin: "JB572819", phone: "0674234567" },
-                        { role: "الكاتب العام", name: "فؤاد الغازي", cin: "JB283910", phone: "0675345678" },
-                        { role: "أمين المال", name: "فاطمة الزهراء شريف", cin: "JB849201", phone: "0676456789" }
+                        { role: "الرئيس", name: "رشيد أوبلا", cin: "JB782910", phone: "0673123456" },
+                        { role: "نائبة الرئيس", name: "نعيمة آيت بي", cin: "JB892019", phone: "0674234567" },
+                        { role: "الكاتب العام", name: "ياسين المنصوري", cin: "JB901928", phone: "0675345678" },
+                        { role: "أمين المال", name: "فاطمة بوزيد", cin: "JB120938", phone: "0676456789" }
                     ],
-                    pvNumber: "محضر دورة ماي 2026 - مقرر عدد 107",
-                    projectSupported: "إحداث وتجهيز مركز صحي جماعي وتسيير الفرق الطبية المتنقلة بأحياء بيوكرى"
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 21/2026",
+                    projectSupported: "تنظيم قوافل طبية متعددة التخصصات (طب العيون، السكري، وصحة الأم والطفل) بالمركز والدواوير"
                 },
                 {
                     id: 5,
-                    projectName: "بناء وتجهيز المركب المدرسي الحديث وتجهيزاته الداخلية",
-                    assocName: "جمعية الآفاق لدعم التمدرس ومحاربة الهدر المدرسي",
-                    assocType: "تعليمية وتربوية",
-                    domainIcon: "📖",
-                    legalStatus: "تعليمية وتربوية",
-                    statutStatus: "مطابقة",
-                    annualRef: "2026/09",
-                    amount: 22000,
-                    progress: 25,
-                    president: "لطيفة العلمي",
+                    projectName: "تثمين التراث الأمازيغي والمحافظة على قصبات وأسوار تاسيلا",
+                    assocName: "جمعية ماسة الكبرى للتراث الثقافي وفنون تماست",
+                    assocType: "الثقافة والتراث الواحاتي",
+                    domainIcon: "🏛️",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
+                    annualRef: "2026/05",
+                    amount: 40000,
+                    progress: 80,
+                    president: "الحسين إدبوش",
                     bureauMembers: [
-                        { role: "الرئيسة", name: "لطيفة العلمي", cin: "JB672910", phone: "0677123456" },
-                        { role: "نائب الرئيس", name: "عبد الجليل الراجي", cin: "JB102948", phone: "0678234567" },
-                        { role: "الكاتب العام", name: "جميلة التازي", cin: "JB492019", phone: "0679345678" },
-                        { role: "أمين المال", name: "محمد الحيان", cin: "JB839201", phone: "0680456789" }
+                        { role: "الرئيس", name: "الحسين إدبوش", cin: "JB239401", phone: "0677123456" },
+                        { role: "نائب الرئيس", name: "عمر أفينو", cin: "JB348291", phone: "0678234567" },
+                        { role: "الكاتب العام", name: "لحسن بوالزيت", cin: "JB459102", phone: "0679345678" },
+                        { role: "أمينة المال", name: "خديجة أنجار", cin: "JB560293", phone: "0680456789" }
                     ],
-                    pvNumber: "محضر دورة ماي 2026 - مقرر عدد 108",
-                    projectSupported: "بناء وتجهيز المركب المدرسي الحديث وتوفير المحافظ والدروس الداعمة"
-                }
-            ],
-            eligibilityQuestions: {
-                "رياضية": {
-                    title: "معايير وشروط استفادة الجمعيات والأندية الرياضية",
-                    criteria: [
-                        "أن تكون الجمعية منخرطة بإحدى الجامعات الملكية المغربية أو العصب الجهوية المعترف بها.",
-                        "توفر الجمعية على مقر رسمي وأنشطة منتظمة ومستمرة بتراب جماعة بيوكرى.",
-                        "الإدلاء بالتقريرين الأدبي والمالي المصادق عليهما في آخر جمع عام.",
-                        "تقديم برنامج عمل رياضي سنوي وميزانية تقديرية واضحة للموسم الرياضي."
-                    ],
-                    requiredDocs: [
-                        "طلب الدعم موجه للسيد رئيس المجلس الجماعي وبطاقة الاستمارة الرسمية.",
-                        "وصل الإيداع القانوني النهائي المسلم من السلطة المحلية المختصة (محيّن).",
-                        "القانون الأساسي للجمعية ولائحة أعضاء المكتب المسير الحاليين.",
-                        "محضر آخر جمع عام عادي أو استثنائي معتمد.",
-                        "التقرير الأدبي والتقرير المالي للموسم المنصرم موقعان من طرف الرئيس وأمين المال.",
-                        "شهادة الحساب البنكي (RIB) أصلية أو نموذج شيك ملغى باسم الجمعية."
-                    ]
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 22/2026",
+                    projectSupported: "تنظيم مهرجان التراث الواحاتي لماسة ومعارض الصناعة التقليدية والتعريف بالمواقع الأثرية"
                 },
-                "ثقافية وتراثية": {
-                    title: "معايير وشروط استفادة الجمعيات الثقافية والفنية والتراثية",
-                    criteria: [
-                        "المساهمة الفعالة في تنشيط المدينة وإبراز التراث الأمازيغي والموروث السوسي الأصيل.",
-                        "تنظيم ندوات أو معارض أو عروض مسرحية وموسيقية هادفة ومجانية للعموم.",
-                        "احترام آجال تقديم الملفات والشفافية المالية في صرف المنح السابقة."
+                {
+                    id: 6,
+                    projectName: "صيانة وتدبير منظومة التزويد بالماء الصالح للشرب بالدواوير",
+                    assocName: "جمعية تسنولت للتنمية الاجتماعية وتدبير الماء الشروب",
+                    assocType: "البيئة والماء الصالح للشرب",
+                    domainIcon: "💧",
+                    legalStatus: "موافقة نهائية",
+                    statutStatus: "ملف قانوني مطابق",
+                    annualRef: "2026/06",
+                    amount: 50000,
+                    progress: 100,
+                    president: "أحمد أعدي",
+                    bureauMembers: [
+                        { role: "الرئيس", name: "أحمد أعدي", cin: "JB671203", phone: "0681123456" },
+                        { role: "نائب الرئيس", name: "محمد كراج", cin: "JB782314", phone: "0682234567" },
+                        { role: "الكاتب العام", name: "إبراهيم إدلعرب", cin: "JB893425", phone: "0683345678" },
+                        { role: "أمين المال", name: "مبارك بيجديكن", cin: "JB904536", phone: "0684456789" }
                     ],
-                    requiredDocs: [
-                        "طلب الدعم موجه للسيد الرئيس وبطاقة الاستمارة الرسمية.",
-                        "الملف القانوني المكتمل (القانون الأساسي + وصل الإيداع النهائي).",
-                        "لائحة أعضاء المكتب المسير والتقرير الأدبي والمالي المعتمد.",
-                        "بطاقة تقنية للمشروع أو المهرجان الثقافي المزمع تنظيمه.",
-                        "شهادة الحساب البنكي (RIB) باسم الجمعية."
-                    ]
+                    pvNumber: "محضر دورة المجلس الجماعي - مقرر عدد 23/2026",
+                    projectSupported: "صيانة المضخات وتأهيل الخزان المائي وشبكة التوزيع الداخلية لخدمة أزيد من 1,470 نسمة بدوار تسنولت"
                 }
-            }
+            ]
         };
     },
 
     init() {
         this.cleanLegacyData();
         if (!localStorage.getItem(SUBVENTION_STORAGE_KEY)) {
-            const def = this.getDefaultData();
-            this.save(def);
+            localStorage.setItem(SUBVENTION_STORAGE_KEY, JSON.stringify(this.getDefaultData()));
         }
     },
 
     get() {
-        this.cleanLegacyData();
+        this.init();
         try {
             const raw = localStorage.getItem(SUBVENTION_STORAGE_KEY);
-            if (!raw) {
-                const def = this.getDefaultData();
-                this.save(def);
-                return def;
-            }
+            if (!raw) return this.getDefaultData();
             return JSON.parse(raw);
         } catch (e) {
             return this.getDefaultData();
@@ -194,47 +177,6 @@ export const SubventionModel = {
 
     save(data) {
         localStorage.setItem(SUBVENTION_STORAGE_KEY, JSON.stringify(data));
-        return data;
-    },
-
-    updateDecision(title, details, deadline) {
-        const data = this.get();
-        if (title) data.decisionTitle = title;
-        if (details) data.decisionDetails = details;
-        if (deadline) data.deadline = deadline;
-        this.save(data);
-        return data;
-    },
-
-    addBeneficiary(item) {
-        const data = this.get();
-        item.id = Date.now();
-        if (!item.projectName) item.projectName = item.projectSupported || item.assocName;
-        if (!item.amount) item.amount = 0;
-        if (!item.progress) item.progress = 80;
-        if (!item.annualRef) item.annualRef = `2026/${String(data.beneficiaries.length + 1).padStart(2, '0')}`;
-        if (!item.legalStatus) item.legalStatus = 'موافقة';
-        if (!item.statutStatus) item.statutStatus = 'مطابقة';
-        
-        data.beneficiaries.unshift(item);
-        this.save(data);
-        return data;
-    },
-
-    deleteBeneficiary(id) {
-        const data = this.get();
-        data.beneficiaries = data.beneficiaries.filter(b => b.id != id);
-        this.save(data);
-        return data;
-    },
-
-    updateBeneficiary(id, fields) {
-        const data = this.get();
-        const idx = data.beneficiaries.findIndex(b => b.id == id);
-        if (idx !== -1) {
-            data.beneficiaries[idx] = { ...data.beneficiaries[idx], ...fields };
-            this.save(data);
-        }
         return data;
     }
 };

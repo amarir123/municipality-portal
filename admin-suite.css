@@ -1,0 +1,961 @@
+/* ==========================================================================
+   COMMUNE DE MASSA — PREMIUM 3D ADMIN DASHBOARD SUITE
+   Executive SaaS Control Panel Design System
+   Palette: Forest Green (#07574B) × Champagne Gold (#E6B83F) × Warm Ivory (#F8F5EC)
+   ========================================================================== */
+
+:root {
+    --adm-primary: #07574B;
+    --adm-primary-dark: #063D35;
+    --adm-primary-deep: #032520;
+    --adm-primary-light: #EBF4F2;
+    --adm-gold: #E6B83F;
+    --adm-gold-hover: #D4A738;
+    --adm-gold-light: #FDF9EE;
+    --adm-gold-glow: rgba(230, 184, 63, 0.35);
+    --adm-ivory: #F8F5EC;
+    --adm-surface: #FFFFFF;
+    --adm-navy: #172B3D;
+    --adm-text: #1e293b;
+    --adm-muted: #64748B;
+    --adm-border: #E2E8F0;
+    --adm-border-hover: #CBD5E1;
+    --adm-border-gold: rgba(230, 184, 63, 0.4);
+    --adm-burgundy: #C10144;
+    --adm-success: #10B981;
+    --adm-danger: #EF4444;
+    --adm-shadow-sm: 0 2px 6px rgba(7, 87, 75, 0.04);
+    --adm-shadow-md: 0 8px 24px -4px rgba(7, 87, 75, 0.07), 0 2px 6px -1px rgba(7, 87, 75, 0.04);
+    --adm-shadow-lg: 0 16px 36px -6px rgba(7, 87, 75, 0.12), 0 4px 12px -2px rgba(7, 87, 75, 0.05);
+    --adm-shadow-3d: 0 12px 30px -4px rgba(6, 61, 53, 0.14), 0 0 0 1px rgba(230, 184, 63, 0.22);
+    --adm-radius: 14px;
+    --adm-radius-lg: 18px;
+    --adm-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- 1. GLOBAL BODY & RESET FOR ADMIN --- */
+body.admin-body {
+    background-color: #F4F6F5 !important;
+    background-image: 
+        radial-gradient(rgba(7, 87, 75, 0.04) 1.5px, transparent 1.5px),
+        linear-gradient(180deg, #F8F5EC 0%, #F4F6F5 300px) !important;
+    background-size: 24px 24px, 100% 100% !important;
+    color: var(--adm-text) !important;
+    font-family: 'IBM Plex Sans Arabic', 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    align-items: stretch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    direction: rtl !important;
+    text-align: right !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+/* Custom Scrollbar for Admin */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--adm-gold);
+}
+
+/* --- 2. LOGIN OVERLAY EXPERIENCE --- */
+.login-overlay {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+    background: radial-gradient(circle at 50% 30%, #07574B 0%, #063D35 45%, #031c18 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    padding: 24px !important;
+    box-sizing: border-box !important;
+}
+
+.login-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        radial-gradient(rgba(230, 184, 63, 0.15) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 80% 20%, rgba(230, 184, 63, 0.12) 0%, transparent 40%);
+    background-size: 32px 32px, 100% 100%;
+    pointer-events: none;
+}
+
+.login-card {
+    background: #FFFFFF !important;
+    border-radius: 22px !important;
+    padding: 44px 38px 36px !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    box-shadow: 
+        0 25px 70px -15px rgba(3, 37, 32, 0.65),
+        0 0 0 1px rgba(230, 184, 63, 0.35) !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    animation: loginCardFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.login-card-top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #E6B83F 0%, #07574B 50%, #C10144 100%) !important;
+}
+
+.login-logo {
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    margin: 0 auto 16px;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+}
+
+.login-title {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    color: var(--adm-primary) !important;
+    margin-bottom: 6px !important;
+    letter-spacing: -0.01em;
+}
+
+.login-subtitle {
+    font-size: 0.9rem !important;
+    color: var(--adm-muted) !important;
+    margin-bottom: 24px !important;
+}
+
+.login-btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #07574B 0%, #063D35 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid var(--adm-border-gold) !important;
+    padding: 13px 20px !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    cursor: pointer;
+    box-shadow: 0 8px 20px -3px rgba(7, 87, 75, 0.35), 0 0 0 1px rgba(230, 184, 63, 0.25) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--adm-transition);
+}
+
+.login-btn-submit:hover {
+    background: linear-gradient(135deg, #096859 0%, #074e44 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -3px rgba(7, 87, 75, 0.45), 0 0 0 2px rgba(230, 184, 63, 0.4) !important;
+}
+
+.login-footer-tag {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* --- 3. REIMAGINED ADMINISTRATIVE SIDEBAR --- */
+.admin-sidebar {
+    width: 285px !important;
+    background: linear-gradient(180deg, #063D35 0%, #042E28 55%, #021C18 100%) !important;
+    color: #cbd5e1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-left: 1px solid rgba(230, 184, 63, 0.25) !important;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25) !important;
+    flex-shrink: 0 !important;
+    position: relative;
+    z-index: 50;
+    transition: var(--adm-transition);
+}
+
+.admin-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(rgba(230, 184, 63, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.sidebar-header {
+    padding: 26px 20px 20px !important;
+    border-bottom: 1px solid rgba(230, 184, 63, 0.18) !important;
+    text-align: center !important;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar-logo {
+    max-width: 90px !important;
+    width: 82px !important;
+    height: 82px !important;
+    margin: 0 auto 12px !important;
+    background: #ffffff !important;
+    padding: 8px !important;
+    border-radius: 16px !important;
+    border: 2px solid rgba(230, 184, 63, 0.45) !important;
+    box-shadow: 
+        0 6px 18px rgba(0, 0, 0, 0.35),
+        0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--adm-transition);
+}
+
+.sidebar-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sidebar-logo:hover {
+    transform: translateY(-2px) scale(1.03);
+    border-color: var(--adm-gold) !important;
+    box-shadow: 0 10px 24px rgba(230, 184, 63, 0.25) !important;
+}
+
+.sidebar-title {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: #FFFFFF !important;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+
+.sidebar-title::after {
+    content: 'COMMUNE DE MASSA';
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--adm-gold);
+    margin-top: 3px;
+    direction: ltr;
+}
+
+/* Category Dividers */
+.sidebar-category-label {
+    padding: 16px 20px 6px !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    color: rgba(230, 184, 63, 0.75) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-category-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(230, 184, 63, 0.15);
+}
+
+.sidebar-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 14px 10px !important;
+    flex-grow: 1 !important;
+    gap: 4px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #94a3b8 !important;
+    padding: 11px 16px !important;
+    text-align: right !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: var(--adm-transition) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    border-radius: 12px !important;
+    border-right: 3px solid transparent !important;
+    position: relative;
+}
+
+.sidebar-btn:hover {
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: translateX(-4px);
+}
+
+.sidebar-btn.active {
+    color: #FFFFFF !important;
+    background: linear-gradient(270deg, rgba(230, 184, 63, 0.22) 0%, rgba(7, 87, 75, 0.25) 100%) !important;
+    border-right-color: var(--adm-gold) !important;
+    font-weight: 700 !important;
+    box-shadow: 
+        inset 0 0 16px rgba(230, 184, 63, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-btn .icon {
+    width: 19px !important;
+    height: 19px !important;
+    stroke: currentColor;
+    flex-shrink: 0;
+    transition: var(--adm-transition);
+}
+
+.sidebar-btn.active .icon,
+.sidebar-btn:hover .icon {
+    stroke: var(--adm-gold) !important;
+    filter: drop-shadow(0 0 4px rgba(230, 184, 63, 0.4));
+}
+
+.sidebar-footer {
+    padding: 16px !important;
+    border-top: 1px solid rgba(230, 184, 63, 0.15) !important;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar-footer .btn {
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    padding: 10px 14px !important;
+    font-size: 0.88rem !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #fca5a5 !important;
+    transition: var(--adm-transition) !important;
+}
+
+.sidebar-footer .btn:hover {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35) !important;
+}
+
+/* --- 4. MAIN CONTENT AREA & HEADER --- */
+.admin-main {
+    flex-grow: 1 !important;
+    padding: 32px 40px !important;
+    overflow-y: auto !important;
+    background: transparent !important;
+}
+
+.admin-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 28px !important;
+    padding: 18px 26px !important;
+    background: #FFFFFF !important;
+    border-radius: var(--adm-radius-lg) !important;
+    border: 1px solid var(--adm-border) !important;
+    box-shadow: var(--adm-shadow-md) !important;
+    position: relative;
+}
+
+.admin-header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, var(--adm-gold) 0%, var(--adm-primary) 100%);
+    border-top-left-radius: var(--adm-radius-lg);
+    border-top-right-radius: var(--adm-radius-lg);
+}
+
+.admin-header-title {
+    font-size: 1.45rem !important;
+    font-weight: 900 !important;
+    color: var(--adm-primary) !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+}
+
+.admin-user-info {
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    color: var(--adm-muted) !important;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.admin-user-info strong {
+    color: var(--adm-primary-dark);
+}
+
+.admin-user-info a {
+    color: var(--adm-primary-dark) !important;
+    background: linear-gradient(135deg, #F8F5EC 0%, #F5ECCB 100%);
+    border: 1.5px solid var(--adm-border-gold);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 10px rgba(230, 184, 63, 0.2);
+    transition: var(--adm-transition);
+}
+
+.admin-user-info a:hover {
+    background: linear-gradient(135deg, var(--adm-gold) 0%, #D4A738 100%);
+    color: #063D35 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(230, 184, 63, 0.35);
+}
+
+/* Breadcrumbs in header */
+.admin-breadcrumbs {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.admin-breadcrumbs .sep {
+    color: var(--adm-gold);
+}
+
+.admin-breadcrumbs .current {
+    color: var(--adm-primary);
+}
+
+/* --- 5. EXECUTIVE KPI SUMMARY WIDGETS --- */
+.widgets-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    margin-bottom: 32px !important;
+}
+
+.widget-card {
+    background: #FFFFFF !important;
+    border-radius: var(--adm-radius) !important;
+    padding: 22px 24px !important;
+    box-shadow: var(--adm-shadow-md) !important;
+    border: 1px solid var(--adm-border) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: var(--adm-transition) !important;
+}
+
+.widget-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, var(--adm-gold) 0%, var(--adm-primary) 100%);
+}
+
+.widget-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--adm-shadow-3d) !important;
+    border-color: var(--adm-border-gold) !important;
+}
+
+.widget-value {
+    font-size: 2.3rem !important;
+    font-weight: 900 !important;
+    color: var(--adm-primary) !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.widget-label {
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    color: var(--adm-muted) !important;
+}
+
+.widget-icon-box {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, rgba(7, 87, 75, 0.08) 0%, rgba(230, 184, 63, 0.15) 100%) !important;
+    color: var(--adm-primary) !important;
+    border: 1px solid rgba(230, 184, 63, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.8) !important;
+    transition: var(--adm-transition);
+}
+
+.widget-card:hover .widget-icon-box {
+    transform: scale(1.08) rotate(3deg);
+    background: linear-gradient(135deg, var(--adm-primary) 0%, var(--adm-primary-dark) 100%) !important;
+    color: var(--adm-gold) !important;
+}
+
+/* --- 6. LUXURY SaaS CARDS & SECTIONS --- */
+.card {
+    background: #FFFFFF !important;
+    border-radius: var(--adm-radius-lg) !important;
+    padding: 26px 28px !important;
+    box-shadow: var(--adm-shadow-md) !important;
+    border: 1px solid var(--adm-border) !important;
+    margin-bottom: 24px !important;
+    position: relative;
+    transition: var(--adm-transition);
+}
+
+.card:hover {
+    box-shadow: var(--adm-shadow-lg) !important;
+}
+
+.panel-section-title {
+    font-size: 1.3rem !important;
+    font-weight: 900 !important;
+    color: var(--adm-primary) !important;
+    margin-bottom: 22px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+}
+
+.card h3 {
+    font-size: 1.12rem !important;
+    font-weight: 800 !important;
+    color: var(--adm-primary) !important;
+    margin-bottom: 16px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- 7. FORMS, INPUTS & CONTROLS --- */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 7px !important;
+}
+
+.form-input,
+select.form-input,
+textarea.form-input {
+    width: 100% !important;
+    padding: 11px 15px !important;
+    border-radius: 10px !important;
+    border: 1.5px solid var(--adm-border) !important;
+    background: #F8FAFC !important;
+    color: var(--adm-navy) !important;
+    font-size: 0.92rem !important;
+    font-family: inherit !important;
+    font-weight: 500 !important;
+    transition: var(--adm-transition) !important;
+    box-sizing: border-box !important;
+}
+
+.form-input:focus,
+select.form-input:focus,
+textarea.form-input:focus {
+    background: #FFFFFF !important;
+    border-color: var(--adm-gold) !important;
+    box-shadow: 0 0 0 3.5px rgba(230, 184, 63, 0.22) !important;
+    outline: none !important;
+}
+
+/* File Upload styling */
+input[type="file"].form-input {
+    background: #f1f5f9 !important;
+    border: 1.5px dashed #cbd5e1 !important;
+    padding: 8px 12px !important;
+    cursor: pointer;
+}
+
+input[type="file"].form-input:hover {
+    border-color: var(--adm-gold) !important;
+    background: #f8fafc !important;
+}
+
+/* --- 8. BUTTONS (SaaS 3D Hierarchy) --- */
+.btn {
+    border-radius: 11px !important;
+    padding: 11px 22px !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: var(--adm-transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border: 1px solid transparent !important;
+    text-decoration: none !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #07574B 0%, #063D35 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid var(--adm-border-gold) !important;
+    box-shadow: 0 6px 16px -2px rgba(7, 87, 75, 0.3) !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #096859 0%, #074e44 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 22px -2px rgba(7, 87, 75, 0.45) !important;
+}
+
+.btn-gold {
+    background: linear-gradient(135deg, #E6B83F 0%, #D4A738 100%) !important;
+    color: #063D35 !important;
+    font-weight: 800 !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 6px 18px -2px rgba(230, 184, 63, 0.4) !important;
+}
+
+.btn-gold:hover {
+    background: linear-gradient(135deg, #f0c34d 0%, #dfb13f 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 24px -2px rgba(230, 184, 63, 0.55) !important;
+}
+
+.btn-outline {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--adm-border) !important;
+    color: var(--adm-primary) !important;
+}
+
+.btn-outline:hover {
+    border-color: var(--adm-primary) !important;
+    background: var(--adm-primary-light) !important;
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 14px 28px !important;
+    font-size: 1.05rem !important;
+    border-radius: 14px !important;
+}
+
+/* --- 9. SECTION VISIBILITY ENGINE (Luxury Switch Toggles) --- */
+#branding-panel .card:has(input[type="checkbox"]) {
+    border-top: 4px solid var(--adm-primary) !important;
+}
+
+#branding-panel input[type="checkbox"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 48px !important;
+    height: 26px !important;
+    border-radius: 20px !important;
+    background: #cbd5e1 !important;
+    position: relative !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    border: 2px solid transparent !important;
+}
+
+#branding-panel input[type="checkbox"]::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    right: 2px !important;
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#branding-panel input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #07574B 0%, #063D35 100%) !important;
+    border-color: var(--adm-gold) !important;
+}
+
+#branding-panel input[type="checkbox"]:checked::after {
+    transform: translateX(-22px) !important;
+    background: var(--adm-gold) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+}
+
+/* The parent container of each toggle switch */
+#branding-panel .card div:has(> input[type="checkbox"]) {
+    border-radius: 12px !important;
+    transition: var(--adm-transition) !important;
+    border: 1.5px solid #e2e8f0 !important;
+    background: #ffffff !important;
+}
+
+#branding-panel .card div:has(> input[type="checkbox"]:checked) {
+    background: #f0fdf9 !important;
+    border-color: rgba(7, 87, 75, 0.4) !important;
+    box-shadow: 0 4px 14px rgba(7, 87, 75, 0.06) !important;
+}
+
+/* --- 10. COLOR PALETTE STUDIO --- */
+input[type="color"] {
+    -webkit-appearance: none !important;
+    border: 1.5px solid var(--adm-border) !important;
+    border-radius: 12px !important;
+    padding: 3px !important;
+    background: #FFFFFF !important;
+    cursor: pointer;
+    box-shadow: var(--adm-shadow-sm) !important;
+    transition: var(--adm-transition) !important;
+}
+
+input[type="color"]:hover {
+    border-color: var(--adm-gold) !important;
+    transform: scale(1.02);
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0 !important;
+    border-radius: 8px !important;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none !important;
+    border-radius: 8px !important;
+}
+
+/* --- 11. HERO CAROUSEL SLIDES MANAGER --- */
+#branding-panel .card div[style*="border-right-width: 4px"] {
+    border-radius: 14px !important;
+    border: 1px solid var(--adm-border) !important;
+    border-right-width: 5px !important;
+    box-shadow: var(--adm-shadow-sm) !important;
+    transition: var(--adm-transition) !important;
+}
+
+#branding-panel .card div[style*="border-right-width: 4px"]:hover {
+    box-shadow: var(--adm-shadow-md) !important;
+    transform: translateY(-2px);
+}
+
+/* --- 12. TABLES & MANAGEMENT DATA --- */
+.table-responsive {
+    border-radius: var(--adm-radius-lg) !important;
+    border: 1px solid var(--adm-border) !important;
+    box-shadow: var(--adm-shadow-md) !important;
+    overflow: hidden !important;
+    background: #FFFFFF !important;
+}
+
+.admin-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+.admin-table th {
+    background: linear-gradient(180deg, #FAF7F0 0%, #F4EFE6 100%) !important;
+    color: var(--adm-primary) !important;
+    font-weight: 800 !important;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid #E6B83F !important;
+    font-size: 0.92rem !important;
+}
+
+.admin-table td {
+    padding: 14px 20px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    color: var(--adm-navy) !important;
+    font-size: 0.9rem !important;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+    background: #f8fafc !important;
+}
+
+/* --- 13. TOAST SYSTEM (Feedback Alerts) --- */
+.toast-notify {
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 30px !important;
+    right: auto !important;
+    min-width: 320px !important;
+    max-width: 440px !important;
+    background: linear-gradient(135deg, #07574B 0%, #063D35 100%) !important;
+    color: #FFFFFF !important;
+    border: 1.5px solid var(--adm-gold) !important;
+    padding: 16px 22px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    transform: translateY(140px) !important;
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.toast-notify.show,
+.toast-notify.active {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+
+.toast-notify.error {
+    background: linear-gradient(135deg, #C10144 0%, #990033 100%) !important;
+    border-color: #fca5a5 !important;
+}
+
+.toast-title {
+    color: var(--adm-gold) !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.toast-msg {
+    color: #f8fafc !important;
+    font-size: 0.88rem !important;
+}
+
+.toast-dismiss-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #cbd5e1 !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important;
+    padding: 4px !important;
+    margin-right: auto !important;
+    line-height: 1 !important;
+}
+
+.toast-dismiss-btn:hover {
+    color: #ffffff !important;
+}
+
+/* --- 14. MODALS & POPUPS --- */
+.modal-overlay {
+    backdrop-filter: blur(8px) !important;
+    background: rgba(3, 37, 32, 0.65) !important;
+    animation: modalBackdropFade 0.3s ease !important;
+}
+
+.modal-content {
+    border-radius: 20px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(230, 184, 63, 0.3) !important;
+    border: none !important;
+    overflow: hidden !important;
+    position: relative;
+    animation: modalZoomIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--adm-gold) 0%, var(--adm-primary) 100%);
+}
+
+@keyframes modalZoomIn {
+    from { opacity: 0; transform: scale(0.92) translateY(15px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes modalBackdropFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- 15. RESPONSIVE DESIGN --- */
+@media (max-width: 1200px) {
+    .widgets-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    body.admin-body {
+        flex-direction: column !important;
+    }
+    .admin-sidebar {
+        width: 100% !important;
+        border-left: none !important;
+        border-bottom: 2px solid rgba(230, 184, 63, 0.3) !important;
+    }
+    .sidebar-menu {
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        padding: 10px !important;
+    }
+    .sidebar-btn {
+        padding: 10px 14px !important;
+        white-space: nowrap !important;
+    }
+    .admin-main {
+        padding: 20px !important;
+    }
+    .widgets-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+/* Additional mobile enhancements */
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 14px !important;
+        padding: 16px !important;
+    }
+    .admin-user-info {
+        width: 100% !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+    }
+    .admin-header-title {
+        font-size: 1.25rem !important;
+        flex-wrap: wrap !important;
+    }
+}

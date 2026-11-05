@@ -8,7 +8,7 @@ export const PollModel = {
         const defaultData = [
             {
                 id: 1,
-                question: "ما رأيك في جودة الخدمات الرقمية والإدارية المقدمة بجماعة بيوكرى؟",
+                question: "ما رأيك في جودة الخدمات الرقمية والإدارية المقدمة بجماعة ماسة؟",
                 type: "sentiment",
                 category: "استطلاع رأي المواطنين",
                 createdAt: "2026-10-15",

@@ -1,67 +1,68 @@
 const defaultBranding = {
-    muniName: "جماعة بيوكرى",
-    cityName: "بيوكرى",
+    muniName: "الجماعة الترابية لماسة",
+    cityName: "ماسة",
+    cityLatin: "MASSA",
     logoUrl: "assets/logo.png",
-    primaryColor: "#1B3A8A",
-    secondaryColor: "#0F9D8A",
-    creamColor: "#FBF6EC",
-    accentColor: "#F2A93B",
-    terracottaColor: "#D9603B",
-    darkColor: "#0B1530",
-    textColor: "#0B1530",
-    heroBgUrl: "assets/biougra_bg.png",
+    primaryColor: "#07574B", // Forest Green Institutional
+    secondaryColor: "#063D35", // Deep Green
+    creamColor: "#F8F5EC", // Warm Ivory
+    accentColor: "#E6B83F", // Champagne Gold Accent
+    terracottaColor: "#C10144", // Logo Burgundy Accent
+    darkColor: "#063D35", // Deep Forest Green
+    textColor: "#172B3D", // Text Navy High Contrast
+    heroBgUrl: "assets/biougra_landscape_clean.png",
     cardCouncilUrl: "assets/card_council.png",
     cardProceduresUrl: "assets/card_procedures.png",
     cardTerritoryUrl: "assets/card_territory.png",
-    tickerText: "مرحباً بكم في البوابة الإلكترونية الرسمية لجماعة بيوكرى - تواصلوا معنا وقدموا طلباتكم وتتبعوا ملفاتكم وشكاياتكم إلكترونياً على مدار الساعة.",
-    phone: "+212 528 81 80 00",
-    email: "contact@biougra.ma",
-    address: "شارع محمد الخامس، المقر الرئيسي لجماعة بيوكرى",
-    workingHours: "من الإثنين إلى الجمعة: 08:30 - 16:30",
-    weatherCity: "بيوكرى",
-    weatherTemp: "23°C",
+    tickerText: "مرحباً بكم في البوابة الإلكترونية الرسمية للجماعة الترابية لماسة - نافذتكم الرقمية للاطلاع على مشاريع الجماعة وبرنامج العمل وتقديم الشكايات والخدمات الإدارية.",
+    phone: "+212 528 26 00 21",
+    email: "contact@communedemassa.ma",
+    address: "مقر الجماعة الترابية لماسة، حي بوتبوز، قيادة ماسة، دائرة بلفاع ماسة، إقليم اشتوكة آيت باها، 87452",
+    workingHours: "الإثنين إلى الخميس: 08:30 - 16:30 | الجمعة: 08:30 - 11:30 و 15:00 - 16:30",
+    weatherCity: "ماسة",
+    weatherTemp: "24°C",
     weatherStatus: "مشمس",
 
     // Slogan & Header Subtitle
-    slogan: "من أجل تنمية مستدامة و خدمة أفضل للمواطنين",
-    heroSubtitle: "تقريب الإدارة من المواطن وتعزيز التنمية المحلية",
+    slogan: "من أجل تنمية مجالية شاملة، حكامة تشاركية، وخدمة متميزة لساكنة ماسة",
+    heroSubtitle: "البوابة الرسمية لرئاسة ومجلس الجماعة الترابية لماسة - إقليم اشتوكة آيت باها",
 
-    // Portal Curved Ribbon Statistics (الأرقام والإحصائيات)
-    stat1Val: "+120",
-    stat1Label: "طلب معالجة شهرياً",
-    stat2Val: "+98%",
-    stat2Label: "معدل إنجاز المشاريع",
-    stat3Val: "+12",
-    stat3Label: "برنامج قطاعي",
-    stat4Val: "+45",
-    stat4Label: "مشروع تنموي",
-    statsSubtitle: "تعكس هذه الأرقام حجم الجهود المبذولة لخدمة الإقليم",
+    // Portal Curved Ribbon Statistics (الأرقام والإحصائيات الرسمية لماسة)
+    stat1Val: "17,579",
+    stat1Label: "نسمة (الساكنة القانونية)",
+    stat2Val: "440.84 م.د",
+    stat2Label: "إجمالي الاستثمارات المبرمجة",
+    stat3Val: "126",
+    stat3Label: "مشروعاً تنموياً مهيكلاً",
+    stat4Val: "4",
+    stat4Label: "محاور استراتيجية كبرى",
+    statsSubtitle: "مؤشرات التشخيص التشاركي لبرنامج عمل الجماعة الترابية لماسة 2017- 2022",
 
     // Hero 3D Stage Cards (شرائح العرض بالهيرو)
-    heroSlide1Title: "تأهيل البنية التحتية بالمنطقة",
-    heroSlide1Subtitle: "أشغال تهيئة الطرقات والأحياء السكنية.",
-    heroSlide1Badge: "أخبار الجماعة 📰",
-    heroSlide1Date: "15 ماي 2025",
+    heroSlide1Title: "تيسير رخص البناء والتعمير لماسة",
+    heroSlide1Subtitle: "المصادقة على تصنيف القطاعات المستهدفة بإعادة الهيكلة على مساحة 179 هكتاراً.",
+    heroSlide1Badge: "التعمير والإسكان 📐",
+    heroSlide1Date: "28 أكتوبر 2026",
     heroSlide1Img: "assets/video_hall.png",
 
-    heroSlide2Title: "إطلاق أسطول حافلات النقل الحضري بالنيابة",
-    heroSlide2Subtitle: "تعزيز أسطول النقل الحضري لتسهيل تنقل المواطنين والطلبة بالإقليم.",
-    heroSlide2Badge: "خدمات النقل 🚌",
-    heroSlide2Date: "12 ماي 2025",
-    heroSlide2Img: "assets/video_bus.png",
+    heroSlide2Title: "مشروع التطهير السائل بمركز ماسة",
+    heroSlide2Subtitle: "اتفاقية شراكة بغلاف 37 مليون درهم لحماية واحة ماسة ومحطة التصفية والمعالجة.",
+    heroSlide2Badge: "البيئة والموارد 🌿",
+    heroSlide2Date: "14 شتنبر 2026",
+    heroSlide2Img: "assets/video_park.png",
 
-    heroSlide3Title: "مشروع السوق الأسبوعي الجديد",
-    heroSlide3Subtitle: "إعطاء انطلاقة أشغال بناء السوق الأسبوعي الحديث.",
-    heroSlide3Badge: "المشاريع 🏗️",
-    heroSlide3Date: "10 ماي 2025",
-    heroSlide3Img: "assets/video_park.png",
+    heroSlide3Title: "قنطرة وادي ماسة وتثنية الطريق 1016",
+    heroSlide3Subtitle: "مشروع استراتيجي مهيكل لفك العزلة وتأمين انسيابية السير بين سيدي عبو والجماعة.",
+    heroSlide3Badge: "البنية التحتية 🌉",
+    heroSlide3Date: "18 يوليوز 2026",
+    heroSlide3Img: "assets/ref_project_road.jpg",
     heroBgImg: "assets/biougra_landscape_clean.png",
 
     // Social Media Links
-    facebookUrl: "https://facebook.com",
-    twitterUrl: "https://twitter.com",
-    instagramUrl: "https://instagram.com",
-    youtubeUrl: "https://youtube.com",
+    facebookUrl: "https://facebook.com/communedemassa",
+    twitterUrl: "https://twitter.com/communedemassa",
+    instagramUrl: "https://instagram.com/communedemassa",
+    youtubeUrl: "https://youtube.com/communedemassa",
 
     // Emergency Numbers
     emergencyCivil: "15",
@@ -69,75 +70,105 @@ const defaultBranding = {
     emergencyGendarme: "177",
 
     // Section Visibility Toggles
-    showTicker: false,
+    showHero: true,
+    showPortalStats: true,
+    showEssentialServices: true,
+    showNews: true,
     showUrban: true,
+    showMandate: true,
+    showSynthesis: true,
+    showSubventions: true,
+    showPoll: true,
     showPublications: true,
-    showEvents: true,
     showMultimedia: true,
-    showServices: true
+    showEvents: true,
+    showTicker: false
 };
 
 export class BrandingModel {
-    static STORAGE_KEY = 'agadir_branding';
+    static STORAGE_KEY = 'massa_branding_v3';
+
+    static cleanLegacyData() {
+        try {
+            localStorage.removeItem('agadir_branding');
+            localStorage.removeItem('biougra_branding');
+            localStorage.removeItem('massa_branding_v2');
+        } catch (e) {}
+    }
 
     static init() {
+        this.cleanLegacyData();
         const stored = localStorage.getItem(this.STORAGE_KEY);
         if (!stored) {
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultBranding));
         } else {
             try {
                 const parsed = JSON.parse(stored);
-                // Ensure newly introduced keys are preserved with defaults
-                const merged = { ...defaultBranding, ...parsed };
-                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(merged));
-            } catch (e) {}
+                if (parsed.paletteVersion !== 'massa_forest_gold_v3') {
+                    parsed.primaryColor = defaultBranding.primaryColor;
+                    parsed.secondaryColor = defaultBranding.secondaryColor;
+                    parsed.creamColor = defaultBranding.creamColor;
+                    parsed.accentColor = defaultBranding.accentColor;
+                    parsed.darkColor = defaultBranding.darkColor;
+                    parsed.textColor = defaultBranding.textColor;
+                    parsed.muniName = defaultBranding.muniName;
+                    parsed.cityName = defaultBranding.cityName;
+                    parsed.phone = defaultBranding.phone;
+                    parsed.address = defaultBranding.address;
+                    parsed.paletteVersion = 'massa_forest_gold_v3';
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(parsed));
+                }
+            } catch (e) {
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultBranding));
+            }
         }
     }
 
     static get() {
         this.init();
         try {
-            const stored = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-            return { ...defaultBranding, ...stored };
+            const data = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+            return { ...defaultBranding, ...data };
         } catch (e) {
             return defaultBranding;
         }
     }
 
-    static save(data) {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
-        localStorage.setItem('biougra_last_sync_timestamp', Date.now().toString());
+    static save(brandingData) {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(brandingData));
+        this.applyToDOM(brandingData);
     }
 
-    static exportPackageJSON() {
-        const fullData = {
-            branding: this.get(),
-            news: JSON.parse(localStorage.getItem('biougra_news') || '[]'),
-            projects: JSON.parse(localStorage.getItem('biougra_projects') || '[]'),
-            publications: JSON.parse(localStorage.getItem('agadir_publications') || '[]'),
-            events: JSON.parse(localStorage.getItem('biougra_events') || '[]'),
-            services: JSON.parse(localStorage.getItem('agadir_services') || '[]'),
-            procedures: JSON.parse(localStorage.getItem('biougra_procedures_data') || '[]'),
-            exportedAt: new Date().toISOString()
-        };
-        return JSON.stringify(fullData, null, 2);
+    static reset() {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(defaultBranding));
+        this.applyToDOM(defaultBranding);
+        return defaultBranding;
     }
 
-    static importPackageJSON(jsonString) {
-        try {
-            const parsed = JSON.parse(jsonString);
-            if (parsed.branding) localStorage.setItem('agadir_branding', JSON.stringify(parsed.branding));
-            if (parsed.news) localStorage.setItem('biougra_news', JSON.stringify(parsed.news));
-            if (parsed.projects) localStorage.setItem('biougra_projects', JSON.stringify(parsed.projects));
-            if (parsed.publications) localStorage.setItem('agadir_publications', JSON.stringify(parsed.publications));
-            if (parsed.events) localStorage.setItem('biougra_events', JSON.stringify(parsed.events));
-            if (parsed.services) localStorage.setItem('agadir_services', JSON.stringify(parsed.services));
-            if (parsed.procedures) localStorage.setItem('biougra_procedures_data', JSON.stringify(parsed.procedures));
-            localStorage.setItem('biougra_last_sync_timestamp', Date.now().toString());
-            return true;
-        } catch (e) {
-            console.error('Import Error', e);
-            return false;
-        }
+    static applyToDOM(data = null) {
+        const b = data || this.get();
+        document.documentElement.style.setProperty('--primary-color', b.primaryColor || '#07574B');
+        document.documentElement.style.setProperty('--secondary-color', b.secondaryColor || '#063D35');
+        document.documentElement.style.setProperty('--cream-color', b.creamColor || '#F8F5EC');
+        document.documentElement.style.setProperty('--accent-color', b.accentColor || '#E6B83F');
+        document.documentElement.style.setProperty('--dark-color', b.darkColor || '#063D35');
+        document.documentElement.style.setProperty('--text-main', b.textColor || '#172B3D');
+
+        document.querySelectorAll('.muni-name-display').forEach(el => {
+            el.textContent = b.muniName || 'الجماعة الترابية لماسة';
+        });
+
+        document.querySelectorAll('.city-name-display').forEach(el => {
+            el.textContent = b.cityName || 'ماسة';
+        });
+
+        const logoEl = document.querySelector('.main-logo');
+        if (logoEl && b.logoUrl) logoEl.src = b.logoUrl;
+
+        const subTitleEl = document.querySelector('.hero-subtitle');
+        if (subTitleEl && b.heroSubtitle) subTitleEl.textContent = b.heroSubtitle;
+
+        const sloganEl = document.querySelector('.hero-slogan');
+        if (sloganEl && b.slogan) sloganEl.textContent = b.slogan;
     }
 }

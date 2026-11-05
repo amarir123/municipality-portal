@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="بيوكرى مدينة مستدامة - مبادرات الجماعة للمحافظة على البيئة، التنقل الأخضر، والطاقة النظيفة.">
-    <title>بيوكرى مدينة مستدامة | بوابة جماعة بيوكرى</title>
+    <meta name="description" content="ماسة واحة مستدامة - حماية وادي ماسة، المنتزه الوطني، مشروع التطهير السائل، والمحافظة على البيئة والتنوع البيولوجي.">
+    <title>ماسة واحة مستدامة | بوابة الجماعة الترابية لماسة</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=5.0">
-    <link rel="stylesheet" href="moroccan-suite.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=23.0">
+    <link rel="stylesheet" href="moroccan-suite.css?v=23.0">
     <style>
-        /* Extra styles for subpages */
         .subpage-hero {
             position: relative;
             height: 320px;
-            background-image: url('assets/biougra_bg.png');
+            background-image: url('assets/biougra_landscape_clean.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -30,7 +29,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(13, 94, 166, 0.4) 0%, rgba(13, 94, 166, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(6, 61, 53, 0.88) 0%, rgba(7, 87, 75, 0.94) 100%);
             z-index: 1;
         }
         .subpage-hero-content {
@@ -38,10 +37,34 @@
             z-index: 2;
             width: 100%;
         }
+        .subpage-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(230, 184, 63, 0.2);
+            border: 1px solid rgba(230, 184, 63, 0.5);
+            border-radius: 30px;
+            color: #E6B83F;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
         .subpage-hero-title {
             font-size: 2.5rem;
             font-weight: 800;
+            color: #FFFFFF;
         }
+        .subpage-hero-subtitle {
+            font-size: 1.1rem;
+            color: #FFFFFF !important;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+            opacity: 0.98;
+            max-width: 750px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -49,61 +72,83 @@
             margin: 40px 0;
         }
         .stat-card {
-            background-color: var(--bg-light);
+            background-color: var(--bg-white);
             border-radius: var(--border-radius);
-            padding: 30px 20px;
+            padding: 30px 24px;
             text-align: center;
             border: 1px solid var(--border-color);
-            box-shadow: var(--box-shadow);
+            box-shadow: 0 4px 14px rgba(7, 87, 75, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(7, 87, 75, 0.12);
         }
         .stat-number {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            line-height: 1;
+            color: #07574B !important;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            font-family: 'Cairo', sans-serif;
+            background: none !important;
+            -webkit-text-fill-color: #07574B !important;
         }
         .stat-label {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .stat-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.6;
         }
+
         .content-box {
             background-color: var(--bg-white);
-            padding: 40px;
+            padding: 36px 40px;
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
             box-shadow: var(--box-shadow);
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         .content-box h3 {
             color: var(--primary-color);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 18px;
             border-right: 4px solid var(--accent-color);
             padding-right: 12px;
         }
         .content-box p {
-            margin-bottom: 16px;
-            color: #4a5568;
-            font-size: 0.95rem;
+            margin-bottom: 14px;
+            color: #334155;
+            font-size: 0.98rem;
+            line-height: 1.8;
         }
         .feature-list {
-            margin-right: 24px;
-            margin-bottom: 24px;
+            margin-right: 20px;
+            margin-bottom: 20px;
         }
         .feature-list li {
-            list-style-type: square;
-            margin-bottom: 10px;
-            color: var(--text-main);
-            font-size: 0.95rem;
+            list-style-type: none;
+            position: relative;
+            padding-right: 28px;
+            margin-bottom: 14px;
+            color: #1e293b;
+            font-size: 0.96rem;
+            line-height: 1.7;
         }
+        .feature-list li::before {
+            content: "🌿";
+            position: absolute;
+            right: 0;
+            top: 2px;
+            font-size: 1rem;
+        }
+
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -119,6 +164,23 @@
             }
         }
     </style>
+    <script>
+        // Automatic cache buster & storage synchronizer for Commune de Massa Portal
+        (function() {
+            const MASSA_SYNC_BUILD = 'massa_build_official_v120_benlachgar';
+            try {
+                if (localStorage.getItem('massa_sync_build') !== MASSA_SYNC_BUILD) {
+                    console.log('Synchronizing official Massa portal data to build:', MASSA_SYNC_BUILD);
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    localStorage.setItem('massa_sync_build', MASSA_SYNC_BUILD);
+                }
+            } catch(e) {
+                console.warn('Storage sync:', e);
+            }
+        })();
+    </script>
+
 </head>
 <body>
 
@@ -167,17 +229,17 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
                     <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
-                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية الحضرية</a></li>
+                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية والمشاريع</a></li>
                     <li><a href="action-program.html" class="nav-link">برنامج عمل الجماعة</a></li>
                     <li><a href="index.html#procedures-grid" class="nav-link">الإجراءات الإدارية</a></li>
-                    <li><a href="sustainable.html" class="nav-link active">بيوكرى مدينة مستدامة</a></li>
+                    <li><a href="sustainable.html" class="nav-link active">ماسة واحة مستدامة</a></li>
                     <li><a href="municipality.html" class="nav-link">الجماعة الترابية</a></li>
                 </ul>
             </nav>
 
             <div class="logo-container">
                 <a href="index.html" class="logo-link">
-                    <img src="assets/biougra_logo.png" alt="شعار الجماعة الترابية لبيوكرى VILLE DE BIOUGRA" class="main-logo">
+                    <img src="assets/logo.png" alt="شعار الجماعة الترابية لماسة COMMUNE DE MASSA" class="main-logo">
                 </a>
             </div>
         </div>
@@ -186,44 +248,49 @@
     <!-- SUBPAGE HERO -->
     <section class="subpage-hero">
         <div class="container subpage-hero-content">
-            <h1 class="subpage-hero-title">بيوكرى مدينة مستدامة</h1>
+            <div class="subpage-hero-tag">
+                <span>✦ التنوع البيولوجي وحماية المنظومة الواحاتية ✦</span>
+            </div>
+            <h1 class="subpage-hero-title">ماسة واحة مستدامة</h1>
+            <p class="subpage-hero-subtitle">استراتيجية الجماعة الترابية لماسة لحماية الموارد الطبيعية، المحافظة على وادي ماسة ومحيط المنتزه الوطني، وتحقيق التنمية الإيكولوجية.</p>
         </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <main class="container">
         <div class="content-box">
-            <h3>رؤية بيوكرى للتنمية المستدامة</h3>
-            <p>تضع الجماعة الترابية لبيوكرى التنمية المستدامة في صلب مخططها الاستراتيجي، بهدف تحقيق التوازن بين النمو الاقتصادي، والعدالة الاجتماعية، وحماية الثروات البيئية لفائدة الأجيال القادمة.</p>
-            <p>وترتكز استراتيجية المدينة المستدامة على ثلاثة محاور كبرى: ترشيد الموارد المائية، تعزيز التنقل الأخضر والصديق للبيئة، والرفع من كفاءة تدبير النفايات الحضرية والاستغلال الطاقي النظيف.</p>
+            <h3>رؤية ماسة للتنمية البيئية والواحة المستدامة</h3>
+            <p>تحظى الجماعة الترابية لماسة بموقع جغرافي وبيئي استثنائي على ضفاف <strong>وادي ماسة</strong> وبمحاذاة <strong>المنتزه الوطني لسوس ماسة</strong>، المصنف ضمن اتفاقية «رامسار» الدولية للمناطق الرطبة ذات الأهمية الإيكولوجية العالمية، وموطن الطيور النادرة لاسيما <em>طائر أبو منجل الأقرع (Ibis chauve)</em>.</p>
+            <p>تضع الجماعة الترابية حماية هذا الموروث الإيكولوجي الفريد في صلب برنامج عملها، من خلال الموازنة بين التنمية الاقتصادية والفلاحية وصيانة الفرشة المائية والموارد الطبيعية لفائدة الأجيال الحاضرة والقادمة.</p>
         </div>
 
         <!-- STATS SECTION -->
         <div class="stats-grid">
             <div class="stat-card">
+                <div class="stat-number">37 م.د</div>
+                <div class="stat-label">مشروع التطهير السائل بمركز ماسة</div>
+                <div class="stat-desc">مشروع مهيكل بشراكة مع وزارة الداخلية ومجلس الجهة لإحداث شبكة الصرف الصحي ومحطة المعالجة لحماية الفرشة المائية للواحة والوادي.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">33,800 هكتار</div>
+                <div class="stat-label">المنتزه الوطني لسوس ماسة</div>
+                <div class="stat-desc">مجال طبيعي ومحمية رطبة عالمية تمتد على وادي ماسة والساحل، تحضن تنوعاً بيولوجياً فريداً ومحميات لتربية المها وغزال المهر.</div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-number">100%</div>
-                <div class="stat-label">سقي المساحات الخضراء</div>
-                <div class="stat-desc">تتم عملية سقي جميع الحدائق العمومية وملاعب الغولف ومساحات الطرق الحضرية بالمدينة باستخدام المياه العادمة بعد تصفيتها ومعالجتها بالكامل.</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">30+ كلم</div>
-                <div class="stat-label">ممرات الدراجات</div>
-                <div class="stat-desc">بناء شبكة متصلة ومحمية من ممرات الدراجات الهوائية على طول الشرايين الرئيسية الحضرية لتشجيع وسائل التنقل النشطة وتقليل الانبعاثات.</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">20,000+</div>
-                <div class="stat-label">شجرة مغروسة</div>
-                <div class="stat-desc">ضمن المبادرة الخضراء للمدينة، تم غرس آلاف الأشجار والنباتات المحلية المتكيفة مع مناخ سوس ماسة لتخفيض درجة الحرارة وتحسين جودة الهواء.</div>
+                <div class="stat-label">حماية مجرى وادي ماسة</div>
+                <div class="stat-desc">مشاريع تهيئة وتنقية مجرى الوادي، بناء حواجز الوقاية من الحمولات المائية، وصيانة المنظومة المائية للسقي التقليدي بالواحة.</div>
             </div>
         </div>
 
         <div class="content-box">
-            <h3>المشاريع البيئية الكبرى</h3>
-            <p>تسعى المدينة عبر شركائها لتنزيل مشاريع نوعية تعزز حضور البعد البيئي والتنموي:</p>
+            <h3>المشاريع والمبادرات البيئية الكبرى المبرمجة</h3>
+            <p>تسعى الجماعة الترابية لماسة عبر شراكاتها المؤسساتية مع كتابة الدولة المكلفة بالماء، كتابة الدولة في التنمية المستدامة، ووكالة الحوض المائي لسوس ماسة، إلى تنزيل مشاريع بيئية محورية:</p>
             <ul class="feature-list">
-                <li><strong>حافلات أملواي عالية الجودة (BHNS):</strong> خط النقل المخصص الذي سيعوض آلاف السيارات اليومية، ويشتغل وفق معايير بيئية عالية تقلل الغازات السامة وتضمن نقلاً سريعاً ونظيفاً.</li>
-                <li><strong>الإنارة العمومية الذكية:</strong> تعميم مصابيح LED وتثبيت الموقتات الذكية للتحكم التلقائي في شدة الإضاءة، مما ساهم في خفض استهلاك الطاقة الكهربائية للجماعة بنسبة تفوق 40%.</li>
-                <li><strong>فرز النفايات الحضرية:</strong> إطلاق مخطط تجريبي لفرز النفايات المنزلية من المنبع ببعض الأحياء وتجهيز مطمر مراقب حديث لمعالجة الغازات الحيوية الناتجة وتحويلها لطاقة.</li>
+                <li><strong>محطة التصفية والمعالجة الإيكولوجية للمياه العادمة:</strong> إحداث نظام متطور لمعالجة المياه العادمة بمركز ماسة لإعادة استعمالها في سقي الأحزمة الخضراء والأشجار الواحاتية وحماية المياه الجوفية.</li>
+                <li><strong>تأهيل مطرح النفايات بسيدي عبو واقتناء آليات النظافة:</strong> اقتناء شاحنات ضاغطة وحاويات جديدة لجمع النفايات المنزلية والمشابهة بكافة الأحياء والدواوير (2.7 مليون درهم بشراكة مع ANDZOA ووزارة الداخلية).</li>
+                <li><strong>الوقاية من الفيضانات وتهيئة ضفاف وادي ماسة:</strong> بناء منشآت فنية وحواجز وقائية لحماية التجمعات السكانية القريبة من مجرى الوادي من أخطار السيول والحمولات المائية الاستثنائية.</li>
+                <li><strong>النجاعة الطاقية والإنارة العمومية الشمسية:</strong> تعميم المصابيح الاقتصادية LED واستعمال الطاقة الشمسية في إنارة المسالك القروية والمرافق الإدارية للجماعة لخفض الانبعاثات وفاتورة الاستهلاك.</li>
             </ul>
         </div>
     </main>
@@ -257,16 +324,15 @@
             <div class="footer-col">
                 <h3 class="footer-col-title">الجماعة الترابية</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">الجماعة الترابية</a></li>
-                    <li><a href="index.html">الهيكل التنظيمي للجماعة</a></li>
-                    <li><a href="index.html">مكتب المجلس الجماعي</a></li>
-                    <li><a href="index.html">أعضاء المجلس الجماعي</a></li>
-                    <li><a href="index.html">أدوار ووظائف</a></li>
+                    <li><a href="index.html">الجماعة الترابية لماسة</a></li>
+                    <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
+                    <li><a href="index.html#urban-development">المشاريع التنموية</a></li>
+                    <li><a href="index.html#synthesisSection">التقرير التركيبي والميزانية</a></li>
                     <li><a href="index.html">هيئة المساواة وتكافؤ الفرص</a></li>
                 </ul>
             </div>
             <div class="footer-logo-col">
-                <img src="assets/biougra_logo.png" alt="مدينة بيوكرى VILLE DE BIOUGRA" class="footer-logo">
+                <img src="assets/logo.png" alt="ماسة COMMUNE DE MASSA" class="footer-logo">
             </div>
         </div>
         <div class="container footer-bottom">
@@ -285,7 +351,7 @@
                 </a>
             </div>
             <div class="footer-copyright">
-                2026 &copy; <span class="muni-name-display">الجماعة الترابية لبيوكرى</span>
+                2026 &copy; <span class="muni-name-display">الجماعة الترابية لماسة</span>
             </div>
         </div>
     </footer>
@@ -298,7 +364,7 @@
         </svg>
     </button>
 
-    <script type="module" src="js/app.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="js/app.js?v=23.0"></script>
+    <script src="app.js?v=23.0"></script>
 </body>
 </html>

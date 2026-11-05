@@ -1,64 +1,34 @@
-/* DESIGN SYSTEM & VARIABLE TOKENS (SOUSS-MASSA PRESTIGIOUS 3-COLOR PALETTE 60-30-10: Royal Blue #14306B | Warm Gold #C9972E | Sand #FAF7F0 | Night #0D1B3E) */
+/* DESIGN SYSTEM & VARIABLE TOKENS (SOUSS-MASSA PRESTIGIOUS 3-COLOR PALETTE 60-30-10: Royal Blue #0E3860 | Warm Gold #E6B83F | Sand #F8F5EC | Night #172B3D) */
 :root {
-    --primary-color: #14306B;
-    --primary-hover: #0d224e;
-    --primary-light: #edf2fa;
-    --primary-glow: rgba(20, 48, 107, 0.25);
+    --primary-color: #07574B;
+    --primary-deep: #063D35;
+    --primary-hover: #05463C;
+    --primary-light: #E8F3F1;
+    --primary-glow: rgba(7, 87, 75, 0.22);
 
-    --secondary-color: #14306B;
-    --secondary-hover: #0d224e;
-    --secondary-light: #edf2fa;
-    --secondary-glow: rgba(20, 48, 107, 0.25);
+    --secondary-color: #063D35;
+    --secondary-hover: #042923;
+    --secondary-light: #E8F3F1;
+    --secondary-glow: rgba(6, 61, 53, 0.25);
 
-    --accent-color: #C9972E;
-    --accent-hover: #E3B351;
-    --accent-light: #fbf7ee;
-    --accent-glow: rgba(201, 151, 46, 0.35);
+    --accent-color: #E6B83F;
+    --accent-hover: #D4A32D;
+    --accent-light: #FEF9EC;
+    --accent-glow: rgba(230, 184, 63, 0.35);
 
-    --terracotta: #C9972E;
-    --terracotta-hover: #b88622;
-    --terracotta-light: #fbf7ee;
-    --terracotta-glow: rgba(201, 151, 46, 0.35);
+    --terracotta: #C10144;
+    --terracotta-hover: #9E0138;
+    --terracotta-light: #FDEBF2;
 
-    --cream-bg: #FAF7F0;
-    --sand-bg: #FAF7F0;
-    --cream-soft: #fdfaf4;
-
-    --dark-color: #0D1B3E;
-    --night-bg: #0D1B3E;
-    --dark-light: #15274d;
-    --text-main: #0D1B3E;
-    --text-muted: #53627d;
-    --text-footer: #B8C3DE;
-    --text-on-dark: #E8ECF5;
-
-    --bg-light: #FAF7F0;
-    --bg-white: #ffffff;
-    --border-color: #e5ded0;
-    
-    /* Institutional & Heritage Arabic Typography - Cairo as Primary */
-    --font-arabic: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
-    --font-kufi: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
-    
-    /* Spacing Scale Tokens */
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-6: 24px;
-    --space-8: 32px;
-    --space-12: 48px;
-    
-    /* Animation & Transitions */
-    --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-    --transition-slow: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    
-    /* Layout & Shadows */
-    --border-radius: 14px;
-    --border-radius-lg: 22px;
-    --box-shadow: 0 4px 20px rgba(11, 21, 48, 0.06);
-    --box-shadow-hover: 0 20px 45px rgba(27, 58, 138, 0.16);
-    --container-width: 1700px;
+    --sand-bg: #F8F5EC;
+    --cream-bg: #F8F5EC;
+    --dark-color: #063D35;
+    --night-bg: #063D35;
+    --text-main: #172B3D;
+    --text-muted: #64748B;
+    --text-footer: #CBD5E1;
+    --text-on-dark: #F8FAFC;
+    --border-subtle: #E4E8E2;
 }
 
 /* RESET & CORE STYLES */
@@ -1956,9 +1926,10 @@ body.admin-body {
     border-bottom: 1px solid #edf2f7;
 }
 .admin-table th {
-    font-weight: 700;
-    color: var(--text-main);
-    background-color: #f7fafc;
+    font-weight: 800;
+    color: #07574B;
+    background: linear-gradient(180deg, #FAF7F0 0%, #F4EFE6 100%);
+    border-bottom: 2px solid #E6B83F;
 }
 .admin-table tr:hover {
     background-color: #f8fafc;
@@ -2267,7 +2238,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1010 !important;
-    background: linear-gradient(135deg, #1B3A8A 0%, #152d6b 50%, #102354 100%) !important;
+    background: linear-gradient(135deg, #0E3860 0%, #152d6b 50%, #102354 100%) !important;
     border-bottom: 3.5px solid var(--accent-color) !important;
     box-shadow: 0 4px 20px rgba(11, 21, 48, 0.35) !important;
     transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, box-shadow 0.3s, height 0.3s;
@@ -2504,7 +2475,7 @@ body.dark-mode-theme .news-item {
     background:
         radial-gradient(60% 80% at 80% 10%, rgba(15, 157, 138, 0.42), transparent),
         radial-gradient(50% 70% at 10% 90%, rgba(242, 169, 59, 0.32), transparent),
-        linear-gradient(160deg, #0B1530 0%, #1B3A8A 100%);
+        linear-gradient(160deg, #0B1530 0%, #0E3860 100%);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -3583,7 +3554,7 @@ body.dark-mode-theme .news-item {
 
 /* 5. INTERACTIVE FILE & COMPLAINT TRACKING BAR (تتبع ملفك أو شكايتك) */
 .tracking-strip-section {
-    background: linear-gradient(135deg, #0B1530 0%, #162447 50%, #1B3A8A 100%);
+    background: linear-gradient(135deg, #0B1530 0%, #162447 50%, #0E3860 100%);
     color: #ffffff;
     padding: 38px 0;
     position: relative;
@@ -3957,7 +3928,7 @@ body.dark-mode-theme .cmdk-footer {
     border-radius: 12px;
     padding: 16px;
     transition: all 0.3s ease;
-    border-top: 3px solid #1B3A8A;
+    border-top: 3px solid #0E3860;
     color: #1e293b;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
@@ -3965,7 +3936,7 @@ body.dark-mode-theme .cmdk-footer {
 .subvention-cat-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(27, 58, 138, 0.08);
-    border-top-color: #C9972E;
+    border-top-color: #E6B83F;
 }
 
 .sub-cat-header {
@@ -4004,7 +3975,7 @@ body.dark-mode-theme .cmdk-footer {
 
 .sub-cat-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #1B3A8A, #10b981);
+    background: linear-gradient(90deg, #0E3860, #10b981);
     border-radius: 3px;
 }
 
@@ -4041,9 +4012,9 @@ body.dark-mode-theme .cmdk-footer {
 
 .eligibility-tab-btn:hover,
 .eligibility-tab-btn.active {
-    background: #1B3A8A;
+    background: #0E3860;
     color: #ffffff;
-    border-color: #1B3A8A;
+    border-color: #0E3860;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(27, 58, 138, 0.25);
 }
@@ -4066,7 +4037,7 @@ body.dark-mode-theme .cmdk-footer {
 }
 
 .eligibility-col h4 {
-    color: #1B3A8A;
+    color: #0E3860;
     font-size: 1.05rem;
     margin-bottom: 12px;
     display: flex;
@@ -4116,11 +4087,11 @@ body.dark-mode-theme .cmdk-footer {
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 16px;
-    border-right: 4px solid #1B3A8A;
+    border-right: 4px solid #0E3860;
 }
 
 .consistance-card.gold-border {
-    border-right-color: #C9972E;
+    border-right-color: #E6B83F;
 }
 
 .consistance-card.green-border {
@@ -4163,7 +4134,7 @@ body.dark-mode-theme .cmdk-footer {
     height: 72px;
     border-radius: 50%;
     background: rgba(201, 151, 46, 0.2);
-    border: 3px solid #C9972E;
+    border: 3px solid #E6B83F;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4180,7 +4151,7 @@ body.dark-mode-theme .cmdk-footer {
 
 .cv-role {
     font-size: 0.95rem;
-    color: #E3B351;
+    color: #D4A32D;
     font-weight: 700;
 }
 

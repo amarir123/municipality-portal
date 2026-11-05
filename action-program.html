@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="برنامج عمل الجماعة الترابية لبيوكرى 2022-2027 - الأهداف الاستراتيجية والمشاريع التنموية.">
-    <title>برنامج عمل الجماعة 2022-2027 | بوابة جماعة بيوكرى</title>
+    <meta name="description" content="برنامج عمل الجماعة الترابية لماسة 2017- 2022 - الأهداف الاستراتيجية، التشخيص التشاركي، والمشاريع التنموية المهيكلة.">
+    <title>برنامج عمل الجماعة 2017- 2022 | بوابة جماعة ماسة</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=22.0">
+    <link rel="stylesheet" href="style.css?v=120.0">
     <link rel="stylesheet" href="moroccan-suite.css?v=22.0">
     <style>
         .subpage-hero {
             position: relative;
             height: 320px;
-            background-image: url('assets/biougra_bg.png');
+            background-image: url('assets/biougra_landscape_clean.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -29,7 +29,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(13, 94, 166, 0.4) 0%, rgba(13, 94, 166, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(6, 61, 53, 0.88) 0%, rgba(7, 87, 75, 0.94) 100%);
             z-index: 1;
         }
         .subpage-hero-content {
@@ -37,30 +37,133 @@
             z-index: 2;
             width: 100%;
         }
-        .subpage-hero-title {
-            font-size: 2.5rem;
-            font-weight: 800;
+        .subpage-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(230, 184, 63, 0.2);
+            border: 1px solid rgba(230, 184, 63, 0.5);
+            border-radius: 30px;
+            color: #E6B83F;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
+        .subpage-hero-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            line-height: 1.3;
+        }
+        .subpage-hero-subtitle {
+            font-size: 1.1rem;
+            color: #FFFFFF !important;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+            opacity: 0.98;
+            max-width: 750px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Diagnostic Highlights Grid */
+        .diagnostic-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+        .diag-stat-card {
+            background: var(--bg-white);
+            padding: 24px 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 14px rgba(7, 87, 75, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .diag-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(7, 87, 75, 0.12);
+        }
+        .diag-stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(7, 87, 75, 0.08);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .diag-stat-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1.2;
+            font-family: 'Cairo', sans-serif;
+        }
+        .diag-stat-lbl {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
         .content-box {
             background-color: var(--bg-white);
-            padding: 40px;
+            padding: 35px 40px;
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
             box-shadow: var(--box-shadow);
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         .content-box h3 {
             color: var(--primary-color);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 18px;
             border-right: 4px solid var(--accent-color);
             padding-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .content-box p {
-            margin-bottom: 16px;
-            color: #4a5568;
+            margin-bottom: 14px;
+            color: #334155;
+            font-size: 0.98rem;
+            line-height: 1.8;
+        }
+
+        /* Diagnostic Demographics Pill Box */
+        .demographics-pill-box {
+            background: #F8F5EC;
+            border: 1px solid rgba(230, 184, 63, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .demographic-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .demographic-item strong {
+            color: var(--primary-color);
             font-size: 0.95rem;
+        }
+        .demographic-item span {
+            color: #475569;
+            font-size: 0.88rem;
+            line-height: 1.5;
         }
         
         /* Accordion layout for Program Axes */
@@ -68,41 +171,48 @@
             margin: 30px 0;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
         .accordion-item {
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: 0 4px 12px rgba(7, 87, 75, 0.05);
             background-color: var(--bg-white);
             transition: var(--transition);
         }
         .accordion-header {
-            padding: 20px 24px;
-            background-color: var(--bg-light);
+            padding: 22px 26px;
+            background-color: #FAFAF8;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-main);
             transition: var(--transition);
             user-select: none;
+            border-right: 4px solid transparent;
         }
         .accordion-header:hover {
-            background-color: var(--primary-light);
+            background-color: rgba(7, 87, 75, 0.04);
             color: var(--primary-color);
         }
-        .accordion-item.active .accordion-header {
-            background-color: var(--primary-color);
-            color: var(--bg-white);
+        .accordion-item.active .accordion-header,
+        .accordion-item.active .accordion-header span {
+            background-color: var(--primary-color) !important;
+            color: #FFFFFF !important;
+            border-right: 4px solid var(--accent-color);
+        }
+        .accordion-item.active .accordion-header svg {
+            stroke: #FFFFFF !important;
         }
         .accordion-icon {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
         .accordion-item.active .accordion-icon {
             transform: rotate(180deg);
@@ -110,65 +220,200 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 24px;
+            transition: max-height 0.35s ease-out;
+            padding: 0 26px;
         }
         .accordion-item.active .accordion-content {
-            max-height: 1000px;
-            padding: 24px;
+            max-height: 2500px;
+            padding: 26px;
             border-top: 1px solid var(--border-color);
         }
         
         .axis-meta {
             display: flex;
-            gap: 24px;
-            background-color: var(--bg-light);
-            padding: 15px 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: #F8F5EC;
+            padding: 16px 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 22px;
+            font-size: 0.92rem;
+            border: 1px solid rgba(230, 184, 63, 0.3);
+            align-items: center;
+        }
+        .axis-meta strong {
+            color: var(--primary-color);
+        }
+        .axis-progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: auto;
         }
         .axis-progress-bar {
-            width: 150px;
-            height: 8px;
-            background-color: #dee2e6;
-            border-radius: 4px;
+            width: 140px;
+            height: 9px;
+            background-color: #e2e8f0;
+            border-radius: 6px;
             overflow: hidden;
-            align-self: center;
         }
         .axis-progress {
             height: 100%;
             background-color: var(--accent-color);
-            border-radius: 4px;
+            border-radius: 6px;
         }
-        .accordion-item.active .axis-progress {
-            background-color: var(--accent-color);
+
+        /* Detailed Project Cards inside Accordion */
+        .axis-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 18px;
         }
-        .project-list {
-            margin-right: 20px;
+        .axis-project-subcard {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
-        .project-list li {
-            list-style-type: disc;
-            margin-bottom: 10px;
+        .axis-project-subcard:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .proj-code-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(7, 87, 75, 0.08);
+            color: var(--primary-color);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.78rem;
+        }
+        .proj-card-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .proj-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            padding-top: 8px;
+            border-top: 1px dashed #e2e8f0;
+            margin-top: auto;
+        }
+        .proj-cost-highlight {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .proj-partners-text {
+            font-size: 0.8rem;
+            color: #475569;
+            background: #F8F5EC;
+            padding: 6px 10px;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+
+        /* Official Download Banner Card */
+        .pac-download-banner {
+            background: linear-gradient(135deg, var(--deep-green, #063D35) 0%, var(--primary-color, #07574B) 100%);
+            border-radius: var(--border-radius-lg);
+            padding: 32px 40px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 40px 0;
+            box-shadow: 0 10px 25px rgba(6, 61, 53, 0.25);
+            border: 1px solid rgba(230, 184, 63, 0.35);
+        }
+        .pac-download-info h4 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #E6B83F;
+            margin-bottom: 8px;
+        }
+        .pac-download-info p {
             font-size: 0.95rem;
-            color: #4a5568;
+            color: #F8F5EC;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .pac-download-btn-wrap {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 992px) {
+            .diagnostic-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .axis-projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .demographics-pill-box {
+                grid-template-columns: 1fr;
+            }
+            .pac-download-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 20px;
+            }
         }
         @media (max-width: 768px) {
             .subpage-hero {
-                height: 240px;
+                height: 250px;
             }
             .subpage-hero-title {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
+            }
+            .diagnostic-stats-grid {
+                grid-template-columns: 1fr;
             }
             .axis-meta {
                 flex-direction: column;
-                gap: 10px;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .axis-progress-wrap {
+                margin-right: 0;
+                width: 100%;
+                justify-content: space-between;
             }
             .axis-progress-bar {
-                width: 100%;
+                flex: 1;
             }
         }
     </style>
+    <script>
+        // Automatic cache buster & storage synchronizer for Commune de Massa Portal
+        (function() {
+            const MASSA_SYNC_BUILD = 'massa_build_official_v120_benlachgar';
+            try {
+                if (localStorage.getItem('massa_sync_build') !== MASSA_SYNC_BUILD) {
+                    console.log('Synchronizing official Massa portal data to build:', MASSA_SYNC_BUILD);
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    localStorage.setItem('massa_sync_build', MASSA_SYNC_BUILD);
+                }
+            } catch(e) {
+                console.warn('Storage sync:', e);
+            }
+        })();
+    </script>
+
 </head>
 <body>
 
@@ -217,17 +462,17 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="contact.html" class="nav-link">أوقات العمل</a></li>
                     <li><a href="publications.html" class="nav-link">منشوراتنا</a></li>
-                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية الحضرية</a></li>
+                    <li><a href="index.html#urban-development" class="nav-link">برنامج التنمية والمشاريع</a></li>
                     <li><a href="action-program.html" class="nav-link active">برنامج عمل الجماعة</a></li>
                     <li><a href="index.html#procedures-grid" class="nav-link">الإجراءات الإدارية</a></li>
-                    <li><a href="sustainable.html" class="nav-link">بيوكرى مدينة مستدامة</a></li>
+                    <li><a href="sustainable.html" class="nav-link">ماسة واحة مستدامة</a></li>
                     <li><a href="municipality.html" class="nav-link">الجماعة الترابية</a></li>
                 </ul>
             </nav>
 
             <div class="logo-container">
                 <a href="index.html" class="logo-link">
-                    <img src="assets/biougra_logo.png" alt="شعار الجماعة الترابية لبيوكرى VILLE DE BIOUGRA" class="main-logo">
+                    <img src="assets/logo.png" alt="شعار الجماعة الترابية لماسة COMMUNE DE MASSA" class="main-logo">
                 </a>
             </div>
         </div>
@@ -236,133 +481,357 @@
     <!-- SUBPAGE HERO -->
     <section class="subpage-hero">
         <div class="container subpage-hero-content">
-            <h1 class="subpage-hero-title">برنامج عمل الجماعة 2022-2027</h1>
+            <div class="subpage-hero-tag">
+                <span>✦ الوثيقة الاستراتيجية الرسمية للمجلس الجماعي ✦</span>
+            </div>
+            <h1 class="subpage-hero-title">برنامج عمل الجماعة الترابية لماسة</h1>
+            <p class="subpage-hero-subtitle">المخطط التنموي الاستراتيجي الشامل 2017- 2022 لتأهيل البنية التحتية، حماية البيئة، والنهوض بالمجال الترابي لماسة.</p>
         </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <main class="container">
-        <div class="content-box">
-            <h3>تقديم برنامج عمل الجماعة</h3>
-            <p>يعد برنامج عمل الجماعة الترابية لبيوكرى للفترة الممتدة بين 2022 و2027 الوثيقة المرجعية والتخطيطية الكبرى لرسم وتوجيه الاستثمارات التنموية بالمدينة خلال الولاية الانتدابية الحالية.</p>
-            <p>تم إعداد هذا المخطط وفق مقاربة تشاركية واسعة شملت الفاعلين الاقتصاديين، المجتمع المدني، الهيئات الاستشارية، وممثلي الإدارات العمومية، لتحديد أولويات التنمية لساكنة بيوكرى والمصادقة على ميزانية مالية إجمالية تفوق 2.6 مليار درهم لتمويل مختلف المشاريع.</p>
+
+        <!-- 1. Diagnostic Indicators 4-Card Suite -->
+        <div class="diagnostic-stats-grid">
+            <div class="diag-stat-card">
+                <div class="diag-stat-icon">👥</div>
+                <div>
+                    <div class="diag-stat-val">17,579</div>
+                    <div class="diag-stat-lbl">نسمة (4,067 أسرة)</div>
+                </div>
+            </div>
+            <div class="diag-stat-card">
+                <div class="diag-stat-icon">💰</div>
+                <div>
+                    <div class="diag-stat-val">440.84 م.د</div>
+                    <div class="diag-stat-lbl">إجمالي الاستثمارات المبرمجة</div>
+                </div>
+            </div>
+            <div class="diag-stat-card">
+                <div class="diag-stat-icon">🏗️</div>
+                <div>
+                    <div class="diag-stat-val">126</div>
+                    <div class="diag-stat-lbl">مشروعاً تنموياً مهيكلاً</div>
+                </div>
+            </div>
+            <div class="diag-stat-card">
+                <div class="diag-stat-icon">🎯</div>
+                <div>
+                    <div class="diag-stat-val">4</div>
+                    <div class="diag-stat-lbl">محاور استراتيجية كبرى</div>
+                </div>
+            </div>
         </div>
 
-        <h2 class="section-title">المحاور الاستراتيجية الكبرى للبرنامج</h2>
+        <!-- 2. PAC Diagnostic Presentation Box -->
+        <div class="content-box">
+            <h3>تقديم برنامج عمل الجماعة والتشخيص الترابي التشاركي</h3>
+            <p>يعد <strong>برنامج عمل الجماعة الترابية لماسة</strong> الوثيقة المرجعية والتخطيطية الكبرى لرسم وتوجيه الاستثمارات التنموية بتراب الجماعة، تنفيذاً لمقتضيات القانون التنظيمي رقم 113.14 المتعلق بالجماعات الترابية ومقتضيات المرسوم رقم 2.16.301 المتعلق بمسطرة إعداد برنامج عمل الجماعة وتتبعه وتحيينه وتقييمه.</p>
+            <p>تم إعداد هذا المخطط الاستراتيجي وفق <strong>مقاربة تشاركية مندمجة</strong> واكبتها الهيئات الاستشارية المحدثة لدى المجلس، لاسيما <em>هيئة المساواة وتكافؤ الفرص ومقاربة النوع</em>، وبمساهمة فاعلة من مختلف المصالح اللاممركزة للدولة، المجتمع المدني، والشركاء المؤسساتيين في إقليم اشتوكة آيت باها وجهة سوس ماسة.</p>
+            
+            <div class="demographics-pill-box">
+                <div class="demographic-item">
+                    <strong>📍 المجال الحضري والمركز (60% من الساكنة - 10,458 نسمة):</strong>
+                    <span>يشمل أحياء تاسيلا، سيدي بورجا، الخارج، أغربان، الزاوية، الركاين، بويغد، تين حموش، المصلى، المسيرة الخضراء، وبوتبوز.</span>
+                </div>
+                <div class="demographic-item">
+                    <strong>🌾 المجال القروي والدواوير (40% من الساكنة - 7,121 نسمة):</strong>
+                    <span>يشمل دواوير جوابر، تسنولت، إفنتار، أكرار، أدولون، آيت السوق، تكوت، آيت الياس/لحوس، أدومحيا، والمرس، وساحل سيدي بوالفضايل.</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 0;">يبلغ الغلاف المالي التقديري الإجمالي للمشاريع المبرمجة بالبرنامج <strong>440,840,000 درهم (44.08 مليار سنتيم)</strong> موزعة على 4 محاور استراتيجية كبرى تتكامل فيها التجهيزات الأساسية مع حماية البيئة والتنمية الاقتصادية والحكامة الترابية.</p>
+        </div>
+
+        <!-- 3. Official PAC Document Download Banner -->
+        <div class="pac-download-banner">
+            <div class="pac-download-info">
+                <h4>تحميل وثيقة برنامج عمل الجماعة كاملة</h4>
+                <p>النسخة الرسمية الكاملة المعتمدة من طرف المجلس الجماعي لماسة، متضمنة التشخيص المالي والمجالي، بطائق المشاريع، وجداول الالتزامات المالية للشركاء (4.19 ميغابايت).</p>
+            </div>
+            <div class="pac-download-btn-wrap">
+                <a href="#download-pac" onclick="alert('وثيقة برنامج عمل جماعة ماسة الرسمية متوفرة في قسم المنشورات والمصالح الإدارية بالجماعة.'); return false;" class="btn btn-gold btn-lg">تحميل الوثيقة الرسمية 📥</a>
+            </div>
+        </div>
+
+        <!-- 4. Strategic Axes Section -->
+        <h2 class="section-title">المحاور الاستراتيجية الأربعة الكبرى للبرنامج</h2>
 
         <div class="accordion-wrapper">
             <!-- Axis 1 -->
             <div class="accordion-item active">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>المحور الأول: تهيئة البنية التحتية، الطرق وحركية السير</span>
+                    <span>المحور الأول: تقوية خدمات القرب في التجهيزات الأساسية وفك العزلة وتنظيم المجال الترابي</span>
                     <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-content">
                     <div class="axis-meta">
-                        <div><strong>الميزانية المخصصة:</strong> 1.1 مليار درهم</div>
-                        <div><strong>نسبة الإنجاز الفعلية:</strong> 85%</div>
-                        <div class="axis-progress-bar">
-                            <div class="axis-progress" style="width: 85%;"></div>
+                        <div><strong>الميزانية المخصصة:</strong> 65.94 مليون درهم</div>
+                        <div><strong>عدد المشاريع:</strong> 29 مشروعاً مهيكلاً</div>
+                        <div class="axis-progress-wrap">
+                            <span>نسبة الإنجاز: <strong>88%</strong></span>
+                            <div class="axis-progress-bar">
+                                <div class="axis-progress" style="width: 88%;"></div>
+                            </div>
                         </div>
                     </div>
-                    <p>يهدف هذا المحور إلى فك العزلة وتطوير حركة السير وتهيئة الطرق الكبرى ومداخل المدينة وربط الأحياء ببعضها.</p>
-                    <ul class="project-list">
-                        <li>بناء الممر تحت الأرضي بمدخل المدينة وتثليث الطرق الدائرية.</li>
-                        <li>إعادة تعبيد الشوارع الرئيسية وتحديث شبكة الإنارة العمومية بمصابيح موفرة للطاقة.</li>
-                        <li>إنجاز ممرات الدراجات الهوائية والممرات الخاصة بالراجلين وتحديث إشارات المرور الذكية.</li>
-                    </ul>
+                    <p>يهدف هذا المحور إلى تقوية البنية التحتية الأساسية والرفع من جودتها، فك العزلة عن دواوير الجماعة، تنظيم المجال العمراني، تعميم تزويد الساكنة بالماء الصالح للشرب، وتقوية الشبكة الكهربائية والإنارة العمومية بمختلف المراكز والهوامش.</p>
+                    
+                    <div class="axis-projects-grid">
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 7.1</span>
+                            <h4 class="proj-card-title">تمرير التيار الكهربائي الجهد المتوسط تحت أرضي وتقوية الشبكة</h4>
+                            <div class="proj-partners-text">الشركاء: المكتب الوطني للكهرباء (ONEE)، وزارة الداخلية، والجماعة الترابية لماسة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">8,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 2.3</span>
+                            <h4 class="proj-card-title">بناء المحاور الكبرى للطرق بدواوير: آيت السوق، آيت الياس، تكوت، أدولون، إفنتار، أكرار، سيدي بوالفضايل، أدومحيا، تسنولت</h4>
+                            <div class="proj-partners-text">الشركاء: صندوق التنمية القروية (FDR)، جهة سوس ماسة، المجلس الإقليمي، وزارة التجهيز</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">7,410,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 1.3</span>
+                            <h4 class="proj-card-title">بناء وتعبيد الطريق الرابطة بين الطريق الإقليمية 1016 ودوار العزيب مرورا بدوار جوابر</h4>
+                            <div class="proj-partners-text">الشركاء: صندوق التنمية القروية (FDR)، جهة سوس ماسة، المجلس الإقليمي باشتوكة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">5,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 4.1 & 4.2</span>
+                            <h4 class="proj-card-title">تهيئة وتقوية وتمديد الشبكة الكهربائية وشبكة الماء الصالح للشرب بالدواوير</h4>
+                            <div class="proj-partners-text">الشركاء: ONEE قطاع الكهرباء والماء، الجماعة، والمستفيدون</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">8,000,000 درهم</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Axis 2 -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>المحور الثاني: البيئة، جودة الحياة وتطوير المساحات الخضراء</span>
+                    <span>المحور الثاني: حماية الموارد الطبيعية والمحافظة على البيئة والوقاية من الفيضانات والحرائق</span>
                     <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-content">
                     <div class="axis-meta">
-                        <div><strong>الميزانية المخصصة:</strong> 450 مليون درهم</div>
-                        <div><strong>نسبة الإنجاز الفعلية:</strong> 75%</div>
-                        <div class="axis-progress-bar">
-                            <div class="axis-progress" style="width: 75%;"></div>
+                        <div><strong>الميزانية المخصصة:</strong> 123.90 مليون درهم</div>
+                        <div><strong>عدد المشاريع:</strong> 16 مشروعاً بيئياً وقائياً</div>
+                        <div class="axis-progress-wrap">
+                            <span>نسبة الإنجاز: <strong>82%</strong></span>
+                            <div class="axis-progress-bar">
+                                <div class="axis-progress" style="width: 82%;"></div>
+                            </div>
                         </div>
                     </div>
-                    <p>يركز هذا المحور على الجوانب البيئية وتجميل المدينة وزيادة حصة الفرد من المساحات الخضراء والحدائق العامة.</p>
-                    <ul class="project-list">
-                        <li>تهيئة وتدشين منتزه "النجاح" ومنتزهات الأحياء للقرب.</li>
-                        <li>إنجاز محطة متطورة لتصفية المياه العادمة لإعادة استخدامها بسقي حدائق المدينة.</li>
-                        <li>إطلاق مبادرة التشجير المكثف لأحياء بيوكرى.</li>
-                    </ul>
+                    <p>يركز هذا المحور الحيوي على صيانة المنظومة البيئية لوادي ماسة والواحة المحيطة به، إنجاز شبكة التطهير السائل ومحطة المعالجة لحماية الفرشة المائية، تدبير وتأهيل مطرح النفايات بسيدي عبو، والوقاية الاستباقية من الفيضانات والحرائق.</p>
+                    
+                    <div class="axis-projects-grid">
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 4.5</span>
+                            <h4 class="proj-card-title">إنجاز شبكة صرف المياه العادمة بمركز ماسة (التطهير السائل)</h4>
+                            <div class="proj-partners-text">الشركاء: كتابة الدولة في التنمية المستدامة، كتابة الدولة في الماء، جهة سوس ماسة، ONEE، وزارة الداخلية</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">40,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 4.7</span>
+                            <h4 class="proj-card-title">إحداث محطة لمعالجة وتصفية المياه العادمة بمركز ماسة</h4>
+                            <div class="proj-partners-text">الشركاء: كتابة الدولة المكلفة بالماء والبيئة، مجلس الجهة، ONEE، الجماعة الترابية لماسة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">30,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 4.6</span>
+                            <h4 class="proj-card-title">إنجاز شبكة صرف مياه الأمطار بمركز ماسة لحماية الأحياء</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة الداخلية (صندوق الكوارث الطبيعية)، كتابة الدولة في الماء، مجلس الجهة، الجماعة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">15,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 4.11</span>
+                            <h4 class="proj-card-title">تهيئة وتنقية وتأهيل مجرى وادي ماسة وبناء حواجز الوقاية</h4>
+                            <div class="proj-partners-text">الشركاء: كتابة الدولة المكلفة بالماء، صندوق الكوارث الطبيعية، الجماعة الترابية لماسة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">10,000,000 درهم</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Axis 3 -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>المحور الثالث: دعم التعليم، الصحة، الشؤون الاجتماعية وتكافؤ الفرص</span>
+                    <span>المحور الثالث: تفعيل مرتكزات الحكامة والمقاربة التشاركية وتكريس مبادئ المساواة وتكافؤ الفرص والرقمنة</span>
                     <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-content">
                     <div class="axis-meta">
-                        <div><strong>الميزانية المخصصة:</strong> 350 مليون درهم</div>
-                        <div><strong>نسبة الإنجاز الفعلية:</strong> 60%</div>
-                        <div class="axis-progress-bar">
-                            <div class="axis-progress" style="width: 60%;"></div>
+                        <div><strong>الميزانية المخصصة:</strong> 61.50 مليون درهم</div>
+                        <div><strong>عدد المشاريع:</strong> 51 مشروعاً وعملية</div>
+                        <div class="axis-progress-wrap">
+                            <span>نسبة الإنجاز: <strong>90%</strong></span>
+                            <div class="axis-progress-bar">
+                                <div class="axis-progress" style="width: 90%;"></div>
+                            </div>
                         </div>
                     </div>
-                    <p>يهدف هذا المحور لتحقيق التماسك الاجتماعي وتحسين الخدمات الأساسية في قطاعي الصحة والتعليم ودعم الشباب والنساء والطفل.</p>
-                    <ul class="project-list">
-                        <li>بناء مراكز صحية للقرب وتحديث مستوصفات الأحياء الهامشية وتجهيزها.</li>
-                        <li>بناء وتحديث المدارس الابتدائية ودعم برامج التعليم الأولي العمومي للأسر المعوزة.</li>
-                        <li>توقيع اتفاقيات دعم وتأهيل سنوية للجمعيات العاملة بمجال محو الأمية والرعاية والتوحد.</li>
-                    </ul>
+                    <p>يرمي هذا المحور إلى عصرنة التدبير الجماعي ورقمنة الخدمات الإدارية، إحداث بوابة إلكترونية تفاعلية للجماعة (المشروع 5.5)، تكوين المنتخبين والموظفين، تقوية قدرات جمعيات المجتمع المدني، وتأهيل قطاعات الشباب والرياضة والتعليم والتكوين المهني.</p>
+                    
+                    <div class="axis-projects-grid">
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 6.19</span>
+                            <h4 class="proj-card-title">إحداث مركز التكوين المهني لشباب جماعة ماسة</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة التربية الوطنية والتكوين المهني، مجلس جهة سوس ماسة، المجلس الإقليمي، الجماعة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">10,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 6.1</span>
+                            <h4 class="proj-card-title">تهيئة وتعشيب وتجهيز الملعب الجماعي بسيدي عبو</h4>
+                            <div class="proj-partners-text">الشركاء: الجامعة الملكية المغربية لكرة القدم، وزارة الشباب والرياضة، المجلس الإقليمي، الجماعة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">8,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 6.7</span>
+                            <h4 class="proj-card-title">إحداث قاعة مغطاة للرياضات وملاعب القرب بمختلف الدواوير</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة الشباب والرياضة، الجماعة الترابية لماسة، المبادرة الوطنية للتنمية البشرية (INDH)</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">5,200,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 5.5</span>
+                            <h4 class="proj-card-title">إحداث البوابة الإلكترونية للجماعة وتحديث الإدارة الجماعية</h4>
+                            <div class="proj-partners-text">الشركاء: الجماعة الترابية لماسة، المديرية العامة للجماعات الترابية (DGCL)</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">1,500,000 درهم</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Axis 4 -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>المحور الرابع: الهوية الثقافية، السياحة وتثمين التراث المحلي</span>
+                    <span>المحور الرابع: تحسين جاذبية ماسة وتنويع اقتصادها وتثمين موروثها الثقافي والرياضي والسياحي</span>
                     <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-content">
                     <div class="axis-meta">
-                        <div><strong>الميزانية المخصصة:</strong> 500 مليون درهم</div>
-                        <div><strong>نسبة الإنجاز الفعلية:</strong> 70%</div>
-                        <div class="axis-progress-bar">
-                            <div class="axis-progress" style="width: 70%;"></div>
+                        <div><strong>الميزانية المخصصة:</strong> 186.60 مليون درهم</div>
+                        <div><strong>عدد المشاريع:</strong> 30 مشروعاً استراتيجياً</div>
+                        <div class="axis-progress-wrap">
+                            <span>نسبة الإنجاز: <strong>80%</strong></span>
+                            <div class="axis-progress-bar">
+                                <div class="axis-progress" style="width: 80%;"></div>
+                            </div>
                         </div>
                     </div>
-                    <p>يرمي لتنشيط القطاع السياحي وتثبيت هوية المدينة وتاريخها الأمازيغي وحماية المواقع الأثرية.</p>
-                    <ul class="project-list">
-                        <li>مشروع تأهيل المعالم التاريخية والتراثية بالمنطقة وإحداث متحف تذكاري.</li>
-                        <li>إنشاء وتجهيز "المركب الثقافي لبيوكرى" كفضاء للعروض الفنية الكبرى.</li>
-                        <li>إحداث متاحف متخصصة وتطوير الكورنيش والمسار السياحي للشاطئ بالكامل.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Axis 5 -->
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>المحور الخامس: الإدارة الذكية والتحول الرقمي وحسن الحكامة</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
-                <div class="accordion-content">
-                    <div class="axis-meta">
-                        <div><strong>الميزانية المخصصة:</strong> 200 مليون درهم</div>
-                        <div><strong>نسبة الإنجاز الفعلية:</strong> 80%</div>
-                        <div class="axis-progress-bar">
-                            <div class="axis-progress" style="width: 80%;"></div>
+                    <p>يمثل المحور الاقتصادي والتنموي الأكبر في ميزانية البرنامج، ويهدف إلى إحداث المنطقة الحرفية والصناعية بسيدي عبو، عصرنة وتأهيل السوق الأسبوعي، إحداث مرفأ الصيد التقليدي بسيدي بوالفضايل، تثنية الطريق 1016، وبناء قنطرة ثانية على وادي ماسة لحماية وانسيابية الربط الإقليمي.</p>
+                    
+                    <div class="axis-projects-grid">
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 9.4</span>
+                            <h4 class="proj-card-title">إحداث المنطقة الحرفية والصناعية بسيدي عبو</h4>
+                            <div class="proj-partners-text">الشركاء: الجماعة (العقار والدراسة)، شركة العمران والقطاع الخاص، وزارة التجارة والصناعة، مجلس الجهة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">40,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 7.1</span>
+                            <h4 class="proj-card-title">إعادة هيكلة الأحياء الناقصة التجهيز بالمركز وهوامشه</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة إعداد التراب الوطني والتعمير والإسكان وسياسة المدينة، الجماعة، المجلس الإقليمي</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">33,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 3.13</span>
+                            <h4 class="proj-card-title">إحداث قنطرة ثانية على وادي ماسة وتأهيل المنشآت الفنية</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة التجهيز والنقل، كتابة الدولة المكلفة بالماء، صندوق التنمية القروية (FDR)، مجلس الجهة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">30,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 9.2</span>
+                            <h4 class="proj-card-title">إعادة هيكلة وعصرنة السوق الأسبوعي بسيدي عبو وبناء المجزرة النموذجية</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة الداخلية، مجلس جهة سوس ماسة، المجلس الإقليمي باشتوكة، الجماعة الترابية لماسة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">25,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 9.9</span>
+                            <h4 class="proj-card-title">إحداث مرفأ الصيد التقليدي ونقطة التفريغ بسيدي بوالفضايل</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة الفلاحة والصيد البحري، مجلس جهة سوس ماسة، الجماعة (عينية)</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">20,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 7.12</span>
+                            <h4 class="proj-card-title">تثنية مقطع الطريق الإقليمية 1016 من سيدي عبو إلى مقر الجماعة</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة التجهيز والنقل، صندوق التنمية القروية FDR، مجلس جهة سوس ماسة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">15,000,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 8.1 & 8.2</span>
+                            <h4 class="proj-card-title">صيانة وترميم السور التقليدي بتاسيلا وأخربان وتثمين المآثر التاريخية</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة الثقافة والاتصال، الجماعة الترابية لماسة، جمعيات المجتمع المدني</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">2,500,000 درهم</span>
+                            </div>
+                        </div>
+                        <div class="axis-project-subcard">
+                            <span class="proj-code-badge">الرمز 8.3</span>
+                            <h4 class="proj-card-title">تأهيل وتجهيز المركب الثقافي لماسة ومركز عرض منتوجات الصناعة التقليدية</h4>
+                            <div class="proj-partners-text">الشركاء: وزارة السياحة والصناعة التقليدية، كتابة الدولة المكلفة بالصناعة التقليدية، الجماعة</div>
+                            <div class="proj-card-meta">
+                                <span>الكلفة التقديرية:</span>
+                                <span class="proj-cost-highlight">7,000,000 درهم</span>
+                            </div>
                         </div>
                     </div>
-                    <p>يرتكز على رقمنة ورقابة الأنظمة الإدارية الداخلية وتسهيل الخدمات على المرتفقين والمواطنين وتتبع الميزانية.</p>
-                    <ul class="project-list">
-                        <li>تعميم الخدمات السحابية والربط الشبكي لمقاطعات وملحقات الجماعة.</li>
-                        <li>دعم الخدمات الرقمية المباشرة لرخص الأنشطة والتعمير وشواهد الحالة المدنية.</li>
-                        <li>تكوين المستمر للموظفين الإداريين لضمان الجودة والشفافية وتسهيل الاستقبال.</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -397,16 +866,15 @@
             <div class="footer-col">
                 <h3 class="footer-col-title">الجماعة الترابية</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">الجماعة الترابية</a></li>
-                    <li><a href="index.html">الهيكل التنظيمي للجماعة</a></li>
-                    <li><a href="index.html">مكتب المجلس الجماعي</a></li>
-                    <li><a href="index.html">أعضاء المجلس الجماعي</a></li>
-                    <li><a href="index.html">أدوار ووظائف</a></li>
+                    <li><a href="index.html">الجماعة الترابية لماسة</a></li>
+                    <li><a href="action-program.html">برنامج عمل الجماعة</a></li>
+                    <li><a href="index.html#urban-development">المشاريع التنموية</a></li>
+                    <li><a href="index.html#synthesisSection">التقرير التركيبي والميزانية</a></li>
                     <li><a href="index.html">هيئة المساواة وتكافؤ الفرص</a></li>
                 </ul>
             </div>
             <div class="footer-logo-col">
-                <img src="assets/biougra_logo.png" alt="مدينة بيوكرى VILLE DE BIOUGRA" class="footer-logo">
+                <img src="assets/logo.png" alt="ماسة COMMUNE DE MASSA" class="footer-logo">
             </div>
         </div>
         <div class="container footer-bottom">
@@ -425,7 +893,7 @@
                 </a>
             </div>
             <div class="footer-copyright">
-                2026 &copy; <span class="muni-name-display">الجماعة الترابية لبيوكرى</span>
+                2026 &copy; <span class="muni-name-display">الجماعة الترابية لماسة</span>
             </div>
         </div>
     </footer>
@@ -438,15 +906,12 @@
         </svg>
     </button>
 
-    <script type="module" src="js/app.js?v=22.0"></script>
-    <script src="app.js?v=22.0"></script>
+    <script type="module" src="js/app.js?v=23.0"></script>
+    <script src="app.js?v=23.0"></script>
     <script>
-        // Custom accordion logic for action program page
         function toggleAccordion(header) {
             const item = header.parentElement;
             const items = document.querySelectorAll('.accordion-item');
-            
-            // Toggle active state
             const isActive = item.classList.contains('active');
             
             items.forEach(i => {
@@ -461,7 +926,6 @@
             }
         }
         
-        // Initialize active accordion heights on load
         window.addEventListener('DOMContentLoaded', () => {
             const activeItem = document.querySelector('.accordion-item.active');
             if (activeItem) {

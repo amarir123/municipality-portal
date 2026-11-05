@@ -21,17 +21,17 @@ const translations = {
             urbanDev: 'برنامج التنمية الحضرية',
             actionProg: 'برنامج عمل الجماعة',
             procedures: 'الإجراءات الإدارية',
-            sustainable: 'بيوكرى مدينة مستدامة',
+            sustainable: 'ماسة مدينة مستدامة',
             municipality: 'الجماعة الترابية'
         },
         hero: {
-            title: 'بوابة الجماعة الترابية لبيوكرى',
+            title: 'بوابة الجماعة الترابية لماسة',
             btn: 'تعرف على الجماعة'
         },
         sections: {
             news: 'مستجدات الجماعة',
             procedures: 'الاجراءات الادارية',
-            urban: 'برنامج التنمية الحضرية لبيوكرى',
+            urban: 'برنامج التنمية الحضرية لماسة',
             multimedia: 'صوت و صورة',
             events: 'انشطة ومناسبات'
         }
@@ -41,14 +41,14 @@ const translations = {
         menu: {
             workingHours: 'Horaires',
             publications: 'Publications',
-            urbanDev: 'PDU de Biougra',
+            urbanDev: 'PAC de Massa',
             actionProg: 'Plan d\'Action',
             procedures: 'Démarches Administratives',
-            sustainable: 'Biougra Ville Durable',
+            sustainable: 'Massa Oasis Durable',
             municipality: 'La Commune'
         },
         hero: {
-            title: 'Portail de la Commune de Biougra',
+            title: 'Portail de la Commune de Massa',
             btn: 'Découvrir la Commune'
         },
         sections: {
@@ -67,11 +67,11 @@ const translations = {
             urbanDev: 'Urban Development',
             actionProg: 'Action Plan',
             procedures: 'Administrative Procedures',
-            sustainable: 'Sustainable Biougra',
+            sustainable: 'Sustainable Massa',
             municipality: 'The Municipality'
         },
         hero: {
-            title: 'Portal of the Municipality of Biougra',
+            title: 'Portal of the Municipality of Massa',
             btn: 'Discover the Municipality'
         },
         sections: {
@@ -442,10 +442,10 @@ function updateActionProgramUI() {
 // Static contents
 const staticModalData = {
     council: {
-        title: 'المجلس الجماعي لبيوكرى',
+        title: 'المجلس الجماعي لماسة',
         content: `
             <div class="modal-text">
-                <p>يتكون المجلس الجماعي لبيوكرى من أعضاء يمثلون مختلف الهيئات السياسية بالمدينة، برئاسة رئيس المجلس الجماعي وفريقه التنفيذي.</p>
+                <p>يتكون المجلس الجماعي لماسة من أعضاء يمثلون مختلف الهيئات السياسية بالمدينة، برئاسة رئيس المجلس الجماعي وفريقه التنفيذي.</p>
                 <br>
                 <p><strong>مهام المجلس الجماعي:</strong></p>
                 <ul class="modal-list">
@@ -462,7 +462,7 @@ const staticModalData = {
         title: 'الإجراءات الإدارية للمواطنين',
         content: `
             <div class="modal-text">
-                <p>تسعى جماعة بيوكرى إلى رقمنة وتسهيل جميع الإجراءات الإدارية لتوفير الوقت والجهد على المواطنين والشركات.</p>
+                <p>تسعى جماعة ماسة إلى رقمنة وتسهيل جميع الإجراءات الإدارية لتوفير الوقت والجهد على المواطنين والشركات.</p>
                 <br>
                 <div class="modal-tabs">
                     <button class="modal-tab active" onclick="switchModalTab(event, 'tab-digital')">الخدمات الرقمية</button>
@@ -479,7 +479,7 @@ const staticModalData = {
                 </div>
                 
                 <div id="tab-physical" class="modal-tab-content">
-                    <p>بالنسبة للخدمات التي تتطلب الحضور الشخصي، تستقبلكم المصالح الحضرية لبيوكرى لتقديم الخدمات التالية:</p>
+                    <p>بالنسبة للخدمات التي تتطلب الحضور الشخصي، تستقبلكم المصالح الحضرية لماسة لتقديم الخدمات التالية:</p>
                     <ul class="modal-list">
                         <li>تصحيح الإمضاء (تطابق الشواهد مع أصولها).</li>
                         <li>تصاريح الولادة والوفاة وتحديث دفاتر الحالة المدنية.</li>
@@ -490,10 +490,10 @@ const staticModalData = {
         `
     },
     territory: {
-        title: 'الجماعة الترابية لبيوكرى',
+        title: 'الجماعة الترابية لماسة',
         content: `
             <div class="modal-text">
-                <p>تعتبر الجماعة الترابية لبيوكرى شخصاً معنوياً خاضعاً للقانون العام، وتتمتع بالاستقلال الإداري والمالي، وتعتبر عاصمة إقليم شتوكة أيت باها لتقريب الإدارة من المواطنين.</p>
+                <p>تعتبر الجماعة الترابية لماسة شخصاً معنوياً خاضعاً للقانون العام، وتتمتع بالاستقلال الإداري والمالي، وتعتبر عاصمة إقليم شتوكة أيت باها لتقريب الإدارة من المواطنين.</p>
                 <br>
                 <p><strong>الهيكل الإداري للجماعة:</strong></p>
                 <ul class="modal-list">
@@ -509,7 +509,7 @@ const staticModalData = {
         title: 'شؤون حفظ الصحة والوقاية',
         content: `
             <div class="modal-text">
-                <p>يدير المكتب الجماعي لحفظ الصحة ببيوكرى جميع العمليات الطبية والوقائية لضمان صحة وسلامة الساكنة.</p>
+                <p>يدير المكتب الجماعي لحفظ الصحة بماسة جميع العمليات الطبية والوقائية لضمان صحة وسلامة الساكنة.</p>
                 <br>
                 <div class="modal-tabs">
                     <button class="modal-tab active" onclick="switchModalTab(event, 'health-req')">شواهد التفتيش الصحي</button>
@@ -538,7 +538,7 @@ const staticModalData = {
         title: 'الشؤون الثقافية وتدبير الفضاءات',
         content: `
             <div class="modal-text">
-                <p>تشرف جماعة بيوكرى على شبكة واسعة من الفضاءات الثقافية لتنشيط الحياة الفنية بالمدينة.</p>
+                <p>تشرف جماعة ماسة على شبكة واسعة من الفضاءات الثقافية لتنشيط الحياة الفنية بالمدينة.</p>
                 <br>
                 <p><strong>كيفية حجز قاعة أو فضاء ثقافي لتنظيم فعالية:</strong></p>
                 <ul class="modal-list">
@@ -597,7 +597,7 @@ const staticModalData = {
         title: 'الشؤون الرياضية واستغلال الملاعب',
         content: `
             <div class="modal-text">
-                <p>تدير الجماعة الملاعب الرياضية الحضرية وملاعب القرب الموزعة عبر أحياء بيوكرى لتشجيع الممارسة الرياضية للشباب والنوادي المحلية.</p>
+                <p>تدير الجماعة الملاعب الرياضية الحضرية وملاعب القرب الموزعة عبر أحياء ماسة لتشجيع الممارسة الرياضية للشباب والنوادي المحلية.</p>
                 <br>
                 <p><strong>شروط حجز واستغلال ملاعب القرب:</strong></p>
                 <ul class="modal-list">
@@ -633,10 +633,10 @@ const staticModalData = {
         `
     },
     park: {
-        title: 'فيديو: تهيئة المنتزه الحضري لبيوكرى',
+        title: 'فيديو: تهيئة المنتزه الحضري لماسة',
         content: `
             <div class="modal-text">
-                <p>شاهد تفاصيل افتتاح وتهيئة المنتزه الحضري لبيوكرى لخدمة الساكنة وتوفير فضاءات الترفيه والألعاب.</p>
+                <p>شاهد تفاصيل افتتاح وتهيئة المنتزه الحضري لماسة لخدمة الساكنة وتوفير فضاءات الترفيه والألعاب.</p>
                 <br>
                 <div class="modal-video-container">
                     <img src="assets/video_park.png" alt="Video Placeholder" class="modal-video-placeholder">
@@ -652,10 +652,10 @@ const staticModalData = {
         `
     },
     hall: {
-        title: 'فيديو: القاعة المغطاة الرياضية ببيوكرى',
+        title: 'فيديو: القاعة المغطاة الرياضية بماسة',
         content: `
             <div class="modal-text">
-                <p>فيديو يعرض أشغال تهيئة وإعادة هيكلة القاعة المغطاة ببيوكرى وتجهيزها بأحدث الأرضيات والمدرجات لاستقبال المباريات الوطنية والرياضية.</p>
+                <p>فيديو يعرض أشغال تهيئة وإعادة هيكلة القاعة المغطاة بماسة وتجهيزها بأحدث الأرضيات والمدرجات لاستقبال المباريات الوطنية والرياضية.</p>
                 <br>
                 <div class="modal-video-container">
                     <img src="assets/video_hall.png" alt="Video Placeholder" class="modal-video-placeholder">
@@ -671,10 +671,10 @@ const staticModalData = {
         `
     },
     bus: {
-        title: 'فيديو: إطلاق مشاريع النقل والتأهيل الحضري ببيوكرى',
+        title: 'فيديو: إطلاق مشاريع النقل والتأهيل الحضري بماسة',
         content: `
             <div class="modal-text">
-                <p>تغطية إعلامية خاصة بمناسبة بدء تنفيذ التحديثات والمشروعات الصديقة للبيئة بمركز وجماعة بيوكرى.</p>
+                <p>تغطية إعلامية خاصة بمناسبة بدء تنفيذ التحديثات والمشروعات الصديقة للبيئة بمركز وجماعة ماسة.</p>
                 <br>
                 <div class="modal-video-container">
                     <img src="assets/video_bus.png" alt="Video Placeholder" class="modal-video-placeholder">
@@ -732,7 +732,7 @@ function openDynamicModal(dataKey) {
                     <p style="color: var(--accent-color); font-weight: 700; font-size: 0.85rem;">النشاط المدرج - تاريخ اليوم: ${eventItem.date}</p>
                     <br>
                     <img src="${eventItem.image}" alt="Event Photo" style="border-radius: 8px; margin-bottom: 20px; box-shadow: var(--box-shadow); width: 100%;">
-                    <p style="font-size: 0.95rem;">ينعقد هذا النشاط في سياق تنزيل محاور برنامج عمل الجماعة الترابية لبيوكرى وتعزيز التواصل المباشر مع المجتمع المدني والفاعلين.</p>
+                    <p style="font-size: 0.95rem;">ينعقد هذا النشاط في سياق تنزيل محاور برنامج عمل الجماعة الترابية لماسة وتعزيز التواصل المباشر مع المجتمع المدني والفاعلين.</p>
                 </div>
             `;
         }
@@ -763,7 +763,7 @@ function openDynamicModal(dataKey) {
                 title = `فيديو: ${video.title}`;
                 content = `
                     <div class="modal-text">
-                        <p>فيديو يعرض المستجدات وأعمال التنمية الحضرية لبلدية بيوكرى.</p>
+                        <p>فيديو يعرض المستجدات وأعمال التنمية الحضرية لجماعة ماسة.</p>
                         <br>
                         <div class="modal-video-container">
                             <img src="${video.thumbnail}" alt="Video Placeholder" class="modal-video-placeholder">
@@ -924,7 +924,7 @@ if (moreNewsBtn) {
 const moreMediaBtn = document.getElementById('moreMediaBtn');
 if (moreMediaBtn) {
     moreMediaBtn.addEventListener('click', () => {
-        alert('تنبيه: سيتم توجيهكم إلى معرض الوسائط الإعلامية الكامل لمدينة بيوكرى.');
+        alert('تنبيه: سيتم توجيهكم إلى معرض الوسائط الإعلامية الكامل لماسة.');
     });
     moreMediaBtn.style.cursor = 'pointer';
 }
@@ -1440,7 +1440,7 @@ window.handleCitizenTracking = function(e) {
     // Simulate authentic institutional status steps
     body.innerHTML = `
         <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; border-right: 4px solid var(--primary-color); margin-bottom: 20px;">
-            <div style="font-size: 0.82rem; color: var(--text-muted);">رقم الإيداع المعتمد لجماعة بيوكرى:</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">رقم الإيداع المعتمد لجماعة ماسة:</div>
             <strong style="font-size: 1.15rem; color: var(--primary-color);">${code}</strong>
             <div style="font-size: 0.85rem; color: var(--dark-color); margin-top: 4px;">موضوع الطلب: <strong>معالجة إدارية رسمية بالمصالح الجماعية</strong></div>
         </div>
@@ -1498,7 +1498,7 @@ window.openServiceDetail = function(key) {
             title: "عقد الازدياد والحالة المدنية",
             icon: "👶",
             docs: ["الدفتر العائلي الأصلي أو نسخة منه", "رقم وتاريخ رسم الولادة", "بطاقة التعريف الوطنية لطالب الوثيقة"],
-            dept: "مكاتب الحالة المدنية لجماعة بيوكرى",
+            dept: "مكاتب الحالة المدنية لجماعة ماسة",
             delay: "تسليم فوري ومباشر بالمكتب"
         },
         legalization: {
@@ -1571,15 +1571,15 @@ window.toggleFontSize = function() {
 // 5. ACCESSIBILITY: LUXURY DAY/NIGHT TOGGLE (Default is bright official daylight)
 window.toggleDarkMode = function() {
     const isDark = document.body.classList.toggle('dark-mode-theme');
-    localStorage.setItem('biougra_dark_mode', isDark ? 'true' : 'false');
+    localStorage.setItem('massa_dark_mode', isDark ? 'true' : 'false');
     if (typeof showQuickToast === 'function') {
         showQuickToast(isDark ? 'تم تفعيل الوضع الليلي 🌙' : 'تم تفعيل الوضع النهاري الرسمي ☀️');
     }
 };
 
 // Guarantee clean official daylight theme - clear legacy dark mode cached preference
-if (localStorage.getItem('biougra_dark_mode') === 'true') {
-    localStorage.removeItem('biougra_dark_mode');
+if (localStorage.getItem('massa_dark_mode') === 'true') {
+    localStorage.removeItem('massa_dark_mode');
 }
 document.body.classList.remove('dark-mode-theme');
 
@@ -1621,7 +1621,7 @@ function getHeroPanoSlides() {
             icon: "📰",
             time: "⏱️ 03:20",
             title: branding?.heroSlide1Title || "تأهيل البنية التحتية بالمنطقة",
-            desc: branding?.heroSlide1Subtitle || "جماعة بيوكرى تسهر أشغال تهيئة الطرقات والأحياء السكنية وتعزيز شبكات الإنارة والماء الصالح للشرب.",
+            desc: branding?.heroSlide1Subtitle || "جماعة ماسة تسهر أشغال تهيئة الطرقات والأحياء السكنية وتعزيز شبكات الإنارة والماء الصالح للشرب.",
             img: branding?.heroSlide1Img || "assets/video_hall.png",
             date: branding?.heroSlide1Date || "15 ماي 2025"
         },
@@ -1631,7 +1631,7 @@ function getHeroPanoSlides() {
             icon: "🏗️",
             time: "⏱️ 04:15",
             title: branding?.heroSlide3Title || "مشروع السوق الأسبوعي الجديد",
-            desc: branding?.heroSlide3Subtitle || "إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة بيوكرى لتنشيط الحركة التجارية والاقتصادية.",
+            desc: branding?.heroSlide3Subtitle || "إعطاء انطلاقة أشغال بناء السوق الأسبوعي بجماعة ماسة لتنشيط الحركة التجارية والاقتصادية.",
             img: branding?.heroSlide3Img || "assets/video_park.png",
             date: branding?.heroSlide3Date || "10 ماي 2025"
         }
